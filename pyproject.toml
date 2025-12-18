@@ -4,7 +4,7 @@ dynamic = ["version"]
 
 [tool.poetry]
 name = "kard-financial-sdk"
-version = "0.0.78937"
+version = "0.0.78938"
 description = ""
 readme = "README.md"
 authors = []
