@@ -35,44 +35,23 @@ A full reference for this library is available [here](https://github.com/KardFin
 Instantiate and use the client with the following:
 
 ```python
-import datetime
-
 from kard import KardApi
-from kard.attributions import (
-    InternalApiAttribution_OfferAttribution,
-    InternalApiOfferAttributionAttributes,
-)
+from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = KardApi(
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
-client.attributions.internal_bulk_create_attributions(
+client.users.create(
+    organization_id="organization-123",
     data=[
-        InternalApiAttribution_OfferAttribution(
-            attributes=InternalApiOfferAttributionAttributes(
-                issuer_id="issuerId",
-                user_id="userId",
-                entity_id="entityId",
-                event_code="IMPRESSION",
-                medium="BROWSE",
-                event_date=datetime.datetime.fromisoformat(
-                    "2024-01-15 09:30:00+00:00",
-                ),
+        UserRequestDataUnion_User(
+            id="1234567890",
+            attributes=UserRequestAttributes(
+                zip_code="11238",
+                enrolled_rewards=["CARDLINKED"],
             ),
-        ),
-        InternalApiAttribution_OfferAttribution(
-            attributes=InternalApiOfferAttributionAttributes(
-                issuer_id="issuerId",
-                user_id="userId",
-                entity_id="entityId",
-                event_code="IMPRESSION",
-                medium="BROWSE",
-                event_date=datetime.datetime.fromisoformat(
-                    "2024-01-15 09:30:00+00:00",
-                ),
-            ),
-        ),
+        )
     ],
 )
 ```
@@ -83,13 +62,9 @@ The SDK also exports an `async` client so that you can make non-blocking calls t
 
 ```python
 import asyncio
-import datetime
 
 from kard import AsyncKardApi
-from kard.attributions import (
-    InternalApiAttribution_OfferAttribution,
-    InternalApiOfferAttributionAttributes,
-)
+from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = AsyncKardApi(
     client_id="YOUR_CLIENT_ID",
@@ -98,32 +73,16 @@ client = AsyncKardApi(
 
 
 async def main() -> None:
-    await client.attributions.internal_bulk_create_attributions(
+    await client.users.create(
+        organization_id="organization-123",
         data=[
-            InternalApiAttribution_OfferAttribution(
-                attributes=InternalApiOfferAttributionAttributes(
-                    issuer_id="issuerId",
-                    user_id="userId",
-                    entity_id="entityId",
-                    event_code="IMPRESSION",
-                    medium="BROWSE",
-                    event_date=datetime.datetime.fromisoformat(
-                        "2024-01-15 09:30:00+00:00",
-                    ),
+            UserRequestDataUnion_User(
+                id="1234567890",
+                attributes=UserRequestAttributes(
+                    zip_code="11238",
+                    enrolled_rewards=["CARDLINKED"],
                 ),
-            ),
-            InternalApiAttribution_OfferAttribution(
-                attributes=InternalApiOfferAttributionAttributes(
-                    issuer_id="issuerId",
-                    user_id="userId",
-                    entity_id="entityId",
-                    event_code="IMPRESSION",
-                    medium="BROWSE",
-                    event_date=datetime.datetime.fromisoformat(
-                        "2024-01-15 09:30:00+00:00",
-                    ),
-                ),
-            ),
+            )
         ],
     )
 
@@ -140,7 +99,7 @@ will be thrown.
 from kard.core.api_error import ApiError
 
 try:
-    client.attributions.internal_bulk_create_attributions(...)
+    client.users.create(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -177,9 +136,7 @@ from kard import KardApi
 client = KardApi(
     ...,
 )
-response = (
-    client.attributions.with_raw_response.internal_bulk_create_attributions(...)
-)
+response = client.users.with_raw_response.create(...)
 print(response.headers)  # access the response headers
 print(response.data)  # access the underlying object
 ```
@@ -199,7 +156,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.attributions.internal_bulk_create_attributions(..., request_options={
+client.users.create(..., request_options={
     "max_retries": 1
 })
 ```
@@ -219,7 +176,7 @@ client = KardApi(
 
 
 # Override timeout for a specific method
-client.attributions.internal_bulk_create_attributions(..., request_options={
+client.users.create(..., request_options={
     "timeout_in_seconds": 1
 })
 ```

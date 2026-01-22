@@ -7,26 +7,18 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .file_metadata_attribute import FileMetadataAttribute
-    from .file_metadata_attributes_resource import FileMetadataAttributesResource
-    from .file_metadata_resource import FileMetadataResource
     from .file_metadata_with_url import FileMetadataWithUrl
     from .file_type import FileType
     from .files_metadata_sort_options import FilesMetadataSortOptions
     from .get_files_metadata_response import GetFilesMetadataResponse
     from .pagination_meta import PaginationMeta
-    from .save_files_metadata_request import SaveFilesMetadataRequest
-    from .save_files_metadata_response_object import SaveFilesMetadataResponseObject
 _dynamic_imports: typing.Dict[str, str] = {
     "FileMetadataAttribute": ".file_metadata_attribute",
-    "FileMetadataAttributesResource": ".file_metadata_attributes_resource",
-    "FileMetadataResource": ".file_metadata_resource",
     "FileMetadataWithUrl": ".file_metadata_with_url",
     "FileType": ".file_type",
     "FilesMetadataSortOptions": ".files_metadata_sort_options",
     "GetFilesMetadataResponse": ".get_files_metadata_response",
     "PaginationMeta": ".pagination_meta",
-    "SaveFilesMetadataRequest": ".save_files_metadata_request",
-    "SaveFilesMetadataResponseObject": ".save_files_metadata_response_object",
 }
 
 
@@ -53,13 +45,9 @@ def __dir__():
 
 __all__ = [
     "FileMetadataAttribute",
-    "FileMetadataAttributesResource",
-    "FileMetadataResource",
     "FileMetadataWithUrl",
     "FileType",
     "FilesMetadataSortOptions",
     "GetFilesMetadataResponse",
     "PaginationMeta",
-    "SaveFilesMetadataRequest",
-    "SaveFilesMetadataResponseObject",
 ]

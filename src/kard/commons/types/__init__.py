@@ -6,14 +6,6 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .address import Address
-    from .audit_event import AuditEvent
-    from .audit_event_author import AuditEventAuthor, AuditEventAuthor_System, AuditEventAuthor_User
-    from .audit_event_entity_type import AuditEventEntityType
-    from .audit_event_meta_properties import AuditEventMetaProperties
-    from .audit_event_operation_type import AuditEventOperationType
-    from .audit_event_system_author import AuditEventSystemAuthor
-    from .audit_event_user_author import AuditEventUserAuthor
     from .category_option import CategoryOption
     from .commission_type import CommissionType
     from .commission_value import CommissionValue
@@ -23,40 +15,22 @@ if typing.TYPE_CHECKING:
     from .error_object import ErrorObject
     from .error_response import ErrorResponse
     from .error_source import ErrorSource
-    from .geo_location import GeoLocation
-    from .issuer_id import IssuerId
     from .job import Job
     from .job_response import JobResponse
     from .job_status import JobStatus
     from .links import Links
-    from .location_type import LocationType
     from .mongo_id import MongoId
     from .notification_type import NotificationType
-    from .operating_hours import OperatingHours
     from .organization_id import OrganizationId
-    from .page import Page
-    from .partially_accepted_data import PartiallyAcceptedData
     from .purchase_channel import PurchaseChannel
     from .relationship_data import RelationshipData
     from .relationship_multiple import RelationshipMultiple
     from .relationship_single import RelationshipSingle
     from .resource_type import ResourceType
-    from .sort_order import SortOrder
-    from .source import Source
     from .state import State
     from .subscription_id import SubscriptionId
     from .user_id import UserId
 _dynamic_imports: typing.Dict[str, str] = {
-    "Address": ".address",
-    "AuditEvent": ".audit_event",
-    "AuditEventAuthor": ".audit_event_author",
-    "AuditEventAuthor_System": ".audit_event_author",
-    "AuditEventAuthor_User": ".audit_event_author",
-    "AuditEventEntityType": ".audit_event_entity_type",
-    "AuditEventMetaProperties": ".audit_event_meta_properties",
-    "AuditEventOperationType": ".audit_event_operation_type",
-    "AuditEventSystemAuthor": ".audit_event_system_author",
-    "AuditEventUserAuthor": ".audit_event_user_author",
     "CategoryOption": ".category_option",
     "CommissionType": ".commission_type",
     "CommissionValue": ".commission_value",
@@ -66,26 +40,18 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ErrorObject": ".error_object",
     "ErrorResponse": ".error_response",
     "ErrorSource": ".error_source",
-    "GeoLocation": ".geo_location",
-    "IssuerId": ".issuer_id",
     "Job": ".job",
     "JobResponse": ".job_response",
     "JobStatus": ".job_status",
     "Links": ".links",
-    "LocationType": ".location_type",
     "MongoId": ".mongo_id",
     "NotificationType": ".notification_type",
-    "OperatingHours": ".operating_hours",
     "OrganizationId": ".organization_id",
-    "Page": ".page",
-    "PartiallyAcceptedData": ".partially_accepted_data",
     "PurchaseChannel": ".purchase_channel",
     "RelationshipData": ".relationship_data",
     "RelationshipMultiple": ".relationship_multiple",
     "RelationshipSingle": ".relationship_single",
     "ResourceType": ".resource_type",
-    "SortOrder": ".sort_order",
-    "Source": ".source",
     "State": ".state",
     "SubscriptionId": ".subscription_id",
     "UserId": ".user_id",
@@ -114,16 +80,6 @@ def __dir__():
 
 
 __all__ = [
-    "Address",
-    "AuditEvent",
-    "AuditEventAuthor",
-    "AuditEventAuthor_System",
-    "AuditEventAuthor_User",
-    "AuditEventEntityType",
-    "AuditEventMetaProperties",
-    "AuditEventOperationType",
-    "AuditEventSystemAuthor",
-    "AuditEventUserAuthor",
     "CategoryOption",
     "CommissionType",
     "CommissionValue",
@@ -133,26 +89,18 @@ __all__ = [
     "ErrorObject",
     "ErrorResponse",
     "ErrorSource",
-    "GeoLocation",
-    "IssuerId",
     "Job",
     "JobResponse",
     "JobStatus",
     "Links",
-    "LocationType",
     "MongoId",
     "NotificationType",
-    "OperatingHours",
     "OrganizationId",
-    "Page",
-    "PartiallyAcceptedData",
     "PurchaseChannel",
     "RelationshipData",
     "RelationshipMultiple",
     "RelationshipSingle",
     "ResourceType",
-    "SortOrder",
-    "Source",
     "State",
     "SubscriptionId",
     "UserId",

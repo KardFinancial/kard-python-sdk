@@ -14,103 +14,15 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
-from ..core.serialization import convert_and_respect_annotation_metadata
 from .errors.forbidden_error import ForbiddenError
-from .types.file_metadata_resource import FileMetadataResource
 from .types.file_type import FileType
 from .types.files_metadata_sort_options import FilesMetadataSortOptions
 from .types.get_files_metadata_response import GetFilesMetadataResponse
-from .types.save_files_metadata_response_object import SaveFilesMetadataResponseObject
-
-# this is used as the default value for optional parameters
-OMIT = typing.cast(typing.Any, ...)
 
 
 class RawFilesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
-
-    def internal_save_file(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[FileMetadataResource],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[SaveFilesMetadataResponseObject]:
-        """
-        Call this endpoint to save conciliation file metadata.
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[FileMetadataResource]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[SaveFilesMetadataResponseObject]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"internal/files/issuers/{jsonable_encoder(organization_id)}/metadata",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[FileMetadataResource], direction="write"
-                ),
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SaveFilesMetadataResponseObject,
-                    parse_obj_as(
-                        type_=SaveFilesMetadataResponseObject,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 500:
-                raise InternalServerError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_metadata(
         self,
@@ -240,88 +152,6 @@ class RawFilesClient:
 class AsyncRawFilesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
-
-    async def internal_save_file(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[FileMetadataResource],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[SaveFilesMetadataResponseObject]:
-        """
-        Call this endpoint to save conciliation file metadata.
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[FileMetadataResource]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[SaveFilesMetadataResponseObject]
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"internal/files/issuers/{jsonable_encoder(organization_id)}/metadata",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[FileMetadataResource], direction="write"
-                ),
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    SaveFilesMetadataResponseObject,
-                    parse_obj_as(
-                        type_=SaveFilesMetadataResponseObject,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 500:
-                raise InternalServerError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_metadata(
         self,

@@ -6,14 +6,9 @@ from ..commons.types.organization_id import OrganizationId
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from .raw_client import AsyncRawFilesClient, RawFilesClient
-from .types.file_metadata_resource import FileMetadataResource
 from .types.file_type import FileType
 from .types.files_metadata_sort_options import FilesMetadataSortOptions
 from .types.get_files_metadata_response import GetFilesMetadataResponse
-from .types.save_files_metadata_response_object import SaveFilesMetadataResponseObject
-
-# this is used as the default value for optional parameters
-OMIT = typing.cast(typing.Any, ...)
 
 
 class FilesClient:
@@ -30,84 +25,6 @@ class FilesClient:
         RawFilesClient
         """
         return self._raw_client
-
-    def internal_save_file(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[FileMetadataResource],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> SaveFilesMetadataResponseObject:
-        """
-        Call this endpoint to save conciliation file metadata.
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[FileMetadataResource]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SaveFilesMetadataResponseObject
-
-        Examples
-        --------
-        from kard import KardApi
-        from kard.commons import RelationshipData, RelationshipSingle
-        from kard.files import FileMetadataAttributesResource, FileMetadataResource
-
-        client = KardApi(
-            client_id="YOUR_CLIENT_ID",
-            client_secret="YOUR_CLIENT_SECRET",
-        )
-        client.files.internal_save_file(
-            organization_id="organizationId",
-            data=[
-                FileMetadataResource(
-                    id="id",
-                    type="earnedRewardApprovedDailyReconciliationFile",
-                    attributes=FileMetadataAttributesResource(
-                        file_name="fileName",
-                        bucket_name="bucketName",
-                        last_modified="lastModified",
-                        sent_at="sentAt",
-                    ),
-                    relationships={
-                        "relationships": RelationshipSingle(
-                            data=RelationshipData(
-                                type="type",
-                                id="id",
-                            ),
-                        )
-                    },
-                ),
-                FileMetadataResource(
-                    id="id",
-                    type="earnedRewardApprovedDailyReconciliationFile",
-                    attributes=FileMetadataAttributesResource(
-                        file_name="fileName",
-                        bucket_name="bucketName",
-                        last_modified="lastModified",
-                        sent_at="sentAt",
-                    ),
-                    relationships={
-                        "relationships": RelationshipSingle(
-                            data=RelationshipData(
-                                type="type",
-                                id="id",
-                            ),
-                        )
-                    },
-                ),
-            ],
-        )
-        """
-        _response = self._raw_client.internal_save_file(organization_id, data=data, request_options=request_options)
-        return _response.data
 
     def get_metadata(
         self,
@@ -205,94 +122,6 @@ class AsyncFilesClient:
         AsyncRawFilesClient
         """
         return self._raw_client
-
-    async def internal_save_file(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[FileMetadataResource],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> SaveFilesMetadataResponseObject:
-        """
-        Call this endpoint to save conciliation file metadata.
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[FileMetadataResource]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        SaveFilesMetadataResponseObject
-
-        Examples
-        --------
-        import asyncio
-
-        from kard import AsyncKardApi
-        from kard.commons import RelationshipData, RelationshipSingle
-        from kard.files import FileMetadataAttributesResource, FileMetadataResource
-
-        client = AsyncKardApi(
-            client_id="YOUR_CLIENT_ID",
-            client_secret="YOUR_CLIENT_SECRET",
-        )
-
-
-        async def main() -> None:
-            await client.files.internal_save_file(
-                organization_id="organizationId",
-                data=[
-                    FileMetadataResource(
-                        id="id",
-                        type="earnedRewardApprovedDailyReconciliationFile",
-                        attributes=FileMetadataAttributesResource(
-                            file_name="fileName",
-                            bucket_name="bucketName",
-                            last_modified="lastModified",
-                            sent_at="sentAt",
-                        ),
-                        relationships={
-                            "relationships": RelationshipSingle(
-                                data=RelationshipData(
-                                    type="type",
-                                    id="id",
-                                ),
-                            )
-                        },
-                    ),
-                    FileMetadataResource(
-                        id="id",
-                        type="earnedRewardApprovedDailyReconciliationFile",
-                        attributes=FileMetadataAttributesResource(
-                            file_name="fileName",
-                            bucket_name="bucketName",
-                            last_modified="lastModified",
-                            sent_at="sentAt",
-                        ),
-                        relationships={
-                            "relationships": RelationshipSingle(
-                                data=RelationshipData(
-                                    type="type",
-                                    id="id",
-                                ),
-                            )
-                        },
-                    ),
-                ],
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.internal_save_file(
-            organization_id, data=data, request_options=request_options
-        )
-        return _response.data
 
     async def get_metadata(
         self,

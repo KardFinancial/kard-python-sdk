@@ -12,20 +12,11 @@ from .core.oauth_token_provider import AsyncOAuthTokenProvider, OAuthTokenProvid
 from .environment import KardApiEnvironment
 
 if typing.TYPE_CHECKING:
-    from .attributions.client import AsyncAttributionsClient, AttributionsClient
     from .auth.client import AsyncAuthClient, AuthClient
-    from .billing_agent.client import AsyncBillingAgentClient, BillingAgentClient
-    from .billing_service.client import AsyncBillingServiceClient, BillingServiceClient
-    from .eligibility_broker.client import AsyncEligibilityBrokerClient, EligibilityBrokerClient
-    from .experiments.client import AsyncExperimentsClient, ExperimentsClient
     from .files.client import AsyncFilesClient, FilesClient
     from .notifications.client import AsyncNotificationsClient, NotificationsClient
-    from .offers.client import AsyncOffersClient, OffersClient
     from .ping.client import AsyncPingClient, PingClient
-    from .queue_dispatcher.client import AsyncQueueDispatcherClient, QueueDispatcherClient
-    from .segment_users.client import AsyncSegmentUsersClient, SegmentUsersClient
     from .transactions.client import AsyncTransactionsClient, TransactionsClient
-    from .txn_map_service.client import AsyncTxnMapServiceClient, TxnMapServiceClient
     from .users.client import AsyncUsersClient, UsersClient
 
 
@@ -166,29 +157,12 @@ class KardApi:
             raise ApiError(
                 body="The client must be instantiated with either 'token' or both 'client_id' and 'client_secret'"
             )
-        self._attributions: typing.Optional[AttributionsClient] = None
         self._auth: typing.Optional[AuthClient] = None
-        self._billing_agent: typing.Optional[BillingAgentClient] = None
-        self._billing_service: typing.Optional[BillingServiceClient] = None
-        self._eligibility_broker: typing.Optional[EligibilityBrokerClient] = None
-        self._experiments: typing.Optional[ExperimentsClient] = None
         self._files: typing.Optional[FilesClient] = None
         self._notifications: typing.Optional[NotificationsClient] = None
-        self._offers: typing.Optional[OffersClient] = None
         self._ping: typing.Optional[PingClient] = None
-        self._queue_dispatcher: typing.Optional[QueueDispatcherClient] = None
-        self._segment_users: typing.Optional[SegmentUsersClient] = None
         self._transactions: typing.Optional[TransactionsClient] = None
-        self._txn_map_service: typing.Optional[TxnMapServiceClient] = None
         self._users: typing.Optional[UsersClient] = None
-
-    @property
-    def attributions(self):
-        if self._attributions is None:
-            from .attributions.client import AttributionsClient  # noqa: E402
-
-            self._attributions = AttributionsClient(client_wrapper=self._client_wrapper)
-        return self._attributions
 
     @property
     def auth(self):
@@ -197,38 +171,6 @@ class KardApi:
 
             self._auth = AuthClient(client_wrapper=self._client_wrapper)
         return self._auth
-
-    @property
-    def billing_agent(self):
-        if self._billing_agent is None:
-            from .billing_agent.client import BillingAgentClient  # noqa: E402
-
-            self._billing_agent = BillingAgentClient(client_wrapper=self._client_wrapper)
-        return self._billing_agent
-
-    @property
-    def billing_service(self):
-        if self._billing_service is None:
-            from .billing_service.client import BillingServiceClient  # noqa: E402
-
-            self._billing_service = BillingServiceClient(client_wrapper=self._client_wrapper)
-        return self._billing_service
-
-    @property
-    def eligibility_broker(self):
-        if self._eligibility_broker is None:
-            from .eligibility_broker.client import EligibilityBrokerClient  # noqa: E402
-
-            self._eligibility_broker = EligibilityBrokerClient(client_wrapper=self._client_wrapper)
-        return self._eligibility_broker
-
-    @property
-    def experiments(self):
-        if self._experiments is None:
-            from .experiments.client import ExperimentsClient  # noqa: E402
-
-            self._experiments = ExperimentsClient(client_wrapper=self._client_wrapper)
-        return self._experiments
 
     @property
     def files(self):
@@ -247,14 +189,6 @@ class KardApi:
         return self._notifications
 
     @property
-    def offers(self):
-        if self._offers is None:
-            from .offers.client import OffersClient  # noqa: E402
-
-            self._offers = OffersClient(client_wrapper=self._client_wrapper)
-        return self._offers
-
-    @property
     def ping(self):
         if self._ping is None:
             from .ping.client import PingClient  # noqa: E402
@@ -263,36 +197,12 @@ class KardApi:
         return self._ping
 
     @property
-    def queue_dispatcher(self):
-        if self._queue_dispatcher is None:
-            from .queue_dispatcher.client import QueueDispatcherClient  # noqa: E402
-
-            self._queue_dispatcher = QueueDispatcherClient(client_wrapper=self._client_wrapper)
-        return self._queue_dispatcher
-
-    @property
-    def segment_users(self):
-        if self._segment_users is None:
-            from .segment_users.client import SegmentUsersClient  # noqa: E402
-
-            self._segment_users = SegmentUsersClient(client_wrapper=self._client_wrapper)
-        return self._segment_users
-
-    @property
     def transactions(self):
         if self._transactions is None:
             from .transactions.client import TransactionsClient  # noqa: E402
 
             self._transactions = TransactionsClient(client_wrapper=self._client_wrapper)
         return self._transactions
-
-    @property
-    def txn_map_service(self):
-        if self._txn_map_service is None:
-            from .txn_map_service.client import TxnMapServiceClient  # noqa: E402
-
-            self._txn_map_service = TxnMapServiceClient(client_wrapper=self._client_wrapper)
-        return self._txn_map_service
 
     @property
     def users(self):
@@ -441,29 +351,12 @@ class AsyncKardApi:
             raise ApiError(
                 body="The client must be instantiated with either 'token' or both 'client_id' and 'client_secret'"
             )
-        self._attributions: typing.Optional[AsyncAttributionsClient] = None
         self._auth: typing.Optional[AsyncAuthClient] = None
-        self._billing_agent: typing.Optional[AsyncBillingAgentClient] = None
-        self._billing_service: typing.Optional[AsyncBillingServiceClient] = None
-        self._eligibility_broker: typing.Optional[AsyncEligibilityBrokerClient] = None
-        self._experiments: typing.Optional[AsyncExperimentsClient] = None
         self._files: typing.Optional[AsyncFilesClient] = None
         self._notifications: typing.Optional[AsyncNotificationsClient] = None
-        self._offers: typing.Optional[AsyncOffersClient] = None
         self._ping: typing.Optional[AsyncPingClient] = None
-        self._queue_dispatcher: typing.Optional[AsyncQueueDispatcherClient] = None
-        self._segment_users: typing.Optional[AsyncSegmentUsersClient] = None
         self._transactions: typing.Optional[AsyncTransactionsClient] = None
-        self._txn_map_service: typing.Optional[AsyncTxnMapServiceClient] = None
         self._users: typing.Optional[AsyncUsersClient] = None
-
-    @property
-    def attributions(self):
-        if self._attributions is None:
-            from .attributions.client import AsyncAttributionsClient  # noqa: E402
-
-            self._attributions = AsyncAttributionsClient(client_wrapper=self._client_wrapper)
-        return self._attributions
 
     @property
     def auth(self):
@@ -472,38 +365,6 @@ class AsyncKardApi:
 
             self._auth = AsyncAuthClient(client_wrapper=self._client_wrapper)
         return self._auth
-
-    @property
-    def billing_agent(self):
-        if self._billing_agent is None:
-            from .billing_agent.client import AsyncBillingAgentClient  # noqa: E402
-
-            self._billing_agent = AsyncBillingAgentClient(client_wrapper=self._client_wrapper)
-        return self._billing_agent
-
-    @property
-    def billing_service(self):
-        if self._billing_service is None:
-            from .billing_service.client import AsyncBillingServiceClient  # noqa: E402
-
-            self._billing_service = AsyncBillingServiceClient(client_wrapper=self._client_wrapper)
-        return self._billing_service
-
-    @property
-    def eligibility_broker(self):
-        if self._eligibility_broker is None:
-            from .eligibility_broker.client import AsyncEligibilityBrokerClient  # noqa: E402
-
-            self._eligibility_broker = AsyncEligibilityBrokerClient(client_wrapper=self._client_wrapper)
-        return self._eligibility_broker
-
-    @property
-    def experiments(self):
-        if self._experiments is None:
-            from .experiments.client import AsyncExperimentsClient  # noqa: E402
-
-            self._experiments = AsyncExperimentsClient(client_wrapper=self._client_wrapper)
-        return self._experiments
 
     @property
     def files(self):
@@ -522,14 +383,6 @@ class AsyncKardApi:
         return self._notifications
 
     @property
-    def offers(self):
-        if self._offers is None:
-            from .offers.client import AsyncOffersClient  # noqa: E402
-
-            self._offers = AsyncOffersClient(client_wrapper=self._client_wrapper)
-        return self._offers
-
-    @property
     def ping(self):
         if self._ping is None:
             from .ping.client import AsyncPingClient  # noqa: E402
@@ -538,36 +391,12 @@ class AsyncKardApi:
         return self._ping
 
     @property
-    def queue_dispatcher(self):
-        if self._queue_dispatcher is None:
-            from .queue_dispatcher.client import AsyncQueueDispatcherClient  # noqa: E402
-
-            self._queue_dispatcher = AsyncQueueDispatcherClient(client_wrapper=self._client_wrapper)
-        return self._queue_dispatcher
-
-    @property
-    def segment_users(self):
-        if self._segment_users is None:
-            from .segment_users.client import AsyncSegmentUsersClient  # noqa: E402
-
-            self._segment_users = AsyncSegmentUsersClient(client_wrapper=self._client_wrapper)
-        return self._segment_users
-
-    @property
     def transactions(self):
         if self._transactions is None:
             from .transactions.client import AsyncTransactionsClient  # noqa: E402
 
             self._transactions = AsyncTransactionsClient(client_wrapper=self._client_wrapper)
         return self._transactions
-
-    @property
-    def txn_map_service(self):
-        if self._txn_map_service is None:
-            from .txn_map_service.client import AsyncTxnMapServiceClient  # noqa: E402
-
-            self._txn_map_service = AsyncTxnMapServiceClient(client_wrapper=self._client_wrapper)
-        return self._txn_map_service
 
     @property
     def users(self):

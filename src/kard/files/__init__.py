@@ -8,29 +8,21 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .types import (
         FileMetadataAttribute,
-        FileMetadataAttributesResource,
-        FileMetadataResource,
         FileMetadataWithUrl,
         FileType,
         FilesMetadataSortOptions,
         GetFilesMetadataResponse,
         PaginationMeta,
-        SaveFilesMetadataRequest,
-        SaveFilesMetadataResponseObject,
     )
     from .errors import ForbiddenError
 _dynamic_imports: typing.Dict[str, str] = {
     "FileMetadataAttribute": ".types",
-    "FileMetadataAttributesResource": ".types",
-    "FileMetadataResource": ".types",
     "FileMetadataWithUrl": ".types",
     "FileType": ".types",
     "FilesMetadataSortOptions": ".types",
     "ForbiddenError": ".errors",
     "GetFilesMetadataResponse": ".types",
     "PaginationMeta": ".types",
-    "SaveFilesMetadataRequest": ".types",
-    "SaveFilesMetadataResponseObject": ".types",
 }
 
 
@@ -57,14 +49,10 @@ def __dir__():
 
 __all__ = [
     "FileMetadataAttribute",
-    "FileMetadataAttributesResource",
-    "FileMetadataResource",
     "FileMetadataWithUrl",
     "FileType",
     "FilesMetadataSortOptions",
     "ForbiddenError",
     "GetFilesMetadataResponse",
     "PaginationMeta",
-    "SaveFilesMetadataRequest",
-    "SaveFilesMetadataResponseObject",
 ]

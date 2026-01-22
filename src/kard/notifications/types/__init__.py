@@ -31,9 +31,6 @@ if typing.TYPE_CHECKING:
     from .location_coordinates import LocationCoordinates
     from .location_status import LocationStatus
     from .merchant_source import MerchantSource
-    from .merchant_status import MerchantStatus
-    from .notification import Notification
-    from .notification_attributes import NotificationAttributes
     from .notification_data_union import (
         NotificationDataUnion,
         NotificationDataUnion_AuditUpdate,
@@ -49,8 +46,6 @@ if typing.TYPE_CHECKING:
     )
     from .notification_metadata import NotificationMetadata
     from .notification_payload import NotificationPayload
-    from .notification_union import NotificationUnion, NotificationUnion_Notification
-    from .notifications_response_object import NotificationsResponseObject
     from .offer_status import OfferStatus
     from .offer_type import OfferType
     from .reward_notification_attributes import RewardNotificationAttributes
@@ -98,9 +93,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LocationCoordinates": ".location_coordinates",
     "LocationStatus": ".location_status",
     "MerchantSource": ".merchant_source",
-    "MerchantStatus": ".merchant_status",
-    "Notification": ".notification",
-    "NotificationAttributes": ".notification_attributes",
     "NotificationDataUnion": ".notification_data_union",
     "NotificationDataUnion_AuditUpdate": ".notification_data_union",
     "NotificationDataUnion_Clawback": ".notification_data_union",
@@ -114,9 +106,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationDataUnion_ValidTransaction": ".notification_data_union",
     "NotificationMetadata": ".notification_metadata",
     "NotificationPayload": ".notification_payload",
-    "NotificationUnion": ".notification_union",
-    "NotificationUnion_Notification": ".notification_union",
-    "NotificationsResponseObject": ".notifications_response_object",
     "OfferStatus": ".offer_status",
     "OfferType": ".offer_type",
     "RewardNotificationAttributes": ".reward_notification_attributes",
@@ -188,9 +177,6 @@ __all__ = [
     "LocationCoordinates",
     "LocationStatus",
     "MerchantSource",
-    "MerchantStatus",
-    "Notification",
-    "NotificationAttributes",
     "NotificationDataUnion",
     "NotificationDataUnion_AuditUpdate",
     "NotificationDataUnion_Clawback",
@@ -204,9 +190,6 @@ __all__ = [
     "NotificationDataUnion_ValidTransaction",
     "NotificationMetadata",
     "NotificationPayload",
-    "NotificationUnion",
-    "NotificationUnion_Notification",
-    "NotificationsResponseObject",
     "OfferStatus",
     "OfferType",
     "RewardNotificationAttributes",
