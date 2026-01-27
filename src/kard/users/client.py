@@ -16,6 +16,7 @@ from .types.user_request_data_union import UserRequestDataUnion
 
 if typing.TYPE_CHECKING:
     from .attributions.client import AsyncAttributionsClient, AttributionsClient
+    from .auth.client import AsyncAuthClient, AuthClient
     from .rewards.client import AsyncRewardsClient, RewardsClient
     from .uploads.client import AsyncUploadsClient, UploadsClient
 # this is used as the default value for optional parameters
@@ -27,6 +28,7 @@ class UsersClient:
         self._raw_client = RawUsersClient(client_wrapper=client_wrapper)
         self._client_wrapper = client_wrapper
         self._attributions: typing.Optional[AttributionsClient] = None
+        self._auth: typing.Optional[AuthClient] = None
         self._rewards: typing.Optional[RewardsClient] = None
         self._uploads: typing.Optional[UploadsClient] = None
 
@@ -235,6 +237,14 @@ class UsersClient:
         return self._attributions
 
     @property
+    def auth(self):
+        if self._auth is None:
+            from .auth.client import AuthClient  # noqa: E402
+
+            self._auth = AuthClient(client_wrapper=self._client_wrapper)
+        return self._auth
+
+    @property
     def rewards(self):
         if self._rewards is None:
             from .rewards.client import RewardsClient  # noqa: E402
@@ -256,6 +266,7 @@ class AsyncUsersClient:
         self._raw_client = AsyncRawUsersClient(client_wrapper=client_wrapper)
         self._client_wrapper = client_wrapper
         self._attributions: typing.Optional[AsyncAttributionsClient] = None
+        self._auth: typing.Optional[AsyncAuthClient] = None
         self._rewards: typing.Optional[AsyncRewardsClient] = None
         self._uploads: typing.Optional[AsyncUploadsClient] = None
 
@@ -494,6 +505,14 @@ class AsyncUsersClient:
 
             self._attributions = AsyncAttributionsClient(client_wrapper=self._client_wrapper)
         return self._attributions
+
+    @property
+    def auth(self):
+        if self._auth is None:
+            from .auth.client import AsyncAuthClient  # noqa: E402
+
+            self._auth = AsyncAuthClient(client_wrapper=self._client_wrapper)
+        return self._auth
 
     @property
     def rewards(self):

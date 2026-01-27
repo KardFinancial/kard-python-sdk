@@ -20,7 +20,7 @@ if typing.TYPE_CHECKING:
         UserResponseUnionNoData_User,
     )
     from .errors import MultiStatus
-    from . import attributions, rewards, uploads
+    from . import attributions, auth, rewards, uploads
     from .attributions import (
         CreateAttributionRequestObject,
         CreateAttributionRequestUnion,
@@ -35,6 +35,7 @@ if typing.TYPE_CHECKING:
         OfferAttributionRequest,
         OfferMedium,
     )
+    from .auth import WebviewTokenResponse
     from .rewards import (
         Amount,
         AmountType,
@@ -178,7 +179,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UserResponseNoData": ".types",
     "UserResponseUnionNoData": ".types",
     "UserResponseUnionNoData_User": ".types",
+    "WebviewTokenResponse": ".auth",
     "attributions": ".attributions",
+    "auth": ".auth",
     "rewards": ".rewards",
     "uploads": ".uploads",
 }
@@ -287,7 +290,9 @@ __all__ = [
     "UserResponseNoData",
     "UserResponseUnionNoData",
     "UserResponseUnionNoData_User",
+    "WebviewTokenResponse",
     "attributions",
+    "auth",
     "rewards",
     "uploads",
 ]

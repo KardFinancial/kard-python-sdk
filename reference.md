@@ -1469,6 +1469,87 @@ Use `type` to distinguish between the two:
 </dl>
 </details>
 
+## Webview Authentication
+<details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_webview_token</a>(...) -&gt; AsyncHttpResponse[WebviewTokenResponse]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves an OAuth token for webview authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+
+client = KardApi(
+    client_id="YOUR_CLIENT_ID",
+    client_secret="YOUR_CLIENT_SECRET",
+)
+client.users.auth.get_webview_token(
+    organization_id="organization-123",
+    user_id="user-123",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `UserId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Rewards
 <details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">offers</a>(...) -&gt; AsyncHttpResponse[OffersResponseObject]</code></summary>
 <dl>
