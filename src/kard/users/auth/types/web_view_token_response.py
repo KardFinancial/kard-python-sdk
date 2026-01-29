@@ -6,15 +6,15 @@ import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class WebviewTokenResponse(UniversalBaseModel):
+class WebViewTokenResponse(UniversalBaseModel):
     """
     An OAuth token response.
 
     Examples
     --------
-    from kard.users.auth import WebviewTokenResponse
+    from kard.users.auth import WebViewTokenResponse
 
-    WebviewTokenResponse(
+    WebViewTokenResponse(
         access_token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
         expires_in=3600,
         token_type="Bearer",

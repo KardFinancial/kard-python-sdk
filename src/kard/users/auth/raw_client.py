@@ -14,20 +14,20 @@ from ...core.http_response import AsyncHttpResponse, HttpResponse
 from ...core.jsonable_encoder import jsonable_encoder
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
-from .types.webview_token_response import WebviewTokenResponse
+from .types.web_view_token_response import WebViewTokenResponse
 
 
 class RawAuthClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get_webview_token(
+    def get_web_view_token(
         self,
         organization_id: OrganizationId,
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[WebviewTokenResponse]:
+    ) -> HttpResponse[WebViewTokenResponse]:
         """
         Retrieves an OAuth token for webview authentication.
 
@@ -42,7 +42,7 @@ class RawAuthClient:
 
         Returns
         -------
-        HttpResponse[WebviewTokenResponse]
+        HttpResponse[WebViewTokenResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v2/auth/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/token",
@@ -52,9 +52,9 @@ class RawAuthClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    WebviewTokenResponse,
+                    WebViewTokenResponse,
                     parse_obj_as(
-                        type_=WebviewTokenResponse,  # type: ignore
+                        type_=WebViewTokenResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -91,13 +91,13 @@ class AsyncRawAuthClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get_webview_token(
+    async def get_web_view_token(
         self,
         organization_id: OrganizationId,
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[WebviewTokenResponse]:
+    ) -> AsyncHttpResponse[WebViewTokenResponse]:
         """
         Retrieves an OAuth token for webview authentication.
 
@@ -112,7 +112,7 @@ class AsyncRawAuthClient:
 
         Returns
         -------
-        AsyncHttpResponse[WebviewTokenResponse]
+        AsyncHttpResponse[WebViewTokenResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/auth/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/token",
@@ -122,9 +122,9 @@ class AsyncRawAuthClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    WebviewTokenResponse,
+                    WebViewTokenResponse,
                     parse_obj_as(
-                        type_=WebviewTokenResponse,  # type: ignore
+                        type_=WebViewTokenResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -6,8 +6,8 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .webview_token_response import WebviewTokenResponse
-_dynamic_imports: typing.Dict[str, str] = {"WebviewTokenResponse": ".webview_token_response"}
+    from .web_view_token_response import WebViewTokenResponse
+_dynamic_imports: typing.Dict[str, str] = {"WebViewTokenResponse": ".web_view_token_response"}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +31,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["WebviewTokenResponse"]
+__all__ = ["WebViewTokenResponse"]

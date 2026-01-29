@@ -1469,8 +1469,8 @@ Use `type` to distinguish between the two:
 </dl>
 </details>
 
-## Webview
-<details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_webview_token</a>(...) -&gt; AsyncHttpResponse[WebviewTokenResponse]</code></summary>
+## WebView
+<details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_web_view_token</a>(...) -&gt; AsyncHttpResponse[WebViewTokenResponse]</code></summary>
 <dl>
 <dd>
 
@@ -1503,7 +1503,7 @@ client = KardApi(
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
-client.users.auth.get_webview_token(
+client.users.auth.get_web_view_token(
     organization_id="organization-123",
     user_id="user-123",
 )

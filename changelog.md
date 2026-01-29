@@ -1,3 +1,16 @@
+## 2.0.0 - 2026-01-29
+* refactor: rename webview to WebView for consistency
+* Standardize the naming convention by changing "webview" to "WebView" throughout
+* the codebase to follow proper camelCase naming for improved readability and
+* consistency with common naming patterns.
+* Key changes:
+* Rename WebviewTokenResponse to WebViewTokenResponse class
+* Update get_webview_token method to get_web_view_token
+* Rename webview_token_response.py to web_view_token_response.py
+* Update all import statements and references to use new naming
+* Update documentation and examples to reflect new names
+* 🌿 Generated with Fern
+
 ## 1.0.1 - 2026-01-29
 * docs: update section heading from "Webview Authentication" to "Webview"
 * Simplified the section heading in the API documentation to make it more concise

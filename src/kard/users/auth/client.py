@@ -7,7 +7,7 @@ from ...commons.types.user_id import UserId
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
 from .raw_client import AsyncRawAuthClient, RawAuthClient
-from .types.webview_token_response import WebviewTokenResponse
+from .types.web_view_token_response import WebViewTokenResponse
 
 
 class AuthClient:
@@ -25,13 +25,13 @@ class AuthClient:
         """
         return self._raw_client
 
-    def get_webview_token(
+    def get_web_view_token(
         self,
         organization_id: OrganizationId,
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WebviewTokenResponse:
+    ) -> WebViewTokenResponse:
         """
         Retrieves an OAuth token for webview authentication.
 
@@ -46,7 +46,7 @@ class AuthClient:
 
         Returns
         -------
-        WebviewTokenResponse
+        WebViewTokenResponse
 
         Examples
         --------
@@ -56,12 +56,12 @@ class AuthClient:
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
-        client.users.auth.get_webview_token(
+        client.users.auth.get_web_view_token(
             organization_id="organization-123",
             user_id="user-123",
         )
         """
-        _response = self._raw_client.get_webview_token(organization_id, user_id, request_options=request_options)
+        _response = self._raw_client.get_web_view_token(organization_id, user_id, request_options=request_options)
         return _response.data
 
 
@@ -80,13 +80,13 @@ class AsyncAuthClient:
         """
         return self._raw_client
 
-    async def get_webview_token(
+    async def get_web_view_token(
         self,
         organization_id: OrganizationId,
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> WebviewTokenResponse:
+    ) -> WebViewTokenResponse:
         """
         Retrieves an OAuth token for webview authentication.
 
@@ -101,7 +101,7 @@ class AsyncAuthClient:
 
         Returns
         -------
-        WebviewTokenResponse
+        WebViewTokenResponse
 
         Examples
         --------
@@ -116,7 +116,7 @@ class AsyncAuthClient:
 
 
         async def main() -> None:
-            await client.users.auth.get_webview_token(
+            await client.users.auth.get_web_view_token(
                 organization_id="organization-123",
                 user_id="user-123",
             )
@@ -124,5 +124,5 @@ class AsyncAuthClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_webview_token(organization_id, user_id, request_options=request_options)
+        _response = await self._raw_client.get_web_view_token(organization_id, user_id, request_options=request_options)
         return _response.data

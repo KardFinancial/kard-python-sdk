@@ -35,7 +35,7 @@ if typing.TYPE_CHECKING:
         OfferAttributionRequest,
         OfferMedium,
     )
-    from .auth import WebviewTokenResponse
+    from .auth import WebViewTokenResponse
     from .rewards import (
         Amount,
         AmountType,
@@ -179,7 +179,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UserResponseNoData": ".types",
     "UserResponseUnionNoData": ".types",
     "UserResponseUnionNoData_User": ".types",
-    "WebviewTokenResponse": ".auth",
+    "WebViewTokenResponse": ".auth",
     "attributions": ".attributions",
     "auth": ".auth",
     "rewards": ".rewards",
@@ -290,7 +290,7 @@ __all__ = [
     "UserResponseNoData",
     "UserResponseUnionNoData",
     "UserResponseUnionNoData_User",
-    "WebviewTokenResponse",
+    "WebViewTokenResponse",
     "attributions",
     "auth",
     "rewards",
