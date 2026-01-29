@@ -1469,7 +1469,7 @@ Use `type` to distinguish between the two:
 </dl>
 </details>
 
-## Webview Authentication
+## Webview
 <details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_webview_token</a>(...) -&gt; AsyncHttpResponse[WebviewTokenResponse]</code></summary>
 <dl>
 <dd>
