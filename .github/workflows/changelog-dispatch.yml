@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
       - "CHANGELOG.md"
+      - "changelog.md"
   workflow_dispatch:
     inputs:
       ref:
