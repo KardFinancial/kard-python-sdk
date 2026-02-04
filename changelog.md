@@ -1,3 +1,17 @@
+## 2.1.0 - 2026-02-04
+* feat: add supported_components parameter to rewards endpoints
+* Adds a new optional supported_components parameter to both offers() and locations() methods in the rewards client. This parameter allows callers to specify which UI component types to include in API responses, enabling more granular control over returned data.
+* The parameter accepts ComponentType enum values including shortDescription, longDescription, cta, tags, and detailTags. When provided, the API returns structured component data through new OfferComponents, CtaComponent, and ButtonStyle types.
+* Key changes:
+* Add supported_components parameter to offers() and locations() endpoints
+* Create new ComponentType enum with UI component type options
+* Add OfferComponents model with optional UI component fields
+* Add CtaComponent model for call-to-action button data
+* Add ButtonStyle enum for button styling options
+* Update method signatures in sync/async client and raw client classes
+* Add comprehensive parameter documentation and type hints
+* 🌿 Generated with Fern
+
 ## 2.0.0 - 2026-01-29
 * refactor: rename webview to WebView for consistency
 * Standardize the naming convention by changing "webview" to "WebView" throughout

@@ -9,6 +9,7 @@ if typing.TYPE_CHECKING:
     from .amount import Amount
     from .amount_type import AmountType
     from .asset import Asset
+    from .button_style import ButtonStyle
     from .category_data import CategoryData
     from .category_fields import CategoryFields
     from .category_identifier import CategoryIdentifier
@@ -16,7 +17,9 @@ if typing.TYPE_CHECKING:
     from .category_relationship import CategoryRelationship
     from .category_relationship_object import CategoryRelationshipObject
     from .commission import Commission
+    from .component_type import ComponentType
     from .coordinates import Coordinates
+    from .cta_component import CtaComponent
     from .eligibility_location_address import EligibilityLocationAddress
     from .eligibility_location_included import EligibilityLocationIncluded
     from .eligibility_offer_included import EligibilityOfferIncluded
@@ -27,6 +30,7 @@ if typing.TYPE_CHECKING:
     from .location_sort_options import LocationSortOptions
     from .locations_response_object import LocationsResponseObject
     from .offer_common_fields import OfferCommonFields
+    from .offer_components import OfferComponents
     from .offer_data_union import OfferDataUnion, OfferDataUnion_StandardOffer
     from .offer_relationship import OfferRelationship
     from .offer_sort_options import OfferSortOptions
@@ -41,6 +45,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Amount": ".amount",
     "AmountType": ".amount_type",
     "Asset": ".asset",
+    "ButtonStyle": ".button_style",
     "CategoryData": ".category_data",
     "CategoryFields": ".category_fields",
     "CategoryIdentifier": ".category_identifier",
@@ -48,7 +53,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CategoryRelationship": ".category_relationship",
     "CategoryRelationshipObject": ".category_relationship_object",
     "Commission": ".commission",
+    "ComponentType": ".component_type",
     "Coordinates": ".coordinates",
+    "CtaComponent": ".cta_component",
     "EligibilityLocationAddress": ".eligibility_location_address",
     "EligibilityLocationIncluded": ".eligibility_location_included",
     "EligibilityOfferIncluded": ".eligibility_offer_included",
@@ -59,6 +66,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LocationSortOptions": ".location_sort_options",
     "LocationsResponseObject": ".locations_response_object",
     "OfferCommonFields": ".offer_common_fields",
+    "OfferComponents": ".offer_components",
     "OfferDataUnion": ".offer_data_union",
     "OfferDataUnion_StandardOffer": ".offer_data_union",
     "OfferRelationship": ".offer_relationship",
@@ -98,6 +106,7 @@ __all__ = [
     "Amount",
     "AmountType",
     "Asset",
+    "ButtonStyle",
     "CategoryData",
     "CategoryFields",
     "CategoryIdentifier",
@@ -105,7 +114,9 @@ __all__ = [
     "CategoryRelationship",
     "CategoryRelationshipObject",
     "Commission",
+    "ComponentType",
     "Coordinates",
+    "CtaComponent",
     "EligibilityLocationAddress",
     "EligibilityLocationIncluded",
     "EligibilityOfferIncluded",
@@ -116,6 +127,7 @@ __all__ = [
     "LocationSortOptions",
     "LocationsResponseObject",
     "OfferCommonFields",
+    "OfferComponents",
     "OfferDataUnion",
     "OfferDataUnion_StandardOffer",
     "OfferRelationship",

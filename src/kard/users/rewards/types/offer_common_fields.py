@@ -11,6 +11,7 @@ from ....core.serialization import FieldMetadata
 from .amount import Amount
 from .asset import Asset
 from .commission import Commission
+from .offer_components import OfferComponents
 
 
 class OfferCommonFields(UniversalBaseModel):
@@ -91,6 +92,11 @@ class OfferCommonFields(UniversalBaseModel):
     description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Description of the offer
+    """
+
+    components: typing.Optional[OfferComponents] = pydantic.Field(default=None)
+    """
+    UI component data for the offer, returned when supportedComponents query parameter is provided
     """
 
     if IS_PYDANTIC_V2:
