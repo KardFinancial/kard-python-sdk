@@ -1,3 +1,18 @@
+## 2.1.0 - 2026-02-04
+* feat: add UI component support for rewards API
+* Add support for customizable UI components in rewards offers and locations to enable
+* flexible frontend rendering. This enhancement allows clients to specify which UI
+* components they need in the response, reducing payload size and improving performance
+* for different UI contexts.
+* Key changes:
+* Add `supported_components` parameter to offers() and locations() methods
+* Introduce ComponentType enum with values: shortDescription, longDescription, cta, tags, detailTags
+* Add OfferComponents data structure with optional UI component fields
+* Add CtaComponent with button text and style configuration
+* Add ButtonStyle enum for button styling options
+* Update method signatures and documentation for both sync and async clients
+* 🌿 Generated with Fern
+
 ## 2.0.0 - 2026-01-29
 * refactor: rename webview to WebView for consistency
 * Standardize the naming convention by changing "webview" to "WebView" throughout

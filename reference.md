@@ -1692,6 +1692,14 @@ client.users.rewards.offers(
 <dl>
 <dd>
 
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the response. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -1882,6 +1890,14 @@ client.users.rewards.locations(
 <dd>
 
 **include:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — CSV list of included resources in the response (e.g "offers,categories"). Allowed values are `offers` and `categories`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in included offers. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
     
 </dd>
 </dl>

@@ -10,6 +10,7 @@ from ...commons.types.user_id import UserId
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
 from .raw_client import AsyncRawRewardsClient, RawRewardsClient
+from .types.component_type import ComponentType
 from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
 from .types.offer_sort_options import OfferSortOptions
@@ -44,6 +45,7 @@ class RewardsClient:
         filter_is_targeted: typing.Optional[bool] = None,
         sort: typing.Optional[typing.Union[OfferSortOptions, typing.Sequence[OfferSortOptions]]] = None,
         include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> OffersResponseObject:
         """
@@ -76,6 +78,9 @@ class RewardsClient:
 
         include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -111,6 +116,7 @@ class RewardsClient:
             filter_is_targeted=filter_is_targeted,
             sort=sort,
             include=include,
+            supported_components=supported_components,
             request_options=request_options,
         )
         return _response.data
@@ -133,6 +139,7 @@ class RewardsClient:
         filter_radius: typing.Optional[int] = None,
         sort: typing.Optional[typing.Union[LocationSortOptions, typing.Sequence[LocationSortOptions]]] = None,
         include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LocationsResponseObject:
         """
@@ -178,6 +185,9 @@ class RewardsClient:
         include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             CSV list of included resources in the response (e.g "offers,categories"). Allowed values are `offers` and `categories`.
 
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in included offers. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -219,6 +229,7 @@ class RewardsClient:
             filter_radius=filter_radius,
             sort=sort,
             include=include,
+            supported_components=supported_components,
             request_options=request_options,
         )
         return _response.data
@@ -252,6 +263,7 @@ class AsyncRewardsClient:
         filter_is_targeted: typing.Optional[bool] = None,
         sort: typing.Optional[typing.Union[OfferSortOptions, typing.Sequence[OfferSortOptions]]] = None,
         include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> OffersResponseObject:
         """
@@ -284,6 +296,9 @@ class AsyncRewardsClient:
 
         include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -327,6 +342,7 @@ class AsyncRewardsClient:
             filter_is_targeted=filter_is_targeted,
             sort=sort,
             include=include,
+            supported_components=supported_components,
             request_options=request_options,
         )
         return _response.data
@@ -349,6 +365,7 @@ class AsyncRewardsClient:
         filter_radius: typing.Optional[int] = None,
         sort: typing.Optional[typing.Union[LocationSortOptions, typing.Sequence[LocationSortOptions]]] = None,
         include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LocationsResponseObject:
         """
@@ -393,6 +410,9 @@ class AsyncRewardsClient:
 
         include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
             CSV list of included resources in the response (e.g "offers,categories"). Allowed values are `offers` and `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in included offers. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -443,6 +463,7 @@ class AsyncRewardsClient:
             filter_radius=filter_radius,
             sort=sort,
             include=include,
+            supported_components=supported_components,
             request_options=request_options,
         )
         return _response.data
