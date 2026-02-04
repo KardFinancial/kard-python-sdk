@@ -1,3 +1,15 @@
+## 2.2.0 - 2026-02-04
+* feat: add core transaction support for banking systems with limited card data
+* Adds support for a new transaction type "coreTransaction" to handle transactions from core banking systems that have limited card-level data. This enables processing of transactions with minimal merchant information and financial institution details.
+* Key changes:
+* Add new coreTransaction type with CoreTransactionAttributes and CoreMerchant models
+* Add FinancialInstitution model for bank identification using RSSD ID
+* Update Transactions union type to include Transactions_CoreTransaction
+* Add comprehensive exports across all modules for new transaction types
+* Update API documentation and client methods to describe the three transaction types
+* Improve timestamp descriptions to use ISO 8601 format specification
+* 🌿 Generated with Fern
+
 ## 2.1.0 - 2026-02-04
 * feat: add UI component support for rewards API
 * Add support for customizable UI components in rewards offers and locations to enable
