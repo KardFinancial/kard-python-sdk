@@ -160,7 +160,7 @@ class RawAttributionsClient:
         HttpResponse[ActivateOfferResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/activate",
+            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/attributions/offers/{jsonable_encoder(offer_id)}/activate",
             method="POST",
             params={
                 "supportedComponents": supported_components,
@@ -351,7 +351,7 @@ class AsyncRawAttributionsClient:
         AsyncHttpResponse[ActivateOfferResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/activate",
+            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/attributions/offers/{jsonable_encoder(offer_id)}/activate",
             method="POST",
             params={
                 "supportedComponents": supported_components,

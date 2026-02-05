@@ -1,3 +1,12 @@
+## 2.2.1 - 2026-02-05
+* fix: correct API endpoint path for offer activation
+* Fixed the URL path for activating offers to include the missing 'attributions' segment in both synchronous and asynchronous client methods. This ensures requests are sent to the correct endpoint structure.
+* Key changes:
+* Update synchronous client offer activation endpoint from 'users/{user_id}/offers/{offer_id}/activate' to 'users/{user_id}/attributions/offers/{offer_id}/activate'
+* Update asynchronous client offer activation endpoint to match the corrected path structure
+* Maintain consistency between sync and async API client implementations
+* 🌿 Generated with Fern
+
 ## 2.2.0 - 2026-02-05
 * feat: add core transaction support and user offer activation endpoint
 * Expand transaction processing capabilities by introducing support for core banking transactions with limited card-level data. Add new user offer activation endpoint to enable tracking of user interactions with offers via CTA medium.
