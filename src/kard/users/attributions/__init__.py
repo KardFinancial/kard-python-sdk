@@ -7,6 +7,11 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
+        ActivateOfferIncludeOption,
+        ActivateOfferIncluded,
+        ActivateOfferResponse,
+        ActivateOfferResponseAttributes,
+        ActivateOfferResponseData,
         CreateAttributionRequestObject,
         CreateAttributionRequestUnion,
         CreateAttributionRequestUnion_NotificationAttribution,
@@ -21,6 +26,11 @@ if typing.TYPE_CHECKING:
         OfferMedium,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "ActivateOfferIncludeOption": ".types",
+    "ActivateOfferIncluded": ".types",
+    "ActivateOfferResponse": ".types",
+    "ActivateOfferResponseAttributes": ".types",
+    "ActivateOfferResponseData": ".types",
     "CreateAttributionRequestObject": ".types",
     "CreateAttributionRequestUnion": ".types",
     "CreateAttributionRequestUnion_NotificationAttribution": ".types",
@@ -58,6 +68,11 @@ def __dir__():
 
 
 __all__ = [
+    "ActivateOfferIncludeOption",
+    "ActivateOfferIncluded",
+    "ActivateOfferResponse",
+    "ActivateOfferResponseAttributes",
+    "ActivateOfferResponseData",
     "CreateAttributionRequestObject",
     "CreateAttributionRequestUnion",
     "CreateAttributionRequestUnion_NotificationAttribution",

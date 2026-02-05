@@ -2,4 +2,4 @@
 
 import typing
 
-EventCode = typing.Union[typing.Literal["IMPRESSION", "VIEW"], typing.Any]
+EventCode = typing.Union[typing.Literal["IMPRESSION", "VIEW", "ACTIVATE"], typing.Any]

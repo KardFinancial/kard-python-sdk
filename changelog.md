@@ -1,3 +1,14 @@
+## 2.2.0 - 2026-02-05
+* feat: add core transaction support and user offer activation endpoint
+* Expand transaction processing capabilities by introducing support for core banking transactions with limited card-level data. Add new user offer activation endpoint to enable tracking of user interactions with offers via CTA medium.
+* Key changes:
+* Add coreTransaction type for core banking systems with limited card data
+* Create CoreTransactionAttributes, CoreMerchant, and FinancialInstitution types
+* Add users.attributions.activate endpoint for offer activation tracking
+* Update documentation to clarify location endpoint functionality
+* Standardize timestamp format descriptions to ISO 8601 across transaction types
+* 🌿 Generated with Fern
+
 ## 2.1.0 - 2026-02-04
 * feat: add UI component support for rewards API
 * Add support for customizable UI components in rewards offers and locations to enable

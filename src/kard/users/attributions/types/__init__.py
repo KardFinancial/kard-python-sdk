@@ -6,6 +6,11 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .activate_offer_include_option import ActivateOfferIncludeOption
+    from .activate_offer_included import ActivateOfferIncluded
+    from .activate_offer_response import ActivateOfferResponse
+    from .activate_offer_response_attributes import ActivateOfferResponseAttributes
+    from .activate_offer_response_data import ActivateOfferResponseData
     from .create_attribution_request_object import CreateAttributionRequestObject
     from .create_attribution_request_union import (
         CreateAttributionRequestUnion,
@@ -21,6 +26,11 @@ if typing.TYPE_CHECKING:
     from .offer_attribution_request import OfferAttributionRequest
     from .offer_medium import OfferMedium
 _dynamic_imports: typing.Dict[str, str] = {
+    "ActivateOfferIncludeOption": ".activate_offer_include_option",
+    "ActivateOfferIncluded": ".activate_offer_included",
+    "ActivateOfferResponse": ".activate_offer_response",
+    "ActivateOfferResponseAttributes": ".activate_offer_response_attributes",
+    "ActivateOfferResponseData": ".activate_offer_response_data",
     "CreateAttributionRequestObject": ".create_attribution_request_object",
     "CreateAttributionRequestUnion": ".create_attribution_request_union",
     "CreateAttributionRequestUnion_NotificationAttribution": ".create_attribution_request_union",
@@ -58,6 +68,11 @@ def __dir__():
 
 
 __all__ = [
+    "ActivateOfferIncludeOption",
+    "ActivateOfferIncluded",
+    "ActivateOfferResponse",
+    "ActivateOfferResponseAttributes",
+    "ActivateOfferResponseData",
     "CreateAttributionRequestObject",
     "CreateAttributionRequestUnion",
     "CreateAttributionRequestUnion_NotificationAttribution",

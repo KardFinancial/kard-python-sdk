@@ -6,7 +6,10 @@ from ...commons.types.organization_id import OrganizationId
 from ...commons.types.user_id import UserId
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
+from ..rewards.types.component_type import ComponentType
 from .raw_client import AsyncRawAttributionsClient, RawAttributionsClient
+from .types.activate_offer_include_option import ActivateOfferIncludeOption
+from .types.activate_offer_response import ActivateOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
 from .types.create_attribution_response import CreateAttributionResponse
 
@@ -115,6 +118,68 @@ class AttributionsClient:
         )
         """
         _response = self._raw_client.create(organization_id, user_id, data=data, request_options=request_options)
+        return _response.data
+
+    def activate(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ActivateOfferResponse:
+        """
+        Record when a user activates an offer. Creates an attribution event with eventCode=ACTIVATE and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being activated
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ActivateOfferResponse
+
+        Examples
+        --------
+        from kard import KardApi
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.users.attributions.activate(
+            organization_id="organization-123",
+            user_id="user-123",
+            offer_id="offer-456",
+        )
+        """
+        _response = self._raw_client.activate(
+            organization_id,
+            user_id,
+            offer_id,
+            supported_components=supported_components,
+            include=include,
+            request_options=request_options,
+        )
         return _response.data
 
 
@@ -226,4 +291,74 @@ class AsyncAttributionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.create(organization_id, user_id, data=data, request_options=request_options)
+        return _response.data
+
+    async def activate(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ActivateOfferResponse:
+        """
+        Record when a user activates an offer. Creates an attribution event with eventCode=ACTIVATE and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being activated
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ActivateOfferResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.users.attributions.activate(
+                organization_id="organization-123",
+                user_id="user-123",
+                offer_id="offer-456",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.activate(
+            organization_id,
+            user_id,
+            offer_id,
+            supported_components=supported_components,
+            include=include,
+            request_options=request_options,
+        )
         return _response.data

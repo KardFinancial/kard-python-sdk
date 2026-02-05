@@ -78,6 +78,7 @@ class TransactionsRequestBody(UniversalBaseModel):
     Use `type` to distinguish between the two:
     - `transaction`: For transactions requiring processing and matching by the Kard system.
     - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
+    - `coreTransaction`: For transactions from core banking systems with limited card-level data.
     """
 
     if IS_PYDANTIC_V2:

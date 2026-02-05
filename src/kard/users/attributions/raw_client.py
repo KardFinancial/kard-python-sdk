@@ -16,6 +16,9 @@ from ...core.jsonable_encoder import jsonable_encoder
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from ...core.serialization import convert_and_respect_annotation_metadata
+from ..rewards.types.component_type import ComponentType
+from .types.activate_offer_include_option import ActivateOfferIncludeOption
+from .types.activate_offer_response import ActivateOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
 from .types.create_attribution_response import CreateAttributionResponse
 
@@ -118,6 +121,101 @@ class RawAttributionsClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def activate(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ActivateOfferResponse]:
+        """
+        Record when a user activates an offer. Creates an attribution event with eventCode=ACTIVATE and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being activated
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ActivateOfferResponse]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/activate",
+            method="POST",
+            params={
+                "supportedComponents": supported_components,
+                "include": include,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ActivateOfferResponse,
+                    parse_obj_as(
+                        type_=ActivateOfferResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawAttributionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -172,6 +270,101 @@ class AsyncRawAttributionsClient:
                     CreateAttributionResponse,
                     parse_obj_as(
                         type_=CreateAttributionResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def activate(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ActivateOfferResponse]:
+        """
+        Record when a user activates an offer. Creates an attribution event with eventCode=ACTIVATE and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being activated
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ActivateOfferResponse]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/activate",
+            method="POST",
+            params={
+                "supportedComponents": supported_components,
+                "include": include,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ActivateOfferResponse,
+                    parse_obj_as(
+                        type_=ActivateOfferResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

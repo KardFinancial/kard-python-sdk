@@ -22,6 +22,11 @@ if typing.TYPE_CHECKING:
     from .errors import MultiStatus
     from . import attributions, auth, rewards, uploads
     from .attributions import (
+        ActivateOfferIncludeOption,
+        ActivateOfferIncluded,
+        ActivateOfferResponse,
+        ActivateOfferResponseAttributes,
+        ActivateOfferResponseData,
         CreateAttributionRequestObject,
         CreateAttributionRequestUnion,
         CreateAttributionRequestUnion_NotificationAttribution,
@@ -102,6 +107,11 @@ if typing.TYPE_CHECKING:
         UploadPartMultiStatus,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "ActivateOfferIncludeOption": ".attributions",
+    "ActivateOfferIncluded": ".attributions",
+    "ActivateOfferResponse": ".attributions",
+    "ActivateOfferResponseAttributes": ".attributions",
+    "ActivateOfferResponseData": ".attributions",
     "Amount": ".rewards",
     "AmountType": ".rewards",
     "Asset": ".rewards",
@@ -217,6 +227,11 @@ def __dir__():
 
 
 __all__ = [
+    "ActivateOfferIncludeOption",
+    "ActivateOfferIncluded",
+    "ActivateOfferResponse",
+    "ActivateOfferResponseAttributes",
+    "ActivateOfferResponseData",
     "Amount",
     "AmountType",
     "Asset",
