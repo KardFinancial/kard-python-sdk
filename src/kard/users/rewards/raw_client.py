@@ -49,8 +49,7 @@ class RawRewardsClient:
         """
         Retrieve national brand offers that a specified user is eligible for. Call this endpoint to build out your
         [targeted offers UX experience](/2024-10-01/api/getting-started#b-discover-a-lapsed-customer-clo). Local offers details
-        can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations) endpoint with the
-        `includeLocal` query parameter.<br/>
+        can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations).<br/>
         <b>Required scopes:</b> `rewards:read`
 
         Parameters
@@ -184,8 +183,7 @@ class RawRewardsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[LocationsResponseObject]:
         """
-        Retrieve national and local geographic locations that a specified user has eligible in-store offers at. To
-        include local locations, add the `includeLocal` query parameter to your api call. Use this endpoint to build
+        Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build
         out your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note
         that Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search
         pattern.<br/>
@@ -340,8 +338,7 @@ class AsyncRawRewardsClient:
         """
         Retrieve national brand offers that a specified user is eligible for. Call this endpoint to build out your
         [targeted offers UX experience](/2024-10-01/api/getting-started#b-discover-a-lapsed-customer-clo). Local offers details
-        can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations) endpoint with the
-        `includeLocal` query parameter.<br/>
+        can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations).<br/>
         <b>Required scopes:</b> `rewards:read`
 
         Parameters
@@ -475,8 +472,7 @@ class AsyncRawRewardsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[LocationsResponseObject]:
         """
-        Retrieve national and local geographic locations that a specified user has eligible in-store offers at. To
-        include local locations, add the `includeLocal` query parameter to your api call. Use this endpoint to build
+        Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build
         out your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note
         that Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search
         pattern.<br/>
