@@ -558,7 +558,8 @@ client.ping.ping()
 Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>
 Please use the correct type when calling the endpoint:
 - `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.
-- `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.<br/>
+- `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
+- `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>
 
 <b>Required scopes:</b> `transaction:write`<br/>
 <b>Note:</b> `Maximum of 500 transactions can be created per request`.
@@ -580,9 +581,10 @@ import datetime
 
 from kard import KardApi
 from kard.transactions import (
-    MatchedTransactionsAttributes,
-    Merchant,
-    Transactions_MatchedTransaction,
+    CoreMerchant,
+    CoreTransactionAttributes,
+    FinancialInstitution,
+    Transactions_CoreTransaction,
 )
 
 client = KardApi(
@@ -592,36 +594,28 @@ client = KardApi(
 client.transactions.create(
     organization_id="organization-123",
     data=[
-        Transactions_MatchedTransaction(
-            id="unknown_payment_txn_12345",
-            attributes=MatchedTransactionsAttributes(
+        Transactions_CoreTransaction(
+            id="core_txn_98765432109876543210",
+            attributes=CoreTransactionAttributes(
                 user_id="6FHt5b6Fnp0qdomMEy5AN6PXcSJIeX69",
-                amount=2500,
-                subtotal=2000,
-                description="ONLINE STORE PURCHASE",
-                authorization_date=datetime.datetime.fromisoformat(
-                    "2021-07-02 17:47:06+00:00",
-                ),
-                payment_type="UNKNOWN",
-                matched_offer_id="5eb2d4a39ce24e00081488c4",
+                transaction_id="CORE-TXN-2024-001234",
+                amount=4599,
+                currency="USD",
+                description="WALMART SUPERCENTER",
                 direction="DEBIT",
-                merchant=Merchant(
-                    id="98765432109876543",
-                    name="ONLINE STORE",
-                    addr_street="456 Web St",
-                    addr_city="Online City",
-                    addr_state="CA",
-                    addr_zipcode="90210",
-                    addr_country="United States",
+                settled_date=datetime.datetime.fromisoformat(
+                    "2024-10-15 14:30:00+00:00",
                 ),
-                card_last_four="7890",
-                authorization_code="5678",
-                retrieval_reference_number="200804333919",
-                system_trace_audit_number="444939",
-                acquirer_reference_number="9876543210987654321098765432",
-                transaction_id="unknown-txn-4567-efgh-ijkl-mnop-qrstuvwxyz01",
-                order_id="online_order_789012",
-                receipt_medium="ELECTRONIC",
+                authorization_date=datetime.datetime.fromisoformat(
+                    "2024-10-15 14:25:00+00:00",
+                ),
+                financial_institution=FinancialInstitution(
+                    rssd_id="852218",
+                    name="First National Bank",
+                ),
+                merchant=CoreMerchant(
+                    addr_zipcode="75001",
+                ),
             ),
         )
     ],
@@ -655,6 +649,7 @@ Discriminated union representing the request body for submitting a transaction.
 Use `type` to distinguish between the two:
 - `transaction`: For transactions requiring processing and matching by the Kard system.
 - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
+- `coreTransaction`: For transactions from core banking systems with limited card-level data.
     
 </dd>
 </dl>
@@ -1565,8 +1560,7 @@ client.users.auth.get_web_view_token(
 
 Retrieve national brand offers that a specified user is eligible for. Call this endpoint to build out your
 [targeted offers UX experience](/2024-10-01/api/getting-started#b-discover-a-lapsed-customer-clo). Local offers details
-can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations) endpoint with the
-`includeLocal` query parameter.<br/>
+can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations).<br/>
 <b>Required scopes:</b> `rewards:read`
 </dd>
 </dl>
@@ -1724,8 +1718,7 @@ client.users.rewards.offers(
 <dl>
 <dd>
 
-Retrieve national and local geographic locations that a specified user has eligible in-store offers at. To
-include local locations, add the `includeLocal` query parameter to your api call. Use this endpoint to build
+Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build
 out your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note
 that Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search
 pattern.<br/>
