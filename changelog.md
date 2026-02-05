@@ -1,3 +1,15 @@
+## 2.2.0 - 2026-02-05
+* feat: add support for core banking transaction type
+* Introduce a new transaction type specifically designed for core banking systems with limited card-level data. This enhancement expands the Kard API's transaction processing capabilities to accommodate different types of financial institution integrations.
+* Key changes:
+* Added CoreTransactionAttributes model with financial institution and merchant data
+* Added CoreMerchant and FinancialInstitution types for core transaction metadata
+* Added Transactions_CoreTransaction discriminated union variant
+* Updated API documentation to include coreTransaction type alongside transaction and matchedTransaction
+* Updated timestamp format descriptions to use ISO 8601 standard throughout
+* Refined documentation for rewards endpoints to remove deprecated query parameter references
+* 🌿 Generated with Fern
+
 ## 2.1.0 - 2026-02-04
 * feat: add UI component support for rewards API
 * Add support for customizable UI components in rewards offers and locations to enable
