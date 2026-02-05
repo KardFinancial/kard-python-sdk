@@ -1,3 +1,14 @@
+## 2.2.0 - 2026-02-05
+* feat: add core transaction support for banking systems
+* Add support for core banking system transactions with limited card-level data through a new `coreTransaction` type. This enhancement enables direct integration with core banking systems that may not have detailed card transaction data.
+* Key changes:
+* Add new `CoreTransaction` type with `CoreTransactionAttributes` and `CoreMerchant` models
+* Add `FinancialInstitution` model for banking institution details
+* Update transaction API to accept `coreTransaction` alongside existing transaction types
+* Add comprehensive type definitions and client support for core transactions
+* Update documentation to describe the new core transaction workflow
+* 🌿 Generated with Fern
+
 ## 2.1.0 - 2026-02-04
 * feat: add UI component support for rewards API
 * Add support for customizable UI components in rewards offers and locations to enable
