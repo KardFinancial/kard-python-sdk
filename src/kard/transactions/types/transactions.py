@@ -7,6 +7,7 @@ import typing
 import pydantic
 import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .core_transaction_attributes import CoreTransactionAttributes
 from .matched_transactions_attributes import MatchedTransactionsAttributes
 from .transactions_attributes import TransactionsAttributes
 
@@ -41,6 +42,22 @@ class Transactions_MatchedTransaction(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class Transactions_CoreTransaction(UniversalBaseModel):
+    type: typing.Literal["coreTransaction"] = "coreTransaction"
+    id: str
+    attributes: CoreTransactionAttributes
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 Transactions = typing_extensions.Annotated[
-    typing.Union[Transactions_Transaction, Transactions_MatchedTransaction], pydantic.Field(discriminator="type")
+    typing.Union[Transactions_Transaction, Transactions_MatchedTransaction, Transactions_CoreTransaction],
+    pydantic.Field(discriminator="type"),
 ]

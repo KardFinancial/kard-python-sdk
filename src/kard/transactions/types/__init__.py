@@ -13,12 +13,16 @@ if typing.TYPE_CHECKING:
     from .audit_status import AuditStatus
     from .card_network import CardNetwork
     from .commission_earned_details import CommissionEarnedDetails
+    from .core_merchant import CoreMerchant
+    from .core_transaction_attributes import CoreTransactionAttributes
+    from .core_transaction_request import CoreTransactionRequest
     from .create_audit_multi_status_response import CreateAuditMultiStatusResponse
     from .create_audit_request_body import CreateAuditRequestBody
     from .create_audit_request_data_union import CreateAuditRequestDataUnion, CreateAuditRequestDataUnion_Audit
     from .create_audit_response_body import CreateAuditResponseBody
     from .create_audit_response_data_union import CreateAuditResponseDataUnion, CreateAuditResponseDataUnion_Audit
     from .direction_type import DirectionType
+    from .financial_institution import FinancialInstitution
     from .fraudulent_transaction_attributes import FraudulentTransactionAttributes
     from .fraudulent_transaction_data import FraudulentTransactionData
     from .fraudulent_transaction_object import FraudulentTransactionObject
@@ -49,7 +53,12 @@ if typing.TYPE_CHECKING:
     from .transaction_offer_resource import TransactionOfferResource
     from .transaction_payment_type import TransactionPaymentType
     from .transaction_status import TransactionStatus
-    from .transactions import Transactions, Transactions_MatchedTransaction, Transactions_Transaction
+    from .transactions import (
+        Transactions,
+        Transactions_CoreTransaction,
+        Transactions_MatchedTransaction,
+        Transactions_Transaction,
+    )
     from .transactions_attributes import TransactionsAttributes
     from .transactions_multi_response import TransactionsMultiResponse
     from .transactions_request import TransactionsRequest
@@ -66,6 +75,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuditStatus": ".audit_status",
     "CardNetwork": ".card_network",
     "CommissionEarnedDetails": ".commission_earned_details",
+    "CoreMerchant": ".core_merchant",
+    "CoreTransactionAttributes": ".core_transaction_attributes",
+    "CoreTransactionRequest": ".core_transaction_request",
     "CreateAuditMultiStatusResponse": ".create_audit_multi_status_response",
     "CreateAuditRequestBody": ".create_audit_request_body",
     "CreateAuditRequestDataUnion": ".create_audit_request_data_union",
@@ -74,6 +86,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateAuditResponseDataUnion": ".create_audit_response_data_union",
     "CreateAuditResponseDataUnion_Audit": ".create_audit_response_data_union",
     "DirectionType": ".direction_type",
+    "FinancialInstitution": ".financial_institution",
     "FraudulentTransactionAttributes": ".fraudulent_transaction_attributes",
     "FraudulentTransactionData": ".fraudulent_transaction_data",
     "FraudulentTransactionObject": ".fraudulent_transaction_object",
@@ -111,6 +124,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TransactionsRequestBody": ".transactions_request_body",
     "TransactionsResponse": ".transactions_response",
     "TransactionsResponseData": ".transactions_response_data",
+    "Transactions_CoreTransaction": ".transactions",
     "Transactions_MatchedTransaction": ".transactions",
     "Transactions_Transaction": ".transactions",
     "VisaMid": ".visa_mid",
@@ -147,6 +161,9 @@ __all__ = [
     "AuditStatus",
     "CardNetwork",
     "CommissionEarnedDetails",
+    "CoreMerchant",
+    "CoreTransactionAttributes",
+    "CoreTransactionRequest",
     "CreateAuditMultiStatusResponse",
     "CreateAuditRequestBody",
     "CreateAuditRequestDataUnion",
@@ -155,6 +172,7 @@ __all__ = [
     "CreateAuditResponseDataUnion",
     "CreateAuditResponseDataUnion_Audit",
     "DirectionType",
+    "FinancialInstitution",
     "FraudulentTransactionAttributes",
     "FraudulentTransactionData",
     "FraudulentTransactionObject",
@@ -192,6 +210,7 @@ __all__ = [
     "TransactionsRequestBody",
     "TransactionsResponse",
     "TransactionsResponseData",
+    "Transactions_CoreTransaction",
     "Transactions_MatchedTransaction",
     "Transactions_Transaction",
     "VisaMid",
