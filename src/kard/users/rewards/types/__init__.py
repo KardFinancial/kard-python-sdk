@@ -19,6 +19,7 @@ if typing.TYPE_CHECKING:
     from .commission import Commission
     from .component_type import ComponentType
     from .coordinates import Coordinates
+    from .cta_action import CtaAction
     from .cta_component import CtaComponent
     from .eligibility_location_address import EligibilityLocationAddress
     from .eligibility_location_included import EligibilityLocationIncluded
@@ -55,6 +56,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Commission": ".commission",
     "ComponentType": ".component_type",
     "Coordinates": ".coordinates",
+    "CtaAction": ".cta_action",
     "CtaComponent": ".cta_component",
     "EligibilityLocationAddress": ".eligibility_location_address",
     "EligibilityLocationIncluded": ".eligibility_location_included",
@@ -116,6 +118,7 @@ __all__ = [
     "Commission",
     "ComponentType",
     "Coordinates",
+    "CtaAction",
     "CtaComponent",
     "EligibilityLocationAddress",
     "EligibilityLocationIncluded",

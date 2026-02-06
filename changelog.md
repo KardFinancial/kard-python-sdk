@@ -1,3 +1,15 @@
+## 2.3.0 - 2026-02-06
+* feat: add CtaAction type for enhanced CTA button functionality
+* Introduce a new CtaAction class to provide action configuration capabilities
+* for CTA buttons. This enhancement allows buttons to specify both URL endpoints
+* and HTTP methods when clicked, enabling more sophisticated interaction patterns
+* within the rewards system.
+* Key changes:
+* Add new CtaAction type with url and method fields for button configuration
+* Update CtaComponent to include optional action field for enhanced functionality
+* Register CtaAction in all necessary import hierarchies (users, rewards, types modules)
+* 🌿 Generated with Fern
+
 ## 2.2.2 - 2026-02-06
 * fix: correct API endpoint path for offer activation
 * Fixed the URL path structure for activating offers by removing the redundant

@@ -7,6 +7,7 @@ import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .button_style import ButtonStyle
+from .cta_action import CtaAction
 
 
 class CtaComponent(UniversalBaseModel):
@@ -22,6 +23,11 @@ class CtaComponent(UniversalBaseModel):
     button_style: typing_extensions.Annotated[ButtonStyle, FieldMetadata(alias="buttonStyle")] = pydantic.Field()
     """
     Style of the button
+    """
+
+    action: typing.Optional[CtaAction] = pydantic.Field(default=None)
+    """
+    Action to perform when the button is clicked
     """
 
     if IS_PYDANTIC_V2:
