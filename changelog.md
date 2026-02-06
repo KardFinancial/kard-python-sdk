@@ -1,3 +1,14 @@
+## 2.2.2 - 2026-02-06
+* fix: correct API endpoint path for offer activation
+* Fixed the URL path structure for activating offers by removing the redundant
+* /attributions/ segment from the endpoint. This corrects the API route to properly
+* target the offers resource directly under users.
+* Key changes:
+* Update sync client endpoint from /users/{user_id}/attributions/offers/{offer_id}/activate to /users/{user_id}/offers/{offer_id}/activate
+* Update async client endpoint with same path correction
+* Align endpoint structure with expected API routing pattern
+* 🌿 Generated with Fern
+
 ## 2.2.1 - 2026-02-05
 * fix: correct API endpoint path for offer activation
 * Fixed the URL path for activating offers to include the missing 'attributions' segment in both synchronous and asynchronous client methods. This ensures requests are sent to the correct endpoint structure.
