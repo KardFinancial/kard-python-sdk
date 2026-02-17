@@ -17,7 +17,7 @@ Create `src/kard/{name}.py` where `{name}` is a short, descriptive snake_case na
 
 Rules:
 
-- **Only stdlib imports.** No third-party dependencies. The SDK ships with httpx, pydantic, and typing_extensions, but custom utility functions must not depend on them unless they are working with SDK types. Check `requirements.txt` and `pyproject.toml [tool.poetry.dependencies]` if unsure.
+- **Prefer stdlib imports.** The SDK ships with httpx, pydantic, and typing_extensions -- those are safe to use. For anything else, check `pyproject.toml [tool.poetry.dependencies]` first. If the function genuinely requires a package that is not already a dependency, see [Adding Custom Dependencies](#adding-custom-dependencies) below.
 - **Python 3.8+ compatible.** No walrus operator, no `dict | dict` union syntax, no `type` statement, no `match/case`. Use `typing.Union`, `typing.Optional`, `typing.List`, `typing.Dict` instead of built-in generics for type hints (e.g., `list[str]` is 3.9+).
 - **Input validation pattern.** Check argument types with `isinstance` and raise `TypeError` with message `f"Expected a string, got {type(raw).__name__}"`. Validate values and raise `ValueError` with descriptive messages. Follow the exact pattern in `src/kard/hem.py`.
 - **Docstrings.** Every public function gets a Google-style docstring with a summary line, description of behavior, and a `Raises:` section listing each exception type and when it is raised. See `normalize_email` in `src/kard/hem.py`.
@@ -92,12 +92,36 @@ python -m pytest tests/ -v
 
 All four must pass with zero errors and zero warnings.
 
+## Adding Custom Dependencies
+
+If a custom function legitimately requires an external package that is not already in `pyproject.toml`, you must register it with Fern so it is included when the SDK is regenerated and published.
+
+In the Fern `generators.yml` configuration, add the package under `extra_dependencies` (production) or `extra_dev_dependencies` (test/dev only):
+
+```yaml
+- name: fernapi/fern-python-sdk
+  version: "..."
+  config:
+    extra_dependencies:
+      package-name: 'X.Y.Z'
+    extra_dev_dependencies:
+      test-only-package: 'X.Y.Z'
+```
+
+**Guidelines:**
+
+- **Stdlib first.** Always check whether the standard library can do the job before adding a dependency. Fewer dependencies mean fewer version conflicts for SDK consumers.
+- **Pin to a minimum version** (e.g., `'>=1.2.0'`) rather than an exact version, unless there is a specific compatibility reason.
+- **Production vs dev.** If the package is only needed for tests, put it under `extra_dev_dependencies`. Only use `extra_dependencies` for packages that are imported by code in `src/kard/`.
+- **Update `pyproject.toml` locally** as well so that `poetry install` and local development work. Fern will manage it on regeneration, but local dev needs it too.
+- **Note:** `extra_dependencies` in `generators.yml` requires a Fern Pro or Enterprise plan. See [Fern docs on custom dependencies](https://buildwithfern.com/learn/sdks/generators/python/custom-code#adding-custom-dependencies) for details.
+
 ## Checklist
 
 Before finishing, verify every item:
 
 - [ ] `src/kard/{name}.py` exists with type hints, docstrings, and input validation
-- [ ] Only stdlib imports are used in the module
+- [ ] Only stdlib/existing SDK imports are used, or new dependencies are registered in `generators.yml` and `pyproject.toml`
 - [ ] All code is Python 3.8+ compatible (no 3.9+ syntax)
 - [ ] `src/kard/{name}.py` is listed in `.fernignore`
 - [ ] `tests/custom/test_{name}.py` exists with parametrized tests
