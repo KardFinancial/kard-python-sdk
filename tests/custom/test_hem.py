@@ -7,7 +7,7 @@ from kard.hem import generate_hem, normalize_email
 
 _VECTORS_PATH = os.path.join(os.path.dirname(__file__), "test_vectors.json")
 
-with open(_VECTORS_PATH) as f:
+with open(_VECTORS_PATH, encoding="utf-8") as f:
     vectors = json.load(f)
 
 
