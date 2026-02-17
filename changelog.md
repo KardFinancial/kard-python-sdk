@@ -1,3 +1,14 @@
+## 3.0.0 - 2026-02-17
+* refactor: simplify transaction attributes by flattening nested structures
+* Replace complex nested objects with simplified string fields in transaction attributes to improve API usability and reduce complexity.
+* Key changes:
+* Remove CoreMerchant and FinancialInstitution complex types
+* Replace financial_institution object with financial_institution_name string field
+* Remove merchant object dependency from CoreTransactionAttributes
+* Update all imports and exports across modules to remove deleted types
+* Simplify example usage in documentation
+* 🌿 Generated with Fern
+
 ## 2.3.0 - 2026-02-06
 * feat: add CtaAction type for enhanced CTA button functionality
 * Introduce a new CtaAction class to provide action configuration capabilities

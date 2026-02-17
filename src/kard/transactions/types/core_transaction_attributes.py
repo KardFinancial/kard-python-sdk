@@ -7,9 +7,7 @@ import pydantic
 import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
-from .core_merchant import CoreMerchant
 from .direction_type import DirectionType
-from .financial_institution import FinancialInstitution
 
 
 class CoreTransactionAttributes(UniversalBaseModel):
@@ -60,16 +58,11 @@ class CoreTransactionAttributes(UniversalBaseModel):
     Timestamp for transaction authorization. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z
     """
 
-    financial_institution: typing_extensions.Annotated[
-        FinancialInstitution, FieldMetadata(alias="financialInstitution")
-    ] = pydantic.Field()
+    financial_institution_name: typing_extensions.Annotated[str, FieldMetadata(alias="financialInstitutionName")] = (
+        pydantic.Field()
+    )
     """
-    Financial institution details
-    """
-
-    merchant: CoreMerchant = pydantic.Field()
-    """
-    Merchant details
+    Name of the financial institution
     """
 
     if IS_PYDANTIC_V2:

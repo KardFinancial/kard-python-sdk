@@ -581,9 +581,7 @@ import datetime
 
 from kard import KardApi
 from kard.transactions import (
-    CoreMerchant,
     CoreTransactionAttributes,
-    FinancialInstitution,
     Transactions_CoreTransaction,
 )
 
@@ -609,13 +607,7 @@ client.transactions.create(
                 authorization_date=datetime.datetime.fromisoformat(
                     "2024-10-15 14:25:00+00:00",
                 ),
-                financial_institution=FinancialInstitution(
-                    rssd_id="852218",
-                    name="First National Bank",
-                ),
-                merchant=CoreMerchant(
-                    addr_zipcode="75001",
-                ),
+                financial_institution_name="First National Bank",
             ),
         )
     ],

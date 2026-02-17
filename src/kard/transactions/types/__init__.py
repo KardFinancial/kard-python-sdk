@@ -13,7 +13,6 @@ if typing.TYPE_CHECKING:
     from .audit_status import AuditStatus
     from .card_network import CardNetwork
     from .commission_earned_details import CommissionEarnedDetails
-    from .core_merchant import CoreMerchant
     from .core_transaction_attributes import CoreTransactionAttributes
     from .core_transaction_request import CoreTransactionRequest
     from .create_audit_multi_status_response import CreateAuditMultiStatusResponse
@@ -22,7 +21,6 @@ if typing.TYPE_CHECKING:
     from .create_audit_response_body import CreateAuditResponseBody
     from .create_audit_response_data_union import CreateAuditResponseDataUnion, CreateAuditResponseDataUnion_Audit
     from .direction_type import DirectionType
-    from .financial_institution import FinancialInstitution
     from .fraudulent_transaction_attributes import FraudulentTransactionAttributes
     from .fraudulent_transaction_data import FraudulentTransactionData
     from .fraudulent_transaction_object import FraudulentTransactionObject
@@ -75,7 +73,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuditStatus": ".audit_status",
     "CardNetwork": ".card_network",
     "CommissionEarnedDetails": ".commission_earned_details",
-    "CoreMerchant": ".core_merchant",
     "CoreTransactionAttributes": ".core_transaction_attributes",
     "CoreTransactionRequest": ".core_transaction_request",
     "CreateAuditMultiStatusResponse": ".create_audit_multi_status_response",
@@ -86,7 +83,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateAuditResponseDataUnion": ".create_audit_response_data_union",
     "CreateAuditResponseDataUnion_Audit": ".create_audit_response_data_union",
     "DirectionType": ".direction_type",
-    "FinancialInstitution": ".financial_institution",
     "FraudulentTransactionAttributes": ".fraudulent_transaction_attributes",
     "FraudulentTransactionData": ".fraudulent_transaction_data",
     "FraudulentTransactionObject": ".fraudulent_transaction_object",
@@ -161,7 +157,6 @@ __all__ = [
     "AuditStatus",
     "CardNetwork",
     "CommissionEarnedDetails",
-    "CoreMerchant",
     "CoreTransactionAttributes",
     "CoreTransactionRequest",
     "CreateAuditMultiStatusResponse",
@@ -172,7 +167,6 @@ __all__ = [
     "CreateAuditResponseDataUnion",
     "CreateAuditResponseDataUnion_Audit",
     "DirectionType",
-    "FinancialInstitution",
     "FraudulentTransactionAttributes",
     "FraudulentTransactionData",
     "FraudulentTransactionObject",
