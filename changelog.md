@@ -1,3 +1,14 @@
+## 3.1.1 - 2026-02-17
+* refactor: remove custom function examples and skill documentation
+* Clean up repository by removing example custom function implementations and associated skill documentation that were no longer needed.
+* Key changes:
+* Remove .agents/skills/add-custom-function.md skill documentation file
+* Remove .claude/skills/add-custom-function.md symlink
+* Remove tests/custom/test_hem.py example test file
+* Remove tests/custom/test_vectors.json example test vectors
+* Clean up .gitignore to remove .claude directory exclusions
+* 🌿 Generated with Fern
+
 ## 3.0.0 - 2026-02-17
 * refactor: simplify transaction attributes by flattening nested structures
 * Replace complex nested objects with simplified string fields in transaction attributes to improve API usability and reduce complexity.
