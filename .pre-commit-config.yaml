@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-hem-docs
+        name: Check HEM documentation in reference.md
+        entry: python3 scripts/check_hem_docs.py
+        language: system
+        files: (reference\.md|src/kard/hem\.py)$
+        pass_filenames: false

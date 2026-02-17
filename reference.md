@@ -2331,15 +2331,15 @@ client.users.uploads.update(
 <dd>
 
 **upload_id:** `str` — The upload ID identifying the upload session to update
-    
+
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**data:** `UpdateUploadRequestDataUnion` 
-    
+**data:** `UpdateUploadRequestDataUnion`
+
 </dd>
 </dl>
 
@@ -2347,7 +2347,71 @@ client.users.uploads.update(
 <dd>
 
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## HEM
+<details><summary><code><a href="src/kard/hem.py">generate_hem</a>(raw) -&gt; str</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a Hashed Email (HEM) from a raw email address. The email is normalized
+following UID2/LiveRamp industry standards before being hashed with SHA-256.
+
+Normalization rules:
+- Remove all whitespace
+- Lowercase the entire address
+- Gmail/Googlemail only: remove dots from local-part, strip '+' suffix
+- Canonicalize googlemail.com to gmail.com
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard.hem import generate_hem
+
+hem = generate_hem("Test.User+extra@gmail.com")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**raw:** `str` — The raw email address to normalize and hash.
+
 </dd>
 </dl>
 </dd>
