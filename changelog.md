@@ -1,3 +1,12 @@
+## 3.1.2 - 2026-02-18
+* chore: update Fern CLI version to 3.79.2
+* This change updates the Fern CLI version from 3.29.0 to 3.79.2 in the metadata configuration. This is a maintenance update to use a newer version of the Fern tooling for SDK generation.
+* Key changes:
+* Update cliVersion from 3.29.0 to 3.79.2 in .fern/metadata.json
+* Maintain existing generator name and version configurations
+* Ensures compatibility with latest Fern CLI features and improvements
+* 🌿 Generated with Fern
+
 ## 3.1.1 - 2026-02-17
 * refactor: remove custom function examples and skill documentation
 * Clean up repository by removing example custom function implementations and associated skill documentation that were no longer needed.
