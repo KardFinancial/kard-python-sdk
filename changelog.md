@@ -1,3 +1,12 @@
+## 3.1.2 - 2026-02-18
+* chore: update Fern CLI version to 3.79.2
+* Updates the Fern CLI version from 3.29.0 to 3.79.2, bringing the latest tooling improvements and bug fixes. This is a development tooling update that does not affect the public API or runtime behavior.
+* Key changes:
+* Update cliVersion from 3.29.0 to 3.79.2 in metadata configuration
+* Maintain existing generator name and version unchanged
+* Bring latest Fern CLI capabilities to the development workflow
+* 🌿 Generated with Fern
+
 ## 3.1.1 - 2026-02-17
 * refactor: remove custom function examples and skill documentation
 * Clean up repository by removing example custom function implementations and associated skill documentation that were no longer needed.
