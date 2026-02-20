@@ -1,3 +1,11 @@
+## 3.1.3 - 2026-02-20
+* chore: downgrade CLI version in metadata
+* Updates the Fern CLI version from 3.79.2 to 3.76.0 in the metadata configuration file. This version change may be related to compatibility requirements or rollback to a more stable version.
+* Key changes:
+* Downgrade cliVersion from 3.79.2 to 3.76.0 in .fern/metadata.json
+* Generator name and version remain unchanged
+* 🌿 Generated with Fern
+
 ## 3.1.2 - 2026-02-18
 * chore: update Fern CLI version to 3.79.2
 * This change updates the Fern CLI version from 3.29.0 to 3.79.2 in the metadata configuration. This is a maintenance update to use a newer version of the Fern tooling for SDK generation.
