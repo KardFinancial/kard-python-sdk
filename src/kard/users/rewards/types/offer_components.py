@@ -28,6 +28,13 @@ class OfferComponents(UniversalBaseModel):
     Long description for the offer
     """
 
+    base_reward: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="baseReward")] = pydantic.Field(
+        default=None
+    )
+    """
+    Formatted reward string
+    """
+
     cta: typing.Optional[CtaComponent] = pydantic.Field(default=None)
     """
     Call-to-action button component

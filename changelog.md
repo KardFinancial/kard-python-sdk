@@ -1,3 +1,12 @@
+## 3.2.0 - 2026-02-23
+* feat: add baseReward component to offer components
+* Add a new baseReward component to the OfferComponents model to support displaying formatted reward information in offers. This component provides a string field for presenting reward details to users.
+* Key changes:
+* Add "baseReward" to ComponentType literal union
+* Add base_reward field to OfferComponents model with string type
+* Include proper field metadata and documentation for the new component
+* 🌿 Generated with Fern
+
 ## 3.1.3 - 2026-02-20
 * chore: downgrade CLI version in metadata
 * Updates the Fern CLI version from 3.79.2 to 3.76.0 in the metadata configuration file. This version change may be related to compatibility requirements or rollback to a more stable version.
