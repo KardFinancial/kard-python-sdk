@@ -11,6 +11,11 @@ if typing.TYPE_CHECKING:
     from .activate_offer_response import ActivateOfferResponse
     from .activate_offer_response_attributes import ActivateOfferResponseAttributes
     from .activate_offer_response_data import ActivateOfferResponseData
+    from .boost_offer_include_option import BoostOfferIncludeOption
+    from .boost_offer_included import BoostOfferIncluded
+    from .boost_offer_response import BoostOfferResponse
+    from .boost_offer_response_attributes import BoostOfferResponseAttributes
+    from .boost_offer_response_data import BoostOfferResponseData
     from .create_attribution_request_object import CreateAttributionRequestObject
     from .create_attribution_request_union import (
         CreateAttributionRequestUnion,
@@ -31,6 +36,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ActivateOfferResponse": ".activate_offer_response",
     "ActivateOfferResponseAttributes": ".activate_offer_response_attributes",
     "ActivateOfferResponseData": ".activate_offer_response_data",
+    "BoostOfferIncludeOption": ".boost_offer_include_option",
+    "BoostOfferIncluded": ".boost_offer_included",
+    "BoostOfferResponse": ".boost_offer_response",
+    "BoostOfferResponseAttributes": ".boost_offer_response_attributes",
+    "BoostOfferResponseData": ".boost_offer_response_data",
     "CreateAttributionRequestObject": ".create_attribution_request_object",
     "CreateAttributionRequestUnion": ".create_attribution_request_union",
     "CreateAttributionRequestUnion_NotificationAttribution": ".create_attribution_request_union",
@@ -73,6 +83,11 @@ __all__ = [
     "ActivateOfferResponse",
     "ActivateOfferResponseAttributes",
     "ActivateOfferResponseData",
+    "BoostOfferIncludeOption",
+    "BoostOfferIncluded",
+    "BoostOfferResponse",
+    "BoostOfferResponseAttributes",
+    "BoostOfferResponseData",
     "CreateAttributionRequestObject",
     "CreateAttributionRequestUnion",
     "CreateAttributionRequestUnion_NotificationAttribution",

@@ -1566,6 +1566,116 @@ client.users.attributions.activate(
 </dl>
 </details>
 
+<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">boost</a>(...) -&gt; AsyncHttpResponse[BoostOfferResponse]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.
+Optionally include the offer data by passing `include=offer`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+
+client = KardApi(
+    client_id="YOUR_CLIENT_ID",
+    client_secret="YOUR_CLIENT_SECRET",
+)
+client.users.attributions.boost(
+    organization_id="organization-123",
+    user_id="user-123",
+    offer_id="offer-456",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `UserId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offer_id:** `str` — The unique identifier of the offer being boosted
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the offer response (when include=offer).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[
+    typing.Union[
+        BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]
+    ]
+]` — Related resources to include in the response. Allowed value is `offer`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## WebView
 <details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_web_view_token</a>(...) -&gt; AsyncHttpResponse[WebViewTokenResponse]</code></summary>
 <dl>

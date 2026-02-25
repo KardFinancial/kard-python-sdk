@@ -19,6 +19,8 @@ from ...core.serialization import convert_and_respect_annotation_metadata
 from ..rewards.types.component_type import ComponentType
 from .types.activate_offer_include_option import ActivateOfferIncludeOption
 from .types.activate_offer_response import ActivateOfferResponse
+from .types.boost_offer_include_option import BoostOfferIncludeOption
+from .types.boost_offer_response import BoostOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
 from .types.create_attribution_response import CreateAttributionResponse
 
@@ -216,6 +218,101 @@ class RawAttributionsClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def boost(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[BoostOfferResponse]:
+        """
+        Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being boosted
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[BoostOfferResponse]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/boost",
+            method="POST",
+            params={
+                "supportedComponents": supported_components,
+                "include": include,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    BoostOfferResponse,
+                    parse_obj_as(
+                        type_=BoostOfferResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawAttributionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -365,6 +462,101 @@ class AsyncRawAttributionsClient:
                     ActivateOfferResponse,
                     parse_obj_as(
                         type_=ActivateOfferResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def boost(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[BoostOfferResponse]:
+        """
+        Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being boosted
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[BoostOfferResponse]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/boost",
+            method="POST",
+            params={
+                "supportedComponents": supported_components,
+                "include": include,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    BoostOfferResponse,
+                    parse_obj_as(
+                        type_=BoostOfferResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

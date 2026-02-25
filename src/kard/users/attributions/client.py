@@ -10,6 +10,8 @@ from ..rewards.types.component_type import ComponentType
 from .raw_client import AsyncRawAttributionsClient, RawAttributionsClient
 from .types.activate_offer_include_option import ActivateOfferIncludeOption
 from .types.activate_offer_response import ActivateOfferResponse
+from .types.boost_offer_include_option import BoostOfferIncludeOption
+from .types.boost_offer_response import BoostOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
 from .types.create_attribution_response import CreateAttributionResponse
 
@@ -173,6 +175,68 @@ class AttributionsClient:
         )
         """
         _response = self._raw_client.activate(
+            organization_id,
+            user_id,
+            offer_id,
+            supported_components=supported_components,
+            include=include,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def boost(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> BoostOfferResponse:
+        """
+        Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being boosted
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BoostOfferResponse
+
+        Examples
+        --------
+        from kard import KardApi
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.users.attributions.boost(
+            organization_id="organization-123",
+            user_id="user-123",
+            offer_id="offer-456",
+        )
+        """
+        _response = self._raw_client.boost(
             organization_id,
             user_id,
             offer_id,
@@ -354,6 +418,76 @@ class AsyncAttributionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.activate(
+            organization_id,
+            user_id,
+            offer_id,
+            supported_components=supported_components,
+            include=include,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def boost(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        offer_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        include: typing.Optional[
+            typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]
+        ] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> BoostOfferResponse:
+        """
+        Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.
+        Optionally include the offer data by passing `include=offer`.
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        offer_id : str
+            The unique identifier of the offer being boosted
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the offer response (when include=offer).
+
+        include : typing.Optional[typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]]
+            Related resources to include in the response. Allowed value is `offer`.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BoostOfferResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.users.attributions.boost(
+                organization_id="organization-123",
+                user_id="user-123",
+                offer_id="offer-456",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.boost(
             organization_id,
             user_id,
             offer_id,

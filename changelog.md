@@ -1,3 +1,14 @@
+## 3.3.0 - 2026-02-25
+* feat: add boost method for offer attribution tracking
+* Add new boost method to the attributions client to track when users boost offers. This creates an attribution event with eventCode=BOOST and medium=CTA, complementing the existing activate functionality.
+* Key changes:
+* Add boost() method to both sync and async AttributionsClient classes
+* Implement boost endpoint in RawAttributionsClient with proper error handling
+* Create BoostOfferResponse types and include options for response serialization
+* Extend EventCode enum to support "BOOST" event type
+* Update all module exports to include new boost-related types
+* 🌿 Generated with Fern
+
 ## 3.2.1 - 2026-02-25
 * chore: update dependencies and CLI version
 * Update Fern CLI from version 3.76.0 to 3.88.1 and refresh dependency lock file to include latest package versions. This maintenance update ensures the SDK generation tooling is current with the latest improvements and security patches.
