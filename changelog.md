@@ -1,3 +1,12 @@
+## 3.2.1 - 2026-02-25
+* chore: update dependencies and CLI version
+* Update Fern CLI from version 3.76.0 to 3.88.1 and refresh dependency lock file to include latest package versions. This maintenance update ensures the SDK generation tooling is current with the latest improvements and security patches.
+* Key changes:
+* Update Fern CLI version from 3.76.0 to 3.88.1 in metadata
+* Refresh certifi package from 2026.1.4 to 2026.2.25 in lock file
+* Maintain compatibility with existing generator version 4.45.3
+* 🌿 Generated with Fern
+
 ## 3.2.0 - 2026-02-23
 * feat: add baseReward component to offer components
 * Add a new baseReward component to the OfferComponents model to support displaying formatted reward information in offers. This component provides a string field for presenting reward details to users.
