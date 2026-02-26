@@ -1,3 +1,12 @@
+## 3.3.1 - 2026-02-26
+* chore: update CLI version to 3.90.4
+* Update the Fern CLI version used for code generation from 3.88.1 to 3.90.4 to incorporate the latest improvements and bug fixes in the development toolchain.
+* Key changes:
+* Update cliVersion from 3.88.1 to 3.90.4 in metadata configuration
+* Maintain compatibility with existing generator versions
+* Ensure access to latest CLI features and stability improvements
+* 🌿 Generated with Fern
+
 ## 3.3.0 - 2026-02-25
 * feat: add boost method for offer attribution tracking
 * Add new boost method to the attributions client to track when users boost offers. This creates an attribution event with eventCode=BOOST and medium=CTA, complementing the existing activate functionality.
