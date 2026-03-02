@@ -1,3 +1,12 @@
+## 3.4.0 - 2026-03-02
+* feat: add start_icon field to CtaComponent
+* Add support for displaying icons on CTA buttons by introducing a new optional start_icon field to the CtaComponent class. This enhancement allows developers to specify an icon identifier that will be rendered alongside the button text, improving the visual presentation and user experience of call-to-action elements.
+* Key changes:
+* Add optional start_icon field with "startIcon" alias to CtaComponent
+* Include comprehensive docstring documenting the icon identifier functionality
+* Maintain backward compatibility with existing implementations
+* 🌿 Generated with Fern
+
 ## 3.3.2 - 2026-02-27
 * chore: update CLI version in Fern metadata
 * Update the Fern CLI version from 3.90.4 to 3.93.2 in the metadata configuration. This change maintains the existing generator settings while incorporating the latest CLI improvements and fixes.

@@ -30,6 +30,13 @@ class CtaComponent(UniversalBaseModel):
     Action to perform when the button is clicked
     """
 
+    start_icon: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="startIcon")] = pydantic.Field(
+        default=None
+    )
+    """
+    Icon identifier to display on the button
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:
