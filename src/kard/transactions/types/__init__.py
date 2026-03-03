@@ -21,6 +21,7 @@ if typing.TYPE_CHECKING:
     from .create_audit_response_body import CreateAuditResponseBody
     from .create_audit_response_data_union import CreateAuditResponseDataUnion, CreateAuditResponseDataUnion_Audit
     from .direction_type import DirectionType
+    from .financial_institution_name import FinancialInstitutionName
     from .fraudulent_transaction_attributes import FraudulentTransactionAttributes
     from .fraudulent_transaction_data import FraudulentTransactionData
     from .fraudulent_transaction_object import FraudulentTransactionObject
@@ -83,6 +84,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateAuditResponseDataUnion": ".create_audit_response_data_union",
     "CreateAuditResponseDataUnion_Audit": ".create_audit_response_data_union",
     "DirectionType": ".direction_type",
+    "FinancialInstitutionName": ".financial_institution_name",
     "FraudulentTransactionAttributes": ".fraudulent_transaction_attributes",
     "FraudulentTransactionData": ".fraudulent_transaction_data",
     "FraudulentTransactionObject": ".fraudulent_transaction_object",
@@ -167,6 +169,7 @@ __all__ = [
     "CreateAuditResponseDataUnion",
     "CreateAuditResponseDataUnion_Audit",
     "DirectionType",
+    "FinancialInstitutionName",
     "FraudulentTransactionAttributes",
     "FraudulentTransactionData",
     "FraudulentTransactionObject",

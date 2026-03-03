@@ -1,3 +1,13 @@
+## 3.5.0 - 2026-03-03
+* feat: add FinancialInstitutionName union type for transactions
+* Add a new union type to define valid financial institution names for transaction processing. This provides type safety and validation for financial institution names while maintaining backward compatibility.
+* Key changes:
+* Add FinancialInstitutionName union type with predefined valid institution names
+* Update CoreTransactionAttributes to use the new union type instead of generic string
+* Export FinancialInstitutionName across all relevant module init files
+* Update reference documentation example to use valid institution name
+* 🌿 Generated with Fern
+
 ## 3.4.0 - 2026-03-02
 * feat: add start_icon field to CtaComponent
 * Add support for displaying icons on CTA buttons by introducing a new optional start_icon field to the CtaComponent class. This enhancement allows developers to specify an icon identifier that will be rendered alongside the button text, improving the visual presentation and user experience of call-to-action elements.
