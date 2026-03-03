@@ -3,6 +3,7 @@
 import typing
 from json.decoder import JSONDecodeError
 
+from ..commons.errors.forbidden_error import ForbiddenError
 from ..commons.errors.internal_server_error import InternalServerError
 from ..commons.errors.invalid_request import InvalidRequest
 from ..commons.errors.unauthorized_error import UnauthorizedError
@@ -14,7 +15,6 @@ from ..core.http_response import AsyncHttpResponse, HttpResponse
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
-from .errors.forbidden_error import ForbiddenError
 from .types.file_type import FileType
 from .types.files_metadata_sort_options import FilesMetadataSortOptions
 from .types.get_files_metadata_response import GetFilesMetadataResponse

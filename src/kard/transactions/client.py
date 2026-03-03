@@ -8,6 +8,8 @@ from ..core.request_options import RequestOptions
 from .raw_client import AsyncRawTransactionsClient, RawTransactionsClient
 from .types.create_audit_request_data_union import CreateAuditRequestDataUnion
 from .types.create_audit_response_body import CreateAuditResponseBody
+from .types.create_file_upload_data import CreateFileUploadData
+from .types.create_file_upload_url_response import CreateFileUploadUrlResponse
 from .types.fraudulent_transaction_data import FraudulentTransactionData
 from .types.fraudulent_transaction_object import FraudulentTransactionObject
 from .types.get_earned_rewards_response import GetEarnedRewardsResponse
@@ -246,6 +248,65 @@ class TransactionsClient:
         )
         """
         _response = self._raw_client.create_audits(organization_id, user_id, data=data, request_options=request_options)
+        return _response.data
+
+    def create_bulk_transactions_upload_url(
+        self,
+        organization_id: OrganizationId,
+        *,
+        data: typing.Sequence[CreateFileUploadData],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateFileUploadUrlResponse:
+        """
+        Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly
+        to storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the
+        binary file content as the body. If a URL expires before the upload completes, you must request a new one.
+        Files can be uploaded as plain JSONL or as a gzip-compressed file.
+        Only `coreTransaction` type is supported for bulk file uploads.
+        <b>Required scopes:</b> `transaction:write`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        data : typing.Sequence[CreateFileUploadData]
+            List of file upload requests (1–10 items per request).
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateFileUploadUrlResponse
+
+        Examples
+        --------
+        from kard import KardApi
+        from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.transactions.create_bulk_transactions_upload_url(
+            organization_id="organization-123",
+            data=[
+                CreateFileUploadData(
+                    attributes=CreateFileUploadAttributes(
+                        filename="transaction_12345.jsonl",
+                    ),
+                ),
+                CreateFileUploadData(
+                    attributes=CreateFileUploadAttributes(
+                        filename="transaction_67890.jsonl",
+                    ),
+                ),
+            ],
+        )
+        """
+        _response = self._raw_client.create_bulk_transactions_upload_url(
+            organization_id, data=data, request_options=request_options
+        )
         return _response.data
 
     def get_earned_rewards(
@@ -567,6 +628,73 @@ class AsyncTransactionsClient:
         """
         _response = await self._raw_client.create_audits(
             organization_id, user_id, data=data, request_options=request_options
+        )
+        return _response.data
+
+    async def create_bulk_transactions_upload_url(
+        self,
+        organization_id: OrganizationId,
+        *,
+        data: typing.Sequence[CreateFileUploadData],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> CreateFileUploadUrlResponse:
+        """
+        Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly
+        to storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the
+        binary file content as the body. If a URL expires before the upload completes, you must request a new one.
+        Files can be uploaded as plain JSONL or as a gzip-compressed file.
+        Only `coreTransaction` type is supported for bulk file uploads.
+        <b>Required scopes:</b> `transaction:write`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        data : typing.Sequence[CreateFileUploadData]
+            List of file upload requests (1–10 items per request).
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        CreateFileUploadUrlResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+        from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.transactions.create_bulk_transactions_upload_url(
+                organization_id="organization-123",
+                data=[
+                    CreateFileUploadData(
+                        attributes=CreateFileUploadAttributes(
+                            filename="transaction_12345.jsonl",
+                        ),
+                    ),
+                    CreateFileUploadData(
+                        attributes=CreateFileUploadAttributes(
+                            filename="transaction_67890.jsonl",
+                        ),
+                    ),
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_bulk_transactions_upload_url(
+            organization_id, data=data, request_options=request_options
         )
         return _response.data
 

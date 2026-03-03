@@ -32,7 +32,14 @@ if typing.TYPE_CHECKING:
         SubscriptionId,
         UserId,
     )
-    from .errors import ConflictError, DoesNotExistError, InternalServerError, InvalidRequest, UnauthorizedError
+    from .errors import (
+        ConflictError,
+        DoesNotExistError,
+        ForbiddenError,
+        InternalServerError,
+        InvalidRequest,
+        UnauthorizedError,
+    )
 _dynamic_imports: typing.Dict[str, str] = {
     "CategoryOption": ".types",
     "CommissionType": ".types",
@@ -45,6 +52,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ErrorObject": ".types",
     "ErrorResponse": ".types",
     "ErrorSource": ".types",
+    "ForbiddenError": ".errors",
     "InternalServerError": ".errors",
     "InvalidRequest": ".errors",
     "Job": ".types",
@@ -99,6 +107,7 @@ __all__ = [
     "ErrorObject",
     "ErrorResponse",
     "ErrorSource",
+    "ForbiddenError",
     "InternalServerError",
     "InvalidRequest",
     "Job",

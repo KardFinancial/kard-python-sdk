@@ -20,7 +20,13 @@ if typing.TYPE_CHECKING:
     from .create_audit_request_data_union import CreateAuditRequestDataUnion, CreateAuditRequestDataUnion_Audit
     from .create_audit_response_body import CreateAuditResponseBody
     from .create_audit_response_data_union import CreateAuditResponseDataUnion, CreateAuditResponseDataUnion_Audit
+    from .create_file_upload_attributes import CreateFileUploadAttributes
+    from .create_file_upload_data import CreateFileUploadData
+    from .create_file_upload_request_body import CreateFileUploadRequestBody
+    from .create_file_upload_url_response import CreateFileUploadUrlResponse
     from .direction_type import DirectionType
+    from .file_upload_url_attributes import FileUploadUrlAttributes
+    from .file_upload_url_data import FileUploadUrlData
     from .financial_institution_name import FinancialInstitutionName
     from .fraudulent_transaction_attributes import FraudulentTransactionAttributes
     from .fraudulent_transaction_data import FraudulentTransactionData
@@ -83,7 +89,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateAuditResponseBody": ".create_audit_response_body",
     "CreateAuditResponseDataUnion": ".create_audit_response_data_union",
     "CreateAuditResponseDataUnion_Audit": ".create_audit_response_data_union",
+    "CreateFileUploadAttributes": ".create_file_upload_attributes",
+    "CreateFileUploadData": ".create_file_upload_data",
+    "CreateFileUploadRequestBody": ".create_file_upload_request_body",
+    "CreateFileUploadUrlResponse": ".create_file_upload_url_response",
     "DirectionType": ".direction_type",
+    "FileUploadUrlAttributes": ".file_upload_url_attributes",
+    "FileUploadUrlData": ".file_upload_url_data",
     "FinancialInstitutionName": ".financial_institution_name",
     "FraudulentTransactionAttributes": ".fraudulent_transaction_attributes",
     "FraudulentTransactionData": ".fraudulent_transaction_data",
@@ -168,7 +180,13 @@ __all__ = [
     "CreateAuditResponseBody",
     "CreateAuditResponseDataUnion",
     "CreateAuditResponseDataUnion_Audit",
+    "CreateFileUploadAttributes",
+    "CreateFileUploadData",
+    "CreateFileUploadRequestBody",
+    "CreateFileUploadUrlResponse",
     "DirectionType",
+    "FileUploadUrlAttributes",
+    "FileUploadUrlData",
     "FinancialInstitutionName",
     "FraudulentTransactionAttributes",
     "FraudulentTransactionData",

@@ -1,3 +1,15 @@
+## 3.7.0 - 2026-03-03
+* feat: add bulk transaction file upload functionality
+* Introduce new endpoint for generating presigned URLs to enable bulk transaction file uploads directly to storage. This feature allows uploading up to 10 JSONL transaction files (up to 5GB each) with presigned URLs valid for 15 minutes.
+* Key changes:
+* Add create_bulk_transactions_upload_url method to TransactionsClient and AsyncTransactionsClient
+* Add new data models: CreateFileUploadAttributes, CreateFileUploadData, CreateFileUploadUrlResponse, FileUploadUrlAttributes, FileUploadUrlData
+* Move ForbiddenError from files.errors to commons.errors for shared usage
+* Update API documentation with comprehensive usage examples and parameter descriptions
+* Support both plain JSONL and gzip-compressed file uploads
+* Require transaction:write scope for bulk upload operations
+* 🌿 Generated with Fern
+
 ## 3.6.0 - 2026-03-03
 * feat: add file processing result notifications support
 * This change introduces comprehensive support for file processing result notifications in the SDK. The new notification type enables clients to receive structured feedback about file processing operations, including status updates and metadata.

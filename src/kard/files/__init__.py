@@ -14,13 +14,11 @@ if typing.TYPE_CHECKING:
         GetFilesMetadataResponse,
         PaginationMeta,
     )
-    from .errors import ForbiddenError
 _dynamic_imports: typing.Dict[str, str] = {
     "FileMetadataAttribute": ".types",
     "FileMetadataWithUrl": ".types",
     "FileType": ".types",
     "FilesMetadataSortOptions": ".types",
-    "ForbiddenError": ".errors",
     "GetFilesMetadataResponse": ".types",
     "PaginationMeta": ".types",
 }
@@ -52,7 +50,6 @@ __all__ = [
     "FileMetadataWithUrl",
     "FileType",
     "FilesMetadataSortOptions",
-    "ForbiddenError",
     "GetFilesMetadataResponse",
     "PaginationMeta",
 ]

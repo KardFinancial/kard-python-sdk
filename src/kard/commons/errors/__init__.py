@@ -8,12 +8,14 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .conflict_error import ConflictError
     from .does_not_exist_error import DoesNotExistError
+    from .forbidden_error import ForbiddenError
     from .internal_server_error import InternalServerError
     from .invalid_request import InvalidRequest
     from .unauthorized_error import UnauthorizedError
 _dynamic_imports: typing.Dict[str, str] = {
     "ConflictError": ".conflict_error",
     "DoesNotExistError": ".does_not_exist_error",
+    "ForbiddenError": ".forbidden_error",
     "InternalServerError": ".internal_server_error",
     "InvalidRequest": ".invalid_request",
     "UnauthorizedError": ".unauthorized_error",
@@ -41,4 +43,11 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["ConflictError", "DoesNotExistError", "InternalServerError", "InvalidRequest", "UnauthorizedError"]
+__all__ = [
+    "ConflictError",
+    "DoesNotExistError",
+    "ForbiddenError",
+    "InternalServerError",
+    "InvalidRequest",
+    "UnauthorizedError",
+]

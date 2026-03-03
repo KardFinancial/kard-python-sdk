@@ -856,6 +856,103 @@ client.transactions.create_audits(
 </dl>
 </details>
 
+<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_bulk_transactions_upload_url</a>(...) -&gt; AsyncHttpResponse[CreateFileUploadUrlResponse]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly
+to storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the
+binary file content as the body. If a URL expires before the upload completes, you must request a new one.
+Files can be uploaded as plain JSONL or as a gzip-compressed file.
+Only `coreTransaction` type is supported for bulk file uploads.
+<b>Required scopes:</b> `transaction:write`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
+
+client = KardApi(
+    client_id="YOUR_CLIENT_ID",
+    client_secret="YOUR_CLIENT_SECRET",
+)
+client.transactions.create_bulk_transactions_upload_url(
+    organization_id="organization-123",
+    data=[
+        CreateFileUploadData(
+            attributes=CreateFileUploadAttributes(
+                filename="transaction_12345.jsonl",
+            ),
+        ),
+        CreateFileUploadData(
+            attributes=CreateFileUploadAttributes(
+                filename="transaction_67890.jsonl",
+            ),
+        ),
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**data:** `typing.Sequence[CreateFileUploadData]` — List of file upload requests (1–10 items per request).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">get_earned_rewards</a>(...) -&gt; AsyncHttpResponse[GetEarnedRewardsResponse]</code></summary>
 <dl>
 <dd>
