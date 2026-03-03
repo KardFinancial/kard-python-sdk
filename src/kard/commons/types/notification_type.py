@@ -14,6 +14,7 @@ NotificationType = typing.Union[
         "location",
         "userOffer",
         "auditUpdate",
+        "fileProcessingResult",
     ],
     typing.Any,
 ]

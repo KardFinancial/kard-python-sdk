@@ -7,6 +7,7 @@ import typing
 import pydantic
 import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...files.types.file_metadata_attribute import FileMetadataAttribute
 from .audit_update_attributes import AuditUpdateAttributes
 from .audit_update_relationships import AuditUpdateRelationships
 from .earned_reward_attributes import EarnedRewardAttributes
@@ -186,6 +187,21 @@ class NotificationDataUnion_AuditUpdate(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class NotificationDataUnion_FileProcessingResult(UniversalBaseModel):
+    type: typing.Literal["fileProcessingResult"] = "fileProcessingResult"
+    id: str
+    attributes: FileMetadataAttribute
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 NotificationDataUnion = typing_extensions.Annotated[
     typing.Union[
         NotificationDataUnion_EarnedRewardApproved,
@@ -198,6 +214,7 @@ NotificationDataUnion = typing_extensions.Annotated[
         NotificationDataUnion_Location,
         NotificationDataUnion_UserOffer,
         NotificationDataUnion_AuditUpdate,
+        NotificationDataUnion_FileProcessingResult,
     ],
     pydantic.Field(discriminator="type"),
 ]

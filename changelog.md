@@ -1,3 +1,14 @@
+## 3.6.0 - 2026-03-03
+* feat: add file processing result notifications support
+* This change introduces comprehensive support for file processing result notifications in the SDK. The new notification type enables clients to receive structured feedback about file processing operations, including status updates and metadata.
+* Key changes:
+* Add FileResultData type to represent file processing results in notifications
+* Introduce NotificationDataUnion_FileProcessingResult variant for the new notification type
+* Add "fileProcessingResult" to the NotificationType enum to support the new notification category
+* Include optional errors field in NotificationPayload for enhanced error reporting
+* Update all module exports and dynamic imports to expose the new types
+* 🌿 Generated with Fern
+
 ## 3.5.0 - 2026-03-03
 * feat: add FinancialInstitutionName union type for transactions
 * Add a new union type to define valid financial institution names for transaction processing. This provides type safety and validation for financial institution names while maintaining backward compatibility.

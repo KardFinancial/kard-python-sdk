@@ -3,6 +3,7 @@
 import typing
 
 import pydantic
+from ...commons.types.error_object import ErrorObject
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .notification_data_union import NotificationDataUnion
 from .notification_metadata import NotificationMetadata
@@ -54,6 +55,7 @@ class NotificationPayload(UniversalBaseModel):
 
     data: NotificationDataUnion
     meta: typing.Optional[NotificationMetadata] = None
+    errors: typing.Optional[typing.List[ErrorObject]] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

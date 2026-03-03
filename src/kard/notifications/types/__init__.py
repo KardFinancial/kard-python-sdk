@@ -27,6 +27,7 @@ if typing.TYPE_CHECKING:
     from .failed_transaction_attributes import FailedTransactionAttributes
     from .failed_transaction_data import FailedTransactionData
     from .failed_transaction_relationships import FailedTransactionRelationships
+    from .file_result_data import FileResultData
     from .location_address import LocationAddress
     from .location_coordinates import LocationCoordinates
     from .location_status import LocationStatus
@@ -38,6 +39,7 @@ if typing.TYPE_CHECKING:
         NotificationDataUnion_EarnedRewardApproved,
         NotificationDataUnion_EarnedRewardSettled,
         NotificationDataUnion_FailedTransaction,
+        NotificationDataUnion_FileProcessingResult,
         NotificationDataUnion_Location,
         NotificationDataUnion_Merchant,
         NotificationDataUnion_Offer,
@@ -89,6 +91,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FailedTransactionAttributes": ".failed_transaction_attributes",
     "FailedTransactionData": ".failed_transaction_data",
     "FailedTransactionRelationships": ".failed_transaction_relationships",
+    "FileResultData": ".file_result_data",
     "LocationAddress": ".location_address",
     "LocationCoordinates": ".location_coordinates",
     "LocationStatus": ".location_status",
@@ -99,6 +102,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationDataUnion_EarnedRewardApproved": ".notification_data_union",
     "NotificationDataUnion_EarnedRewardSettled": ".notification_data_union",
     "NotificationDataUnion_FailedTransaction": ".notification_data_union",
+    "NotificationDataUnion_FileProcessingResult": ".notification_data_union",
     "NotificationDataUnion_Location": ".notification_data_union",
     "NotificationDataUnion_Merchant": ".notification_data_union",
     "NotificationDataUnion_Offer": ".notification_data_union",
@@ -173,6 +177,7 @@ __all__ = [
     "FailedTransactionAttributes",
     "FailedTransactionData",
     "FailedTransactionRelationships",
+    "FileResultData",
     "LocationAddress",
     "LocationCoordinates",
     "LocationStatus",
@@ -183,6 +188,7 @@ __all__ = [
     "NotificationDataUnion_EarnedRewardApproved",
     "NotificationDataUnion_EarnedRewardSettled",
     "NotificationDataUnion_FailedTransaction",
+    "NotificationDataUnion_FileProcessingResult",
     "NotificationDataUnion_Location",
     "NotificationDataUnion_Merchant",
     "NotificationDataUnion_Offer",
