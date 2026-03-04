@@ -2,4 +2,4 @@
 
 import typing
 
-ButtonStyle = typing.Union[typing.Literal["PRIMARY", "DISABLED"], typing.Any]
+ButtonStyle = typing.Union[typing.Literal["PRIMARY", "SECONDARY", "DISABLED"], typing.Any]

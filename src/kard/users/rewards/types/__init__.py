@@ -30,6 +30,10 @@ if typing.TYPE_CHECKING:
     from .location_relationships import LocationRelationships
     from .location_sort_options import LocationSortOptions
     from .locations_response_object import LocationsResponseObject
+    from .logo_flare import LogoFlare
+    from .logo_flare_badge import LogoFlareBadge
+    from .logo_flare_badge_position import LogoFlareBadgePosition
+    from .logo_flare_border_color import LogoFlareBorderColor
     from .offer_common_fields import OfferCommonFields
     from .offer_components import OfferComponents
     from .offer_data_union import OfferDataUnion, OfferDataUnion_StandardOffer
@@ -67,6 +71,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LocationRelationships": ".location_relationships",
     "LocationSortOptions": ".location_sort_options",
     "LocationsResponseObject": ".locations_response_object",
+    "LogoFlare": ".logo_flare",
+    "LogoFlareBadge": ".logo_flare_badge",
+    "LogoFlareBadgePosition": ".logo_flare_badge_position",
+    "LogoFlareBorderColor": ".logo_flare_border_color",
     "OfferCommonFields": ".offer_common_fields",
     "OfferComponents": ".offer_components",
     "OfferDataUnion": ".offer_data_union",
@@ -129,6 +137,10 @@ __all__ = [
     "LocationRelationships",
     "LocationSortOptions",
     "LocationsResponseObject",
+    "LogoFlare",
+    "LogoFlareBadge",
+    "LogoFlareBadgePosition",
+    "LogoFlareBorderColor",
     "OfferCommonFields",
     "OfferComponents",
     "OfferDataUnion",

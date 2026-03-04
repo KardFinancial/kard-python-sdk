@@ -1995,7 +1995,7 @@ client.users.rewards.offers(
 <dl>
 <dd>
 
-**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the response. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the response.
     
 </dd>
 </dl>
@@ -2199,7 +2199,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in included offers. Valid values are shortDescription, longDescription, cta, tags, and detailTags.
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in included offers.
     
 </dd>
 </dl>

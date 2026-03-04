@@ -3,5 +3,8 @@
 import typing
 
 ComponentType = typing.Union[
-    typing.Literal["shortDescription", "longDescription", "baseReward", "cta", "tags", "detailTags"], typing.Any
+    typing.Literal[
+        "shortDescription", "longDescription", "baseReward", "boostedReward", "cta", "tags", "detailTags", "logoFlare"
+    ],
+    typing.Any,
 ]

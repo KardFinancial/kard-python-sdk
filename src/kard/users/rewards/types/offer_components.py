@@ -7,6 +7,7 @@ import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .cta_component import CtaComponent
+from .logo_flare import LogoFlare
 
 
 class OfferComponents(UniversalBaseModel):
@@ -35,6 +36,13 @@ class OfferComponents(UniversalBaseModel):
     Formatted reward string
     """
 
+    boosted_reward: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="boostedReward")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Formatted boosted reward string
+    """
+
     cta: typing.Optional[CtaComponent] = pydantic.Field(default=None)
     """
     Call-to-action button component
@@ -50,6 +58,13 @@ class OfferComponents(UniversalBaseModel):
     )
     """
     Detail tags for the offer
+    """
+
+    logo_flare: typing_extensions.Annotated[typing.Optional[LogoFlare], FieldMetadata(alias="logoFlare")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Logo flare configuration for the offer
     """
 
     if IS_PYDANTIC_V2:

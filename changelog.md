@@ -1,3 +1,14 @@
+## 3.8.0 - 2026-03-04
+* feat: add logo flare support and expand UI components
+* Add support for logo flare configuration to enhance offer display with customizable badges and border colors. This update introduces new logo flare types and expands the existing ComponentType enum to include boosted rewards and logo flare components.
+* Key changes:
+* Add LogoFlare, LogoFlareBadge, LogoFlareBadgePosition, and LogoFlareBorderColor types
+* Expand ComponentType to include "boostedReward" and "logoFlare" options
+* Add SECONDARY option to ButtonStyle enum
+* Add boosted_reward and logo_flare fields to OfferComponents
+* Update documentation to remove hardcoded component type examples
+* 🌿 Generated with Fern
+
 ## 3.7.0 - 2026-03-03
 * feat: add bulk transaction file upload functionality
 * Introduce new endpoint for generating presigned URLs to enable bulk transaction file uploads directly to storage. This feature allows uploading up to 10 JSONL transaction files (up to 5GB each) with presigned URLs valid for 15 minutes.
