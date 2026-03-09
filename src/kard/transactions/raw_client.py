@@ -405,7 +405,7 @@ class RawTransactionsClient:
         HttpResponse[CreateFileUploadUrlResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions/upload",
+            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions/uploads",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -951,7 +951,7 @@ class AsyncRawTransactionsClient:
         AsyncHttpResponse[CreateFileUploadUrlResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions/upload",
+            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions/uploads",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(

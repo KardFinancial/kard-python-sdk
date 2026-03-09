@@ -1,3 +1,15 @@
+## 3.8.1 - 2026-03-09
+* fix: correct API endpoint path for transaction file uploads
+* This change fixes an incorrect API endpoint path that was causing transaction
+* file upload requests to fail. The endpoint path was corrected from
+* 'transactions/upload' to 'transactions/uploads' to match the expected server
+* API specification.
+* Key changes:
+* Updated endpoint path from /v2/issuers/{id}/transactions/upload to /v2/issuers/{id}/transactions/uploads
+* Fixed both synchronous and asynchronous client implementations
+* Ensures proper routing to the correct server endpoint for file uploads
+* 🌿 Generated with Fern
+
 ## 3.8.0 - 2026-03-04
 * feat: add logo flare support and expand UI components
 * Add support for logo flare configuration to enhance offer display with customizable badges and border colors. This update introduces new logo flare types and expands the existing ComponentType enum to include boosted rewards and logo flare components.
