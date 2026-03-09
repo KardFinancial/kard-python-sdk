@@ -38,6 +38,7 @@ class RawRewardsClient:
         page_size: typing.Optional[int] = None,
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
+        filter_search: typing.Optional[str] = None,
         filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
         filter_category: typing.Optional[CategoryOption] = None,
         filter_is_targeted: typing.Optional[bool] = None,
@@ -63,6 +64,9 @@ class RawRewardsClient:
         page_after : typing.Optional[str]
 
         page_before : typing.Optional[str]
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
 
         filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
 
@@ -93,6 +97,7 @@ class RawRewardsClient:
                 "page[size]": page_size,
                 "page[after]": page_after,
                 "page[before]": page_before,
+                "filter[search]": filter_search,
                 "filter[purchaseChannel]": filter_purchase_channel,
                 "filter[category]": filter_category,
                 "filter[isTargeted]": filter_is_targeted,
@@ -327,6 +332,7 @@ class AsyncRawRewardsClient:
         page_size: typing.Optional[int] = None,
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
+        filter_search: typing.Optional[str] = None,
         filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
         filter_category: typing.Optional[CategoryOption] = None,
         filter_is_targeted: typing.Optional[bool] = None,
@@ -352,6 +358,9 @@ class AsyncRawRewardsClient:
         page_after : typing.Optional[str]
 
         page_before : typing.Optional[str]
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
 
         filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
 
@@ -382,6 +391,7 @@ class AsyncRawRewardsClient:
                 "page[size]": page_size,
                 "page[after]": page_after,
                 "page[before]": page_before,
+                "filter[search]": filter_search,
                 "filter[purchaseChannel]": filter_purchase_channel,
                 "filter[category]": filter_category,
                 "filter[isTargeted]": filter_is_targeted,

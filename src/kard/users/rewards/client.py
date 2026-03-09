@@ -40,6 +40,7 @@ class RewardsClient:
         page_size: typing.Optional[int] = None,
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
+        filter_search: typing.Optional[str] = None,
         filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
         filter_category: typing.Optional[CategoryOption] = None,
         filter_is_targeted: typing.Optional[bool] = None,
@@ -65,6 +66,9 @@ class RewardsClient:
         page_after : typing.Optional[str]
 
         page_before : typing.Optional[str]
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
 
         filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
 
@@ -110,6 +114,7 @@ class RewardsClient:
             page_size=page_size,
             page_after=page_after,
             page_before=page_before,
+            filter_search=filter_search,
             filter_purchase_channel=filter_purchase_channel,
             filter_category=filter_category,
             filter_is_targeted=filter_is_targeted,
@@ -256,6 +261,7 @@ class AsyncRewardsClient:
         page_size: typing.Optional[int] = None,
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
+        filter_search: typing.Optional[str] = None,
         filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
         filter_category: typing.Optional[CategoryOption] = None,
         filter_is_targeted: typing.Optional[bool] = None,
@@ -281,6 +287,9 @@ class AsyncRewardsClient:
         page_after : typing.Optional[str]
 
         page_before : typing.Optional[str]
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
 
         filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
 
@@ -334,6 +343,7 @@ class AsyncRewardsClient:
             page_size=page_size,
             page_after=page_after,
             page_before=page_before,
+            filter_search=filter_search,
             filter_purchase_channel=filter_purchase_channel,
             filter_category=filter_category,
             filter_is_targeted=filter_is_targeted,

@@ -1953,6 +1953,14 @@ client.users.rewards.offers(
 <dl>
 <dd>
 
+**filter_search:** `typing.Optional[str]` — Case-insensitive search string to filter offers by merchant name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **filter_purchase_channel:** `typing.Optional[typing.Sequence[PurchaseChannel]]` 
     
 </dd>

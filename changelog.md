@@ -1,3 +1,6 @@
+## 3.9.0 - 2026-03-09
+* New optional `filter_search` parameter added to rewards offers methods, allowing case-insensitive filtering by merchant name.
+
 ## 3.8.1 - 2026-03-09
 * fix: correct API endpoint path for transaction file uploads
 * This change fixes an incorrect API endpoint path that was causing transaction
