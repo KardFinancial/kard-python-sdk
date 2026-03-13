@@ -1,3 +1,6 @@
+## 3.11.0 - 2026-03-13
+* The `financial_institution_name` field in `CoreTransactionAttributes` now accepts any string value instead of being limited to a predefined set of financial institution names. This change provides greater flexibility when working with financial institution data.
+
 ## 3.10.0 - 2026-03-13
 * New `OffersMeta` type available for accessing metadata about paginated offers results. The `OffersResponseObject` now includes an optional `meta` field containing all distinct categories available across the entire filtered result set.
 

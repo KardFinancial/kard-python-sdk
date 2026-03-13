@@ -27,7 +27,6 @@ if typing.TYPE_CHECKING:
     from .direction_type import DirectionType
     from .file_upload_url_attributes import FileUploadUrlAttributes
     from .file_upload_url_data import FileUploadUrlData
-    from .financial_institution_name import FinancialInstitutionName
     from .fraudulent_transaction_attributes import FraudulentTransactionAttributes
     from .fraudulent_transaction_data import FraudulentTransactionData
     from .fraudulent_transaction_object import FraudulentTransactionObject
@@ -96,7 +95,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DirectionType": ".direction_type",
     "FileUploadUrlAttributes": ".file_upload_url_attributes",
     "FileUploadUrlData": ".file_upload_url_data",
-    "FinancialInstitutionName": ".financial_institution_name",
     "FraudulentTransactionAttributes": ".fraudulent_transaction_attributes",
     "FraudulentTransactionData": ".fraudulent_transaction_data",
     "FraudulentTransactionObject": ".fraudulent_transaction_object",
@@ -187,7 +185,6 @@ __all__ = [
     "DirectionType",
     "FileUploadUrlAttributes",
     "FileUploadUrlData",
-    "FinancialInstitutionName",
     "FraudulentTransactionAttributes",
     "FraudulentTransactionData",
     "FraudulentTransactionObject",
