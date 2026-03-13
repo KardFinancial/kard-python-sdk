@@ -39,6 +39,7 @@ if typing.TYPE_CHECKING:
     from .offer_data_union import OfferDataUnion, OfferDataUnion_StandardOffer
     from .offer_relationship import OfferRelationship
     from .offer_sort_options import OfferSortOptions
+    from .offers_meta import OffersMeta
     from .offers_response_object import OffersResponseObject
     from .operation_hours import OperationHours
     from .operation_period import OperationPeriod
@@ -81,6 +82,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OfferDataUnion_StandardOffer": ".offer_data_union",
     "OfferRelationship": ".offer_relationship",
     "OfferSortOptions": ".offer_sort_options",
+    "OffersMeta": ".offers_meta",
     "OffersResponseObject": ".offers_response_object",
     "OperationHours": ".operation_hours",
     "OperationPeriod": ".operation_period",
@@ -147,6 +149,7 @@ __all__ = [
     "OfferDataUnion_StandardOffer",
     "OfferRelationship",
     "OfferSortOptions",
+    "OffersMeta",
     "OffersResponseObject",
     "OperationHours",
     "OperationPeriod",

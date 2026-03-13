@@ -1,3 +1,6 @@
+## 3.10.0 - 2026-03-13
+* New `OffersMeta` type available for accessing metadata about paginated offers results. The `OffersResponseObject` now includes an optional `meta` field containing all distinct categories available across the entire filtered result set.
+
 ## 3.9.0 - 2026-03-09
 * New optional `filter_search` parameter added to rewards offers methods, allowing case-insensitive filtering by merchant name.
 

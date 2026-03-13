@@ -7,6 +7,7 @@ from ....commons.types.links import Links
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .eligibility_offer_included import EligibilityOfferIncluded
 from .offer_data_union import OfferDataUnion
+from .offers_meta import OffersMeta
 
 
 class OffersResponseObject(UniversalBaseModel):
@@ -26,6 +27,7 @@ class OffersResponseObject(UniversalBaseModel):
         CategoryRelationshipObject,
         Commission,
         OfferDataUnion_StandardOffer,
+        OffersMeta,
         OffersResponseObject,
         StandardOfferFields,
     )
@@ -113,12 +115,29 @@ class OffersResponseObject(UniversalBaseModel):
             self_="/v2/issuers/{organizationId}/users/{userId}/offers?page[size]=1?sort=-startDate",
             next="/v2/issuers/{organizationId}/users/{userId}/offers?page[after]=NDMyNzQyODI3OTQw&page[size]=1?&sort=-startDate",
         ),
+        meta=OffersMeta(
+            available_categories=[
+                CategoryIncluded(
+                    id="65920081b524d126068de24a",
+                    attributes=CategoryFields(
+                        name="Food & Beverage",
+                    ),
+                ),
+                CategoryIncluded(
+                    id="65920081b524d126068de24c",
+                    attributes=CategoryFields(
+                        name="Department Stores",
+                    ),
+                ),
+            ],
+        ),
     )
     """
 
     data: typing.List[OfferDataUnion]
     links: Links
     included: typing.Optional[typing.List[EligibilityOfferIncluded]] = None
+    meta: typing.Optional[OffersMeta] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
