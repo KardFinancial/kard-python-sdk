@@ -8,6 +8,7 @@ from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .cta_component import CtaComponent
 from .logo_flare import LogoFlare
+from .progress_bar import ProgressBar
 
 
 class OfferComponents(UniversalBaseModel):
@@ -65,6 +66,13 @@ class OfferComponents(UniversalBaseModel):
     )
     """
     Logo flare configuration for the offer
+    """
+
+    progress_bar: typing_extensions.Annotated[typing.Optional[ProgressBar], FieldMetadata(alias="progressBar")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    Progress bar component for tracking offer redemptions
     """
 
     if IS_PYDANTIC_V2:

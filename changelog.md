@@ -1,3 +1,6 @@
+## 3.12.0 - 2026-03-16
+* New ProgressBar component available in OfferComponents to track offer redemption progress. The progress bar includes fields for total redemptions allowed, current user progress, display label, and segmentation options.
+
 ## 3.11.0 - 2026-03-13
 * The `financial_institution_name` field in `CoreTransactionAttributes` now accepts any string value instead of being limited to a predefined set of financial institution names. This change provides greater flexibility when working with financial institution data.
 

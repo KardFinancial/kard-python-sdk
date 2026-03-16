@@ -44,6 +44,7 @@ if typing.TYPE_CHECKING:
     from .operation_hours import OperationHours
     from .operation_period import OperationPeriod
     from .operation_time import OperationTime
+    from .progress_bar import ProgressBar
     from .standard_offer import StandardOffer
     from .standard_offer_core import StandardOfferCore
     from .standard_offer_fields import StandardOfferFields
@@ -87,6 +88,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OperationHours": ".operation_hours",
     "OperationPeriod": ".operation_period",
     "OperationTime": ".operation_time",
+    "ProgressBar": ".progress_bar",
     "StandardOffer": ".standard_offer",
     "StandardOfferCore": ".standard_offer_core",
     "StandardOfferFields": ".standard_offer_fields",
@@ -154,6 +156,7 @@ __all__ = [
     "OperationHours",
     "OperationPeriod",
     "OperationTime",
+    "ProgressBar",
     "StandardOffer",
     "StandardOfferCore",
     "StandardOfferFields",
