@@ -1,3 +1,6 @@
+## 3.13.0 - 2026-03-16
+* The SDK now supports multi-tenant configurations through the new optional `x_kard_target_issuer` parameter on `KardApi` and `AsyncKardApi` clients. When provided, this parameter adds the `X-Kard-Target-Issuer` header to API requests, enabling proper tenant context specification.
+
 ## 3.12.0 - 2026-03-16
 * New ProgressBar component available in OfferComponents to track offer redemption progress. The progress bar includes fields for total redemptions allowed, current user progress, display label, and segmentation options.
 

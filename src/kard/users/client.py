@@ -75,6 +75,7 @@ class UsersClient:
         from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -128,6 +129,7 @@ class UsersClient:
         from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -176,6 +178,7 @@ class UsersClient:
         from kard import KardApi
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -217,6 +220,7 @@ class UsersClient:
         from kard import KardApi
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -315,6 +319,7 @@ class AsyncUsersClient:
         from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -376,6 +381,7 @@ class AsyncUsersClient:
         from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -432,6 +438,7 @@ class AsyncUsersClient:
         from kard import AsyncKardApi
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -481,6 +488,7 @@ class AsyncUsersClient:
         from kard import AsyncKardApi
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )

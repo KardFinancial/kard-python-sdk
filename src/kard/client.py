@@ -67,6 +67,7 @@ class KardApi:
     from kard import KardApi
 
     client = KardApi(
+        x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
         client_id="YOUR_CLIENT_ID",
         client_secret="YOUR_CLIENT_SECRET",
     )
@@ -87,6 +88,7 @@ class KardApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: KardApiEnvironment = KardApiEnvironment.PRODUCTION,
+        x_kard_target_issuer: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -99,6 +101,7 @@ class KardApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: KardApiEnvironment = KardApiEnvironment.PRODUCTION,
+        x_kard_target_issuer: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
@@ -109,6 +112,7 @@ class KardApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: KardApiEnvironment = KardApiEnvironment.PRODUCTION,
+        x_kard_target_issuer: typing.Optional[str] = None,
         client_id: typing.Optional[str] = os.getenv("KARD_CLIENT_ID"),
         client_secret: typing.Optional[str] = os.getenv("KARD_CLIENT_SECRET"),
         token: typing.Optional[typing.Callable[[], str]] = None,
@@ -123,6 +127,7 @@ class KardApi:
         if token is not None:
             self._client_wrapper = SyncClientWrapper(
                 base_url=_get_base_url(base_url=base_url, environment=environment),
+                x_kard_target_issuer=x_kard_target_issuer,
                 httpx_client=httpx_client
                 if httpx_client is not None
                 else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
@@ -137,6 +142,7 @@ class KardApi:
                 client_secret=client_secret,
                 client_wrapper=SyncClientWrapper(
                     base_url=_get_base_url(base_url=base_url, environment=environment),
+                    x_kard_target_issuer=x_kard_target_issuer,
                     httpx_client=httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
                     if follow_redirects is not None
                     else httpx.Client(timeout=_defaulted_timeout),
@@ -145,6 +151,7 @@ class KardApi:
             )
             self._client_wrapper = SyncClientWrapper(
                 base_url=_get_base_url(base_url=base_url, environment=environment),
+                x_kard_target_issuer=x_kard_target_issuer,
                 token=_token_getter_override if _token_getter_override is not None else oauth_token_provider.get_token,
                 httpx_client=httpx_client
                 if httpx_client is not None
@@ -260,6 +267,7 @@ class AsyncKardApi:
     from kard import AsyncKardApi
 
     client = AsyncKardApi(
+        x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
         client_id="YOUR_CLIENT_ID",
         client_secret="YOUR_CLIENT_SECRET",
     )
@@ -280,6 +288,7 @@ class AsyncKardApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: KardApiEnvironment = KardApiEnvironment.PRODUCTION,
+        x_kard_target_issuer: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -292,6 +301,7 @@ class AsyncKardApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: KardApiEnvironment = KardApiEnvironment.PRODUCTION,
+        x_kard_target_issuer: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
@@ -302,6 +312,7 @@ class AsyncKardApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: KardApiEnvironment = KardApiEnvironment.PRODUCTION,
+        x_kard_target_issuer: typing.Optional[str] = None,
         client_id: typing.Optional[str] = os.getenv("KARD_CLIENT_ID"),
         client_secret: typing.Optional[str] = os.getenv("KARD_CLIENT_SECRET"),
         token: typing.Optional[typing.Callable[[], str]] = None,
@@ -316,6 +327,7 @@ class AsyncKardApi:
         if token is not None:
             self._client_wrapper = AsyncClientWrapper(
                 base_url=_get_base_url(base_url=base_url, environment=environment),
+                x_kard_target_issuer=x_kard_target_issuer,
                 httpx_client=httpx_client
                 if httpx_client is not None
                 else httpx.AsyncClient(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
@@ -330,6 +342,7 @@ class AsyncKardApi:
                 client_secret=client_secret,
                 client_wrapper=AsyncClientWrapper(
                     base_url=_get_base_url(base_url=base_url, environment=environment),
+                    x_kard_target_issuer=x_kard_target_issuer,
                     httpx_client=httpx.AsyncClient(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
                     if follow_redirects is not None
                     else httpx.AsyncClient(timeout=_defaulted_timeout),
@@ -338,6 +351,7 @@ class AsyncKardApi:
             )
             self._client_wrapper = AsyncClientWrapper(
                 base_url=_get_base_url(base_url=base_url, environment=environment),
+                x_kard_target_issuer=x_kard_target_issuer,
                 token=_token_getter_override,
                 async_token=oauth_token_provider.get_token,
                 httpx_client=httpx_client

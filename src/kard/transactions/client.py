@@ -84,6 +84,7 @@ class TransactionsClient:
         )
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -176,6 +177,7 @@ class TransactionsClient:
         )
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -229,6 +231,7 @@ class TransactionsClient:
         from kard.transactions import AuditAttributes, CreateAuditRequestDataUnion_Audit
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -285,6 +288,7 @@ class TransactionsClient:
         from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -354,6 +358,7 @@ class TransactionsClient:
         from kard import KardApi
 
         client = KardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -439,6 +444,7 @@ class AsyncTransactionsClient:
         )
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -539,6 +545,7 @@ class AsyncTransactionsClient:
         )
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -602,6 +609,7 @@ class AsyncTransactionsClient:
         from kard.transactions import AuditAttributes, CreateAuditRequestDataUnion_Audit
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -668,6 +676,7 @@ class AsyncTransactionsClient:
         from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -745,6 +754,7 @@ class AsyncTransactionsClient:
         from kard import AsyncKardApi
 
         client = AsyncKardApi(
+            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )

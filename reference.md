@@ -16,6 +16,7 @@
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -100,6 +101,7 @@ through potentially large sets of file metadata.
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -238,6 +240,7 @@ Call this endpoint to fetch the subscriptions of the provided issuer.<br/>
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -322,6 +325,7 @@ from kard.notifications.subscriptions import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -415,6 +419,7 @@ from kard.notifications.subscriptions import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -511,6 +516,7 @@ Call this endpoint to verify network connectivity and service availability.
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -586,6 +592,7 @@ from kard.transactions import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -698,6 +705,7 @@ from kard.transactions import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -788,6 +796,7 @@ from kard import KardApi
 from kard.transactions import AuditAttributes, CreateAuditRequestDataUnion_Audit
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -892,6 +901,7 @@ from kard import KardApi
 from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -987,6 +997,7 @@ Retrieve rewarded transaction history for a specific user. Returns only SETTLED 
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1097,6 +1108,7 @@ from kard import KardApi
 from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1188,6 +1200,7 @@ from kard import KardApi
 from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1285,6 +1298,7 @@ Call this endpoint to delete a specified enrolled user from the rewards program 
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1367,6 +1381,7 @@ Call this endpoint to fetch the details on a specified user.<br/>
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1458,6 +1473,7 @@ from kard.users.attributions import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1584,6 +1600,7 @@ Optionally include the offer data by passing `include=offer`.
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1694,6 +1711,7 @@ Optionally include the offer data by passing `include=offer`.
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1804,6 +1822,7 @@ Retrieves an OAuth token for webview authentication.
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -1888,6 +1907,7 @@ can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/loc
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -2058,6 +2078,7 @@ pattern.<br/>
 from kard import KardApi
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -2264,6 +2285,7 @@ from kard.users.uploads import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -2361,6 +2383,7 @@ from kard.transactions import Merchant, TransactionsAttributes
 from kard.users.uploads import CreateUploadPartDataUnion_HistoricalTransaction
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -2502,6 +2525,7 @@ from kard.users.uploads import (
 )
 
 client = KardApi(
+    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
