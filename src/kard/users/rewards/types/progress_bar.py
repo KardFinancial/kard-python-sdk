@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
+from .progress_bar_labels import ProgressBarLabels
 
 
 class ProgressBar(UniversalBaseModel):
@@ -38,6 +39,11 @@ class ProgressBar(UniversalBaseModel):
     )
     """
     SVG icon to use for each segment when the progress bar is segmented
+    """
+
+    labels: ProgressBarLabels = pydantic.Field()
+    """
+    Labels to render around the progress bar in different layouts
     """
 
     if IS_PYDANTIC_V2:

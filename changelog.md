@@ -1,3 +1,6 @@
+## 3.15.0 - 2026-03-17
+* The SDK now supports progress bar label configuration with new types for customizing label text and positioning in different layouts.
+
 ## 3.14.0 - 2026-03-17
 * The ProgressBar model now includes an optional `segment_icon` field that allows specifying SVG icons for segmented progress bars.
 
