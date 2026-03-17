@@ -1,3 +1,6 @@
+## 3.14.0 - 2026-03-17
+* The ProgressBar model now includes an optional `segment_icon` field that allows specifying SVG icons for segmented progress bars.
+
 ## 3.13.0 - 2026-03-16
 * The SDK now supports multi-tenant configurations through the new optional `x_kard_target_issuer` parameter on `KardApi` and `AsyncKardApi` clients. When provided, this parameter adds the `X-Kard-Target-Issuer` header to API requests, enabling proper tenant context specification.
 

@@ -24,10 +24,10 @@ class BaseClientWrapper:
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
-            "User-Agent": "kard-financial-sdk/3.13.0",
+            "User-Agent": "kard-financial-sdk/3.14.0",
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "kard-financial-sdk",
-            "X-Fern-SDK-Version": "3.13.0",
+            "X-Fern-SDK-Version": "3.14.0",
             **(self.get_custom_headers() or {}),
         }
         if self._x_kard_target_issuer is not None:

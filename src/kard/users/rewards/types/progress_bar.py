@@ -33,6 +33,13 @@ class ProgressBar(UniversalBaseModel):
     Whether the progress bar should be displayed as segmented
     """
 
+    segment_icon: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="segmentIcon")] = (
+        pydantic.Field(default=None)
+    )
+    """
+    SVG icon to use for each segment when the progress bar is segmented
+    """
+
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
     else:
