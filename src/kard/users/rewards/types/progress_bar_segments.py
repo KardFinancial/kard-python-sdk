@@ -4,22 +4,22 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .progress_bar_label_pair import ProgressBarLabelPair
+from .progress_bar_segment import ProgressBarSegment
 
 
-class ProgressBarLabels(UniversalBaseModel):
+class ProgressBarSegments(UniversalBaseModel):
     """
-    Labels to render around the progress bar in different layouts
-    """
-
-    details: typing.Optional[ProgressBarLabelPair] = pydantic.Field(default=None)
-    """
-    Label configuration for the details view
+    Segment configuration for the progress bar in different layouts
     """
 
-    default: ProgressBarLabelPair = pydantic.Field()
+    details: typing.Optional[ProgressBarSegment] = pydantic.Field(default=None)
     """
-    Label configuration for the default view
+    Segment configuration for the details view
+    """
+
+    default: ProgressBarSegment = pydantic.Field()
+    """
+    Segment configuration for the default view
     """
 
     if IS_PYDANTIC_V2:

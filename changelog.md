@@ -1,3 +1,6 @@
+## 4.0.0 - 2026-03-18
+* The progress bar API has been restructured with breaking changes. The `ProgressBarLabel` and `ProgressBarLabelPosition` types have been removed and replaced with `ProgressBarLabelPair` which uses explicit `left` and `right` fields. The `segment_icon` field has been replaced with a new `segments` configuration using `ProgressBarSegments` type. Update imports and field references to use the new structure.
+
 ## 3.15.0 - 2026-03-17
 * The SDK now supports progress bar label configuration with new types for customizing label text and positioning in different layouts.
 

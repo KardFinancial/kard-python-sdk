@@ -4,22 +4,21 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .progress_bar_label_position import ProgressBarLabelPosition
 
 
-class ProgressBarLabel(UniversalBaseModel):
+class ProgressBarLabelPair(UniversalBaseModel):
     """
-    Progress bar label configuration
-    """
-
-    text: str = pydantic.Field()
-    """
-    Text content for the label
+    Left and right label configuration for a specific layout
     """
 
-    position: ProgressBarLabelPosition = pydantic.Field()
+    left: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Position where the label should render
+    Text content for the left label
+    """
+
+    right: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Text content for the right label
     """
 
     if IS_PYDANTIC_V2:
