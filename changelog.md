@@ -1,3 +1,6 @@
+## 4.1.0 - 2026-03-18
+* The SDK now provides specialized types for user update operations. New `UpdateUserRequestAttributes` includes additional fields for email, hashed_email, phone_number, and birth_year. User update and fetch methods now return `UserResponseObject` for improved type consistency.
+
 ## 4.0.0 - 2026-03-18
 * The progress bar API has been restructured with breaking changes. The `ProgressBarLabel` and `ProgressBarLabelPosition` types have been removed and replaced with `ProgressBarLabelPair` which uses explicit `left` and `right` fields. The `segment_icon` field has been replaced with a new `segments` configuration using `ProgressBarSegments` type. Update imports and field references to use the new structure.
 

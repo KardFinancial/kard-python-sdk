@@ -11,8 +11,9 @@ from ..core.request_options import RequestOptions
 from .raw_client import AsyncRawUsersClient, RawUsersClient
 from .types.create_users_object import CreateUsersObject
 from .types.delete_user_response_object import DeleteUserResponseObject
-from .types.update_user_object import UpdateUserObject
+from .types.update_user_request_data_union import UpdateUserRequestDataUnion
 from .types.user_request_data_union import UserRequestDataUnion
+from .types.user_response_object import UserResponseObject
 
 if typing.TYPE_CHECKING:
     from .attributions.client import AsyncAttributionsClient, AttributionsClient
@@ -87,6 +88,11 @@ class UsersClient:
                     attributes=UserRequestAttributes(
                         zip_code="11238",
                         enrolled_rewards=["CARDLINKED"],
+                        email="user@example.com",
+                        hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                        phone_number="+14155552671",
+                        birth_year="1990",
+                        historical_transactions_sent=True,
                     ),
                 )
             ],
@@ -100,9 +106,9 @@ class UsersClient:
         organization_id: OrganizationId,
         user_id: UserId,
         *,
-        data: UserRequestDataUnion,
+        data: UpdateUserRequestDataUnion,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> UpdateUserObject:
+    ) -> UserResponseObject:
         """
         Call this endpoint to update the details on a specified user.<br/>
 
@@ -114,19 +120,22 @@ class UsersClient:
 
         user_id : UserId
 
-        data : UserRequestDataUnion
+        data : UpdateUserRequestDataUnion
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        UpdateUserObject
+        UserResponseObject
 
         Examples
         --------
         from kard import KardApi
-        from kard.users import UserRequestAttributes, UserRequestDataUnion_User
+        from kard.users import (
+            UpdateUserRequestAttributes,
+            UpdateUserRequestDataUnion_User,
+        )
 
         client = KardApi(
             x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
@@ -136,11 +145,15 @@ class UsersClient:
         client.users.update(
             organization_id="organization-123",
             user_id="user-123",
-            data=UserRequestDataUnion_User(
+            data=UpdateUserRequestDataUnion_User(
                 id="1234567890",
-                attributes=UserRequestAttributes(
+                attributes=UpdateUserRequestAttributes(
                     zip_code="11238",
                     enrolled_rewards=["CARDLINKED"],
+                    email="user@example.com",
+                    hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                    phone_number="+14155552671",
+                    birth_year="1990",
                 ),
             ),
         )
@@ -196,7 +209,7 @@ class UsersClient:
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> UpdateUserObject:
+    ) -> UserResponseObject:
         """
         Call this endpoint to fetch the details on a specified user.<br/>
         <br/>
@@ -213,7 +226,7 @@ class UsersClient:
 
         Returns
         -------
-        UpdateUserObject
+        UserResponseObject
 
         Examples
         --------
@@ -334,6 +347,11 @@ class AsyncUsersClient:
                         attributes=UserRequestAttributes(
                             zip_code="11238",
                             enrolled_rewards=["CARDLINKED"],
+                            email="user@example.com",
+                            hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                            phone_number="+14155552671",
+                            birth_year="1990",
+                            historical_transactions_sent=True,
                         ),
                     )
                 ],
@@ -350,9 +368,9 @@ class AsyncUsersClient:
         organization_id: OrganizationId,
         user_id: UserId,
         *,
-        data: UserRequestDataUnion,
+        data: UpdateUserRequestDataUnion,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> UpdateUserObject:
+    ) -> UserResponseObject:
         """
         Call this endpoint to update the details on a specified user.<br/>
 
@@ -364,21 +382,24 @@ class AsyncUsersClient:
 
         user_id : UserId
 
-        data : UserRequestDataUnion
+        data : UpdateUserRequestDataUnion
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        UpdateUserObject
+        UserResponseObject
 
         Examples
         --------
         import asyncio
 
         from kard import AsyncKardApi
-        from kard.users import UserRequestAttributes, UserRequestDataUnion_User
+        from kard.users import (
+            UpdateUserRequestAttributes,
+            UpdateUserRequestDataUnion_User,
+        )
 
         client = AsyncKardApi(
             x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
@@ -391,11 +412,15 @@ class AsyncUsersClient:
             await client.users.update(
                 organization_id="organization-123",
                 user_id="user-123",
-                data=UserRequestDataUnion_User(
+                data=UpdateUserRequestDataUnion_User(
                     id="1234567890",
-                    attributes=UserRequestAttributes(
+                    attributes=UpdateUserRequestAttributes(
                         zip_code="11238",
                         enrolled_rewards=["CARDLINKED"],
+                        email="user@example.com",
+                        hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                        phone_number="+14155552671",
+                        birth_year="1990",
                     ),
                 ),
             )
@@ -462,7 +487,7 @@ class AsyncUsersClient:
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> UpdateUserObject:
+    ) -> UserResponseObject:
         """
         Call this endpoint to fetch the details on a specified user.<br/>
         <br/>
@@ -479,7 +504,7 @@ class AsyncUsersClient:
 
         Returns
         -------
-        UpdateUserObject
+        UserResponseObject
 
         Examples
         --------

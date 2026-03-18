@@ -1120,6 +1120,11 @@ client.users.create(
             attributes=UserRequestAttributes(
                 zip_code="11238",
                 enrolled_rewards=["CARDLINKED"],
+                email="user@example.com",
+                hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                phone_number="+14155552671",
+                birth_year="1990",
+                historical_transactions_sent=True,
             ),
         )
     ],
@@ -1167,7 +1172,7 @@ client.users.create(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/kard/users/client.py">update</a>(...) -&gt; AsyncHttpResponse[UpdateUserObject]</code></summary>
+<details><summary><code>client.users.<a href="src/kard/users/client.py">update</a>(...) -&gt; AsyncHttpResponse[UserResponseObject]</code></summary>
 <dl>
 <dd>
 
@@ -1197,7 +1202,10 @@ Call this endpoint to update the details on a specified user.<br/>
 
 ```python
 from kard import KardApi
-from kard.users import UserRequestAttributes, UserRequestDataUnion_User
+from kard.users import (
+    UpdateUserRequestAttributes,
+    UpdateUserRequestDataUnion_User,
+)
 
 client = KardApi(
     x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
@@ -1207,11 +1215,15 @@ client = KardApi(
 client.users.update(
     organization_id="organization-123",
     user_id="user-123",
-    data=UserRequestDataUnion_User(
+    data=UpdateUserRequestDataUnion_User(
         id="1234567890",
-        attributes=UserRequestAttributes(
+        attributes=UpdateUserRequestAttributes(
             zip_code="11238",
             enrolled_rewards=["CARDLINKED"],
+            email="user@example.com",
+            hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+            phone_number="+14155552671",
+            birth_year="1990",
         ),
     ),
 )
@@ -1246,7 +1258,7 @@ client.users.update(
 <dl>
 <dd>
 
-**data:** `UserRequestDataUnion` 
+**data:** `UpdateUserRequestDataUnion` 
     
 </dd>
 </dl>
@@ -1349,7 +1361,7 @@ client.users.delete(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/kard/users/client.py">get</a>(...) -&gt; AsyncHttpResponse[UpdateUserObject]</code></summary>
+<details><summary><code>client.users.<a href="src/kard/users/client.py">get</a>(...) -&gt; AsyncHttpResponse[UserResponseObject]</code></summary>
 <dl>
 <dd>
 

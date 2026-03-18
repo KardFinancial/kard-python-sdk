@@ -10,21 +10,30 @@ if typing.TYPE_CHECKING:
     from .create_users_object import CreateUsersObject
     from .delete_user_response_object import DeleteUserResponseObject
     from .update_user_object import UpdateUserObject
+    from .update_user_request_attributes import UpdateUserRequestAttributes
+    from .update_user_request_data import UpdateUserRequestData
+    from .update_user_request_data_union import UpdateUserRequestDataUnion, UpdateUserRequestDataUnion_User
     from .user_request_attributes import UserRequestAttributes
     from .user_request_data import UserRequestData
     from .user_request_data_union import UserRequestDataUnion, UserRequestDataUnion_User
     from .user_response_no_data import UserResponseNoData
+    from .user_response_object import UserResponseObject
     from .user_response_union_no_data import UserResponseUnionNoData, UserResponseUnionNoData_User
 _dynamic_imports: typing.Dict[str, str] = {
     "CreateUsersMultiStatusResponse": ".create_users_multi_status_response",
     "CreateUsersObject": ".create_users_object",
     "DeleteUserResponseObject": ".delete_user_response_object",
     "UpdateUserObject": ".update_user_object",
+    "UpdateUserRequestAttributes": ".update_user_request_attributes",
+    "UpdateUserRequestData": ".update_user_request_data",
+    "UpdateUserRequestDataUnion": ".update_user_request_data_union",
+    "UpdateUserRequestDataUnion_User": ".update_user_request_data_union",
     "UserRequestAttributes": ".user_request_attributes",
     "UserRequestData": ".user_request_data",
     "UserRequestDataUnion": ".user_request_data_union",
     "UserRequestDataUnion_User": ".user_request_data_union",
     "UserResponseNoData": ".user_response_no_data",
+    "UserResponseObject": ".user_response_object",
     "UserResponseUnionNoData": ".user_response_union_no_data",
     "UserResponseUnionNoData_User": ".user_response_union_no_data",
 }
@@ -56,11 +65,16 @@ __all__ = [
     "CreateUsersObject",
     "DeleteUserResponseObject",
     "UpdateUserObject",
+    "UpdateUserRequestAttributes",
+    "UpdateUserRequestData",
+    "UpdateUserRequestDataUnion",
+    "UpdateUserRequestDataUnion_User",
     "UserRequestAttributes",
     "UserRequestData",
     "UserRequestDataUnion",
     "UserRequestDataUnion_User",
     "UserResponseNoData",
+    "UserResponseObject",
     "UserResponseUnionNoData",
     "UserResponseUnionNoData_User",
 ]

@@ -9,7 +9,7 @@ from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
 
 
-class UserRequestAttributes(UniversalBaseModel):
+class UpdateUserRequestAttributes(UniversalBaseModel):
     enrolled_rewards: typing_extensions.Annotated[
         typing.List[EnrolledRewardsType], FieldMetadata(alias="enrolledRewards")
     ] = pydantic.Field()
@@ -48,13 +48,6 @@ class UserRequestAttributes(UniversalBaseModel):
     )
     """
     Birth year of user
-    """
-
-    historical_transactions_sent: typing_extensions.Annotated[
-        typing.Optional[bool], FieldMetadata(alias="historicalTransactionsSent")
-    ] = pydantic.Field(default=None)
-    """
-    Indicates whether historical transactions have been sent for this user
     """
 
     if IS_PYDANTIC_V2:

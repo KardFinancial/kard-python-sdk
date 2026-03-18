@@ -22,8 +22,9 @@ from .errors.multi_status import MultiStatus
 from .types.create_users_multi_status_response import CreateUsersMultiStatusResponse
 from .types.create_users_object import CreateUsersObject
 from .types.delete_user_response_object import DeleteUserResponseObject
-from .types.update_user_object import UpdateUserObject
+from .types.update_user_request_data_union import UpdateUserRequestDataUnion
 from .types.user_request_data_union import UserRequestDataUnion
+from .types.user_response_object import UserResponseObject
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -145,9 +146,9 @@ class RawUsersClient:
         organization_id: OrganizationId,
         user_id: UserId,
         *,
-        data: UserRequestDataUnion,
+        data: UpdateUserRequestDataUnion,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[UpdateUserObject]:
+    ) -> HttpResponse[UserResponseObject]:
         """
         Call this endpoint to update the details on a specified user.<br/>
 
@@ -159,21 +160,21 @@ class RawUsersClient:
 
         user_id : UserId
 
-        data : UserRequestDataUnion
+        data : UpdateUserRequestDataUnion
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[UpdateUserObject]
+        HttpResponse[UserResponseObject]
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}",
             method="PUT",
             json={
                 "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=UserRequestDataUnion, direction="write"
+                    object_=data, annotation=UpdateUserRequestDataUnion, direction="write"
                 ),
             },
             request_options=request_options,
@@ -182,9 +183,9 @@ class RawUsersClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    UpdateUserObject,
+                    UserResponseObject,
                     parse_obj_as(
-                        type_=UpdateUserObject,  # type: ignore
+                        type_=UserResponseObject,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -333,7 +334,7 @@ class RawUsersClient:
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[UpdateUserObject]:
+    ) -> HttpResponse[UserResponseObject]:
         """
         Call this endpoint to fetch the details on a specified user.<br/>
         <br/>
@@ -350,7 +351,7 @@ class RawUsersClient:
 
         Returns
         -------
-        HttpResponse[UpdateUserObject]
+        HttpResponse[UserResponseObject]
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}",
@@ -360,9 +361,9 @@ class RawUsersClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    UpdateUserObject,
+                    UserResponseObject,
                     parse_obj_as(
-                        type_=UpdateUserObject,  # type: ignore
+                        type_=UserResponseObject,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -522,9 +523,9 @@ class AsyncRawUsersClient:
         organization_id: OrganizationId,
         user_id: UserId,
         *,
-        data: UserRequestDataUnion,
+        data: UpdateUserRequestDataUnion,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[UpdateUserObject]:
+    ) -> AsyncHttpResponse[UserResponseObject]:
         """
         Call this endpoint to update the details on a specified user.<br/>
 
@@ -536,21 +537,21 @@ class AsyncRawUsersClient:
 
         user_id : UserId
 
-        data : UserRequestDataUnion
+        data : UpdateUserRequestDataUnion
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[UpdateUserObject]
+        AsyncHttpResponse[UserResponseObject]
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}",
             method="PUT",
             json={
                 "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=UserRequestDataUnion, direction="write"
+                    object_=data, annotation=UpdateUserRequestDataUnion, direction="write"
                 ),
             },
             request_options=request_options,
@@ -559,9 +560,9 @@ class AsyncRawUsersClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    UpdateUserObject,
+                    UserResponseObject,
                     parse_obj_as(
-                        type_=UpdateUserObject,  # type: ignore
+                        type_=UserResponseObject,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -710,7 +711,7 @@ class AsyncRawUsersClient:
         user_id: UserId,
         *,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[UpdateUserObject]:
+    ) -> AsyncHttpResponse[UserResponseObject]:
         """
         Call this endpoint to fetch the details on a specified user.<br/>
         <br/>
@@ -727,7 +728,7 @@ class AsyncRawUsersClient:
 
         Returns
         -------
-        AsyncHttpResponse[UpdateUserObject]
+        AsyncHttpResponse[UserResponseObject]
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}",
@@ -737,9 +738,9 @@ class AsyncRawUsersClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    UpdateUserObject,
+                    UserResponseObject,
                     parse_obj_as(
-                        type_=UpdateUserObject,  # type: ignore
+                        type_=UserResponseObject,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -4,35 +4,36 @@ import typing
 
 import pydantic
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .update_user_request_data_union import UpdateUserRequestDataUnion
+from .user_request_data_union import UserRequestDataUnion
 
 
-class UpdateUserObject(UniversalBaseModel):
+class UserResponseObject(UniversalBaseModel):
     """
     Examples
     --------
     from kard.users import (
-        UpdateUserObject,
-        UpdateUserRequestAttributes,
-        UpdateUserRequestDataUnion_User,
+        UserRequestAttributes,
+        UserRequestDataUnion_User,
+        UserResponseObject,
     )
 
-    UpdateUserObject(
-        data=UpdateUserRequestDataUnion_User(
+    UserResponseObject(
+        data=UserRequestDataUnion_User(
             id="1234567890",
-            attributes=UpdateUserRequestAttributes(
+            attributes=UserRequestAttributes(
                 zip_code="11238",
                 enrolled_rewards=["CARDLINKED"],
                 email="user@example.com",
                 hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
                 phone_number="+14155552671",
                 birth_year="1990",
+                historical_transactions_sent=True,
             ),
         ),
     )
     """
 
-    data: UpdateUserRequestDataUnion
+    data: UserRequestDataUnion
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

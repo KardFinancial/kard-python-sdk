@@ -51,6 +51,11 @@ client.users.create(
             attributes=UserRequestAttributes(
                 zip_code="11238",
                 enrolled_rewards=["CARDLINKED"],
+                email="user@example.com",
+                hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                phone_number="+14155552671",
+                birth_year="1990",
+                historical_transactions_sent=True,
             ),
         )
     ],
@@ -83,6 +88,11 @@ async def main() -> None:
                 attributes=UserRequestAttributes(
                     zip_code="11238",
                     enrolled_rewards=["CARDLINKED"],
+                    email="user@example.com",
+                    hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
+                    phone_number="+14155552671",
+                    birth_year="1990",
+                    historical_transactions_sent=True,
                 ),
             )
         ],
