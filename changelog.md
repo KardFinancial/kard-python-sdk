@@ -1,3 +1,6 @@
+## 4.2.0 - 2026-03-25
+* The SDK now includes the last four digits of the card used for transactions. The new `card_last_four` field is available in `CoreTransactionAttributes` to provide additional transaction context.
+
 ## 4.1.0 - 2026-03-18
 * The SDK now provides specialized types for user update operations. New `UpdateUserRequestAttributes` includes additional fields for email, hashed_email, phone_number, and birth_year. User update and fetch methods now return `UserResponseObject` for improved type consistency.
 
