@@ -1,3 +1,6 @@
+## 5.0.0 - 2026-03-27
+* The SDK now supports issuer-specific authentication tokens. The `x_kard_target_issuer` parameter has moved from the global client configuration to the `get_token()` method, enabling partners managing multiple issuers to scope auth tokens to specific issuers on a per-request basis. Update your authentication code to pass the issuer ID when calling `get_token()` instead of during client initialization.
+
 ## 4.2.0 - 2026-03-25
 * The SDK now includes the last four digits of the card used for transactions. The new `card_last_four` field is available in `CoreTransactionAttributes` to provide additional transaction context.
 

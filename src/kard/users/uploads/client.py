@@ -70,7 +70,6 @@ class UploadsClient:
         )
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -127,7 +126,6 @@ class UploadsClient:
         from kard.users.uploads import CreateUploadPartDataUnion_HistoricalTransaction
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -222,7 +220,6 @@ class UploadsClient:
         )
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -297,7 +294,6 @@ class AsyncUploadsClient:
         )
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -361,7 +357,6 @@ class AsyncUploadsClient:
         from kard.users.uploads import CreateUploadPartDataUnion_HistoricalTransaction
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -464,7 +459,6 @@ class AsyncUploadsClient:
         )
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )

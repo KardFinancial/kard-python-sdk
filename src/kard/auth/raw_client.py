@@ -19,7 +19,12 @@ class RawAuthClient:
         self._client_wrapper = client_wrapper
 
     def get_token(
-        self, *, client_id: str, client_secret: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        client_id: str,
+        client_secret: str,
+        x_kard_target_issuer: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[TokenResponse]:
         """
         Parameters
@@ -27,6 +32,9 @@ class RawAuthClient:
         client_id : str
 
         client_secret : str
+
+        x_kard_target_issuer : typing.Optional[str]
+            (Beta) Target issuer ID for partners managing multiple issuers on the Kard platform. When set, the auth token will be scoped to this specific issuer. Required if you manage more than one issuer; omit if you operate a single issuer integration.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -41,6 +49,9 @@ class RawAuthClient:
             json={
                 "client_id": client_id,
                 "client_secret": client_secret,
+            },
+            headers={
+                "X-Kard-Target-Issuer": str(x_kard_target_issuer) if x_kard_target_issuer is not None else None,
             },
             request_options=request_options,
             omit=OMIT,
@@ -66,7 +77,12 @@ class AsyncRawAuthClient:
         self._client_wrapper = client_wrapper
 
     async def get_token(
-        self, *, client_id: str, client_secret: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        client_id: str,
+        client_secret: str,
+        x_kard_target_issuer: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[TokenResponse]:
         """
         Parameters
@@ -74,6 +90,9 @@ class AsyncRawAuthClient:
         client_id : str
 
         client_secret : str
+
+        x_kard_target_issuer : typing.Optional[str]
+            (Beta) Target issuer ID for partners managing multiple issuers on the Kard platform. When set, the auth token will be scoped to this specific issuer. Required if you manage more than one issuer; omit if you operate a single issuer integration.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -88,6 +107,9 @@ class AsyncRawAuthClient:
             json={
                 "client_id": client_id,
                 "client_secret": client_secret,
+            },
+            headers={
+                "X-Kard-Target-Issuer": str(x_kard_target_issuer) if x_kard_target_issuer is not None else None,
             },
             request_options=request_options,
             omit=OMIT,

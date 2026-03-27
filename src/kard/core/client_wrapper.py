@@ -10,13 +10,11 @@ class BaseClientWrapper:
     def __init__(
         self,
         *,
-        x_kard_target_issuer: typing.Optional[str] = None,
         token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         base_url: str,
         timeout: typing.Optional[float] = None,
     ):
-        self._x_kard_target_issuer = x_kard_target_issuer
         self._token = token
         self._headers = headers
         self._base_url = base_url
@@ -24,14 +22,12 @@ class BaseClientWrapper:
 
     def get_headers(self) -> typing.Dict[str, str]:
         headers: typing.Dict[str, str] = {
-            "User-Agent": "kard-financial-sdk/4.2.0",
+            "User-Agent": "kard-financial-sdk/5.0.0",
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "kard-financial-sdk",
-            "X-Fern-SDK-Version": "4.2.0",
+            "X-Fern-SDK-Version": "5.0.0",
             **(self.get_custom_headers() or {}),
         }
-        if self._x_kard_target_issuer is not None:
-            headers["X-Kard-Target-Issuer"] = self._x_kard_target_issuer
         token = self._get_token()
         if token is not None:
             headers["Authorization"] = f"Bearer {token}"
@@ -57,16 +53,13 @@ class SyncClientWrapper(BaseClientWrapper):
     def __init__(
         self,
         *,
-        x_kard_target_issuer: typing.Optional[str] = None,
         token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         base_url: str,
         timeout: typing.Optional[float] = None,
         httpx_client: httpx.Client,
     ):
-        super().__init__(
-            x_kard_target_issuer=x_kard_target_issuer, token=token, headers=headers, base_url=base_url, timeout=timeout
-        )
+        super().__init__(token=token, headers=headers, base_url=base_url, timeout=timeout)
         self.httpx_client = HttpClient(
             httpx_client=httpx_client,
             base_headers=self.get_headers,
@@ -79,7 +72,6 @@ class AsyncClientWrapper(BaseClientWrapper):
     def __init__(
         self,
         *,
-        x_kard_target_issuer: typing.Optional[str] = None,
         token: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         base_url: str,
@@ -87,9 +79,7 @@ class AsyncClientWrapper(BaseClientWrapper):
         async_token: typing.Optional[typing.Callable[[], typing.Awaitable[str]]] = None,
         httpx_client: httpx.AsyncClient,
     ):
-        super().__init__(
-            x_kard_target_issuer=x_kard_target_issuer, token=token, headers=headers, base_url=base_url, timeout=timeout
-        )
+        super().__init__(token=token, headers=headers, base_url=base_url, timeout=timeout)
         self._async_token = async_token
         self.httpx_client = AsyncHttpClient(
             httpx_client=httpx_client,

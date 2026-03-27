@@ -27,7 +27,12 @@ class AuthClient:
         return self._raw_client
 
     def get_token(
-        self, *, client_id: str, client_secret: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        client_id: str,
+        client_secret: str,
+        x_kard_target_issuer: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> TokenResponse:
         """
         Parameters
@@ -35,6 +40,9 @@ class AuthClient:
         client_id : str
 
         client_secret : str
+
+        x_kard_target_issuer : typing.Optional[str]
+            (Beta) Target issuer ID for partners managing multiple issuers on the Kard platform. When set, the auth token will be scoped to this specific issuer. Required if you manage more than one issuer; omit if you operate a single issuer integration.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -48,7 +56,6 @@ class AuthClient:
         from kard import KardApi
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -58,7 +65,10 @@ class AuthClient:
         )
         """
         _response = self._raw_client.get_token(
-            client_id=client_id, client_secret=client_secret, request_options=request_options
+            client_id=client_id,
+            client_secret=client_secret,
+            x_kard_target_issuer=x_kard_target_issuer,
+            request_options=request_options,
         )
         return _response.data
 
@@ -79,7 +89,12 @@ class AsyncAuthClient:
         return self._raw_client
 
     async def get_token(
-        self, *, client_id: str, client_secret: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        *,
+        client_id: str,
+        client_secret: str,
+        x_kard_target_issuer: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> TokenResponse:
         """
         Parameters
@@ -87,6 +102,9 @@ class AsyncAuthClient:
         client_id : str
 
         client_secret : str
+
+        x_kard_target_issuer : typing.Optional[str]
+            (Beta) Target issuer ID for partners managing multiple issuers on the Kard platform. When set, the auth token will be scoped to this specific issuer. Required if you manage more than one issuer; omit if you operate a single issuer integration.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -102,7 +120,6 @@ class AsyncAuthClient:
         from kard import AsyncKardApi
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -118,6 +135,9 @@ class AsyncAuthClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get_token(
-            client_id=client_id, client_secret=client_secret, request_options=request_options
+            client_id=client_id,
+            client_secret=client_secret,
+            x_kard_target_issuer=x_kard_target_issuer,
+            request_options=request_options,
         )
         return _response.data

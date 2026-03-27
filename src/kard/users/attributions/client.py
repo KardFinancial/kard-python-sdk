@@ -79,7 +79,6 @@ class AttributionsClient:
         )
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -166,7 +165,6 @@ class AttributionsClient:
         from kard import KardApi
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -229,7 +227,6 @@ class AttributionsClient:
         from kard import KardApi
 
         client = KardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -311,7 +308,6 @@ class AsyncAttributionsClient:
         )
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -406,7 +402,6 @@ class AsyncAttributionsClient:
         from kard import AsyncKardApi
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
@@ -477,7 +472,6 @@ class AsyncAttributionsClient:
         from kard import AsyncKardApi
 
         client = AsyncKardApi(
-            x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )

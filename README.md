@@ -39,7 +39,6 @@ from kard import KardApi
 from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = KardApi(
-    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
@@ -73,7 +72,6 @@ from kard import AsyncKardApi
 from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = AsyncKardApi(
-    x_kard_target_issuer="YOUR_X_KARD_TARGET_ISSUER",
     client_id="YOUR_CLIENT_ID",
     client_secret="YOUR_CLIENT_SECRET",
 )
