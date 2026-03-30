@@ -1,3 +1,6 @@
+## 6.0.0 - 2026-03-30
+* The `card_last_four` field in `CoreTransactionAttributes` has been replaced with `card_last_fours` (now a list of strings) to support transactions where multiple cards may have been used. Update your code to handle the new list format when accessing card information from transaction data.
+
 ## 5.0.0 - 2026-03-27
 * The SDK now supports issuer-specific authentication tokens. The `x_kard_target_issuer` parameter has moved from the global client configuration to the `get_token()` method, enabling partners managing multiple issuers to scope auth tokens to specific issuers on a per-request basis. Update your authentication code to pass the issuer ID when calling `get_token()` instead of during client initialization.
 

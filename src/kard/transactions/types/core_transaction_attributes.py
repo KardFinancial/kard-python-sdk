@@ -65,11 +65,11 @@ class CoreTransactionAttributes(UniversalBaseModel):
     Name of the financial institution
     """
 
-    card_last_four: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardLastFour")] = (
-        pydantic.Field(default=None)
-    )
+    card_last_fours: typing_extensions.Annotated[
+        typing.Optional[typing.List[str]], FieldMetadata(alias="cardLastFours")
+    ] = pydantic.Field(default=None)
     """
-    Last four digits of the card used for the transaction.
+    Last four digits of the card(s) that may have been used for the transaction. When the issuer cannot determine which specific card was used, multiple values are provided as candidates.
     """
 
     if IS_PYDANTIC_V2:
