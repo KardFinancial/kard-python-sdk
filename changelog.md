@@ -1,3 +1,6 @@
+## 6.1.0 - 2026-04-02
+* The SDK now exposes a unique identifier for the financial institution on transaction data. The new optional `financial_institution_id` field is available in `CoreTransactionAttributes` to replace the deprecated `financial_institution` name field. Existing code using `financial_institution` continues to work without changes.
+
 ## 6.0.0 - 2026-03-30
 * The `card_last_four` field in `CoreTransactionAttributes` has been replaced with `card_last_fours` (now a list of strings) to support transactions where multiple cards may have been used. Update your code to handle the new list format when accessing card information from transaction data.
 

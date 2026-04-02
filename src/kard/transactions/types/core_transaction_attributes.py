@@ -62,7 +62,14 @@ class CoreTransactionAttributes(UniversalBaseModel):
         pydantic.Field()
     )
     """
-    Name of the financial institution
+    Deprecated. Use `financialInstitutionId` instead. Name of the financial institution.
+    """
+
+    financial_institution_id: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="financialInstitutionId")
+    ] = pydantic.Field(default=None)
+    """
+    Unique identifier of the financial institution
     """
 
     card_last_fours: typing_extensions.Annotated[

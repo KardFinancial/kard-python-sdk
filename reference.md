@@ -616,6 +616,7 @@ client.transactions.create(
                     "2024-10-15 14:25:00+00:00",
                 ),
                 financial_institution_name="west union bank",
+                financial_institution_id="fin-inst-001",
                 card_last_fours=["4321"],
             ),
         )
