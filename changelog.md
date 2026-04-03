@@ -1,3 +1,6 @@
+## 6.2.0 - 2026-04-03
+* The deprecated `financial_institution_name` field in `CoreTransactionAttributes` is now optional (defaults to `None`), reflecting its deprecated status in favor of `financial_institution_id`. Existing code that reads this field continues to work without changes.
+
 ## 6.1.0 - 2026-04-02
 * The SDK now exposes a unique identifier for the financial institution on transaction data. The new optional `financial_institution_id` field is available in `CoreTransactionAttributes` to replace the deprecated `financial_institution` name field. Existing code using `financial_institution` continues to work without changes.
 
