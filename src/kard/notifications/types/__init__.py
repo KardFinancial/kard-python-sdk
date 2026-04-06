@@ -9,15 +9,6 @@ if typing.TYPE_CHECKING:
     from .audit_update_attributes import AuditUpdateAttributes
     from .audit_update_data import AuditUpdateData
     from .audit_update_relationships import AuditUpdateRelationships
-    from .broker_amount import BrokerAmount
-    from .broker_amount_type import BrokerAmountType
-    from .broker_asset import BrokerAsset
-    from .broker_asset_type import BrokerAssetType
-    from .broker_operation_hours import BrokerOperationHours
-    from .broker_operation_period import BrokerOperationPeriod
-    from .broker_purchase_channel import BrokerPurchaseChannel
-    from .broker_reward import BrokerReward
-    from .broker_reward_type import BrokerRewardType
     from .clawback_data import ClawbackData
     from .earned_reward_approved_data import EarnedRewardApprovedData
     from .earned_reward_attributes import EarnedRewardAttributes
@@ -28,10 +19,6 @@ if typing.TYPE_CHECKING:
     from .failed_transaction_data import FailedTransactionData
     from .failed_transaction_relationships import FailedTransactionRelationships
     from .file_result_data import FileResultData
-    from .location_address import LocationAddress
-    from .location_coordinates import LocationCoordinates
-    from .location_status import LocationStatus
-    from .merchant_source import MerchantSource
     from .notification_data_union import (
         NotificationDataUnion,
         NotificationDataUnion_AuditUpdate,
@@ -40,48 +27,19 @@ if typing.TYPE_CHECKING:
         NotificationDataUnion_EarnedRewardSettled,
         NotificationDataUnion_FailedTransaction,
         NotificationDataUnion_FileProcessingResult,
-        NotificationDataUnion_Location,
-        NotificationDataUnion_Merchant,
-        NotificationDataUnion_Offer,
-        NotificationDataUnion_UserOffer,
         NotificationDataUnion_ValidTransaction,
     )
     from .notification_metadata import NotificationMetadata
     from .notification_payload import NotificationPayload
-    from .offer_status import OfferStatus
-    from .offer_type import OfferType
     from .reward_notification_attributes import RewardNotificationAttributes
-    from .time_period import TimePeriod
     from .transaction_relationships import TransactionRelationships
-    from .user_offer_status import UserOfferStatus
     from .valid_transaction_attributes import ValidTransactionAttributes
     from .valid_transaction_commission_earned import ValidTransactionCommissionEarned
     from .valid_transaction_data import ValidTransactionData
-    from .webhook_locations_attributes import WebhookLocationsAttributes
-    from .webhook_locations_data import WebhookLocationsData
-    from .webhook_locations_relationships import WebhookLocationsRelationships
-    from .webhook_merchant_attributes import WebhookMerchantAttributes
-    from .webhook_merchant_data import WebhookMerchantData
-    from .webhook_merchant_relationships import WebhookMerchantRelationships
-    from .webhook_offer_attributes import WebhookOfferAttributes
-    from .webhook_offer_data import WebhookOfferData
-    from .webhook_offer_relationships import WebhookOfferRelationships
-    from .webhook_user_offer_attributes import WebhookUserOfferAttributes
-    from .webhook_user_offer_data import WebhookUserOfferData
-    from .webhook_user_offer_relationships import WebhookUserOfferRelationships
 _dynamic_imports: typing.Dict[str, str] = {
     "AuditUpdateAttributes": ".audit_update_attributes",
     "AuditUpdateData": ".audit_update_data",
     "AuditUpdateRelationships": ".audit_update_relationships",
-    "BrokerAmount": ".broker_amount",
-    "BrokerAmountType": ".broker_amount_type",
-    "BrokerAsset": ".broker_asset",
-    "BrokerAssetType": ".broker_asset_type",
-    "BrokerOperationHours": ".broker_operation_hours",
-    "BrokerOperationPeriod": ".broker_operation_period",
-    "BrokerPurchaseChannel": ".broker_purchase_channel",
-    "BrokerReward": ".broker_reward",
-    "BrokerRewardType": ".broker_reward_type",
     "ClawbackData": ".clawback_data",
     "EarnedRewardApprovedData": ".earned_reward_approved_data",
     "EarnedRewardAttributes": ".earned_reward_attributes",
@@ -92,10 +50,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FailedTransactionData": ".failed_transaction_data",
     "FailedTransactionRelationships": ".failed_transaction_relationships",
     "FileResultData": ".file_result_data",
-    "LocationAddress": ".location_address",
-    "LocationCoordinates": ".location_coordinates",
-    "LocationStatus": ".location_status",
-    "MerchantSource": ".merchant_source",
     "NotificationDataUnion": ".notification_data_union",
     "NotificationDataUnion_AuditUpdate": ".notification_data_union",
     "NotificationDataUnion_Clawback": ".notification_data_union",
@@ -103,34 +57,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationDataUnion_EarnedRewardSettled": ".notification_data_union",
     "NotificationDataUnion_FailedTransaction": ".notification_data_union",
     "NotificationDataUnion_FileProcessingResult": ".notification_data_union",
-    "NotificationDataUnion_Location": ".notification_data_union",
-    "NotificationDataUnion_Merchant": ".notification_data_union",
-    "NotificationDataUnion_Offer": ".notification_data_union",
-    "NotificationDataUnion_UserOffer": ".notification_data_union",
     "NotificationDataUnion_ValidTransaction": ".notification_data_union",
     "NotificationMetadata": ".notification_metadata",
     "NotificationPayload": ".notification_payload",
-    "OfferStatus": ".offer_status",
-    "OfferType": ".offer_type",
     "RewardNotificationAttributes": ".reward_notification_attributes",
-    "TimePeriod": ".time_period",
     "TransactionRelationships": ".transaction_relationships",
-    "UserOfferStatus": ".user_offer_status",
     "ValidTransactionAttributes": ".valid_transaction_attributes",
     "ValidTransactionCommissionEarned": ".valid_transaction_commission_earned",
     "ValidTransactionData": ".valid_transaction_data",
-    "WebhookLocationsAttributes": ".webhook_locations_attributes",
-    "WebhookLocationsData": ".webhook_locations_data",
-    "WebhookLocationsRelationships": ".webhook_locations_relationships",
-    "WebhookMerchantAttributes": ".webhook_merchant_attributes",
-    "WebhookMerchantData": ".webhook_merchant_data",
-    "WebhookMerchantRelationships": ".webhook_merchant_relationships",
-    "WebhookOfferAttributes": ".webhook_offer_attributes",
-    "WebhookOfferData": ".webhook_offer_data",
-    "WebhookOfferRelationships": ".webhook_offer_relationships",
-    "WebhookUserOfferAttributes": ".webhook_user_offer_attributes",
-    "WebhookUserOfferData": ".webhook_user_offer_data",
-    "WebhookUserOfferRelationships": ".webhook_user_offer_relationships",
 }
 
 
@@ -159,15 +93,6 @@ __all__ = [
     "AuditUpdateAttributes",
     "AuditUpdateData",
     "AuditUpdateRelationships",
-    "BrokerAmount",
-    "BrokerAmountType",
-    "BrokerAsset",
-    "BrokerAssetType",
-    "BrokerOperationHours",
-    "BrokerOperationPeriod",
-    "BrokerPurchaseChannel",
-    "BrokerReward",
-    "BrokerRewardType",
     "ClawbackData",
     "EarnedRewardApprovedData",
     "EarnedRewardAttributes",
@@ -178,10 +103,6 @@ __all__ = [
     "FailedTransactionData",
     "FailedTransactionRelationships",
     "FileResultData",
-    "LocationAddress",
-    "LocationCoordinates",
-    "LocationStatus",
-    "MerchantSource",
     "NotificationDataUnion",
     "NotificationDataUnion_AuditUpdate",
     "NotificationDataUnion_Clawback",
@@ -189,32 +110,12 @@ __all__ = [
     "NotificationDataUnion_EarnedRewardSettled",
     "NotificationDataUnion_FailedTransaction",
     "NotificationDataUnion_FileProcessingResult",
-    "NotificationDataUnion_Location",
-    "NotificationDataUnion_Merchant",
-    "NotificationDataUnion_Offer",
-    "NotificationDataUnion_UserOffer",
     "NotificationDataUnion_ValidTransaction",
     "NotificationMetadata",
     "NotificationPayload",
-    "OfferStatus",
-    "OfferType",
     "RewardNotificationAttributes",
-    "TimePeriod",
     "TransactionRelationships",
-    "UserOfferStatus",
     "ValidTransactionAttributes",
     "ValidTransactionCommissionEarned",
     "ValidTransactionData",
-    "WebhookLocationsAttributes",
-    "WebhookLocationsData",
-    "WebhookLocationsRelationships",
-    "WebhookMerchantAttributes",
-    "WebhookMerchantData",
-    "WebhookMerchantRelationships",
-    "WebhookOfferAttributes",
-    "WebhookOfferData",
-    "WebhookOfferRelationships",
-    "WebhookUserOfferAttributes",
-    "WebhookUserOfferData",
-    "WebhookUserOfferRelationships",
 ]

@@ -17,14 +17,6 @@ from .failed_transaction_attributes import FailedTransactionAttributes
 from .failed_transaction_relationships import FailedTransactionRelationships
 from .transaction_relationships import TransactionRelationships
 from .valid_transaction_attributes import ValidTransactionAttributes
-from .webhook_locations_attributes import WebhookLocationsAttributes
-from .webhook_locations_relationships import WebhookLocationsRelationships
-from .webhook_merchant_attributes import WebhookMerchantAttributes
-from .webhook_merchant_relationships import WebhookMerchantRelationships
-from .webhook_offer_attributes import WebhookOfferAttributes
-from .webhook_offer_relationships import WebhookOfferRelationships
-from .webhook_user_offer_attributes import WebhookUserOfferAttributes
-from .webhook_user_offer_relationships import WebhookUserOfferRelationships
 
 
 class NotificationDataUnion_EarnedRewardApproved(UniversalBaseModel):
@@ -107,70 +99,6 @@ class NotificationDataUnion_Clawback(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
-class NotificationDataUnion_Offer(UniversalBaseModel):
-    type: typing.Literal["offer"] = "offer"
-    id: str
-    attributes: WebhookOfferAttributes
-    relationships: WebhookOfferRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
-class NotificationDataUnion_Merchant(UniversalBaseModel):
-    type: typing.Literal["merchant"] = "merchant"
-    id: str
-    attributes: WebhookMerchantAttributes
-    relationships: WebhookMerchantRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
-class NotificationDataUnion_Location(UniversalBaseModel):
-    type: typing.Literal["location"] = "location"
-    id: str
-    attributes: WebhookLocationsAttributes
-    relationships: WebhookLocationsRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
-class NotificationDataUnion_UserOffer(UniversalBaseModel):
-    type: typing.Literal["userOffer"] = "userOffer"
-    id: str
-    attributes: WebhookUserOfferAttributes
-    relationships: WebhookUserOfferRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
 class NotificationDataUnion_AuditUpdate(UniversalBaseModel):
     type: typing.Literal["auditUpdate"] = "auditUpdate"
     id: str
@@ -209,10 +137,6 @@ NotificationDataUnion = typing_extensions.Annotated[
         NotificationDataUnion_ValidTransaction,
         NotificationDataUnion_FailedTransaction,
         NotificationDataUnion_Clawback,
-        NotificationDataUnion_Offer,
-        NotificationDataUnion_Merchant,
-        NotificationDataUnion_Location,
-        NotificationDataUnion_UserOffer,
         NotificationDataUnion_AuditUpdate,
         NotificationDataUnion_FileProcessingResult,
     ],
