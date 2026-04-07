@@ -7,6 +7,7 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
+from .attribution_state import AttributionState
 from .event_code import EventCode
 from .offer_medium import OfferMedium
 
@@ -23,6 +24,11 @@ class OfferAttributionAttributes(UniversalBaseModel):
     """
     The timestamp of the attribution event.
     Must be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").
+    """
+
+    state: typing.Optional[AttributionState] = pydantic.Field(default=None)
+    """
+    Placement context for the attribution event
     """
 
     if IS_PYDANTIC_V2:

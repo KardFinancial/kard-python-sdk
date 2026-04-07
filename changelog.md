@@ -1,3 +1,6 @@
+## 7.2.0 - 2026-04-07
+* The SDK now exposes two new types, `AttributionFilter` and `AttributionState` (available at `kard.AttributionFilter` and `kard.AttributionState`), that represent placement context for attribution events. An optional `state` field of type `AttributionState` has been added to both `NotificationAttributionAttributes` and `OfferAttributionAttributes`, providing access to the offer's rank and the active filters at the time the user viewed it. Existing code is unaffected as the new field defaults to `None`.
+
 ## 7.1.0 - 2026-04-07
 * The SDK now exposes a new `FileUploadType` type (available at `kard.FileUploadType`) that supports both `"incomingTransactionsFile"` and `"historicalTransactionsFile"` values. The `type` field on `CreateFileUploadData` and `FileUploadUrlData` has been widened from a hard-coded literal to this new union type, allowing consumers to create file upload URLs for historical transaction files in addition to incoming transaction files. Existing code that omits or hard-codes `type="incomingTransactionsFile"` continues to work without changes.
 

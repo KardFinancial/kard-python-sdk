@@ -11,6 +11,8 @@ if typing.TYPE_CHECKING:
     from .activate_offer_response import ActivateOfferResponse
     from .activate_offer_response_attributes import ActivateOfferResponseAttributes
     from .activate_offer_response_data import ActivateOfferResponseData
+    from .attribution_filter import AttributionFilter
+    from .attribution_state import AttributionState
     from .boost_offer_include_option import BoostOfferIncludeOption
     from .boost_offer_included import BoostOfferIncluded
     from .boost_offer_response import BoostOfferResponse
@@ -36,6 +38,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ActivateOfferResponse": ".activate_offer_response",
     "ActivateOfferResponseAttributes": ".activate_offer_response_attributes",
     "ActivateOfferResponseData": ".activate_offer_response_data",
+    "AttributionFilter": ".attribution_filter",
+    "AttributionState": ".attribution_state",
     "BoostOfferIncludeOption": ".boost_offer_include_option",
     "BoostOfferIncluded": ".boost_offer_included",
     "BoostOfferResponse": ".boost_offer_response",
@@ -83,6 +87,8 @@ __all__ = [
     "ActivateOfferResponse",
     "ActivateOfferResponseAttributes",
     "ActivateOfferResponseData",
+    "AttributionFilter",
+    "AttributionState",
     "BoostOfferIncludeOption",
     "BoostOfferIncluded",
     "BoostOfferResponse",
