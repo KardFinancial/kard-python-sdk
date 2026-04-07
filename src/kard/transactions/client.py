@@ -292,11 +292,13 @@ class TransactionsClient:
             organization_id="organization-123",
             data=[
                 CreateFileUploadData(
+                    type="incomingTransactionsFile",
                     attributes=CreateFileUploadAttributes(
                         filename="transaction_12345.jsonl",
                     ),
                 ),
                 CreateFileUploadData(
+                    type="incomingTransactionsFile",
                     attributes=CreateFileUploadAttributes(
                         filename="transaction_67890.jsonl",
                     ),
@@ -678,11 +680,13 @@ class AsyncTransactionsClient:
                 organization_id="organization-123",
                 data=[
                     CreateFileUploadData(
+                        type="incomingTransactionsFile",
                         attributes=CreateFileUploadAttributes(
                             filename="transaction_12345.jsonl",
                         ),
                     ),
                     CreateFileUploadData(
+                        type="incomingTransactionsFile",
                         attributes=CreateFileUploadAttributes(
                             filename="transaction_67890.jsonl",
                         ),

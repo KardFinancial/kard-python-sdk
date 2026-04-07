@@ -20,6 +20,7 @@ class CreateFileUploadUrlResponse(UniversalBaseModel):
     CreateFileUploadUrlResponse(
         data=[
             FileUploadUrlData(
+                type="incomingTransactionsFile",
                 id="2NxKz7TYmqVH8UrjGP1xK3hF2gs",
                 attributes=FileUploadUrlAttributes(
                     url="https://s3.amazonaws.com/bucket/key1?X-Amz-Algorithm=...",
@@ -27,6 +28,7 @@ class CreateFileUploadUrlResponse(UniversalBaseModel):
                 ),
             ),
             FileUploadUrlData(
+                type="incomingTransactionsFile",
                 id="3PqLa8UZnrWI9VskHQ2yL4iG3ht",
                 attributes=FileUploadUrlAttributes(
                     url="https://s3.amazonaws.com/bucket/key2?X-Amz-Algorithm=...",

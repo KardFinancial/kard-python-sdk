@@ -5,10 +5,11 @@ import typing
 import pydantic
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .create_file_upload_attributes import CreateFileUploadAttributes
+from .file_upload_type import FileUploadType
 
 
 class CreateFileUploadData(UniversalBaseModel):
-    type: typing.Literal["incomingTransactionsFile"] = "incomingTransactionsFile"
+    type: FileUploadType
     attributes: CreateFileUploadAttributes
 
     if IS_PYDANTIC_V2:

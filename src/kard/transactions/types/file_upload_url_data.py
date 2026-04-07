@@ -4,11 +4,12 @@ import typing
 
 import pydantic
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .file_upload_type import FileUploadType
 from .file_upload_url_attributes import FileUploadUrlAttributes
 
 
 class FileUploadUrlData(UniversalBaseModel):
-    type: typing.Literal["incomingTransactionsFile"] = "incomingTransactionsFile"
+    type: FileUploadType
     id: str = pydantic.Field()
     """
     Upload session ID for traceability
