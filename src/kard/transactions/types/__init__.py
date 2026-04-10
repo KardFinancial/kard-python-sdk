@@ -11,7 +11,6 @@ if typing.TYPE_CHECKING:
     from .audit_response_attributes import AuditResponseAttributes
     from .audit_response_data import AuditResponseData
     from .audit_status import AuditStatus
-    from .card_network import CardNetwork
     from .commission_earned_details import CommissionEarnedDetails
     from .core_transaction_attributes import CoreTransactionAttributes
     from .core_transaction_request import CoreTransactionRequest
@@ -78,7 +77,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuditResponseAttributes": ".audit_response_attributes",
     "AuditResponseData": ".audit_response_data",
     "AuditStatus": ".audit_status",
-    "CardNetwork": ".card_network",
     "CommissionEarnedDetails": ".commission_earned_details",
     "CoreTransactionAttributes": ".core_transaction_attributes",
     "CoreTransactionRequest": ".core_transaction_request",
@@ -169,7 +167,6 @@ __all__ = [
     "AuditResponseAttributes",
     "AuditResponseData",
     "AuditStatus",
-    "CardNetwork",
     "CommissionEarnedDetails",
     "CoreTransactionAttributes",
     "CoreTransactionRequest",

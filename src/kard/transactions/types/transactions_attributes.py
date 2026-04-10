@@ -5,9 +5,9 @@ import typing
 
 import pydantic
 import typing_extensions
+from ...commons.types.card_network import CardNetwork
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
-from .card_network import CardNetwork
 from .direction_type import DirectionType
 from .merchant import Merchant
 from .processor_mid import ProcessorMid

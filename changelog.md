@@ -1,3 +1,6 @@
+## 8.0.0 - 2026-04-10
+* `CardNetwork` has been moved from `kard.transactions` / `kard.transactions.types` to `kard.commons` / `kard.commons.types`. The top-level import `from kard import CardNetwork` continues to work without changes. If your code imports `CardNetwork` directly from `kard.transactions` or `kard.transactions.types`, update those imports to use `kard.commons` or `kard.commons.types` instead.
+
 ## 7.2.0 - 2026-04-07
 * The SDK now exposes two new types, `AttributionFilter` and `AttributionState` (available at `kard.AttributionFilter` and `kard.AttributionState`), that represent placement context for attribution events. An optional `state` field of type `AttributionState` has been added to both `NotificationAttributionAttributes` and `OfferAttributionAttributes`, providing access to the offer's rank and the active filters at the time the user viewed it. Existing code is unaffected as the new field defaults to `None`.
 

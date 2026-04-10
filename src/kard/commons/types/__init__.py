@@ -6,6 +6,7 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .card_network import CardNetwork
     from .category_option import CategoryOption
     from .commission_type import CommissionType
     from .commission_value import CommissionValue
@@ -31,6 +32,7 @@ if typing.TYPE_CHECKING:
     from .subscription_id import SubscriptionId
     from .user_id import UserId
 _dynamic_imports: typing.Dict[str, str] = {
+    "CardNetwork": ".card_network",
     "CategoryOption": ".category_option",
     "CommissionType": ".commission_type",
     "CommissionValue": ".commission_value",
@@ -80,6 +82,7 @@ def __dir__():
 
 
 __all__ = [
+    "CardNetwork",
     "CategoryOption",
     "CommissionType",
     "CommissionValue",

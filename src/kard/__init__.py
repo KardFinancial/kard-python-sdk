@@ -10,6 +10,7 @@ if typing.TYPE_CHECKING:
     from .auth import TokenResponse
     from .client import AsyncKardApi, KardApi
     from .commons import (
+        CardNetwork,
         CategoryOption,
         CommissionType,
         CommissionValue,
@@ -87,7 +88,6 @@ if typing.TYPE_CHECKING:
         AuditResponseAttributes,
         AuditResponseData,
         AuditStatus,
-        CardNetwork,
         CommissionEarnedDetails,
         CoreTransactionAttributes,
         CoreTransactionRequest,
@@ -182,7 +182,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuditUpdateAttributes": ".notifications",
     "AuditUpdateData": ".notifications",
     "AuditUpdateRelationships": ".notifications",
-    "CardNetwork": ".transactions",
+    "CardNetwork": ".commons",
     "CategoryOption": ".commons",
     "ClawbackData": ".notifications",
     "CommissionEarnedDetails": ".transactions",

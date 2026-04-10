@@ -7,6 +7,7 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
+        CardNetwork,
         CategoryOption,
         CommissionType,
         CommissionValue,
@@ -41,6 +42,7 @@ if typing.TYPE_CHECKING:
         UnauthorizedError,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "CardNetwork": ".types",
     "CategoryOption": ".types",
     "CommissionType": ".types",
     "CommissionValue": ".types",
@@ -96,6 +98,7 @@ def __dir__():
 
 
 __all__ = [
+    "CardNetwork",
     "CategoryOption",
     "CommissionType",
     "CommissionValue",
