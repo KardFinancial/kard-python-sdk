@@ -1,3 +1,6 @@
+## 8.1.0 - 2026-04-10
+* The `get_earned_rewards` method on `TransactionsClient` and `AsyncTransactionsClient` now accepts an optional `include` parameter. Pass a comma-separated string of related resources (supported values: `"merchant"` and `"offer"`) to embed those resources directly in the response. Existing code that omits `include` continues to work without changes.
+
 ## 8.0.0 - 2026-04-10
 * `CardNetwork` has been moved from `kard.transactions` / `kard.transactions.types` to `kard.commons` / `kard.commons.types`. The top-level import `from kard import CardNetwork` continues to work without changes. If your code imports `CardNetwork` directly from `kard.transactions` or `kard.transactions.types`, update those imports to use `kard.commons` or `kard.commons.types` instead.
 

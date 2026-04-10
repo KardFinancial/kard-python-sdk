@@ -1005,6 +1005,7 @@ client.transactions.get_earned_rewards(
     organization_id="org-123",
     user_id="user-456",
     page_size=10,
+    include="merchant,offer",
 )
 
 ```
@@ -1054,6 +1055,14 @@ client.transactions.get_earned_rewards(
 <dd>
 
 **page_size:** `typing.Optional[int]` — Number of results per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[str]` — Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
     
 </dd>
 </dl>

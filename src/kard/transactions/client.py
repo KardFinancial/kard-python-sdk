@@ -319,6 +319,7 @@ class TransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
+        include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
         """
@@ -344,6 +345,9 @@ class TransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
+        include : typing.Optional[str]
+            Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -363,6 +367,7 @@ class TransactionsClient:
             organization_id="org-123",
             user_id="user-456",
             page_size=10,
+            include="merchant,offer",
         )
         """
         _response = self._raw_client.get_earned_rewards(
@@ -371,6 +376,7 @@ class TransactionsClient:
             page_after=page_after,
             page_before=page_before,
             page_size=page_size,
+            include=include,
             request_options=request_options,
         )
         return _response.data
@@ -710,6 +716,7 @@ class AsyncTransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
+        include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
         """
@@ -735,6 +742,9 @@ class AsyncTransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
+        include : typing.Optional[str]
+            Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -759,6 +769,7 @@ class AsyncTransactionsClient:
                 organization_id="org-123",
                 user_id="user-456",
                 page_size=10,
+                include="merchant,offer",
             )
 
 
@@ -770,6 +781,7 @@ class AsyncTransactionsClient:
             page_after=page_after,
             page_before=page_before,
             page_size=page_size,
+            include=include,
             request_options=request_options,
         )
         return _response.data

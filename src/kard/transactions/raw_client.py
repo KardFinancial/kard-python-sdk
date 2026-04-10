@@ -482,6 +482,7 @@ class RawTransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
+        include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetEarnedRewardsResponse]:
         """
@@ -507,6 +508,9 @@ class RawTransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
+        include : typing.Optional[str]
+            Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -521,6 +525,7 @@ class RawTransactionsClient:
                 "page[after]": page_after,
                 "page[before]": page_before,
                 "page[size]": page_size,
+                "include": include,
             },
             request_options=request_options,
         )
@@ -1028,6 +1033,7 @@ class AsyncRawTransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
+        include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetEarnedRewardsResponse]:
         """
@@ -1053,6 +1059,9 @@ class AsyncRawTransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
+        include : typing.Optional[str]
+            Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1067,6 +1076,7 @@ class AsyncRawTransactionsClient:
                 "page[after]": page_after,
                 "page[before]": page_before,
                 "page[size]": page_size,
+                "include": include,
             },
             request_options=request_options,
         )
