@@ -1,6 +1,6 @@
 # Reference
 ## Auth
-<details><summary><code>client.auth.<a href="src/kard/auth/client.py">get_token</a>(...) -&gt; AsyncHttpResponse[TokenResponse]</code></summary>
+<details><summary><code>client.auth.<a href="src/kard/auth/client.py">get_token</a>(...) -> TokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -14,11 +14,14 @@
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.auth.get_token(
     client_id="client_id",
     client_secret="client_secret",
@@ -75,7 +78,7 @@ client.auth.get_token(
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="src/kard/files/client.py">get_metadata</a>(...) -&gt; AsyncHttpResponse[GetFilesMetadataResponse]</code></summary>
+<details><summary><code>client.files.<a href="src/kard/files/client.py">get_metadata</a>(...) -> GetFilesMetadataResponse</code></summary>
 <dl>
 <dd>
 
@@ -106,18 +109,23 @@ through potentially large sets of file metadata.
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.files.get_metadata(
     organization_id="organization-123",
     page_size=5,
     filter_date_from="2025-02-20T21:56:23Z",
     filter_date_to="2025-03-20T21:56:23Z",
     filter_file_type="earnedRewardApprovedDailyReconciliationFile",
-    sort="-sentDate",
+    sort=[
+        "-sentDate"
+    ],
 )
 
 ```
@@ -190,11 +198,7 @@ client.files.get_metadata(
 <dl>
 <dd>
 
-**sort:** `typing.Optional[
-    typing.Union[
-        FilesMetadataSortOptions, typing.Sequence[FilesMetadataSortOptions]
-    ]
-]` — If provided, response will be sorted by the specified fields. Defaults to descending sentDate, equivalent to "-sentDate"
+**sort:** `typing.Optional[typing.Union[FilesMetadataSortOptions, typing.Sequence[FilesMetadataSortOptions]]]` — If provided, response will be sorted by the specified fields. Defaults to descending sentDate, equivalent to "-sentDate"
     
 </dd>
 </dl>
@@ -215,7 +219,7 @@ client.files.get_metadata(
 </details>
 
 ## Subscriptions
-<details><summary><code>client.notifications.subscriptions.<a href="src/kard/notifications/subscriptions/client.py">get</a>(...) -&gt; AsyncHttpResponse[SubscriptionsResponseObject]</code></summary>
+<details><summary><code>client.notifications.subscriptions.<a href="src/kard/notifications/subscriptions/client.py">get</a>(...) -> SubscriptionsResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -244,11 +248,14 @@ Call this endpoint to fetch the subscriptions of the provided issuer.<br/>
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.notifications.subscriptions.get(
     organization_id="organization-123",
 )
@@ -295,7 +302,7 @@ client.notifications.subscriptions.get(
 </dl>
 </details>
 
-<details><summary><code>client.notifications.subscriptions.<a href="src/kard/notifications/subscriptions/client.py">create</a>(...) -&gt; AsyncHttpResponse[CreateSubscriptionsResponseObject]</code></summary>
+<details><summary><code>client.notifications.subscriptions.<a href="src/kard/notifications/subscriptions/client.py">create</a>(...) -> CreateSubscriptionsResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -324,15 +331,15 @@ Call this endpoint to subscribe to notification events.<br/>
 
 ```python
 from kard import KardApi
-from kard.notifications.subscriptions import (
-    SubscriptionRequestAttributes,
-    SubscriptionRequestUnion_Subscription,
-)
+from kard.environment import KardApiEnvironment
+from kard.notifications.subscriptions import SubscriptionRequestUnion_Subscription, SubscriptionRequestAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.notifications.subscriptions.create(
     organization_id="organization-123",
     data=[
@@ -368,7 +375,7 @@ client.notifications.subscriptions.create(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[SubscriptionRequestUnion]` 
+**request:** `SubscriptionRequestBody` 
     
 </dd>
 </dl>
@@ -388,7 +395,7 @@ client.notifications.subscriptions.create(
 </dl>
 </details>
 
-<details><summary><code>client.notifications.subscriptions.<a href="src/kard/notifications/subscriptions/client.py">update</a>(...) -&gt; AsyncHttpResponse[UpdateSubscriptionsResponseObject]</code></summary>
+<details><summary><code>client.notifications.subscriptions.<a href="src/kard/notifications/subscriptions/client.py">update</a>(...) -> UpdateSubscriptionsResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -417,15 +424,15 @@ Call this endpoint to update existing notification subscriptions.<br/>
 
 ```python
 from kard import KardApi
-from kard.notifications.subscriptions import (
-    UpdateSubscriptionRequestAttributes,
-    UpdateSubscriptionRequestUnion_Subscription,
-)
+from kard.environment import KardApiEnvironment
+from kard.notifications.subscriptions import UpdateSubscriptionRequestUnion_Subscription, UpdateSubscriptionRequestAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.notifications.subscriptions.update(
     organization_id="organization-123",
     subscription_id="subscription-123",
@@ -468,7 +475,7 @@ client.notifications.subscriptions.update(
 <dl>
 <dd>
 
-**data:** `UpdateSubscriptionRequestUnion` 
+**request:** `UpdateSubscriptionRequestBody` 
     
 </dd>
 </dl>
@@ -489,7 +496,7 @@ client.notifications.subscriptions.update(
 </details>
 
 ## Ping
-<details><summary><code>client.ping.<a href="src/kard/ping/client.py">ping</a>() -&gt; AsyncHttpResponse[PingResponseObject]</code></summary>
+<details><summary><code>client.ping.<a href="src/kard/ping/client.py">ping</a>() -> PingResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -517,11 +524,14 @@ Call this endpoint to verify network connectivity and service availability.
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.ping.ping()
 
 ```
@@ -551,7 +561,7 @@ client.ping.ping()
 </details>
 
 ## Transactions
-<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create</a>(...) -&gt; AsyncHttpResponse[TransactionsResponse]</code></summary>
+<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create</a>(...) -> TransactionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -585,38 +595,60 @@ Please use the correct type when calling the endpoint:
 <dd>
 
 ```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.transactions import Transactions_Transaction, TransactionsAttributes, Merchant, ProcessorMid_Visa, VisaMidDetails
 import datetime
 
-from kard import KardApi
-from kard.transactions import (
-    CoreTransactionAttributes,
-    Transactions_CoreTransaction,
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
 
-client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
-)
 client.transactions.create(
     organization_id="organization-123",
     data=[
-        Transactions_CoreTransaction(
-            id="core_txn_98765432109876543210",
-            attributes=CoreTransactionAttributes(
+        Transactions_Transaction(
+            id="309rjfoincor3icno3rind093cdow3jciwjdwcm",
+            attributes=TransactionsAttributes(
                 user_id="6FHt5b6Fnp0qdomMEy5AN6PXcSJIeX69",
-                transaction_id="CORE-TXN-2024-001234",
-                amount=4599,
+                status="APPROVED",
+                amount=1000,
+                subtotal=800,
                 currency="USD",
-                description="WALMART SUPERCENTER",
                 direction="DEBIT",
-                settled_date=datetime.datetime.fromisoformat(
-                    "2024-10-15 14:30:00+00:00",
+                payment_type="CARD",
+                description="ADVANCEAUTO",
+                description_2="ADVANCEAUTO",
+                mcc="1234",
+                card_bin="123456",
+                card_last_four="4321",
+                authorization_date=datetime.datetime.fromisoformat("2021-07-02T17:47:06+00:00"),
+                merchant=Merchant(
+                    id="12345678901234567",
+                    name="ADVANCEAUTO",
+                    addr_street="125 Main St",
+                    addr_city="Philadelphia",
+                    addr_state="PA",
+                    addr_zipcode="19147",
+                    addr_country="United States",
+                    latitude="37.9419429",
+                    longitude="-73.1446869",
+                    store_id="12345",
                 ),
-                authorization_date=datetime.datetime.fromisoformat(
-                    "2024-10-15 14:25:00+00:00",
+                authorization_code="123456",
+                retrieval_reference_number="100804333919",
+                acquirer_reference_number="1234567890123456789012345678",
+                system_trace_audit_number="333828",
+                transaction_id="2467de37-cbdc-416d-a359-75de87bfffb0",
+                card_product_id="1234567890123456789012345678",
+                processor_mids=ProcessorMid_Visa(
+                    mids=VisaMidDetails(
+                        vmid="12345678901",
+                        vsid="12345678",
+                    ),
                 ),
-                financial_institution_id="fin-inst-001",
-                card_last_fours=["4321"],
             ),
         )
     ],
@@ -644,13 +676,7 @@ client.transactions.create(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[Transactions]` 
-
-Discriminated union representing the request body for submitting a transaction.
-Use `type` to distinguish between the two:
-- `transaction`: For transactions requiring processing and matching by the Kard system.
-- `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
-- `coreTransaction`: For transactions from core banking systems with limited card-level data.
+**request:** `TransactionsRequestBody` 
     
 </dd>
 </dl>
@@ -670,7 +696,7 @@ Use `type` to distinguish between the two:
 </dl>
 </details>
 
-<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_fraud_markers</a>(...) -&gt; AsyncHttpResponse[FraudulentTransactionObject]</code></summary>
+<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_fraud_markers</a>(...) -> FraudulentTransactionObject</code></summary>
 <dl>
 <dd>
 
@@ -701,15 +727,15 @@ Call this endpoint to flag a submitted transaction as fraudulent. This will prev
 
 ```python
 from kard import KardApi
-from kard.transactions import (
-    FraudulentTransactionAttributes,
-    FraudulentTransactionData,
-)
+from kard.environment import KardApiEnvironment
+from kard.transactions import FraudulentTransactionData, FraudulentTransactionAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.transactions.create_fraud_markers(
     organization_id="organization-123",
     data=[
@@ -745,7 +771,7 @@ client.transactions.create_fraud_markers(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[FraudulentTransactionData]` — List of fraudulent transactions to report
+**request:** `FraudulentTransactionRequestBody` 
     
 </dd>
 </dl>
@@ -765,7 +791,7 @@ client.transactions.create_fraud_markers(
 </dl>
 </details>
 
-<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_audits</a>(...) -&gt; AsyncHttpResponse[CreateAuditResponseBody]</code></summary>
+<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_audits</a>(...) -> CreateAuditResponseBody</code></summary>
 <dl>
 <dd>
 
@@ -794,12 +820,15 @@ Call this endpoint to request that a particular transaction be audited further b
 
 ```python
 from kard import KardApi
-from kard.transactions import AuditAttributes, CreateAuditRequestDataUnion_Audit
+from kard.environment import KardApiEnvironment
+from kard.transactions import CreateAuditRequestDataUnion_Audit, AuditAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.transactions.create_audits(
     organization_id="organization-123",
     user_id="user-123",
@@ -845,7 +874,7 @@ client.transactions.create_audits(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[CreateAuditRequestDataUnion]` 
+**request:** `CreateAuditRequestBody` 
     
 </dd>
 </dl>
@@ -865,7 +894,7 @@ client.transactions.create_audits(
 </dl>
 </details>
 
-<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_bulk_transactions_upload_url</a>(...) -&gt; AsyncHttpResponse[CreateFileUploadUrlResponse]</code></summary>
+<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">create_bulk_transactions_upload_url</a>(...) -> CreateFileUploadUrlResponse</code></summary>
 <dl>
 <dd>
 
@@ -898,12 +927,15 @@ Only `coreTransaction` type is supported for bulk file uploads.
 
 ```python
 from kard import KardApi
-from kard.transactions import CreateFileUploadAttributes, CreateFileUploadData
+from kard.environment import KardApiEnvironment
+from kard.transactions import CreateFileUploadData, CreateFileUploadAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.transactions.create_bulk_transactions_upload_url(
     organization_id="organization-123",
     data=[
@@ -918,7 +950,7 @@ client.transactions.create_bulk_transactions_upload_url(
             attributes=CreateFileUploadAttributes(
                 filename="transaction_67890.jsonl",
             ),
-        ),
+        )
     ],
 )
 
@@ -944,7 +976,7 @@ client.transactions.create_bulk_transactions_upload_url(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[CreateFileUploadData]` — List of file upload requests (1–10 items per request).
+**request:** `CreateFileUploadRequestBody` 
     
 </dd>
 </dl>
@@ -964,7 +996,7 @@ client.transactions.create_bulk_transactions_upload_url(
 </dl>
 </details>
 
-<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">get_earned_rewards</a>(...) -&gt; AsyncHttpResponse[GetEarnedRewardsResponse]</code></summary>
+<details><summary><code>client.transactions.<a href="src/kard/transactions/client.py">get_earned_rewards</a>(...) -> GetEarnedRewardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -996,11 +1028,14 @@ Retrieve rewarded transaction history for a specific user. Returns only SETTLED 
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.transactions.get_earned_rewards(
     organization_id="org-123",
     user_id="user-456",
@@ -1083,7 +1118,7 @@ client.transactions.get_earned_rewards(
 </details>
 
 ## Users
-<details><summary><code>client.users.<a href="src/kard/users/client.py">create</a>(...) -&gt; AsyncHttpResponse[CreateUsersObject]</code></summary>
+<details><summary><code>client.users.<a href="src/kard/users/client.py">create</a>(...) -> CreateUsersObject</code></summary>
 <dl>
 <dd>
 
@@ -1114,12 +1149,15 @@ Call this endpoint to enroll a specified user into your rewards program.<br/>
 
 ```python
 from kard import KardApi
-from kard.users import UserRequestAttributes, UserRequestDataUnion_User
+from kard.environment import KardApiEnvironment
+from kard.users import UserRequestDataUnion_User, UserRequestAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.create(
     organization_id="organization-123",
     data=[
@@ -1127,7 +1165,9 @@ client.users.create(
             id="1234567890",
             attributes=UserRequestAttributes(
                 zip_code="11238",
-                enrolled_rewards=["CARDLINKED"],
+                enrolled_rewards=[
+                    "CARDLINKED"
+                ],
                 email="user@example.com",
                 hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
                 phone_number="+14155552671",
@@ -1160,7 +1200,7 @@ client.users.create(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[UserRequestDataUnion]` 
+**request:** `CreateUsersObject` 
     
 </dd>
 </dl>
@@ -1180,7 +1220,7 @@ client.users.create(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/kard/users/client.py">update</a>(...) -&gt; AsyncHttpResponse[UserResponseObject]</code></summary>
+<details><summary><code>client.users.<a href="src/kard/users/client.py">update</a>(...) -> UserResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -1210,15 +1250,15 @@ Call this endpoint to update the details on a specified user.<br/>
 
 ```python
 from kard import KardApi
-from kard.users import (
-    UpdateUserRequestAttributes,
-    UpdateUserRequestDataUnion_User,
-)
+from kard.environment import KardApiEnvironment
+from kard.users import UpdateUserRequestDataUnion_User, UpdateUserRequestAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.update(
     organization_id="organization-123",
     user_id="user-123",
@@ -1226,7 +1266,9 @@ client.users.update(
         id="1234567890",
         attributes=UpdateUserRequestAttributes(
             zip_code="11238",
-            enrolled_rewards=["CARDLINKED"],
+            enrolled_rewards=[
+                "CARDLINKED"
+            ],
             email="user@example.com",
             hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
             phone_number="+14155552671",
@@ -1265,7 +1307,7 @@ client.users.update(
 <dl>
 <dd>
 
-**data:** `UpdateUserRequestDataUnion` 
+**request:** `UpdateUserObject` 
     
 </dd>
 </dl>
@@ -1285,7 +1327,7 @@ client.users.update(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/kard/users/client.py">delete</a>(...) -&gt; AsyncHttpResponse[DeleteUserResponseObject]</code></summary>
+<details><summary><code>client.users.<a href="src/kard/users/client.py">delete</a>(...) -> DeleteUserResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -1315,11 +1357,14 @@ Call this endpoint to delete a specified enrolled user from the rewards program 
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.delete(
     organization_id="organization-123",
     user_id="user-123",
@@ -1367,7 +1412,7 @@ client.users.delete(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/kard/users/client.py">get</a>(...) -&gt; AsyncHttpResponse[UserResponseObject]</code></summary>
+<details><summary><code>client.users.<a href="src/kard/users/client.py">get</a>(...) -> UserResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -1397,11 +1442,14 @@ Call this endpoint to fetch the details on a specified user.<br/>
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.get(
     organization_id="organization-123",
     user_id="user-123",
@@ -1450,7 +1498,7 @@ client.users.get(
 </details>
 
 ## Users Attributions
-<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">create</a>(...) -&gt; AsyncHttpResponse[CreateAttributionResponse]</code></summary>
+<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">create</a>(...) -> CreateAttributionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1479,20 +1527,17 @@ Call this endpoint to send attribution events made by a single enrolled user for
 <dd>
 
 ```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.users.attributions import CreateAttributionRequestUnion_OfferAttribution, OfferAttributionAttributes, CreateAttributionRequestUnion_NotificationAttribution, NotificationAttributionAttributes
 import datetime
 
-from kard import KardApi
-from kard.users.attributions import (
-    CreateAttributionRequestUnion_NotificationAttribution,
-    CreateAttributionRequestUnion_OfferAttribution,
-    NotificationAttributionAttributes,
-    OfferAttributionAttributes,
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
 
-client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
-)
 client.users.attributions.create(
     organization_id="organization-123",
     user_id="user-123",
@@ -1502,9 +1547,7 @@ client.users.attributions.create(
                 entity_id="60e4ba1da31c5a22a144c075",
                 event_code="VIEW",
                 medium="SEARCH",
-                event_date=datetime.datetime.fromisoformat(
-                    "2025-01-01 00:00:00+00:00",
-                ),
+                event_date=datetime.datetime.fromisoformat("2025-01-01T00:00:00+00:00"),
             ),
         ),
         CreateAttributionRequestUnion_OfferAttribution(
@@ -1512,9 +1555,7 @@ client.users.attributions.create(
                 entity_id="60e4ba1da31c5a22a144c077",
                 event_code="IMPRESSION",
                 medium="EMAIL",
-                event_date=datetime.datetime.fromisoformat(
-                    "2025-01-01 00:00:00+00:00",
-                ),
+                event_date=datetime.datetime.fromisoformat("2025-01-01T00:00:00+00:00"),
             ),
         ),
         CreateAttributionRequestUnion_NotificationAttribution(
@@ -1522,11 +1563,9 @@ client.users.attributions.create(
                 entity_id="60e4ba1da31c5a22a144c076",
                 event_code="IMPRESSION",
                 medium="PUSH",
-                event_date=datetime.datetime.fromisoformat(
-                    "2025-01-01 00:00:00+00:00",
-                ),
+                event_date=datetime.datetime.fromisoformat("2025-01-01T00:00:00+00:00"),
             ),
-        ),
+        )
     ],
 )
 
@@ -1560,12 +1599,7 @@ client.users.attributions.create(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[CreateAttributionRequestUnion]` 
-
-Discriminated union representing the request body for submitting attribution events.
-Use `type` to distinguish between the two:
-- `offerAttribution`: Events related to viewing or interacting with an offer.
-- `notificationAttribution`: Events related to viewing or interacting with a notification.
+**request:** `CreateAttributionRequestObject` 
     
 </dd>
 </dl>
@@ -1585,7 +1619,7 @@ Use `type` to distinguish between the two:
 </dl>
 </details>
 
-<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">activate</a>(...) -&gt; AsyncHttpResponse[ActivateOfferResponse]</code></summary>
+<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">activate</a>(...) -> ActivateOfferResponse</code></summary>
 <dl>
 <dd>
 
@@ -1614,11 +1648,14 @@ Optionally include the offer data by passing `include=offer`.
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.attributions.activate(
     organization_id="organization-123",
     user_id="user-123",
@@ -1671,11 +1708,7 @@ client.users.attributions.activate(
 <dl>
 <dd>
 
-**include:** `typing.Optional[
-    typing.Union[
-        ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]
-    ]
-]` — Related resources to include in the response. Allowed value is `offer`.
+**include:** `typing.Optional[typing.Union[ActivateOfferIncludeOption, typing.Sequence[ActivateOfferIncludeOption]]]` — Related resources to include in the response. Allowed value is `offer`.
     
 </dd>
 </dl>
@@ -1695,7 +1728,7 @@ client.users.attributions.activate(
 </dl>
 </details>
 
-<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">boost</a>(...) -&gt; AsyncHttpResponse[BoostOfferResponse]</code></summary>
+<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">boost</a>(...) -> BoostOfferResponse</code></summary>
 <dl>
 <dd>
 
@@ -1724,11 +1757,14 @@ Optionally include the offer data by passing `include=offer`.
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.attributions.boost(
     organization_id="organization-123",
     user_id="user-123",
@@ -1781,11 +1817,7 @@ client.users.attributions.boost(
 <dl>
 <dd>
 
-**include:** `typing.Optional[
-    typing.Union[
-        BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]
-    ]
-]` — Related resources to include in the response. Allowed value is `offer`.
+**include:** `typing.Optional[typing.Union[BoostOfferIncludeOption, typing.Sequence[BoostOfferIncludeOption]]]` — Related resources to include in the response. Allowed value is `offer`.
     
 </dd>
 </dl>
@@ -1806,7 +1838,7 @@ client.users.attributions.boost(
 </details>
 
 ## WebView
-<details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_web_view_token</a>(...) -&gt; AsyncHttpResponse[WebViewTokenResponse]</code></summary>
+<details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_web_view_token</a>(...) -> WebViewTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -1834,11 +1866,14 @@ Retrieves an OAuth token for webview authentication.
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.auth.get_web_view_token(
     organization_id="organization-123",
     user_id="user-123",
@@ -1887,7 +1922,7 @@ client.users.auth.get_web_view_token(
 </details>
 
 ## Rewards
-<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">offers</a>(...) -&gt; AsyncHttpResponse[OffersResponseObject]</code></summary>
+<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">offers</a>(...) -> OffersResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -1918,17 +1953,22 @@ can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/loc
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.rewards.offers(
     organization_id="organization-123",
     user_id="user-123",
     page_size=1,
     filter_is_targeted=True,
-    sort="-startDate",
+    sort=[
+        "-startDate"
+    ],
 )
 
 ```
@@ -1993,7 +2033,7 @@ client.users.rewards.offers(
 <dl>
 <dd>
 
-**filter_purchase_channel:** `typing.Optional[typing.Sequence[PurchaseChannel]]` 
+**filter_purchase_channel:** `typing.Optional[typing.List[PurchaseChannel]]` 
     
 </dd>
 </dl>
@@ -2017,9 +2057,7 @@ client.users.rewards.offers(
 <dl>
 <dd>
 
-**sort:** `typing.Optional[
-    typing.Union[OfferSortOptions, typing.Sequence[OfferSortOptions]]
-]` — If provided, response will be sorted by the specified fields
+**sort:** `typing.Optional[typing.Union[OfferSortOptions, typing.Sequence[OfferSortOptions]]]` — If provided, response will be sorted by the specified fields
     
 </dd>
 </dl>
@@ -2055,7 +2093,7 @@ client.users.rewards.offers(
 </dl>
 </details>
 
-<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">locations</a>(...) -&gt; AsyncHttpResponse[LocationsResponseObject]</code></summary>
+<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">locations</a>(...) -> LocationsResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -2088,11 +2126,14 @@ pattern.<br/>
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.rewards.locations(
     organization_id="organization-123",
     user_id="user-123",
@@ -2100,7 +2141,9 @@ client.users.rewards.locations(
     filter_latitude=39.9419429,
     filter_longitude=-75.1446869,
     filter_radius=10,
-    include="offers,categories",
+    include=[
+        "offers,categories"
+    ],
 )
 
 ```
@@ -2221,9 +2264,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**sort:** `typing.Optional[
-    typing.Union[LocationSortOptions, typing.Sequence[LocationSortOptions]]
-]` — If provided, response will be sorted by the specified fields
+**sort:** `typing.Optional[typing.Union[LocationSortOptions, typing.Sequence[LocationSortOptions]]]` — If provided, response will be sorted by the specified fields
     
 </dd>
 </dl>
@@ -2260,7 +2301,7 @@ client.users.rewards.locations(
 </details>
 
 ## Users Uploads
-<details><summary><code>client.users.uploads.<a href="src/kard/users/uploads/client.py">create</a>(...) -&gt; AsyncHttpResponse[CreateUploadResponseObject]</code></summary>
+<details><summary><code>client.users.uploads.<a href="src/kard/users/uploads/client.py">create</a>(...) -> CreateUploadResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -2290,15 +2331,16 @@ Part](/api/uploads/create-upload-part) endpoint, historical transactions can be 
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.users.uploads import CreateUploadRequestDataUnion_HistoricalTransactionStart
 from kard.commons import EmptyObject
-from kard.users.uploads import (
-    CreateUploadRequestDataUnion_HistoricalTransactionStart,
-)
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.uploads.create(
     organization_id="organization-123",
     user_id="user-123",
@@ -2337,7 +2379,7 @@ client.users.uploads.create(
 <dl>
 <dd>
 
-**data:** `CreateUploadRequestDataUnion` 
+**request:** `CreateUploadRequestObject` 
     
 </dd>
 </dl>
@@ -2357,7 +2399,7 @@ client.users.uploads.create(
 </dl>
 </details>
 
-<details><summary><code>client.users.uploads.<a href="src/kard/users/uploads/client.py">create_part</a>(...) -&gt; AsyncHttpResponse[CreateUploadPartResponseObject]</code></summary>
+<details><summary><code>client.users.uploads.<a href="src/kard/users/uploads/client.py">create_part</a>(...) -> CreateUploadPartResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -2386,16 +2428,18 @@ Call this endpoint using the upload ID provided in the [Create Upload](/api/uplo
 <dd>
 
 ```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.users.uploads import CreateUploadPartDataUnion_HistoricalTransaction
+from kard.transactions import TransactionsAttributes, Merchant
 import datetime
 
-from kard import KardApi
-from kard.transactions import Merchant, TransactionsAttributes
-from kard.users.uploads import CreateUploadPartDataUnion_HistoricalTransaction
-
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.uploads.create_part(
     organization_id="organization-123",
     user_id="user-123",
@@ -2416,9 +2460,7 @@ client.users.uploads.create_part(
                 mcc="1234",
                 card_bin="123456",
                 card_last_four="4321",
-                authorization_date=datetime.datetime.fromisoformat(
-                    "2021-07-02 17:47:06+00:00",
-                ),
+                authorization_date=datetime.datetime.fromisoformat("2021-07-02T17:47:06+00:00"),
                 merchant=Merchant(
                     id="12345678901234567",
                     name="ADVANCEAUTO",
@@ -2479,7 +2521,7 @@ client.users.uploads.create_part(
 <dl>
 <dd>
 
-**data:** `typing.Sequence[CreateUploadPartDataUnion]` 
+**request:** `CreateUploadPartRequestObject` 
     
 </dd>
 </dl>
@@ -2499,7 +2541,7 @@ client.users.uploads.create_part(
 </dl>
 </details>
 
-<details><summary><code>client.users.uploads.<a href="src/kard/users/uploads/client.py">update</a>(...) -&gt; AsyncHttpResponse[UpdateUploadResponseObject]</code></summary>
+<details><summary><code>client.users.uploads.<a href="src/kard/users/uploads/client.py">update</a>(...) -> UpdateUploadResponseObject</code></summary>
 <dl>
 <dd>
 
@@ -2528,15 +2570,16 @@ Call this endpoint to update your upload session. Currently, you can signal comp
 
 ```python
 from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.users.uploads import UpdateUploadRequestDataUnion_HistoricalTransactionComplete
 from kard.commons import EmptyObject
-from kard.users.uploads import (
-    UpdateUploadRequestDataUnion_HistoricalTransactionComplete,
-)
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
 )
+
 client.users.uploads.update(
     organization_id="organization-123",
     user_id="user-123",
@@ -2585,7 +2628,7 @@ client.users.uploads.update(
 <dl>
 <dd>
 
-**data:** `UpdateUploadRequestDataUnion` 
+**request:** `UpdateUploadRequestObject` 
     
 </dd>
 </dl>

@@ -16,7 +16,9 @@ class LocationAttributes(UniversalBaseModel):
     address: EligibilityLocationAddress
     coordinates: Coordinates
     phone: str
-    operation_hours: typing_extensions.Annotated[OperationHours, FieldMetadata(alias="operationHours")]
+    operation_hours: typing_extensions.Annotated[
+        OperationHours, FieldMetadata(alias="operationHours"), pydantic.Field(alias="operationHours")
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

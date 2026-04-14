@@ -9,8 +9,8 @@ from ...core.serialization import FieldMetadata
 
 
 class NotificationMetadata(UniversalBaseModel):
-    issuer_id: typing_extensions.Annotated[str, FieldMetadata(alias="issuerId")]
-    issuer_name: typing_extensions.Annotated[str, FieldMetadata(alias="issuerName")]
+    issuer_id: typing_extensions.Annotated[str, FieldMetadata(alias="issuerId"), pydantic.Field(alias="issuerId")]
+    issuer_name: typing_extensions.Annotated[str, FieldMetadata(alias="issuerName"), pydantic.Field(alias="issuerName")]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

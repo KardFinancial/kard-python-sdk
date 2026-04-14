@@ -9,12 +9,11 @@ from ...core.serialization import FieldMetadata
 
 
 class TransactionOfferAttributes(UniversalBaseModel):
-    purchase_channel: typing_extensions.Annotated[typing.List[str], FieldMetadata(alias="purchaseChannel")] = (
-        pydantic.Field()
-    )
-    """
-    Purchase channels
-    """
+    purchase_channel: typing_extensions.Annotated[
+        typing.List[str],
+        FieldMetadata(alias="purchaseChannel"),
+        pydantic.Field(alias="purchaseChannel", description="Purchase channels"),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

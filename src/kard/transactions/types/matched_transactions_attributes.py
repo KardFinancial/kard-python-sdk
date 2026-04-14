@@ -15,11 +15,11 @@ from .receipt_medium_type import ReceiptMediumType
 
 
 class MatchedTransactionsAttributes(UniversalBaseModel):
-    user_id: typing_extensions.Annotated[str, FieldMetadata(alias="userId")] = pydantic.Field()
-    """
-    The ID of the user as defined on the issuers system
-    """
-
+    user_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="userId"),
+        pydantic.Field(alias="userId", description="The ID of the user as defined on the issuers system"),
+    ]
     amount: int = pydantic.Field()
     """
     Transaction amount in cents
@@ -35,116 +35,117 @@ class MatchedTransactionsAttributes(UniversalBaseModel):
     Description of transaction - usually includes merchant and other key details on transaction
     """
 
-    authorization_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="authorizationDate")] = (
-        pydantic.Field()
-    )
-    """
-    Timestamp for transaction event. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
-    """
-
-    matched_offer_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="matchedOfferId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The ID of the Kard offer to which the transaction was matched. If this field is omitted, the transaction will be considered unmatched to any Kard offer. This field **must** be omitted when the `paymentType` is `UNKNOWN` and neither an orderId nor a `cardLastFour` is supplied.
-    """
-
-    matched_location_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="matchedLocationId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The unique Kard location ID where the transaction took place. This field **must** be omitted  when `paymentType` is `UNKNOWN`.
-    """
-
+    authorization_date: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="authorizationDate"),
+        pydantic.Field(
+            alias="authorizationDate",
+            description="Timestamp for transaction event. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`",
+        ),
+    ]
+    matched_offer_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="matchedOfferId"),
+        pydantic.Field(
+            alias="matchedOfferId",
+            description="The ID of the Kard offer to which the transaction was matched. If this field is omitted, the transaction will be considered unmatched to any Kard offer. This field **must** be omitted when the `paymentType` is `UNKNOWN` and neither an orderId nor a `cardLastFour` is supplied.",
+        ),
+    ] = None
+    matched_location_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="matchedLocationId"),
+        pydantic.Field(
+            alias="matchedLocationId",
+            description="The unique Kard location ID where the transaction took place. This field **must** be omitted  when `paymentType` is `UNKNOWN`.",
+        ),
+    ] = None
     merchant: typing.Optional[Merchant] = pydantic.Field(default=None)
     """
     Merchant details
     """
 
-    payment_type: typing_extensions.Annotated[PaymentType, FieldMetadata(alias="paymentType")] = pydantic.Field()
-    """
-    The type of payment involved in the transaction.
-    """
-
-    card_bin: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardBIN")] = pydantic.Field(
-        default=None
-    )
-    """
-    Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.
-    """
-
-    card_last_four: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardLastFour")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Card last four digits. This field is **required** when `paymentType` is `CARD` and `matchedOfferId` is provided. It **must** be omitted when `paymentType` is `CASH`.
-    """
-
-    authorization_code: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="authorizationCode")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Transaction approval code
-    """
-
+    payment_type: typing_extensions.Annotated[
+        PaymentType,
+        FieldMetadata(alias="paymentType"),
+        pydantic.Field(alias="paymentType", description="The type of payment involved in the transaction."),
+    ]
+    card_bin: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardBIN"),
+        pydantic.Field(
+            alias="cardBIN",
+            description="Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.",
+        ),
+    ] = None
+    card_last_four: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardLastFour"),
+        pydantic.Field(
+            alias="cardLastFour",
+            description="Card last four digits. This field is **required** when `paymentType` is `CARD` and `matchedOfferId` is provided. It **must** be omitted when `paymentType` is `CASH`.",
+        ),
+    ] = None
+    authorization_code: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="authorizationCode"),
+        pydantic.Field(alias="authorizationCode", description="Transaction approval code"),
+    ] = None
     retrieval_reference_number: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="retrievalReferenceNumber")
-    ] = pydantic.Field(default=None)
-    """
-    Retrieval Reference Number
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="retrievalReferenceNumber"),
+        pydantic.Field(alias="retrievalReferenceNumber", description="Retrieval Reference Number"),
+    ] = None
     system_trace_audit_number: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="systemTraceAuditNumber")
-    ] = pydantic.Field(default=None)
-    """
-    System Trace Audit Number
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="systemTraceAuditNumber"),
+        pydantic.Field(alias="systemTraceAuditNumber", description="System Trace Audit Number"),
+    ] = None
     acquirer_reference_number: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="acquirerReferenceNumber")
-    ] = pydantic.Field(default=None)
-    """
-    Acquirer Reference Number
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="acquirerReferenceNumber"),
+        pydantic.Field(alias="acquirerReferenceNumber", description="Acquirer Reference Number"),
+    ] = None
     direction: DirectionType = pydantic.Field()
     """
     The direction in which the funds flow - DEBIT or CREDIT
     """
 
-    card_network: typing_extensions.Annotated[typing.Optional[CardNetwork], FieldMetadata(alias="cardNetwork")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The card network associated with the transaction. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.
-    """
-
-    transaction_id: typing_extensions.Annotated[str, FieldMetadata(alias="transactionId")] = pydantic.Field()
-    """
-    The transaction ID
-    """
-
-    card_product_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardProductId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The card product ID associated with the transaction. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.
-    """
-
-    order_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="orderId")] = pydantic.Field(
-        default=None
-    )
-    """
-    The unique identifier for an online order linked to this transaction.
-    """
-
+    card_network: typing_extensions.Annotated[
+        typing.Optional[CardNetwork],
+        FieldMetadata(alias="cardNetwork"),
+        pydantic.Field(
+            alias="cardNetwork",
+            description="The card network associated with the transaction. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.",
+        ),
+    ] = None
+    transaction_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="transactionId"),
+        pydantic.Field(alias="transactionId", description="The transaction ID"),
+    ]
+    card_product_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardProductId"),
+        pydantic.Field(
+            alias="cardProductId",
+            description="The card product ID associated with the transaction. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.",
+        ),
+    ] = None
+    order_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="orderId"),
+        pydantic.Field(
+            alias="orderId", description="The unique identifier for an online order linked to this transaction."
+        ),
+    ] = None
     receipt_medium: typing_extensions.Annotated[
-        typing.Optional[ReceiptMediumType], FieldMetadata(alias="receiptMedium")
-    ] = pydantic.Field(default=None)
-    """
-    Indicates the format of the receipt from which the transaction is derived.
-    """
+        typing.Optional[ReceiptMediumType],
+        FieldMetadata(alias="receiptMedium"),
+        pydantic.Field(
+            alias="receiptMedium",
+            description="Indicates the format of the receipt from which the transaction is derived.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

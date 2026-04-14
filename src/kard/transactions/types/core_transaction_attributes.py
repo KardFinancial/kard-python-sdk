@@ -11,16 +11,16 @@ from .direction_type import DirectionType
 
 
 class CoreTransactionAttributes(UniversalBaseModel):
-    user_id: typing_extensions.Annotated[str, FieldMetadata(alias="userId")] = pydantic.Field()
-    """
-    The ID of the user as defined on the issuers system
-    """
-
-    transaction_id: typing_extensions.Annotated[str, FieldMetadata(alias="transactionId")] = pydantic.Field()
-    """
-    The transaction ID from the core banking system
-    """
-
+    user_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="userId"),
+        pydantic.Field(alias="userId", description="The ID of the user as defined on the issuers system"),
+    ]
+    transaction_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="transactionId"),
+        pydantic.Field(alias="transactionId", description="The transaction ID from the core banking system"),
+    ]
     amount: int = pydantic.Field()
     """
     Transaction amount in cents
@@ -46,38 +46,43 @@ class CoreTransactionAttributes(UniversalBaseModel):
     Transaction status (always SETTLED for core transactions)
     """
 
-    settled_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="settledDate")] = pydantic.Field()
-    """
-    Timestamp when transaction was settled. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z
-    """
-
-    authorization_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="authorizationDate")] = (
-        pydantic.Field()
-    )
-    """
-    Timestamp for transaction authorization. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z
-    """
-
+    settled_date: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="settledDate"),
+        pydantic.Field(
+            alias="settledDate",
+            description="Timestamp when transaction was settled. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z",
+        ),
+    ]
+    authorization_date: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="authorizationDate"),
+        pydantic.Field(
+            alias="authorizationDate",
+            description="Timestamp for transaction authorization. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z",
+        ),
+    ]
     financial_institution_name: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="financialInstitutionName")
-    ] = pydantic.Field(default=None)
-    """
-    Deprecated. Use `financialInstitutionId` instead. Name of the financial institution.
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="financialInstitutionName"),
+        pydantic.Field(
+            alias="financialInstitutionName",
+            description="Deprecated. Use `financialInstitutionId` instead. Name of the financial institution.",
+        ),
+    ] = None
     financial_institution_id: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="financialInstitutionId")
-    ] = pydantic.Field(default=None)
-    """
-    Unique identifier of the financial institution
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="financialInstitutionId"),
+        pydantic.Field(alias="financialInstitutionId", description="Unique identifier of the financial institution"),
+    ] = None
     card_last_fours: typing_extensions.Annotated[
-        typing.Optional[typing.List[str]], FieldMetadata(alias="cardLastFours")
-    ] = pydantic.Field(default=None)
-    """
-    Last four digits of the card(s) that may have been used for the transaction. When the issuer cannot determine which specific card was used, multiple values are provided as candidates.
-    """
+        typing.Optional[typing.List[str]],
+        FieldMetadata(alias="cardLastFours"),
+        pydantic.Field(
+            alias="cardLastFours",
+            description="Last four digits of the card(s) that may have been used for the transaction. When the issuer cannot determine which specific card was used, multiple values are provided as candidates.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

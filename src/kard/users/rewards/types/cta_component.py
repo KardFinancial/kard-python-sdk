@@ -15,27 +15,26 @@ class CtaComponent(UniversalBaseModel):
     Call-to-action button component for offers
     """
 
-    button_text: typing_extensions.Annotated[str, FieldMetadata(alias="buttonText")] = pydantic.Field()
-    """
-    Text to display on the button
-    """
-
-    button_style: typing_extensions.Annotated[ButtonStyle, FieldMetadata(alias="buttonStyle")] = pydantic.Field()
-    """
-    Style of the button
-    """
-
+    button_text: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="buttonText"),
+        pydantic.Field(alias="buttonText", description="Text to display on the button"),
+    ]
+    button_style: typing_extensions.Annotated[
+        ButtonStyle,
+        FieldMetadata(alias="buttonStyle"),
+        pydantic.Field(alias="buttonStyle", description="Style of the button"),
+    ]
     action: typing.Optional[CtaAction] = pydantic.Field(default=None)
     """
     Action to perform when the button is clicked
     """
 
-    start_icon: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="startIcon")] = pydantic.Field(
-        default=None
-    )
-    """
-    Icon identifier to display on the button
-    """
+    start_icon: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="startIcon"),
+        pydantic.Field(alias="startIcon", description="Icon identifier to display on the button"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

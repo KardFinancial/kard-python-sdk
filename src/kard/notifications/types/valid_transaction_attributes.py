@@ -12,7 +12,9 @@ from .valid_transaction_commission_earned import ValidTransactionCommissionEarne
 
 class ValidTransactionAttributes(RewardNotificationAttributes):
     commission_earned: typing_extensions.Annotated[
-        ValidTransactionCommissionEarned, FieldMetadata(alias="commissionEarned")
+        ValidTransactionCommissionEarned,
+        FieldMetadata(alias="commissionEarned"),
+        pydantic.Field(alias="commissionEarned"),
     ]
 
     if IS_PYDANTIC_V2:

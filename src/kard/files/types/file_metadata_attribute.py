@@ -9,25 +9,31 @@ from ...core.serialization import FieldMetadata
 
 
 class FileMetadataAttribute(UniversalBaseModel):
-    file_name: typing_extensions.Annotated[str, FieldMetadata(alias="fileName")] = pydantic.Field()
-    """
-    The name of the file.
-    """
-
-    sent_at: typing_extensions.Annotated[str, FieldMetadata(alias="sentAt")] = pydantic.Field()
-    """
-    ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
-    """
-
-    last_modified: typing_extensions.Annotated[str, FieldMetadata(alias="lastModified")] = pydantic.Field()
-    """
-    ISO 8601 timestamp (ISO8601) when the file was last modified.
-    """
-
-    download_url: typing_extensions.Annotated[str, FieldMetadata(alias="downloadUrl")] = pydantic.Field()
-    """
-    Temporary URL that provides direct access to download the file for 30 minutes.
-    """
+    file_name: typing_extensions.Annotated[
+        str, FieldMetadata(alias="fileName"), pydantic.Field(alias="fileName", description="The name of the file.")
+    ]
+    sent_at: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="sentAt"),
+        pydantic.Field(
+            alias="sentAt", description="ISO 8601 timestamp (ISO8601) when the file was originally sent/created."
+        ),
+    ]
+    last_modified: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="lastModified"),
+        pydantic.Field(
+            alias="lastModified", description="ISO 8601 timestamp (ISO8601) when the file was last modified."
+        ),
+    ]
+    download_url: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="downloadUrl"),
+        pydantic.Field(
+            alias="downloadUrl",
+            description="Temporary URL that provides direct access to download the file for 30 minutes.",
+        ),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

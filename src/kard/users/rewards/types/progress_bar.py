@@ -20,11 +20,11 @@ class ProgressBar(UniversalBaseModel):
     Total number of redemptions allowed
     """
 
-    current_progress: typing_extensions.Annotated[int, FieldMetadata(alias="currentProgress")] = pydantic.Field()
-    """
-    Number of redemptions the user has completed
-    """
-
+    current_progress: typing_extensions.Annotated[
+        int,
+        FieldMetadata(alias="currentProgress"),
+        pydantic.Field(alias="currentProgress", description="Number of redemptions the user has completed"),
+    ]
     label: str = pydantic.Field()
     """
     Formatted label for the progress bar

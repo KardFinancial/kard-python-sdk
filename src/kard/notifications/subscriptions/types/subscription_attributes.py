@@ -10,16 +10,16 @@ from ....core.serialization import FieldMetadata
 
 
 class SubscriptionAttributes(UniversalBaseModel):
-    event_name: typing_extensions.Annotated[NotificationType, FieldMetadata(alias="eventName")] = pydantic.Field()
-    """
-    The name of the event
-    """
-
-    webhook_url: typing_extensions.Annotated[str, FieldMetadata(alias="webhookUrl")] = pydantic.Field()
-    """
-    The URL to which notifications will be sent
-    """
-
+    event_name: typing_extensions.Annotated[
+        NotificationType,
+        FieldMetadata(alias="eventName"),
+        pydantic.Field(alias="eventName", description="The name of the event"),
+    ]
+    webhook_url: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="webhookUrl"),
+        pydantic.Field(alias="webhookUrl", description="The URL to which notifications will be sent"),
+    ]
     enabled: bool = pydantic.Field()
     """
     Indicates whether the subscription is active

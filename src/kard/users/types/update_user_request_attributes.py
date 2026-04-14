@@ -11,44 +11,38 @@ from ...core.serialization import FieldMetadata
 
 class UpdateUserRequestAttributes(UniversalBaseModel):
     enrolled_rewards: typing_extensions.Annotated[
-        typing.List[EnrolledRewardsType], FieldMetadata(alias="enrolledRewards")
-    ] = pydantic.Field()
-    """
-    Rewards programs to enroll the user in. If an empty array is supplied, the user will not be enrolled in any programs.
-    """
-
-    zip_code: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="zipCode")] = pydantic.Field(
-        default=None
-    )
-    """
-    Zipcode of user
-    """
-
+        typing.List[EnrolledRewardsType],
+        FieldMetadata(alias="enrolledRewards"),
+        pydantic.Field(
+            alias="enrolledRewards",
+            description="Rewards programs to enroll the user in. If an empty array is supplied, the user will not be enrolled in any programs.",
+        ),
+    ]
+    zip_code: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="zipCode"),
+        pydantic.Field(alias="zipCode", description="Zipcode of user"),
+    ] = None
     email: typing.Optional[str] = pydantic.Field(default=None)
     """
     Email address of user
     """
 
-    hashed_email: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="hashedEmail")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Hashed email address of user (using SHA-256)
-    """
-
-    phone_number: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="phoneNumber")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Phone number of user in E.164 format
-    """
-
-    birth_year: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="birthYear")] = pydantic.Field(
-        default=None
-    )
-    """
-    Birth year of user
-    """
+    hashed_email: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="hashedEmail"),
+        pydantic.Field(alias="hashedEmail", description="Hashed email address of user (using SHA-256)"),
+    ] = None
+    phone_number: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="phoneNumber"),
+        pydantic.Field(alias="phoneNumber", description="Phone number of user in E.164 format"),
+    ] = None
+    birth_year: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="birthYear"),
+        pydantic.Field(alias="birthYear", description="Birth year of user"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

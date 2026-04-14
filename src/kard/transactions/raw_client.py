@@ -14,7 +14,8 @@ from ..commons.types.organization_id import OrganizationId
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
@@ -33,6 +34,7 @@ from .types.get_earned_rewards_response import GetEarnedRewardsResponse
 from .types.transactions import Transactions
 from .types.transactions_multi_response import TransactionsMultiResponse
 from .types.transactions_response import TransactionsResponse
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -78,7 +80,7 @@ class RawTransactionsClient:
         HttpResponse[TransactionsResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions",
+            f"v2/issuers/{encode_path_param(organization_id)}/transactions",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -156,6 +158,10 @@ class RawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_fraud_markers(
@@ -186,7 +192,7 @@ class RawTransactionsClient:
         HttpResponse[FraudulentTransactionObject]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/fraud",
+            f"v2/issuers/{encode_path_param(organization_id)}/fraud",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -253,6 +259,10 @@ class RawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_audits(
@@ -284,7 +294,7 @@ class RawTransactionsClient:
         HttpResponse[CreateAuditResponseBody]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/audits",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/audits",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -373,6 +383,10 @@ class RawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def create_bulk_transactions_upload_url(
@@ -405,7 +419,7 @@ class RawTransactionsClient:
         HttpResponse[CreateFileUploadUrlResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions/uploads",
+            f"v2/issuers/{encode_path_param(organization_id)}/transactions/uploads",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -472,6 +486,10 @@ class RawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get_earned_rewards(
@@ -519,7 +537,7 @@ class RawTransactionsClient:
         HttpResponse[GetEarnedRewardsResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/earned-rewards",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/earned-rewards",
             method="GET",
             params={
                 "page[after]": page_after,
@@ -586,6 +604,10 @@ class RawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -629,7 +651,7 @@ class AsyncRawTransactionsClient:
         AsyncHttpResponse[TransactionsResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions",
+            f"v2/issuers/{encode_path_param(organization_id)}/transactions",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -707,6 +729,10 @@ class AsyncRawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_fraud_markers(
@@ -737,7 +763,7 @@ class AsyncRawTransactionsClient:
         AsyncHttpResponse[FraudulentTransactionObject]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/fraud",
+            f"v2/issuers/{encode_path_param(organization_id)}/fraud",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -804,6 +830,10 @@ class AsyncRawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_audits(
@@ -835,7 +865,7 @@ class AsyncRawTransactionsClient:
         AsyncHttpResponse[CreateAuditResponseBody]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/audits",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/audits",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -924,6 +954,10 @@ class AsyncRawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def create_bulk_transactions_upload_url(
@@ -956,7 +990,7 @@ class AsyncRawTransactionsClient:
         AsyncHttpResponse[CreateFileUploadUrlResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/transactions/uploads",
+            f"v2/issuers/{encode_path_param(organization_id)}/transactions/uploads",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -1023,6 +1057,10 @@ class AsyncRawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get_earned_rewards(
@@ -1070,7 +1108,7 @@ class AsyncRawTransactionsClient:
         AsyncHttpResponse[GetEarnedRewardsResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/earned-rewards",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/earned-rewards",
             method="GET",
             params={
                 "page[after]": page_after,
@@ -1137,4 +1175,8 @@ class AsyncRawTransactionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

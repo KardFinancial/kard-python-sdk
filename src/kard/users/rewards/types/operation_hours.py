@@ -11,7 +11,9 @@ from .operation_period import OperationPeriod
 
 class OperationHours(UniversalBaseModel):
     periods: typing.List[OperationPeriod]
-    weekday_text: typing_extensions.Annotated[typing.List[str], FieldMetadata(alias="weekdayText")]
+    weekday_text: typing_extensions.Annotated[
+        typing.List[str], FieldMetadata(alias="weekdayText"), pydantic.Field(alias="weekdayText")
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

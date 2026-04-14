@@ -15,10 +15,11 @@ class FileUploadUrlAttributes(UniversalBaseModel):
     Use HTTP PUT with binary body. Expires after 15 minutes.
     """
 
-    expires_in: typing_extensions.Annotated[int, FieldMetadata(alias="expiresIn")] = pydantic.Field()
-    """
-    Time in seconds until the presigned URL expires (900)
-    """
+    expires_in: typing_extensions.Annotated[
+        int,
+        FieldMetadata(alias="expiresIn"),
+        pydantic.Field(alias="expiresIn", description="Time in seconds until the presigned URL expires (900)"),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

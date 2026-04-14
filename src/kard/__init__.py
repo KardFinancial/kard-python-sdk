@@ -7,6 +7,7 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from . import auth, commons, files, notifications, ping, transactions, users
+    from ._default_clients import DefaultAioHttpClient, DefaultAsyncHttpxClient
     from .auth import TokenResponse
     from .client import AsyncKardApi, KardApi
     from .commons import (
@@ -207,6 +208,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateIncomingTransactionsMultiStatus": ".transactions",
     "CreateUsersMultiStatusResponse": ".users",
     "CreateUsersObject": ".users",
+    "DefaultAioHttpClient": "._default_clients",
+    "DefaultAsyncHttpxClient": "._default_clients",
     "DeleteUserResponseObject": ".users",
     "DirectionType": ".transactions",
     "DoesNotExistError": ".commons",
@@ -397,6 +400,8 @@ __all__ = [
     "CreateIncomingTransactionsMultiStatus",
     "CreateUsersMultiStatusResponse",
     "CreateUsersObject",
+    "DefaultAioHttpClient",
+    "DefaultAsyncHttpxClient",
     "DeleteUserResponseObject",
     "DirectionType",
     "DoesNotExistError",

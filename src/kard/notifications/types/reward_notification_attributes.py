@@ -19,24 +19,26 @@ class RewardNotificationAttributes(UniversalBaseModel):
     The name of the merchant
     """
 
-    attribution_url: typing_extensions.Annotated[str, FieldMetadata(alias="attributionUrl")] = pydantic.Field()
-    """
-    The attribution URL to track user's interactions with the notification
-    """
-
-    survey_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="surveyUrl")] = pydantic.Field(
-        default=None
-    )
-    """
-    Post experience survey URL, if available. This will be present for rewards associated with local offers.
-    """
-
-    card_product_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardProductId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The ID of the card product
-    """
+    attribution_url: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="attributionUrl"),
+        pydantic.Field(
+            alias="attributionUrl", description="The attribution URL to track user's interactions with the notification"
+        ),
+    ]
+    survey_url: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="surveyUrl"),
+        pydantic.Field(
+            alias="surveyUrl",
+            description="Post experience survey URL, if available. This will be present for rewards associated with local offers.",
+        ),
+    ] = None
+    card_product_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardProductId"),
+        pydantic.Field(alias="cardProductId", description="The ID of the card product"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

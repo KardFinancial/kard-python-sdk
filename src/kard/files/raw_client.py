@@ -12,12 +12,14 @@ from ..commons.types.organization_id import OrganizationId
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import jsonable_encoder
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from .types.file_type import FileType
 from .types.files_metadata_sort_options import FilesMetadataSortOptions
 from .types.get_files_metadata_response import GetFilesMetadataResponse
+from pydantic import ValidationError
 
 
 class RawFilesClient:
@@ -76,7 +78,7 @@ class RawFilesClient:
         HttpResponse[GetFilesMetadataResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/files/metadata",
+            f"v2/issuers/{encode_path_param(organization_id)}/files/metadata",
             method="GET",
             params={
                 "filter[dateFrom]": filter_date_from,
@@ -146,6 +148,10 @@ class RawFilesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -205,7 +211,7 @@ class AsyncRawFilesClient:
         AsyncHttpResponse[GetFilesMetadataResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/files/metadata",
+            f"v2/issuers/{encode_path_param(organization_id)}/files/metadata",
             method="GET",
             params={
                 "filter[dateFrom]": filter_date_from,
@@ -275,4 +281,8 @@ class AsyncRawFilesClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

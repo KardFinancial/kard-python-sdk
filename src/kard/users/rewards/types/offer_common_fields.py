@@ -20,75 +20,75 @@ class OfferCommonFields(UniversalBaseModel):
     Terms and conditions on offer
     """
 
-    max_redemptions: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="maxRedemptions")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Maximum times cardholder can redeem offer, if applicable
-    """
-
+    max_redemptions: typing_extensions.Annotated[
+        typing.Optional[int],
+        FieldMetadata(alias="maxRedemptions"),
+        pydantic.Field(alias="maxRedemptions", description="Maximum times cardholder can redeem offer, if applicable"),
+    ] = None
     name: str = pydantic.Field()
     """
     Name of offer
     """
 
-    purchase_channel: typing_extensions.Annotated[typing.List[PurchaseChannel], FieldMetadata(alias="purchaseChannel")]
-    user_reward: typing_extensions.Annotated[Commission, FieldMetadata(alias="userReward")]
+    purchase_channel: typing_extensions.Annotated[
+        typing.List[PurchaseChannel], FieldMetadata(alias="purchaseChannel"), pydantic.Field(alias="purchaseChannel")
+    ]
+    user_reward: typing_extensions.Annotated[
+        Commission, FieldMetadata(alias="userReward"), pydantic.Field(alias="userReward")
+    ]
     assets: typing.List[Asset] = pydantic.Field()
     """
     Assets associated with offer
     """
 
-    start_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="startDate")] = pydantic.Field()
-    """
-    Beginning date of offer (UTC)
-    """
-
-    expiration_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="expirationDate")] = pydantic.Field()
-    """
-    Expiration date of offer if applicable (UTC)
-    """
-
-    is_targeted: typing_extensions.Annotated[bool, FieldMetadata(alias="isTargeted")] = pydantic.Field()
-    """
-    True returns only targeted offers, false returns only non-targeted offers
-    """
-
+    start_date: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="startDate"),
+        pydantic.Field(alias="startDate", description="Beginning date of offer (UTC)"),
+    ]
+    expiration_date: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="expirationDate"),
+        pydantic.Field(alias="expirationDate", description="Expiration date of offer if applicable (UTC)"),
+    ]
+    is_targeted: typing_extensions.Annotated[
+        bool,
+        FieldMetadata(alias="isTargeted"),
+        pydantic.Field(
+            alias="isTargeted", description="True returns only targeted offers, false returns only non-targeted offers"
+        ),
+    ]
     min_transaction_amount: typing_extensions.Annotated[
-        typing.Optional[Amount], FieldMetadata(alias="minTransactionAmount")
-    ] = pydantic.Field(default=None)
-    """
-    Minimum Transaction Amount required to redeem offer, if available on offer
-    """
-
+        typing.Optional[Amount],
+        FieldMetadata(alias="minTransactionAmount"),
+        pydantic.Field(
+            alias="minTransactionAmount",
+            description="Minimum Transaction Amount required to redeem offer, if available on offer",
+        ),
+    ] = None
     max_transaction_amount: typing_extensions.Annotated[
-        typing.Optional[Amount], FieldMetadata(alias="maxTransactionAmount")
-    ] = pydantic.Field(default=None)
-    """
-    Maximum Transaction Amount allowed to redeem offer, if available on offer
-    """
-
-    min_reward_amount: typing_extensions.Annotated[typing.Optional[Amount], FieldMetadata(alias="minRewardAmount")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Minimum Reward Amount, if available on offer
-    """
-
-    max_reward_amount: typing_extensions.Annotated[typing.Optional[Amount], FieldMetadata(alias="maxRewardAmount")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Maximum Reward Amount, if available on offer
-    """
-
-    website_url: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="websiteUrl")] = pydantic.Field(
-        default=None
-    )
-    """
-    URL to the website of the offer provider
-    """
-
+        typing.Optional[Amount],
+        FieldMetadata(alias="maxTransactionAmount"),
+        pydantic.Field(
+            alias="maxTransactionAmount",
+            description="Maximum Transaction Amount allowed to redeem offer, if available on offer",
+        ),
+    ] = None
+    min_reward_amount: typing_extensions.Annotated[
+        typing.Optional[Amount],
+        FieldMetadata(alias="minRewardAmount"),
+        pydantic.Field(alias="minRewardAmount", description="Minimum Reward Amount, if available on offer"),
+    ] = None
+    max_reward_amount: typing_extensions.Annotated[
+        typing.Optional[Amount],
+        FieldMetadata(alias="maxRewardAmount"),
+        pydantic.Field(alias="maxRewardAmount", description="Maximum Reward Amount, if available on offer"),
+    ] = None
+    website_url: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="websiteUrl"),
+        pydantic.Field(alias="websiteUrl", description="URL to the website of the offer provider"),
+    ] = None
     description: typing.Optional[str] = pydantic.Field(default=None)
     """
     Description of the offer

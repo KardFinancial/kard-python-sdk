@@ -16,11 +16,11 @@ from .transaction_status import TransactionStatus
 
 
 class TransactionsAttributes(UniversalBaseModel):
-    user_id: typing_extensions.Annotated[str, FieldMetadata(alias="userId")] = pydantic.Field()
-    """
-    The ID of the user as defined on the issuers system
-    """
-
+    user_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="userId"),
+        pydantic.Field(alias="userId", description="The ID of the user as defined on the issuers system"),
+    ]
     amount: int = pydantic.Field()
     """
     Transaction amount in cents
@@ -46,147 +46,133 @@ class TransactionsAttributes(UniversalBaseModel):
     Description of transaction - usually includes merchant and other key details on transaction
     """
 
-    description_2: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="description2")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Description2 of transaction — usually includes other merchant identifying information
-    """
-
+    description_2: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="description2"),
+        pydantic.Field(
+            alias="description2",
+            description="Description2 of transaction — usually includes other merchant identifying information",
+        ),
+    ] = None
     mcc: typing.Optional[str] = pydantic.Field(default=None)
     """
     Merchant Category Code (usually a 4-digit numerical number). <b>Note, this field is REQUIRED for SOME national offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
     """
 
-    core_provider_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="coreProviderId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Name of processor associated with transaction
-    """
-
+    core_provider_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="coreProviderId"),
+        pydantic.Field(alias="coreProviderId", description="Name of processor associated with transaction"),
+    ] = None
     transaction_date: typing_extensions.Annotated[
-        typing.Optional[dt.datetime], FieldMetadata(alias="transactionDate")
-    ] = pydantic.Field(default=None)
-    """
-    Timestamp for <b>REVERSED, RETURNED, DECLINED</b> transaction events; <b>REQUIRED</b> for transactions with <b>REVERSED, RETURNED, DECLINED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
-    """
-
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="transactionDate"),
+        pydantic.Field(
+            alias="transactionDate",
+            description="Timestamp for <b>REVERSED, RETURNED, DECLINED</b> transaction events; <b>REQUIRED</b> for transactions with <b>REVERSED, RETURNED, DECLINED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`",
+        ),
+    ] = None
     authorization_date: typing_extensions.Annotated[
-        typing.Optional[dt.datetime], FieldMetadata(alias="authorizationDate")
-    ] = pydantic.Field(default=None)
-    """
-    Timestamp for <b>APPROVED</b> transaction event; <b>REQUIRED</b> for transactions with <b>APPROVED</b> status, and <b>HIGHLY RECOMMENDED</b> to include for transactions with a <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
-    """
-
-    settled_date: typing_extensions.Annotated[typing.Optional[dt.datetime], FieldMetadata(alias="settledDate")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Timestamp for <b>SETTLED</b> transaction event, <b>REQUIRED</b> for transactions with <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
-    """
-
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="authorizationDate"),
+        pydantic.Field(
+            alias="authorizationDate",
+            description="Timestamp for <b>APPROVED</b> transaction event; <b>REQUIRED</b> for transactions with <b>APPROVED</b> status, and <b>HIGHLY RECOMMENDED</b> to include for transactions with a <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`",
+        ),
+    ] = None
+    settled_date: typing_extensions.Annotated[
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="settledDate"),
+        pydantic.Field(
+            alias="settledDate",
+            description="Timestamp for <b>SETTLED</b> transaction event, <b>REQUIRED</b> for transactions with <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`",
+        ),
+    ] = None
     merchant: typing.Optional[Merchant] = pydantic.Field(default=None)
     """
     Merchant details
     """
 
-    card_presence: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardPresence")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Whether card was present at time of transaction
-    """
-
-    pan_entry_mode: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="panEntryMode")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    PAN entry mode
-    """
-
-    card_bin: typing_extensions.Annotated[str, FieldMetadata(alias="cardBIN")] = pydantic.Field()
-    """
-    Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.
-    """
-
-    card_last_four: typing_extensions.Annotated[str, FieldMetadata(alias="cardLastFour")] = pydantic.Field()
-    """
-    Card last four digits.
-    """
-
-    authorization_code: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="authorizationCode")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Transaction approval code
-    """
-
+    card_presence: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardPresence"),
+        pydantic.Field(alias="cardPresence", description="Whether card was present at time of transaction"),
+    ] = None
+    pan_entry_mode: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="panEntryMode"),
+        pydantic.Field(alias="panEntryMode", description="PAN entry mode"),
+    ] = None
+    card_bin: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="cardBIN"),
+        pydantic.Field(
+            alias="cardBIN",
+            description="Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.",
+        ),
+    ]
+    card_last_four: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="cardLastFour"),
+        pydantic.Field(alias="cardLastFour", description="Card last four digits."),
+    ]
+    authorization_code: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="authorizationCode"),
+        pydantic.Field(alias="authorizationCode", description="Transaction approval code"),
+    ] = None
     retrieval_reference_number: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="retrievalReferenceNumber")
-    ] = pydantic.Field(default=None)
-    """
-    Retrieval Reference Number
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="retrievalReferenceNumber"),
+        pydantic.Field(alias="retrievalReferenceNumber", description="Retrieval Reference Number"),
+    ] = None
     system_trace_audit_number: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="systemTraceAuditNumber")
-    ] = pydantic.Field(default=None)
-    """
-    System Trace Audit Number
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="systemTraceAuditNumber"),
+        pydantic.Field(alias="systemTraceAuditNumber", description="System Trace Audit Number"),
+    ] = None
     acquirer_reference_number: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="acquirerReferenceNumber")
-    ] = pydantic.Field(default=None)
-    """
-    Acquirer Reference Number
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="acquirerReferenceNumber"),
+        pydantic.Field(alias="acquirerReferenceNumber", description="Acquirer Reference Number"),
+    ] = None
     direction: DirectionType = pydantic.Field()
     """
     The direction in which the funds flow - DEBIT or CREDIT
     """
 
-    payment_type: typing_extensions.Annotated[TransactionPaymentType, FieldMetadata(alias="paymentType")] = (
-        pydantic.Field()
-    )
-    """
-    The type of payment involved in the transaction.
-    """
-
-    card_network: typing_extensions.Annotated[typing.Optional[CardNetwork], FieldMetadata(alias="cardNetwork")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The card network associated with the transaction
-    """
-
-    transaction_id: typing_extensions.Annotated[str, FieldMetadata(alias="transactionId")] = pydantic.Field()
-    """
-    The transaction ID
-    """
-
-    card_product_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardProductId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The card product ID associated with the transaction
-    """
-
-    user_zip_code: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="userZipCode")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The zip code of the user who made the transaction
-    """
-
-    processor_mids: typing_extensions.Annotated[typing.Optional[ProcessorMid], FieldMetadata(alias="processorMids")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Network specific merchant IDs (MIDs) associated with the transaction
-    """
+    payment_type: typing_extensions.Annotated[
+        TransactionPaymentType,
+        FieldMetadata(alias="paymentType"),
+        pydantic.Field(alias="paymentType", description="The type of payment involved in the transaction."),
+    ]
+    card_network: typing_extensions.Annotated[
+        typing.Optional[CardNetwork],
+        FieldMetadata(alias="cardNetwork"),
+        pydantic.Field(alias="cardNetwork", description="The card network associated with the transaction"),
+    ] = None
+    transaction_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="transactionId"),
+        pydantic.Field(alias="transactionId", description="The transaction ID"),
+    ]
+    card_product_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardProductId"),
+        pydantic.Field(alias="cardProductId", description="The card product ID associated with the transaction"),
+    ] = None
+    user_zip_code: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="userZipCode"),
+        pydantic.Field(alias="userZipCode", description="The zip code of the user who made the transaction"),
+    ] = None
+    processor_mids: typing_extensions.Annotated[
+        typing.Optional[ProcessorMid],
+        FieldMetadata(alias="processorMids"),
+        pydantic.Field(
+            alias="processorMids", description="Network specific merchant IDs (MIDs) associated with the transaction"
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

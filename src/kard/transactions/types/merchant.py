@@ -20,41 +20,31 @@ class Merchant(UniversalBaseModel):
     Merchant name associated with transaction
     """
 
-    addr_street: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="addrStreet")] = pydantic.Field(
-        default=None
-    )
-    """
-    Merchant street address associated with transaction.
-    """
-
-    addr_city: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="addrCity")] = pydantic.Field(
-        default=None
-    )
-    """
-    Merchant address city associated with transaction.
-    """
-
-    addr_state: typing_extensions.Annotated[typing.Optional[States], FieldMetadata(alias="addrState")] = pydantic.Field(
-        default=None
-    )
-    """
-    Merchant address state associated with transaction.
-    """
-
-    addr_zipcode: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="addrZipcode")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Merchant address zip code associated with transaction.
-    """
-
-    addr_country: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="addrCountry")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Merchant address country associated with transaction.
-    """
-
+    addr_street: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="addrStreet"),
+        pydantic.Field(alias="addrStreet", description="Merchant street address associated with transaction."),
+    ] = None
+    addr_city: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="addrCity"),
+        pydantic.Field(alias="addrCity", description="Merchant address city associated with transaction."),
+    ] = None
+    addr_state: typing_extensions.Annotated[
+        typing.Optional[States],
+        FieldMetadata(alias="addrState"),
+        pydantic.Field(alias="addrState", description="Merchant address state associated with transaction."),
+    ] = None
+    addr_zipcode: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="addrZipcode"),
+        pydantic.Field(alias="addrZipcode", description="Merchant address zip code associated with transaction."),
+    ] = None
+    addr_country: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="addrCountry"),
+        pydantic.Field(alias="addrCountry", description="Merchant address country associated with transaction."),
+    ] = None
     latitude: typing.Optional[str] = pydantic.Field(default=None)
     """
     Merchant latitude geocoordinate associated with transaction.
@@ -65,12 +55,11 @@ class Merchant(UniversalBaseModel):
     Merchant longitude geocoordinate associated with transaction.
     """
 
-    store_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="storeId")] = pydantic.Field(
-        default=None
-    )
-    """
-    Merchant store ID where transaction originated from
-    """
+    store_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="storeId"),
+        pydantic.Field(alias="storeId", description="Merchant store ID where transaction originated from"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

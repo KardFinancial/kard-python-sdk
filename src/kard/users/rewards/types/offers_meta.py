@@ -15,11 +15,13 @@ class OffersMeta(UniversalBaseModel):
     """
 
     available_categories: typing_extensions.Annotated[
-        typing.Optional[typing.List[CategoryIncluded]], FieldMetadata(alias="availableCategories")
-    ] = pydantic.Field(default=None)
-    """
-    All distinct categories available across the entire filtered result set, not just the current page
-    """
+        typing.Optional[typing.List[CategoryIncluded]],
+        FieldMetadata(alias="availableCategories"),
+        pydantic.Field(
+            alias="availableCategories",
+            description="All distinct categories available across the entire filtered result set, not just the current page",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

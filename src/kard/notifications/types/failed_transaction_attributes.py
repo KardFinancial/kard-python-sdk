@@ -24,12 +24,11 @@ class FailedTransactionAttributes(UniversalBaseModel):
     The name of the merchant
     """
 
-    card_product_id: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardProductId")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    The ID of the card product
-    """
+    card_product_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardProductId"),
+        pydantic.Field(alias="cardProductId", description="The ID of the card product"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

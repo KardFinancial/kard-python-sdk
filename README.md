@@ -10,6 +10,7 @@ The Kard Python library provides convenient access to the Kard APIs from Python.
 - [Installation](#installation)
 - [Reference](#reference)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
 - [Oauth Token Override](#oauth-token-override)
@@ -36,12 +37,13 @@ Instantiate and use the client with the following:
 
 ```python
 from kard import KardApi
-from kard.users import UserRequestAttributes, UserRequestDataUnion_User
+from kard.users import UserRequestDataUnion_User, UserRequestAttributes
 
 client = KardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
 )
+
 client.users.create(
     organization_id="organization-123",
     data=[
@@ -49,7 +51,9 @@ client.users.create(
             id="1234567890",
             attributes=UserRequestAttributes(
                 zip_code="11238",
-                enrolled_rewards=["CARDLINKED"],
+                enrolled_rewards=[
+                    "CARDLINKED"
+                ],
                 email="user@example.com",
                 hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
                 phone_number="+14155552671",
@@ -61,19 +65,32 @@ client.users.create(
 )
 ```
 
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    environment=KardApiEnvironment.PRODUCTION,
+)
+```
+
 ## Async Client
 
 The SDK also exports an `async` client so that you can make non-blocking calls to our API. Note that if you are constructing an Async httpx client class to pass into this client, use `httpx.AsyncClient()` instead of `httpx.Client()` (e.g. for the `httpx_client` parameter of this client).
 
 ```python
 import asyncio
+from kard.users import UserRequestDataUnion_User, UserRequestAttributes
 
 from kard import AsyncKardApi
-from kard.users import UserRequestAttributes, UserRequestDataUnion_User
 
 client = AsyncKardApi(
-    client_id="YOUR_CLIENT_ID",
-    client_secret="YOUR_CLIENT_SECRET",
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
 )
 
 
@@ -85,7 +102,9 @@ async def main() -> None:
                 id="1234567890",
                 attributes=UserRequestAttributes(
                     zip_code="11238",
-                    enrolled_rewards=["CARDLINKED"],
+                    enrolled_rewards=[
+                        "CARDLINKED"
+                    ],
                     email="user@example.com",
                     hashed_email="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3e2d8a5b76e45a1d4c4e2e3a1",
                     phone_number="+14155552671",
@@ -123,13 +142,16 @@ This SDK supports two authentication methods: OAuth client credentials flow (aut
 from kard import KardApi
 
 # Option 1: Direct bearer token (bypass OAuth flow)
-client = KardApi(..., token="my-pre-generated-bearer-token")
-
-from kard import KardApi
+client = KardApi(
+    ...,
+    token="my-pre-generated-bearer-token",
+)
 
 # Option 2: OAuth client credentials flow (automatic token management)
 client = KardApi(
-    ..., client_id="your-client-id", client_secret="your-client-secret"
+    ...,
+    client_id="your-client-id",
+    client_secret="your-client-secret",
 )
 ```
 
@@ -143,11 +165,10 @@ The `.with_raw_response` property returns a "raw" client that can be used to acc
 ```python
 from kard import KardApi
 
-client = KardApi(
-    ...,
-)
+client = KardApi(...)
 response = client.users.with_raw_response.create(...)
 print(response.headers)  # access the response headers
+print(response.status_code)  # access the response status code
 print(response.data)  # access the underlying object
 ```
 
@@ -176,14 +197,9 @@ client.users.create(..., request_options={
 The SDK defaults to a 60 second timeout. You can configure this with a timeout option at the client or request level.
 
 ```python
-
 from kard import KardApi
 
-client = KardApi(
-    ...,
-    timeout=20.0,
-)
-
+client = KardApi(..., timeout=20.0)
 
 # Override timeout for a specific method
 client.users.create(..., request_options={

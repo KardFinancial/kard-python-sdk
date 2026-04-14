@@ -12,7 +12,8 @@ from ...commons.types.user_id import UserId
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.http_response import AsyncHttpResponse, HttpResponse
-from ...core.jsonable_encoder import jsonable_encoder
+from ...core.jsonable_encoder import encode_path_param
+from ...core.parse_error import ParsingError
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from ...core.serialization import convert_and_respect_annotation_metadata
@@ -23,6 +24,7 @@ from .types.boost_offer_include_option import BoostOfferIncludeOption
 from .types.boost_offer_response import BoostOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
 from .types.create_attribution_response import CreateAttributionResponse
+from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -65,7 +67,7 @@ class RawAttributionsClient:
         HttpResponse[CreateAttributionResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/attributions",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/attributions",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -121,6 +123,10 @@ class RawAttributionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def activate(
@@ -162,7 +168,7 @@ class RawAttributionsClient:
         HttpResponse[ActivateOfferResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/activate",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/offers/{encode_path_param(offer_id)}/activate",
             method="POST",
             params={
                 "supportedComponents": supported_components,
@@ -216,6 +222,10 @@ class RawAttributionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def boost(
@@ -257,7 +267,7 @@ class RawAttributionsClient:
         HttpResponse[BoostOfferResponse]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/boost",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/offers/{encode_path_param(offer_id)}/boost",
             method="POST",
             params={
                 "supportedComponents": supported_components,
@@ -311,6 +321,10 @@ class RawAttributionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -351,7 +365,7 @@ class AsyncRawAttributionsClient:
         AsyncHttpResponse[CreateAttributionResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/attributions",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/attributions",
             method="POST",
             json={
                 "data": convert_and_respect_annotation_metadata(
@@ -407,6 +421,10 @@ class AsyncRawAttributionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def activate(
@@ -448,7 +466,7 @@ class AsyncRawAttributionsClient:
         AsyncHttpResponse[ActivateOfferResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/activate",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/offers/{encode_path_param(offer_id)}/activate",
             method="POST",
             params={
                 "supportedComponents": supported_components,
@@ -502,6 +520,10 @@ class AsyncRawAttributionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def boost(
@@ -543,7 +565,7 @@ class AsyncRawAttributionsClient:
         AsyncHttpResponse[BoostOfferResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers/{jsonable_encoder(offer_id)}/boost",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/offers/{encode_path_param(offer_id)}/boost",
             method="POST",
             params={
                 "supportedComponents": supported_components,
@@ -597,4 +619,8 @@ class AsyncRawAttributionsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

@@ -12,7 +12,7 @@ class EligibilityLocationAddress(UniversalBaseModel):
     street: str
     city: str
     state: str
-    zip_code: typing_extensions.Annotated[str, FieldMetadata(alias="zipCode")]
+    zip_code: typing_extensions.Annotated[str, FieldMetadata(alias="zipCode"), pydantic.Field(alias="zipCode")]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

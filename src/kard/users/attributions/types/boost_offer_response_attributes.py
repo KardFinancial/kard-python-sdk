@@ -10,10 +10,12 @@ from ....core.serialization import FieldMetadata
 
 
 class BoostOfferResponseAttributes(UniversalBaseModel):
-    entity_id: typing_extensions.Annotated[str, FieldMetadata(alias="entityId")]
-    event_code: typing_extensions.Annotated[str, FieldMetadata(alias="eventCode")]
+    entity_id: typing_extensions.Annotated[str, FieldMetadata(alias="entityId"), pydantic.Field(alias="entityId")]
+    event_code: typing_extensions.Annotated[str, FieldMetadata(alias="eventCode"), pydantic.Field(alias="eventCode")]
     medium: str
-    event_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="eventDate")]
+    event_date: typing_extensions.Annotated[
+        dt.datetime, FieldMetadata(alias="eventDate"), pydantic.Field(alias="eventDate")
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

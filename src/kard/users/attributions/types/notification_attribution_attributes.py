@@ -13,19 +13,21 @@ from .notification_medium import NotificationMedium
 
 
 class NotificationAttributionAttributes(UniversalBaseModel):
-    entity_id: typing_extensions.Annotated[str, FieldMetadata(alias="entityId")] = pydantic.Field()
-    """
-    The notification ID
-    """
-
-    event_code: typing_extensions.Annotated[EventCode, FieldMetadata(alias="eventCode")]
+    entity_id: typing_extensions.Annotated[
+        str, FieldMetadata(alias="entityId"), pydantic.Field(alias="entityId", description="The notification ID")
+    ]
+    event_code: typing_extensions.Annotated[
+        EventCode, FieldMetadata(alias="eventCode"), pydantic.Field(alias="eventCode")
+    ]
     medium: NotificationMedium
-    event_date: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="eventDate")] = pydantic.Field()
-    """
-    The timestamp of the attribution event.
-    Must be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").
-    """
-
+    event_date: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="eventDate"),
+        pydantic.Field(
+            alias="eventDate",
+            description='The timestamp of the attribution event.\nMust be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").',
+        ),
+    ]
     state: typing.Optional[AttributionState] = pydantic.Field(default=None)
     """
     Placement context for the attribution event

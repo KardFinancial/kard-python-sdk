@@ -15,13 +15,11 @@ class LogoFlare(UniversalBaseModel):
     Logo flare configuration for offer display
     """
 
-    border_color: typing_extensions.Annotated[LogoFlareBorderColor, FieldMetadata(alias="borderColor")] = (
-        pydantic.Field()
-    )
-    """
-    Border color style for the logo flare
-    """
-
+    border_color: typing_extensions.Annotated[
+        LogoFlareBorderColor,
+        FieldMetadata(alias="borderColor"),
+        pydantic.Field(alias="borderColor", description="Border color style for the logo flare"),
+    ]
     badge: typing.Optional[LogoFlareBadge] = pydantic.Field(default=None)
     """
     Optional badge to display on the logo

@@ -16,67 +16,53 @@ class AuditUpdateAttributes(UniversalBaseModel):
     The status of the audit
     """
 
-    audit_code: typing_extensions.Annotated[int, FieldMetadata(alias="auditCode")] = pydantic.Field()
-    """
-    Audit Code - Enum. Code to define audit.
-      <ul>
-        <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>
-        <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>
-        <li>`8001` : Other - check audit description</li>
-      </ul>
-    """
-
-    merchant_name: typing_extensions.Annotated[str, FieldMetadata(alias="merchantName")] = pydantic.Field()
-    """
-    The merchant name related to the transaction audit
-    """
-
-    audit_description: typing_extensions.Annotated[str, FieldMetadata(alias="auditDescription")] = pydantic.Field()
-    """
-    The description of the audit
-    """
-
-    transaction_id: typing_extensions.Annotated[str, FieldMetadata(alias="transactionId")] = pydantic.Field()
-    """
-    The transaction ID associated with audit
-    """
-
-    resolution_code: typing_extensions.Annotated[typing.Optional[int], FieldMetadata(alias="resolutionCode")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Resolution Code - Enum. field is available when audit is status CLOSED.
-    <ul>
-      <li>`5001` : Transaction will be deleted</li>
-      <li>`5002` : Settlement amount will be adjusted</li>
-      <li>`5003` : Return amount will be adjusted</li>
-      <li>`5004` : Reward dispute resolved</li>
-      <li>`5005` : Transaction will be marked for writeoff</li>
-      <li>`5006` : Transaction will be marked as rejected</li>
-      <li>`5007` : Transaction will be resent through webhook</li>
-      <li>`5008` : Transaction will be resent through daily file</li>
-      <li>`5009` : No change needed</li>
-      <li>`9001` : Ineligible item in purchase</li>
-      <li>`9002` : Return was made</li>
-      <li>`9003` : User ineligible for offer (usually because of participation through another program)</li>
-      <li>`9004` : Redemption limit hit (if offer has a set number of redemptions and it isn't handled programmatically)</li>
-      <li>`9005` : Transaction not captured</li>
-    </ul>
-    """
-
+    audit_code: typing_extensions.Annotated[
+        int,
+        FieldMetadata(alias="auditCode"),
+        pydantic.Field(
+            alias="auditCode",
+            description="Audit Code - Enum. Code to define audit.\n  <ul>\n    <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>\n    <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>\n    <li>`8001` : Other - check audit description</li>\n  </ul>",
+        ),
+    ]
+    merchant_name: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="merchantName"),
+        pydantic.Field(alias="merchantName", description="The merchant name related to the transaction audit"),
+    ]
+    audit_description: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="auditDescription"),
+        pydantic.Field(alias="auditDescription", description="The description of the audit"),
+    ]
+    transaction_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="transactionId"),
+        pydantic.Field(alias="transactionId", description="The transaction ID associated with audit"),
+    ]
+    resolution_code: typing_extensions.Annotated[
+        typing.Optional[int],
+        FieldMetadata(alias="resolutionCode"),
+        pydantic.Field(
+            alias="resolutionCode",
+            description="Resolution Code - Enum. field is available when audit is status CLOSED.\n<ul>\n  <li>`5001` : Transaction will be deleted</li>\n  <li>`5002` : Settlement amount will be adjusted</li>\n  <li>`5003` : Return amount will be adjusted</li>\n  <li>`5004` : Reward dispute resolved</li>\n  <li>`5005` : Transaction will be marked for writeoff</li>\n  <li>`5006` : Transaction will be marked as rejected</li>\n  <li>`5007` : Transaction will be resent through webhook</li>\n  <li>`5008` : Transaction will be resent through daily file</li>\n  <li>`5009` : No change needed</li>\n  <li>`9001` : Ineligible item in purchase</li>\n  <li>`9002` : Return was made</li>\n  <li>`9003` : User ineligible for offer (usually because of participation through another program)</li>\n  <li>`9004` : Redemption limit hit (if offer has a set number of redemptions and it isn't handled programmatically)</li>\n  <li>`9005` : Transaction not captured</li>\n</ul>",
+        ),
+    ] = None
     resolution_description: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="resolutionDescription")
-    ] = pydantic.Field(default=None)
-    """
-    The resolution description; field is available when audit is status CLOSED
-    """
-
+        typing.Optional[str],
+        FieldMetadata(alias="resolutionDescription"),
+        pydantic.Field(
+            alias="resolutionDescription",
+            description="The resolution description; field is available when audit is status CLOSED",
+        ),
+    ] = None
     resolution_time_stamp: typing_extensions.Annotated[
-        typing.Optional[dt.datetime], FieldMetadata(alias="resolutionTimeStamp")
-    ] = pydantic.Field(default=None)
-    """
-    The resolution timestamp of when the audit was marked as status CLOSED in ISO format; available when audit is closed.
-    """
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="resolutionTimeStamp"),
+        pydantic.Field(
+            alias="resolutionTimeStamp",
+            description="The resolution timestamp of when the audit was marked as status CLOSED in ISO format; available when audit is closed.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

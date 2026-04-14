@@ -9,30 +9,31 @@ from ...core.serialization import FieldMetadata
 
 
 class AuditAttributes(UniversalBaseModel):
-    audit_code: typing_extensions.Annotated[int, FieldMetadata(alias="auditCode")] = pydantic.Field()
-    """
-    Audit Code - Enum. Please submit the code that is most relevant to your audit request.
-                <ul>
-                  <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>
-                  <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>
-                  <li>`8001` : Other - check audit description</li>
-                </ul>
-    """
-
-    merchant_name: typing_extensions.Annotated[str, FieldMetadata(alias="merchantName")] = pydantic.Field()
-    """
-    Merchant name related to the transaction audit
-    """
-
-    audit_description: typing_extensions.Annotated[str, FieldMetadata(alias="auditDescription")] = pydantic.Field()
-    """
-    Audit Description. Please provide more details around the audit
-    """
-
-    transaction_id: typing_extensions.Annotated[str, FieldMetadata(alias="transactionId")] = pydantic.Field()
-    """
-    Transaction ID from issuer to audit
-    """
+    audit_code: typing_extensions.Annotated[
+        int,
+        FieldMetadata(alias="auditCode"),
+        pydantic.Field(
+            alias="auditCode",
+            description="Audit Code - Enum. Please submit the code that is most relevant to your audit request.\n            <ul>\n              <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>\n              <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>\n              <li>`8001` : Other - check audit description</li>\n            </ul>",
+        ),
+    ]
+    merchant_name: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="merchantName"),
+        pydantic.Field(alias="merchantName", description="Merchant name related to the transaction audit"),
+    ]
+    audit_description: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="auditDescription"),
+        pydantic.Field(
+            alias="auditDescription", description="Audit Description. Please provide more details around the audit"
+        ),
+    ]
+    transaction_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="transactionId"),
+        pydantic.Field(alias="transactionId", description="Transaction ID from issuer to audit"),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

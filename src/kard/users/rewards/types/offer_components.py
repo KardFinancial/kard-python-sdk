@@ -16,34 +16,26 @@ class OfferComponents(UniversalBaseModel):
     UI component data for rendering offer details
     """
 
-    short_description: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="shortDescription")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Short description for the offer
-    """
-
-    long_description: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="longDescription")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Long description for the offer
-    """
-
-    base_reward: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="baseReward")] = pydantic.Field(
-        default=None
-    )
-    """
-    Formatted reward string
-    """
-
-    boosted_reward: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="boostedReward")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Formatted boosted reward string
-    """
-
+    short_description: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="shortDescription"),
+        pydantic.Field(alias="shortDescription", description="Short description for the offer"),
+    ] = None
+    long_description: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="longDescription"),
+        pydantic.Field(alias="longDescription", description="Long description for the offer"),
+    ] = None
+    base_reward: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="baseReward"),
+        pydantic.Field(alias="baseReward", description="Formatted reward string"),
+    ] = None
+    boosted_reward: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="boostedReward"),
+        pydantic.Field(alias="boostedReward", description="Formatted boosted reward string"),
+    ] = None
     cta: typing.Optional[CtaComponent] = pydantic.Field(default=None)
     """
     Call-to-action button component
@@ -54,26 +46,21 @@ class OfferComponents(UniversalBaseModel):
     Tags for the offer
     """
 
-    detail_tags: typing_extensions.Annotated[typing.Optional[typing.List[str]], FieldMetadata(alias="detailTags")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Detail tags for the offer
-    """
-
-    logo_flare: typing_extensions.Annotated[typing.Optional[LogoFlare], FieldMetadata(alias="logoFlare")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Logo flare configuration for the offer
-    """
-
-    progress_bar: typing_extensions.Annotated[typing.Optional[ProgressBar], FieldMetadata(alias="progressBar")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Progress bar component for tracking offer redemptions
-    """
+    detail_tags: typing_extensions.Annotated[
+        typing.Optional[typing.List[str]],
+        FieldMetadata(alias="detailTags"),
+        pydantic.Field(alias="detailTags", description="Detail tags for the offer"),
+    ] = None
+    logo_flare: typing_extensions.Annotated[
+        typing.Optional[LogoFlare],
+        FieldMetadata(alias="logoFlare"),
+        pydantic.Field(alias="logoFlare", description="Logo flare configuration for the offer"),
+    ] = None
+    progress_bar: typing_extensions.Annotated[
+        typing.Optional[ProgressBar],
+        FieldMetadata(alias="progressBar"),
+        pydantic.Field(alias="progressBar", description="Progress bar component for tracking offer redemptions"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

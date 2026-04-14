@@ -16,7 +16,8 @@ from ...commons.types.user_id import UserId
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.http_response import AsyncHttpResponse, HttpResponse
-from ...core.jsonable_encoder import jsonable_encoder
+from ...core.jsonable_encoder import encode_path_param
+from ...core.parse_error import ParsingError
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from .types.component_type import ComponentType
@@ -24,6 +25,7 @@ from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
 from .types.offer_sort_options import OfferSortOptions
 from .types.offers_response_object import OffersResponseObject
+from pydantic import ValidationError
 
 
 class RawRewardsClient:
@@ -91,7 +93,7 @@ class RawRewardsClient:
         HttpResponse[OffersResponseObject]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/offers",
             method="GET",
             params={
                 "page[size]": page_size,
@@ -164,6 +166,10 @@ class RawRewardsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def locations(
@@ -240,7 +246,7 @@ class RawRewardsClient:
         HttpResponse[LocationsResponseObject]
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/locations",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/locations",
             method="GET",
             params={
                 "page[size]": page_size,
@@ -317,6 +323,10 @@ class RawRewardsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
@@ -385,7 +395,7 @@ class AsyncRawRewardsClient:
         AsyncHttpResponse[OffersResponseObject]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/offers",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/offers",
             method="GET",
             params={
                 "page[size]": page_size,
@@ -458,6 +468,10 @@ class AsyncRawRewardsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def locations(
@@ -534,7 +548,7 @@ class AsyncRawRewardsClient:
         AsyncHttpResponse[LocationsResponseObject]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{jsonable_encoder(organization_id)}/users/{jsonable_encoder(user_id)}/locations",
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/locations",
             method="GET",
             params={
                 "page[size]": page_size,
@@ -611,4 +625,8 @@ class AsyncRawRewardsClient:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

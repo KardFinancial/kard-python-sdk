@@ -13,7 +13,7 @@ class Links(UniversalBaseModel):
     Related links to the API call
     """
 
-    self_: typing_extensions.Annotated[str, FieldMetadata(alias="self")]
+    self_: typing_extensions.Annotated[str, FieldMetadata(alias="self"), pydantic.Field(alias="self")]
     prev: typing.Optional[str] = None
     next: typing.Optional[str] = None
 

@@ -18,51 +18,47 @@ class RewardedTransactionAttributes(UniversalBaseModel):
     Status of the rewarded transaction
     """
 
-    transaction_id: typing_extensions.Annotated[str, FieldMetadata(alias="transactionId")] = pydantic.Field()
-    """
-    The transaction identifier
-    """
-
-    transaction_amount_in_cents: typing_extensions.Annotated[int, FieldMetadata(alias="transactionAmountInCents")] = (
-        pydantic.Field()
-    )
-    """
-    Transaction amount in cents
-    """
-
-    transaction_timestamp: typing_extensions.Annotated[dt.datetime, FieldMetadata(alias="transactionTimestamp")] = (
-        pydantic.Field()
-    )
-    """
-    Timestamp of the transaction in ISO 8601 format
-    """
-
-    paid_to_issuer: typing_extensions.Annotated[PaymentStatus, FieldMetadata(alias="paidToIssuer")] = pydantic.Field()
-    """
-    Payment status to issuer
-    """
-
-    commission_earned: typing_extensions.Annotated[CommissionEarnedDetails, FieldMetadata(alias="commissionEarned")]
+    transaction_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="transactionId"),
+        pydantic.Field(alias="transactionId", description="The transaction identifier"),
+    ]
+    transaction_amount_in_cents: typing_extensions.Annotated[
+        int,
+        FieldMetadata(alias="transactionAmountInCents"),
+        pydantic.Field(alias="transactionAmountInCents", description="Transaction amount in cents"),
+    ]
+    transaction_timestamp: typing_extensions.Annotated[
+        dt.datetime,
+        FieldMetadata(alias="transactionTimestamp"),
+        pydantic.Field(alias="transactionTimestamp", description="Timestamp of the transaction in ISO 8601 format"),
+    ]
+    paid_to_issuer: typing_extensions.Annotated[
+        PaymentStatus,
+        FieldMetadata(alias="paidToIssuer"),
+        pydantic.Field(alias="paidToIssuer", description="Payment status to issuer"),
+    ]
+    commission_earned: typing_extensions.Annotated[
+        CommissionEarnedDetails, FieldMetadata(alias="commissionEarned"), pydantic.Field(alias="commissionEarned")
+    ]
     payout_timestamp: typing_extensions.Annotated[
-        typing.Optional[dt.datetime], FieldMetadata(alias="payoutTimestamp")
-    ] = pydantic.Field(default=None)
-    """
-    Timestamp representing the month when the transaction has been paid out to issuer
-    """
-
-    card_bin: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardBIN")] = pydantic.Field(
-        default=None
-    )
-    """
-    Bank identification number (BIN).
-    """
-
-    card_last_four: typing_extensions.Annotated[typing.Optional[str], FieldMetadata(alias="cardLastFour")] = (
-        pydantic.Field(default=None)
-    )
-    """
-    Card last four digits.
-    """
+        typing.Optional[dt.datetime],
+        FieldMetadata(alias="payoutTimestamp"),
+        pydantic.Field(
+            alias="payoutTimestamp",
+            description="Timestamp representing the month when the transaction has been paid out to issuer",
+        ),
+    ] = None
+    card_bin: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardBIN"),
+        pydantic.Field(alias="cardBIN", description="Bank identification number (BIN)."),
+    ] = None
+    card_last_four: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="cardLastFour"),
+        pydantic.Field(alias="cardLastFour", description="Card last four digits."),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

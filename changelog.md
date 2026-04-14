@@ -1,3 +1,21 @@
+## 8.2.0 - 2026-04-14
+* ### Breaking Changes
+* **Minimum Python version** — raised from 3.8 to 3.10; projects on Python 3.8 or 3.9 must upgrade before updating this SDK.
+* ### Added
+* **`KardApi` / `AsyncKardApi`** — new optional constructor parameters `logging` (`LogConfig | Logger`) and `headers` (`Dict[str, str]`) for structured request/response logging and per-client custom HTTP headers.
+* **`ParsingError`** — new exception (available at `kard.core.parse_error.ParsingError`, re-exported from `kard.core`) raised when a response cannot be deserialized into the expected schema; exposes `headers`, `status_code`, `body`, and `cause` attributes.
+* **Logging framework** — `ILogger`, `ConsoleLogger`, `LogConfig`, `LogLevel`, `Logger`, and `create_logger` are now available from `kard.core` for configuring structured logging with automatic redaction of sensitive headers.
+* **`BaseHttpResponse.status_code`** — new property for inspecting the HTTP status code without accessing the underlying httpx object.
+* **`DefaultAioHttpClient` / `DefaultAsyncHttpxClient`** — pre-configured async HTTP client classes now exported from the top-level `kard` package; `DefaultAioHttpClient` requires the optional `aiohttp` extra.
+* **`aiohttp` transport extra** — install with `pip install kard-financial-sdk[aiohttp]` to use an aiohttp-backed httpx transport.
+* **`Rfc2822DateTime` / `parse_rfc2822_datetime`** — new type and helper in `kard.core.datetime_utils` for deserializing RFC 2822 (email/HTTP header) date strings.
+* ### Changed
+* **Retry behavior** — the HTTP client now retries on connection-level errors (`ConnectError`, `RemoteProtocolError`) in addition to retryable HTTP status codes, using exponential backoff driven by a central `base_max_retries` setting (default: 2).
+* ### Fixed
+* **Base-URL path prefix preservation** — URL construction now uses string joining instead of `urllib.parse.urljoin`, correctly preserving path prefixes (e.g., `https://host/org/tenant/api`) when appending request paths.
+* **Empty query parameter injection** — `HttpClient` and `AsyncHttpClient` no longer forward an empty `params` list or dict to httpx, preventing inadvertent stripping of query parameters already embedded in a URL.
+* **`ParsingError` on deserialization failure** — Pydantic `ValidationError` raised during response parsing in the uploads and auth clients is now caught and re-raised as a structured `ParsingError` instead of bubbling up unhandled.
+
 ## 8.1.0 - 2026-04-10
 * The `get_earned_rewards` method on `TransactionsClient` and `AsyncTransactionsClient` now accepts an optional `include` parameter. Pass a comma-separated string of related resources (supported values: `"merchant"` and `"offer"`) to embed those resources directly in the response. Existing code that omits `include` continues to work without changes.
 

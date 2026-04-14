@@ -9,15 +9,16 @@ from ...core.serialization import FieldMetadata
 
 
 class PaginationMeta(UniversalBaseModel):
-    page_size: typing_extensions.Annotated[int, FieldMetadata(alias="pageSize")] = pydantic.Field()
-    """
-    Number of items per page.
-    """
-
-    has_next_page: typing_extensions.Annotated[bool, FieldMetadata(alias="hasNextPage")] = pydantic.Field()
-    """
-    Indicates if there are more pages available after the current one.
-    """
+    page_size: typing_extensions.Annotated[
+        int, FieldMetadata(alias="pageSize"), pydantic.Field(alias="pageSize", description="Number of items per page.")
+    ]
+    has_next_page: typing_extensions.Annotated[
+        bool,
+        FieldMetadata(alias="hasNextPage"),
+        pydantic.Field(
+            alias="hasNextPage", description="Indicates if there are more pages available after the current one."
+        ),
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
