@@ -1008,7 +1008,7 @@ client.transactions.create_bulk_transactions_upload_url(
 <dl>
 <dd>
 
-Retrieve rewarded transaction history for a specific user. Returns only SETTLED transactions within the last 12 months.
+Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
 <br/>
 <b>Required scopes:</b> `transaction:read`
 <br/>
@@ -1040,6 +1040,7 @@ client.transactions.get_earned_rewards(
     organization_id="org-123",
     user_id="user-456",
     page_size=10,
+    filter_status="APPROVED,SETTLED",
     include="merchant,offer",
 )
 
@@ -1090,6 +1091,14 @@ client.transactions.get_earned_rewards(
 <dd>
 
 **page_size:** `typing.Optional[int]` — Number of results per page
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_status:** `typing.Optional[str]` — Comma-separated list of transaction statuses to return. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted.
     
 </dd>
 </dl>

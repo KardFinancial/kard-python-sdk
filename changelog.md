@@ -1,3 +1,11 @@
+## 8.3.0 - 2026-04-15
+### Added
+* **`GetEarnedRewardsMeta`** — new type (available from `kard`, `kard.transactions`, and `kard.transactions.types`) containing `lifetime_rewards_in_cents`, the user's total lifetime rewards in cents across all matched transactions.
+* **`filter_status` parameter on `get_earned_rewards`** — optional comma-separated string accepted by `TransactionsClient`, `AsyncTransactionsClient`, and their raw counterparts; supported values are `APPROVED` and `SETTLED` (defaults to `SETTLED` when omitted).
+* **`meta` field on `GetEarnedRewardsResponse`** — every earned-rewards response now includes a `meta` object of type `GetEarnedRewardsMeta`.
+### Changed
+* **`RewardedTransactionStatus`** — now includes `"APPROVED"` as a recognized literal value in addition to `"SETTLED"`.
+
 ## 8.2.0 - 2026-04-14
 * ### Breaking Changes
 * **Minimum Python version** — raised from 3.8 to 3.10; projects on Python 3.8 or 3.9 must upgrade before updating this SDK.

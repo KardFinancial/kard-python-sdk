@@ -2,4 +2,4 @@
 
 import typing
 
-RewardedTransactionStatus = typing.Union[typing.Literal["SETTLED"], typing.Any]
+RewardedTransactionStatus = typing.Union[typing.Literal["APPROVED", "SETTLED"], typing.Any]

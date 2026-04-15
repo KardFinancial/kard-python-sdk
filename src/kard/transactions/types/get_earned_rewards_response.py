@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ...commons.types.links import Links
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .get_earned_rewards_meta import GetEarnedRewardsMeta
 from .rewarded_transaction_union import RewardedTransactionUnion
 from .transaction_included_resource import TransactionIncludedResource
 
@@ -23,6 +24,7 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
     )
     from kard.transactions import (
         CommissionEarnedDetails,
+        GetEarnedRewardsMeta,
         GetEarnedRewardsResponse,
         RewardedTransactionAttributes,
         RewardedTransactionRelationships,
@@ -38,7 +40,7 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
             RewardedTransactionUnion_RewardedTransaction(
                 id="fcabf024-3870-41f3-9fbd-b43ea85a3d19",
                 attributes=RewardedTransactionAttributes(
-                    status="SETTLED",
+                    status="APPROVED",
                     transaction_id="TXN-20241001-F21-127964",
                     transaction_amount_in_cents=12796,
                     transaction_timestamp=datetime.datetime.fromisoformat(
@@ -81,11 +83,61 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
                         ),
                     ),
                 ),
-            )
+            ),
+            RewardedTransactionUnion_RewardedTransaction(
+                id="7bcbdb95-f3a5-4f56-a9be-4c25f313eb0a",
+                attributes=RewardedTransactionAttributes(
+                    status="SETTLED",
+                    transaction_id="TXN-20240928-TGT-778813",
+                    transaction_amount_in_cents=8800,
+                    transaction_timestamp=datetime.datetime.fromisoformat(
+                        "2024-09-28 14:11:22+00:00",
+                    ),
+                    paid_to_issuer="PAID_IN_FULL",
+                    payout_timestamp=datetime.datetime.fromisoformat(
+                        "2024-09-29 10:15:00+00:00",
+                    ),
+                    card_bin="123456",
+                    card_last_four="4321",
+                    commission_earned=CommissionEarnedDetails(
+                        issuer=CommissionValue(
+                            type="cents",
+                            value=70,
+                        ),
+                        user=CommissionValue(
+                            type="cents",
+                            value=220,
+                        ),
+                    ),
+                ),
+                relationships=RewardedTransactionRelationships(
+                    user=RelationshipSingle(
+                        data=RelationshipData(
+                            type="user",
+                            id="8c52423a-c319-44ee-8fc7-508e97b43892",
+                        ),
+                    ),
+                    merchant=RelationshipSingle(
+                        data=RelationshipData(
+                            type="merchant",
+                            id="5f3e2d1c40abc50008cc4821",
+                        ),
+                    ),
+                    offer=RelationshipSingle(
+                        data=RelationshipData(
+                            type="offer",
+                            id="OFF-TGT-ONLINE-2024Q4-002",
+                        ),
+                    ),
+                ),
+            ),
         ],
         links=Links(
             self_="/v2/issuers/org-123/users/user-456/earned-rewards?page[size]=10",
             next="/v2/issuers/org-123/users/user-456/earned-rewards?page[size]=10&page[after]=eyJpZCI6ImZjYWJmMDI0LTM4NzAtNDFmMy05ZmJkLWI0M2VhODVhM2QxOSIsInRzIjoiMjAyNC0xMC0wMVQwMTozNjo1N1oifQ==",
+        ),
+        meta=GetEarnedRewardsMeta(
+            lifetime_rewards_in_cents=540,
         ),
         included=[
             TransactionIncludedResource_Merchant(
@@ -118,6 +170,11 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
 
     data: typing.List[RewardedTransactionUnion]
     links: Links
+    meta: GetEarnedRewardsMeta = pydantic.Field()
+    """
+    Additional metadata for the earned rewards response.
+    """
+
     included: typing.Optional[typing.List[TransactionIncludedResource]] = pydantic.Field(default=None)
     """
     Additional resources referenced in the response

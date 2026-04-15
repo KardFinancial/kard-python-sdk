@@ -32,6 +32,7 @@ if typing.TYPE_CHECKING:
     from .fraudulent_transaction_object import FraudulentTransactionObject
     from .fraudulent_transaction_request_body import FraudulentTransactionRequestBody
     from .fraudulent_transaction_response import FraudulentTransactionResponse
+    from .get_earned_rewards_meta import GetEarnedRewardsMeta
     from .get_earned_rewards_response import GetEarnedRewardsResponse
     from .matched_transactions_attributes import MatchedTransactionsAttributes
     from .matched_transactions_request import MatchedTransactionsRequest
@@ -100,6 +101,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FraudulentTransactionObject": ".fraudulent_transaction_object",
     "FraudulentTransactionRequestBody": ".fraudulent_transaction_request_body",
     "FraudulentTransactionResponse": ".fraudulent_transaction_response",
+    "GetEarnedRewardsMeta": ".get_earned_rewards_meta",
     "GetEarnedRewardsResponse": ".get_earned_rewards_response",
     "MatchedTransactionsAttributes": ".matched_transactions_attributes",
     "MatchedTransactionsRequest": ".matched_transactions_request",
@@ -190,6 +192,7 @@ __all__ = [
     "FraudulentTransactionObject",
     "FraudulentTransactionRequestBody",
     "FraudulentTransactionResponse",
+    "GetEarnedRewardsMeta",
     "GetEarnedRewardsResponse",
     "MatchedTransactionsAttributes",
     "MatchedTransactionsRequest",

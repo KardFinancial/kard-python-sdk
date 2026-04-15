@@ -500,11 +500,12 @@ class RawTransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
+        filter_status: typing.Optional[str] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetEarnedRewardsResponse]:
         """
-        Retrieve rewarded transaction history for a specific user. Returns only SETTLED transactions within the last 12 months.
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -526,6 +527,9 @@ class RawTransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
+        filter_status : typing.Optional[str]
+            Comma-separated list of transaction statuses to return. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted.
+
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
 
@@ -543,6 +547,7 @@ class RawTransactionsClient:
                 "page[after]": page_after,
                 "page[before]": page_before,
                 "page[size]": page_size,
+                "filter[status]": filter_status,
                 "include": include,
             },
             request_options=request_options,
@@ -1071,11 +1076,12 @@ class AsyncRawTransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
+        filter_status: typing.Optional[str] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetEarnedRewardsResponse]:
         """
-        Retrieve rewarded transaction history for a specific user. Returns only SETTLED transactions within the last 12 months.
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -1097,6 +1103,9 @@ class AsyncRawTransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
+        filter_status : typing.Optional[str]
+            Comma-separated list of transaction statuses to return. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted.
+
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
 
@@ -1114,6 +1123,7 @@ class AsyncRawTransactionsClient:
                 "page[after]": page_after,
                 "page[before]": page_before,
                 "page[size]": page_size,
+                "filter[status]": filter_status,
                 "include": include,
             },
             request_options=request_options,
