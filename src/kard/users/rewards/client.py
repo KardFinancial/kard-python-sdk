@@ -125,6 +125,83 @@ class RewardsClient:
         )
         return _response.data
 
+    def placement_offers(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        filter_search: typing.Optional[str] = None,
+        filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
+        filter_category: typing.Optional[CategoryOption] = None,
+        filter_is_targeted: typing.Optional[bool] = None,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> OffersResponseObject:
+        """
+        Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
+        limited by the placement's available slots.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
+
+        filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
+
+        filter_category : typing.Optional[CategoryOption]
+
+        filter_is_targeted : typing.Optional[bool]
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        OffersResponseObject
+
+        Examples
+        --------
+        from kard import KardApi
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.users.rewards.placement_offers(
+            organization_id="organizationId",
+            user_id="userId",
+            placement_id="placementId",
+        )
+        """
+        _response = self._raw_client.placement_offers(
+            organization_id,
+            user_id,
+            placement_id,
+            filter_search=filter_search,
+            filter_purchase_channel=filter_purchase_channel,
+            filter_category=filter_category,
+            filter_is_targeted=filter_is_targeted,
+            include=include,
+            supported_components=supported_components,
+            request_options=request_options,
+        )
+        return _response.data
+
     def locations(
         self,
         organization_id: OrganizationId,
@@ -348,6 +425,91 @@ class AsyncRewardsClient:
             filter_category=filter_category,
             filter_is_targeted=filter_is_targeted,
             sort=sort,
+            include=include,
+            supported_components=supported_components,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def placement_offers(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        filter_search: typing.Optional[str] = None,
+        filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
+        filter_category: typing.Optional[CategoryOption] = None,
+        filter_is_targeted: typing.Optional[bool] = None,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> OffersResponseObject:
+        """
+        Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
+        limited by the placement's available slots.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
+
+        filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
+
+        filter_category : typing.Optional[CategoryOption]
+
+        filter_is_targeted : typing.Optional[bool]
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        OffersResponseObject
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.users.rewards.placement_offers(
+                organization_id="organizationId",
+                user_id="userId",
+                placement_id="placementId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.placement_offers(
+            organization_id,
+            user_id,
+            placement_id,
+            filter_search=filter_search,
+            filter_purchase_channel=filter_purchase_channel,
+            filter_category=filter_category,
+            filter_is_targeted=filter_is_targeted,
             include=include,
             supported_components=supported_components,
             request_options=request_options,

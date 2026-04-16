@@ -1,3 +1,9 @@
+## 8.5.0 - 2026-04-16
+### Added
+* **`RewardsClient.placement_offers` / `AsyncRewardsClient.placement_offers`** — new method that retrieves cash-back offers for a placement slot, sorted by highest cash back and limited by the placement's available slots; requires the `rewards:read` scope.
+* **`RawRewardsClient.placement_offers` / `AsyncRawRewardsClient.placement_offers`** — raw HTTP variants of the same endpoint, returning `HttpResponse[OffersResponseObject]` and `AsyncHttpResponse[OffersResponseObject]` respectively.
+* **Placement offers filtering** — optional parameters `filter_search`, `filter_purchase_channel`, `filter_category`, `filter_is_targeted`, `include`, and `supported_components` allow fine-grained control over the offers returned.
+
 ## 8.4.0 - 2026-04-16
 ### Changed
 * **`filter_status` on `get_earned_rewards`** — parameter type narrowed from `Optional[str]` to `Optional[RewardedTransactionStatus]` across all `TransactionsClient` variants; passing `APPROVED` now explicitly returns only approved transactions without a corresponding settled transaction.

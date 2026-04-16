@@ -172,6 +172,131 @@ class RawRewardsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def placement_offers(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        filter_search: typing.Optional[str] = None,
+        filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
+        filter_category: typing.Optional[CategoryOption] = None,
+        filter_is_targeted: typing.Optional[bool] = None,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[OffersResponseObject]:
+        """
+        Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
+        limited by the placement's available slots.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
+
+        filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
+
+        filter_category : typing.Optional[CategoryOption]
+
+        filter_is_targeted : typing.Optional[bool]
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[OffersResponseObject]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/offers",
+            method="GET",
+            params={
+                "filter[search]": filter_search,
+                "filter[purchaseChannel]": filter_purchase_channel,
+                "filter[category]": filter_category,
+                "filter[isTargeted]": filter_is_targeted,
+                "include": include,
+                "supportedComponents": supported_components,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    OffersResponseObject,
+                    parse_obj_as(
+                        type_=OffersResponseObject,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def locations(
         self,
         organization_id: OrganizationId,
@@ -406,6 +531,131 @@ class AsyncRawRewardsClient:
                 "filter[category]": filter_category,
                 "filter[isTargeted]": filter_is_targeted,
                 "sort": sort,
+                "include": include,
+                "supportedComponents": supported_components,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    OffersResponseObject,
+                    parse_obj_as(
+                        type_=OffersResponseObject,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def placement_offers(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        filter_search: typing.Optional[str] = None,
+        filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
+        filter_category: typing.Optional[CategoryOption] = None,
+        filter_is_targeted: typing.Optional[bool] = None,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[OffersResponseObject]:
+        """
+        Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
+        limited by the placement's available slots.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        filter_search : typing.Optional[str]
+            Case-insensitive search string to filter offers by merchant name
+
+        filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
+
+        filter_category : typing.Optional[CategoryOption]
+
+        filter_is_targeted : typing.Optional[bool]
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[OffersResponseObject]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/offers",
+            method="GET",
+            params={
+                "filter[search]": filter_search,
+                "filter[purchaseChannel]": filter_purchase_channel,
+                "filter[category]": filter_category,
+                "filter[isTargeted]": filter_is_targeted,
                 "include": include,
                 "supportedComponents": supported_components,
             },

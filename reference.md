@@ -3063,6 +3063,148 @@ client.users.rewards.offers(
 </dl>
 </details>
 
+<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">placement_offers</a>(...) -> OffersResponseObject</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
+limited by the placement's available slots.<br/>
+<b>Required scopes:</b> `rewards:read`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.users.rewards.placement_offers(
+    organization_id="organizationId",
+    user_id="userId",
+    placement_id="placementId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `UserId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_search:** `typing.Optional[str]` — Case-insensitive search string to filter offers by merchant name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_purchase_channel:** `typing.Optional[typing.List[PurchaseChannel]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_category:** `typing.Optional[CategoryOption]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_is_targeted:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">locations</a>(...) -> LocationsResponseObject</code></summary>
 <dl>
 <dd>
