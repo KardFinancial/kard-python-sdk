@@ -37,6 +37,8 @@ if typing.TYPE_CHECKING:
     from .matched_transactions_attributes import MatchedTransactionsAttributes
     from .matched_transactions_request import MatchedTransactionsRequest
     from .merchant import Merchant
+    from .merchant_asset import MerchantAsset
+    from .merchant_asset_type import MerchantAssetType
     from .payment_status import PaymentStatus
     from .payment_type import PaymentType
     from .processor_mid import ProcessorMid, ProcessorMid_Visa
@@ -106,6 +108,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MatchedTransactionsAttributes": ".matched_transactions_attributes",
     "MatchedTransactionsRequest": ".matched_transactions_request",
     "Merchant": ".merchant",
+    "MerchantAsset": ".merchant_asset",
+    "MerchantAssetType": ".merchant_asset_type",
     "PaymentStatus": ".payment_status",
     "PaymentType": ".payment_type",
     "ProcessorMid": ".processor_mid",
@@ -197,6 +201,8 @@ __all__ = [
     "MatchedTransactionsAttributes",
     "MatchedTransactionsRequest",
     "Merchant",
+    "MerchantAsset",
+    "MerchantAssetType",
     "PaymentStatus",
     "PaymentType",
     "ProcessorMid",

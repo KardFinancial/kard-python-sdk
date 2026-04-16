@@ -1,3 +1,9 @@
+## 8.7.0 - 2026-04-16
+### Added
+* **`MerchantAsset`** — new Pydantic model representing an attribution-signed asset image (logo, banner, etc.) for a merchant, with `type`, `url`, and optional `alt` fields; exported from `kard`, `kard.transactions`, and `kard.transactions.types`.
+* **`MerchantAssetType`** — new type alias for the supported asset kinds (`"IMG_VIEW"`, `"BANNER_VIEW"`); exported from the same modules as `MerchantAsset`.
+* **`assets` field on `TransactionMerchantAttributes`** — new optional `List[MerchantAsset]` field that surfaces attribution-signed merchant images directly within transaction responses.
+
 ## 8.6.0 - 2026-04-16
 ### Added
 * **`PlacementTypeFilter`** — new type representing the two supported placement kinds (`placementMainPage`, `placementPushNotification`); exported from `kard.organizations`, `kard.organizations.placements`, and `kard.organizations.placements.types`.

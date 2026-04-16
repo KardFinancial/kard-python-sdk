@@ -26,6 +26,7 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
         CommissionEarnedDetails,
         GetEarnedRewardsMeta,
         GetEarnedRewardsResponse,
+        MerchantAsset,
         RewardedTransactionAttributes,
         RewardedTransactionRelationships,
         RewardedTransactionUnion_RewardedTransaction,
@@ -144,12 +145,31 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
                 id="633ed2ab30dcb60009dd5699",
                 attributes=TransactionMerchantAttributes(
                     name="Forever 21",
+                    assets=[
+                        MerchantAsset(
+                            type="IMG_VIEW",
+                            url="https://attribution.getkard.com/public/logos/forever21.jpg?subtype=IMG_VIEW&offerId=OFF-F21-INSTORE-2024Q4-001&token=signed-token",
+                            alt="Forever 21 Logo Image",
+                        ),
+                        MerchantAsset(
+                            type="BANNER_VIEW",
+                            url="https://attribution.getkard.com/public/banners/forever21.jpg?subtype=BANNER_VIEW&offerId=OFF-F21-INSTORE-2024Q4-001&token=signed-token",
+                            alt="Forever 21 Banner Image",
+                        ),
+                    ],
                 ),
             ),
             TransactionIncludedResource_Merchant(
                 id="5f3e2d1c40abc50008cc4821",
                 attributes=TransactionMerchantAttributes(
                     name="Target",
+                    assets=[
+                        MerchantAsset(
+                            type="IMG_VIEW",
+                            url="https://attribution.getkard.com/public/logos/target.jpg?subtype=IMG_VIEW&offerId=OFF-TGT-ONLINE-2024Q4-002&token=signed-token",
+                            alt="Target Logo Image",
+                        )
+                    ],
                 ),
             ),
             TransactionIncludedResource_Offer(

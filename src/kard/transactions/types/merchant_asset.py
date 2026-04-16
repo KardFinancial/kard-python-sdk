@@ -4,20 +4,23 @@ import typing
 
 import pydantic
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .merchant_asset import MerchantAsset
+from .merchant_asset_type import MerchantAssetType
 
 
-class TransactionMerchantAttributes(UniversalBaseModel):
-    name: str = pydantic.Field()
+class MerchantAsset(UniversalBaseModel):
+    type: MerchantAssetType = pydantic.Field()
     """
-    Merchant name
+    The type of asset being tracked.
     """
 
-    assets: typing.Optional[typing.List[MerchantAsset]] = pydantic.Field(default=None)
+    url: str = pydantic.Field()
     """
-    Tracked asset images for the merchant (logo, banner, etc.). Each asset
-    URL is signed for attribution tracking and should be loaded as-is by the
-    client.
+    Attribution-signed URL for loading the asset.
+    """
+
+    alt: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Alt text describing the asset for accessibility.
     """
 
     if IS_PYDANTIC_V2:
