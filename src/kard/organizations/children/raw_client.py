@@ -3,115 +3,85 @@
 import typing
 from json.decoder import JSONDecodeError
 
-from ..commons.errors.conflict_error import ConflictError
-from ..commons.errors.does_not_exist_error import DoesNotExistError
-from ..commons.errors.forbidden_error import ForbiddenError
-from ..commons.errors.internal_server_error import InternalServerError
-from ..commons.errors.invalid_request import InvalidRequest
-from ..commons.errors.unauthorized_error import UnauthorizedError
-from ..commons.types.error_response import ErrorResponse
-from ..commons.types.organization_id import OrganizationId
-from ..core.api_error import ApiError
-from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import encode_path_param
-from ..core.parse_error import ParsingError
-from ..core.pydantic_utilities import parse_obj_as
-from ..core.request_options import RequestOptions
-from ..core.serialization import convert_and_respect_annotation_metadata
-from .errors.create_audit_multi_status import CreateAuditMultiStatus
-from .errors.create_incoming_transactions_multi_status import CreateIncomingTransactionsMultiStatus
-from .errors.fraud_multi_status import FraudMultiStatus
-from .types.create_audit_multi_status_response import CreateAuditMultiStatusResponse
-from .types.create_audit_request_data_union import CreateAuditRequestDataUnion
-from .types.create_audit_response_body import CreateAuditResponseBody
-from .types.create_file_upload_data import CreateFileUploadData
-from .types.create_file_upload_url_response import CreateFileUploadUrlResponse
-from .types.fraudulent_transaction_data import FraudulentTransactionData
-from .types.fraudulent_transaction_object import FraudulentTransactionObject
-from .types.fraudulent_transaction_response import FraudulentTransactionResponse
-from .types.get_earned_rewards_response import GetEarnedRewardsResponse
-from .types.rewarded_transaction_status import RewardedTransactionStatus
-from .types.transactions import Transactions
-from .types.transactions_multi_response import TransactionsMultiResponse
-from .types.transactions_response import TransactionsResponse
+from ...commons.errors.conflict_error import ConflictError
+from ...commons.errors.does_not_exist_error import DoesNotExistError
+from ...commons.errors.forbidden_error import ForbiddenError
+from ...commons.errors.internal_server_error import InternalServerError
+from ...commons.errors.invalid_request import InvalidRequest
+from ...commons.errors.unauthorized_error import UnauthorizedError
+from ...commons.types.error_response import ErrorResponse
+from ...core.api_error import ApiError
+from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ...core.http_response import AsyncHttpResponse, HttpResponse
+from ...core.jsonable_encoder import encode_path_param
+from ...core.parse_error import ParsingError
+from ...core.pydantic_utilities import parse_obj_as
+from ...core.request_options import RequestOptions
+from ...core.serialization import convert_and_respect_annotation_metadata
+from ...internal_organizations.types.delete_resource_response import DeleteResourceResponse
+from ..types.external_organization_response import ExternalOrganizationResponse
+from .types.child_organization_list_response import ChildOrganizationListResponse
+from .types.create_child_request_data import CreateChildRequestData
+from .types.update_child_request_data import UpdateChildRequestData
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class RawTransactionsClient:
+class RawChildrenClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def create(
+    def list(
         self,
-        organization_id: OrganizationId,
+        organization_id: str,
         *,
-        data: typing.Sequence[Transactions],
+        page_after: typing.Optional[str] = None,
+        page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[TransactionsResponse]:
+    ) -> HttpResponse[ChildOrganizationListResponse]:
         """
-        Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>
-        Please use the correct type when calling the endpoint:
-        - `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.
-        - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
-        - `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>
-
-        <b>Required scopes:</b> `transaction:write`<br/>
-        <b>Note:</b> `Maximum of 500 transactions can be created per request`.
+        List child organizations belonging to the authenticated issuer
 
         Parameters
         ----------
-        organization_id : OrganizationId
+        organization_id : str
+            Unique identifier of the parent organization
 
-        data : typing.Sequence[Transactions]
-            Discriminated union representing the request body for submitting a transaction.
-            Use `type` to distinguish between the two:
-            - `transaction`: For transactions requiring processing and matching by the Kard system.
-            - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
-            - `coreTransaction`: For transactions from core banking systems with limited card-level data.
+        page_after : typing.Optional[str]
+            Cursor value for the next page of results
+
+        page_size : typing.Optional[int]
+            Maximum number of records to return [1 - 200] (default = 200)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[TransactionsResponse]
+        HttpResponse[ChildOrganizationListResponse]
+            Paginated list of child organizations
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/transactions",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[Transactions], direction="write"
-                ),
+            f"v2/issuers/{encode_path_param(organization_id)}/children",
+            method="GET",
+            params={
+                "page[after]": page_after,
+                "page[size]": page_size,
             },
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    TransactionsResponse,
+                    ChildOrganizationListResponse,
                     parse_obj_as(
-                        type_=TransactionsResponse,  # type: ignore
+                        type_=ChildOrganizationListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 207:
-                raise CreateIncomingTransactionsMultiStatus(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        TransactionsMultiResponse,
-                        parse_obj_as(
-                            type_=TransactionsMultiResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -123,323 +93,6 @@ class RawTransactionsClient:
                         ),
                     ),
                 )
-            if _response.status_code == 500:
-                raise InternalServerError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def create_fraud_markers(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[FraudulentTransactionData],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[FraudulentTransactionObject]:
-        """
-        Call this endpoint to flag a submitted transaction as fraudulent. This will prevent it from being rewarded.<br/>
-
-        <b>Required scopes:</b>&nbsp;&nbsp;`transaction:write`<br/>
-        <b>Note:</b> `Maximum of 500 fraudulent transactions can be created per request`.
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[FraudulentTransactionData]
-            List of fraudulent transactions to report
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[FraudulentTransactionObject]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/fraud",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[FraudulentTransactionData], direction="write"
-                ),
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    FraudulentTransactionObject,
-                    parse_obj_as(
-                        type_=FraudulentTransactionObject,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 207:
-                raise FraudMultiStatus(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        FraudulentTransactionResponse,
-                        parse_obj_as(
-                            type_=FraudulentTransactionResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 500:
-                raise InternalServerError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def create_audits(
-        self,
-        organization_id: OrganizationId,
-        user_id: str,
-        *,
-        data: typing.Sequence[CreateAuditRequestDataUnion],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CreateAuditResponseBody]:
-        """
-        Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>
-        <b>Required scopes:</b> `audit:write`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        user_id : str
-            The ID of the user as defined on the issuers system
-
-        data : typing.Sequence[CreateAuditRequestDataUnion]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[CreateAuditResponseBody]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/audits",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[CreateAuditRequestDataUnion], direction="write"
-                ),
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    CreateAuditResponseBody,
-                    parse_obj_as(
-                        type_=CreateAuditResponseBody,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
-            if _response.status_code == 207:
-                raise CreateAuditMultiStatus(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        CreateAuditMultiStatusResponse,
-                        parse_obj_as(
-                            type_=CreateAuditMultiStatusResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 500:
-                raise InternalServerError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 404:
-                raise DoesNotExistError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    def create_bulk_transactions_upload_url(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[CreateFileUploadData],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[CreateFileUploadUrlResponse]:
-        """
-        Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly
-        to storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the
-        binary file content as the body. If a URL expires before the upload completes, you must request a new one.
-        Files can be uploaded as plain JSONL or as a gzip-compressed file.
-        Only `coreTransaction` type is supported for bulk file uploads.
-        <b>Required scopes:</b> `transaction:write`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[CreateFileUploadData]
-            List of file upload requests (1–10 items per request).
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        HttpResponse[CreateFileUploadUrlResponse]
-        """
-        _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/transactions/uploads",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[CreateFileUploadData], direction="write"
-                ),
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    CreateFileUploadUrlResponse,
-                    parse_obj_as(
-                        type_=CreateFileUploadUrlResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return HttpResponse(response=_response, data=_data)
             if _response.status_code == 403:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
@@ -451,19 +104,8 @@ class RawTransactionsClient:
                         ),
                     ),
                 )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
+            if _response.status_code == 404:
+                raise DoesNotExistError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -493,76 +135,75 @@ class RawTransactionsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_earned_rewards(
+    def create(
         self,
-        organization_id: OrganizationId,
-        user_id: str,
+        organization_id: str,
         *,
-        page_after: typing.Optional[str] = None,
-        page_before: typing.Optional[str] = None,
-        page_size: typing.Optional[int] = None,
-        filter_status: typing.Optional[RewardedTransactionStatus] = None,
-        include: typing.Optional[str] = None,
+        data: CreateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[GetEarnedRewardsResponse]:
+    ) -> HttpResponse[ExternalOrganizationResponse]:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
-        <br/>
-        <b>Required scopes:</b> `transaction:read`
-        <br/>
-        <b>Query Limit:</b> Maximum of 12 months of transaction data can be queried.
+        Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
 
         Parameters
         ----------
-        organization_id : OrganizationId
+        organization_id : str
+            Unique identifier of the parent organization
 
-        user_id : str
-            The ID of the user as defined on the issuers system
-
-        page_after : typing.Optional[str]
-            Cursor for next page (base64-encoded timestamp + transaction ID)
-
-        page_before : typing.Optional[str]
-            Cursor for previous page (base64-encoded timestamp + transaction ID)
-
-        page_size : typing.Optional[int]
-            Number of results per page
-
-        filter_status : typing.Optional[RewardedTransactionStatus]
-            Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
-
-        include : typing.Optional[str]
-            Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+        data : CreateChildRequestData
+            Child organization data for creation
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[GetEarnedRewardsResponse]
+        HttpResponse[ExternalOrganizationResponse]
+            Created child organization resource
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/earned-rewards",
-            method="GET",
-            params={
-                "page[after]": page_after,
-                "page[before]": page_before,
-                "page[size]": page_size,
-                "filter[status]": filter_status,
-                "include": include,
+            f"v2/issuers/{encode_path_param(organization_id)}/children",
+            method="POST",
+            json={
+                "data": convert_and_respect_annotation_metadata(
+                    object_=data, annotation=CreateChildRequestData, direction="write"
+                ),
             },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetEarnedRewardsResponse,
+                    ExternalOrganizationResponse,
                     parse_obj_as(
-                        type_=GetEarnedRewardsResponse,  # type: ignore
+                        type_=ExternalOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 400:
                 raise InvalidRequest(
                     headers=dict(_response.headers),
@@ -574,8 +215,291 @@ class RawTransactionsClient:
                         ),
                     ),
                 )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get(
+        self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ExternalOrganizationResponse]:
+        """
+        Retrieve a specific child organization
+
+        Parameters
+        ----------
+        organization_id : str
+            Unique identifier of the parent organization
+
+        child_id : str
+            Unique identifier of the child organization
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ExternalOrganizationResponse]
+            Child organization resource
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/children/{encode_path_param(child_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ExternalOrganizationResponse,
+                    parse_obj_as(
+                        type_=ExternalOrganizationResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
             if _response.status_code == 401:
                 raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update(
+        self,
+        organization_id: str,
+        child_id: str,
+        *,
+        data: UpdateChildRequestData,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ExternalOrganizationResponse]:
+        """
+        Update a child organization. Only the name can be changed.
+
+        Parameters
+        ----------
+        organization_id : str
+            Unique identifier of the parent organization
+
+        child_id : str
+            Unique identifier of the child organization
+
+        data : UpdateChildRequestData
+            Child organization data for update
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ExternalOrganizationResponse]
+            Updated child organization resource
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/children/{encode_path_param(child_id)}",
+            method="PATCH",
+            json={
+                "data": convert_and_respect_annotation_metadata(
+                    object_=data, annotation=UpdateChildRequestData, direction="write"
+                ),
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ExternalOrganizationResponse,
+                    parse_obj_as(
+                        type_=ExternalOrganizationResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def delete(
+        self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DeleteResourceResponse]:
+        """
+        Delete a child organization
+
+        Parameters
+        ----------
+        organization_id : str
+            Unique identifier of the parent organization
+
+        child_id : str
+            Unique identifier of the child organization
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DeleteResourceResponse]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/children/{encode_path_param(child_id)}",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DeleteResourceResponse,
+                    parse_obj_as(
+                        type_=DeleteResourceResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -617,77 +541,59 @@ class RawTransactionsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
 
-class AsyncRawTransactionsClient:
+class AsyncRawChildrenClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def create(
+    async def list(
         self,
-        organization_id: OrganizationId,
+        organization_id: str,
         *,
-        data: typing.Sequence[Transactions],
+        page_after: typing.Optional[str] = None,
+        page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[TransactionsResponse]:
+    ) -> AsyncHttpResponse[ChildOrganizationListResponse]:
         """
-        Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>
-        Please use the correct type when calling the endpoint:
-        - `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.
-        - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
-        - `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>
-
-        <b>Required scopes:</b> `transaction:write`<br/>
-        <b>Note:</b> `Maximum of 500 transactions can be created per request`.
+        List child organizations belonging to the authenticated issuer
 
         Parameters
         ----------
-        organization_id : OrganizationId
+        organization_id : str
+            Unique identifier of the parent organization
 
-        data : typing.Sequence[Transactions]
-            Discriminated union representing the request body for submitting a transaction.
-            Use `type` to distinguish between the two:
-            - `transaction`: For transactions requiring processing and matching by the Kard system.
-            - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
-            - `coreTransaction`: For transactions from core banking systems with limited card-level data.
+        page_after : typing.Optional[str]
+            Cursor value for the next page of results
+
+        page_size : typing.Optional[int]
+            Maximum number of records to return [1 - 200] (default = 200)
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[TransactionsResponse]
+        AsyncHttpResponse[ChildOrganizationListResponse]
+            Paginated list of child organizations
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/transactions",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[Transactions], direction="write"
-                ),
+            f"v2/issuers/{encode_path_param(organization_id)}/children",
+            method="GET",
+            params={
+                "page[after]": page_after,
+                "page[size]": page_size,
             },
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    TransactionsResponse,
+                    ChildOrganizationListResponse,
                     parse_obj_as(
-                        type_=TransactionsResponse,  # type: ignore
+                        type_=ChildOrganizationListResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 207:
-                raise CreateIncomingTransactionsMultiStatus(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        TransactionsMultiResponse,
-                        parse_obj_as(
-                            type_=TransactionsMultiResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -699,8 +605,108 @@ class AsyncRawTransactionsClient:
                         ),
                     ),
                 )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             if _response.status_code == 500:
                 raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def create(
+        self,
+        organization_id: str,
+        *,
+        data: CreateChildRequestData,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
+        """
+        Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
+
+        Parameters
+        ----------
+        organization_id : str
+            Unique identifier of the parent organization
+
+        data : CreateChildRequestData
+            Child organization data for creation
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ExternalOrganizationResponse]
+            Created child organization resource
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/children",
+            method="POST",
+            json={
+                "data": convert_and_respect_annotation_metadata(
+                    object_=data, annotation=CreateChildRequestData, direction="write"
+                ),
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ExternalOrganizationResponse,
+                    parse_obj_as(
+                        type_=ExternalOrganizationResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -732,6 +738,17 @@ class AsyncRawTransactionsClient:
                         ),
                     ),
                 )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -741,67 +758,67 @@ class AsyncRawTransactionsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def create_fraud_markers(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[FraudulentTransactionData],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[FraudulentTransactionObject]:
+    async def get(
+        self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
         """
-        Call this endpoint to flag a submitted transaction as fraudulent. This will prevent it from being rewarded.<br/>
-
-        <b>Required scopes:</b>&nbsp;&nbsp;`transaction:write`<br/>
-        <b>Note:</b> `Maximum of 500 fraudulent transactions can be created per request`.
+        Retrieve a specific child organization
 
         Parameters
         ----------
-        organization_id : OrganizationId
+        organization_id : str
+            Unique identifier of the parent organization
 
-        data : typing.Sequence[FraudulentTransactionData]
-            List of fraudulent transactions to report
+        child_id : str
+            Unique identifier of the child organization
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[FraudulentTransactionObject]
+        AsyncHttpResponse[ExternalOrganizationResponse]
+            Child organization resource
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/fraud",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[FraudulentTransactionData], direction="write"
-                ),
-            },
+            f"v2/issuers/{encode_path_param(organization_id)}/children/{encode_path_param(child_id)}",
+            method="GET",
             request_options=request_options,
-            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    FraudulentTransactionObject,
+                    ExternalOrganizationResponse,
                     parse_obj_as(
-                        type_=FraudulentTransactionObject,  # type: ignore
+                        type_=ExternalOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 207:
-                raise FraudMultiStatus(
+            if _response.status_code == 401:
+                raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        FraudulentTransactionResponse,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=FraudulentTransactionResponse,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
                 )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -822,17 +839,6 @@ class AsyncRawTransactionsClient:
                         ),
                     ),
                 )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
@@ -842,40 +848,42 @@ class AsyncRawTransactionsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def create_audits(
+    async def update(
         self,
-        organization_id: OrganizationId,
-        user_id: str,
+        organization_id: str,
+        child_id: str,
         *,
-        data: typing.Sequence[CreateAuditRequestDataUnion],
+        data: UpdateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CreateAuditResponseBody]:
+    ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
         """
-        Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>
-        <b>Required scopes:</b> `audit:write`
+        Update a child organization. Only the name can be changed.
 
         Parameters
         ----------
-        organization_id : OrganizationId
+        organization_id : str
+            Unique identifier of the parent organization
 
-        user_id : str
-            The ID of the user as defined on the issuers system
+        child_id : str
+            Unique identifier of the child organization
 
-        data : typing.Sequence[CreateAuditRequestDataUnion]
+        data : UpdateChildRequestData
+            Child organization data for update
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[CreateAuditResponseBody]
+        AsyncHttpResponse[ExternalOrganizationResponse]
+            Updated child organization resource
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/audits",
-            method="POST",
+            f"v2/issuers/{encode_path_param(organization_id)}/children/{encode_path_param(child_id)}",
+            method="PATCH",
             json={
                 "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[CreateAuditRequestDataUnion], direction="write"
+                    object_=data, annotation=UpdateChildRequestData, direction="write"
                 ),
             },
             request_options=request_options,
@@ -884,24 +892,13 @@ class AsyncRawTransactionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    CreateAuditResponseBody,
+                    ExternalOrganizationResponse,
                     parse_obj_as(
-                        type_=CreateAuditResponseBody,  # type: ignore
+                        type_=ExternalOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 207:
-                raise CreateAuditMultiStatus(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        CreateAuditMultiStatusResponse,
-                        parse_obj_as(
-                            type_=CreateAuditMultiStatusResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 401:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
@@ -913,8 +910,8 @@ class AsyncRawTransactionsClient:
                         ),
                     ),
                 )
-            if _response.status_code == 500:
-                raise InternalServerError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -946,109 +943,6 @@ class AsyncRawTransactionsClient:
                         ),
                     ),
                 )
-            if _response.status_code == 409:
-                raise ConflictError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
-        except ValidationError as e:
-            raise ParsingError(
-                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
-            )
-        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
-
-    async def create_bulk_transactions_upload_url(
-        self,
-        organization_id: OrganizationId,
-        *,
-        data: typing.Sequence[CreateFileUploadData],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[CreateFileUploadUrlResponse]:
-        """
-        Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly
-        to storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the
-        binary file content as the body. If a URL expires before the upload completes, you must request a new one.
-        Files can be uploaded as plain JSONL or as a gzip-compressed file.
-        Only `coreTransaction` type is supported for bulk file uploads.
-        <b>Required scopes:</b> `transaction:write`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        data : typing.Sequence[CreateFileUploadData]
-            List of file upload requests (1–10 items per request).
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        AsyncHttpResponse[CreateFileUploadUrlResponse]
-        """
-        _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/transactions/uploads",
-            method="POST",
-            json={
-                "data": convert_and_respect_annotation_metadata(
-                    object_=data, annotation=typing.Sequence[CreateFileUploadData], direction="write"
-                ),
-            },
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                _data = typing.cast(
-                    CreateFileUploadUrlResponse,
-                    parse_obj_as(
-                        type_=CreateFileUploadUrlResponse,  # type: ignore
-                        object_=_response.json(),
-                    ),
-                )
-                return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 403:
-                raise ForbiddenError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
-            if _response.status_code == 400:
-                raise InvalidRequest(
-                    headers=dict(_response.headers),
-                    body=typing.cast(
-                        ErrorResponse,
-                        parse_obj_as(
-                            type_=ErrorResponse,  # type: ignore
-                            object_=_response.json(),
-                        ),
-                    ),
-                )
             if _response.status_code == 500:
                 raise InternalServerError(
                     headers=dict(_response.headers),
@@ -1069,78 +963,44 @@ class AsyncRawTransactionsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_earned_rewards(
-        self,
-        organization_id: OrganizationId,
-        user_id: str,
-        *,
-        page_after: typing.Optional[str] = None,
-        page_before: typing.Optional[str] = None,
-        page_size: typing.Optional[int] = None,
-        filter_status: typing.Optional[RewardedTransactionStatus] = None,
-        include: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[GetEarnedRewardsResponse]:
+    async def delete(
+        self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DeleteResourceResponse]:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
-        <br/>
-        <b>Required scopes:</b> `transaction:read`
-        <br/>
-        <b>Query Limit:</b> Maximum of 12 months of transaction data can be queried.
+        Delete a child organization
 
         Parameters
         ----------
-        organization_id : OrganizationId
+        organization_id : str
+            Unique identifier of the parent organization
 
-        user_id : str
-            The ID of the user as defined on the issuers system
-
-        page_after : typing.Optional[str]
-            Cursor for next page (base64-encoded timestamp + transaction ID)
-
-        page_before : typing.Optional[str]
-            Cursor for previous page (base64-encoded timestamp + transaction ID)
-
-        page_size : typing.Optional[int]
-            Number of results per page
-
-        filter_status : typing.Optional[RewardedTransactionStatus]
-            Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
-
-        include : typing.Optional[str]
-            Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+        child_id : str
+            Unique identifier of the child organization
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[GetEarnedRewardsResponse]
+        AsyncHttpResponse[DeleteResourceResponse]
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/earned-rewards",
-            method="GET",
-            params={
-                "page[after]": page_after,
-                "page[before]": page_before,
-                "page[size]": page_size,
-                "filter[status]": filter_status,
-                "include": include,
-            },
+            f"v2/issuers/{encode_path_param(organization_id)}/children/{encode_path_param(child_id)}",
+            method="DELETE",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    GetEarnedRewardsResponse,
+                    DeleteResourceResponse,
                     parse_obj_as(
-                        type_=GetEarnedRewardsResponse,  # type: ignore
+                        type_=DeleteResourceResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
-            if _response.status_code == 400:
-                raise InvalidRequest(
+            if _response.status_code == 401:
+                raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -1150,8 +1010,8 @@ class AsyncRawTransactionsClient:
                         ),
                     ),
                 )
-            if _response.status_code == 401:
-                raise UnauthorizedError(
+            if _response.status_code == 403:
+                raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,

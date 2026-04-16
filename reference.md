@@ -495,6 +495,967 @@ client.notifications.subscriptions.update(
 </dl>
 </details>
 
+## Organizations
+<details><summary><code>client.organizations.<a href="src/kard/organizations/client.py">get</a>(...) -> ExternalOrganizationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve organization details for the authenticated issuer
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.get(
+    organization_id="organizationId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the organization (must match the authenticated issuer)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Children
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">list</a>(...) -> ChildOrganizationListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List child organizations belonging to the authenticated issuer
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.children.list(
+    organization_id="organizationId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the parent organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_after:** `typing.Optional[str]` — Cursor value for the next page of results
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Maximum number of records to return [1 - 200] (default = 200)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">create</a>(...) -> ExternalOrganizationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.organizations.children import CreateChildRequestData, CreateChildAttributes
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.children.create(
+    organization_id="organizationId",
+    data=CreateChildRequestData(
+        type="organization",
+        attributes=CreateChildAttributes(
+            name="name",
+        ),
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the parent organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `CreateChildRequestBody` — Child organization data for creation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">get</a>(...) -> ExternalOrganizationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific child organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.children.get(
+    organization_id="organizationId",
+    child_id="childId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the parent organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**child_id:** `str` — Unique identifier of the child organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">update</a>(...) -> ExternalOrganizationResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a child organization. Only the name can be changed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.organizations.children import UpdateChildRequestData, UpdateChildAttributes
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.children.update(
+    organization_id="organizationId",
+    child_id="childId",
+    data=UpdateChildRequestData(
+        type="organization",
+        attributes=UpdateChildAttributes(),
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the parent organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**child_id:** `str` — Unique identifier of the child organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `UpdateChildRequestBody` — Child organization data for update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">delete</a>(...) -> DeleteResourceResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a child organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.children.delete(
+    organization_id="organizationId",
+    child_id="childId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the parent organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**child_id:** `str` — Unique identifier of the child organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Placements
+<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">create</a>(...) -> PlacementFormatUnion</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a placement for the organization. Use type "placementMainPage" for main-page placements (requires name and availableSlots) or "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.organizations.placements import CreatePlacementDataUnion_PlacementMainPage, CreateMainPageAttributes
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.placements.create(
+    organization_id="org-123",
+    data=CreatePlacementDataUnion_PlacementMainPage(
+        attributes=CreateMainPageAttributes(
+            name="Homepage Banner",
+            available_slots=5,
+        ),
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `CreatePlacementRequestBody` — Placement data for creation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">list</a>(...) -> PlacementListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List placements belonging to the authenticated organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.placements.list(
+    organization_id="organizationId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_after:** `typing.Optional[str]` — Cursor value for the next page of results
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Maximum number of records to return [1 - 200] (default = 200)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">get</a>(...) -> PlacementFormatUnion</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific placement
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.placements.get(
+    organization_id="organizationId",
+    placement_id="placementId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` — Unique identifier of the placement (UUID v7)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">update</a>(...) -> PlacementFormatUnion</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace a placement. All fields must be provided. Use type "placementMainPage" or "placementPushNotification" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+from kard.organizations.placements import UpdatePlacementDataUnion_PlacementMainPage, UpdateMainPageAttributes
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.placements.update(
+    organization_id="organizationId",
+    placement_id="placementId",
+    data=UpdatePlacementDataUnion_PlacementMainPage(
+        attributes=UpdateMainPageAttributes(
+            name="name",
+            available_slots=1,
+        ),
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` — Unique identifier of the placement (UUID v7)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `UpdatePlacementRequestBody` — Placement data for update
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">delete</a>(...) -> DeleteResourceResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a placement
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.organizations.placements.delete(
+    organization_id="organizationId",
+    placement_id="placementId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `str` — Unique identifier of the organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` — Unique identifier of the placement (UUID v7)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Ping
 <details><summary><code>client.ping.<a href="src/kard/ping/client.py">ping</a>() -> PingResponseObject</code></summary>
 <dl>
@@ -1040,7 +2001,7 @@ client.transactions.get_earned_rewards(
     organization_id="org-123",
     user_id="user-456",
     page_size=10,
-    filter_status="APPROVED,SETTLED",
+    filter_status="APPROVED",
     include="merchant,offer",
 )
 
@@ -1098,7 +2059,7 @@ client.transactions.get_earned_rewards(
 <dl>
 <dd>
 
-**filter_status:** `typing.Optional[str]` — Comma-separated list of transaction statuses to return. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted.
+**filter_status:** `typing.Optional[RewardedTransactionStatus]` — Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
     
 </dd>
 </dl>

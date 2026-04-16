@@ -13,6 +13,7 @@ from .types.create_file_upload_url_response import CreateFileUploadUrlResponse
 from .types.fraudulent_transaction_data import FraudulentTransactionData
 from .types.fraudulent_transaction_object import FraudulentTransactionObject
 from .types.get_earned_rewards_response import GetEarnedRewardsResponse
+from .types.rewarded_transaction_status import RewardedTransactionStatus
 from .types.transactions import Transactions
 from .types.transactions_response import TransactionsResponse
 
@@ -319,7 +320,7 @@ class TransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
-        filter_status: typing.Optional[str] = None,
+        filter_status: typing.Optional[RewardedTransactionStatus] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
@@ -346,8 +347,8 @@ class TransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
-        filter_status : typing.Optional[str]
-            Comma-separated list of transaction statuses to return. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted.
+        filter_status : typing.Optional[RewardedTransactionStatus]
+            Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -371,7 +372,7 @@ class TransactionsClient:
             organization_id="org-123",
             user_id="user-456",
             page_size=10,
-            filter_status="APPROVED,SETTLED",
+            filter_status="APPROVED",
             include="merchant,offer",
         )
         """
@@ -722,7 +723,7 @@ class AsyncTransactionsClient:
         page_after: typing.Optional[str] = None,
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
-        filter_status: typing.Optional[str] = None,
+        filter_status: typing.Optional[RewardedTransactionStatus] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
@@ -749,8 +750,8 @@ class AsyncTransactionsClient:
         page_size : typing.Optional[int]
             Number of results per page
 
-        filter_status : typing.Optional[str]
-            Comma-separated list of transaction statuses to return. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted.
+        filter_status : typing.Optional[RewardedTransactionStatus]
+            Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -779,7 +780,7 @@ class AsyncTransactionsClient:
                 organization_id="org-123",
                 user_id="user-456",
                 page_size=10,
-                filter_status="APPROVED,SETTLED",
+                filter_status="APPROVED",
                 include="merchant,offer",
             )
 

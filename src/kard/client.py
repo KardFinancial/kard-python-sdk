@@ -16,6 +16,7 @@ if typing.TYPE_CHECKING:
     from .auth.client import AsyncAuthClient, AuthClient
     from .files.client import AsyncFilesClient, FilesClient
     from .notifications.client import AsyncNotificationsClient, NotificationsClient
+    from .organizations.client import AsyncOrganizationsClient, OrganizationsClient
     from .ping.client import AsyncPingClient, PingClient
     from .transactions.client import AsyncTransactionsClient, TransactionsClient
     from .users.client import AsyncUsersClient, UsersClient
@@ -175,6 +176,7 @@ class KardApi:
         self._auth: typing.Optional[AuthClient] = None
         self._files: typing.Optional[FilesClient] = None
         self._notifications: typing.Optional[NotificationsClient] = None
+        self._organizations: typing.Optional[OrganizationsClient] = None
         self._ping: typing.Optional[PingClient] = None
         self._transactions: typing.Optional[TransactionsClient] = None
         self._users: typing.Optional[UsersClient] = None
@@ -202,6 +204,14 @@ class KardApi:
 
             self._notifications = NotificationsClient(client_wrapper=self._client_wrapper)
         return self._notifications
+
+    @property
+    def organizations(self):
+        if self._organizations is None:
+            from .organizations.client import OrganizationsClient  # noqa: E402
+
+            self._organizations = OrganizationsClient(client_wrapper=self._client_wrapper)
+        return self._organizations
 
     @property
     def ping(self):
@@ -397,6 +407,7 @@ class AsyncKardApi:
         self._auth: typing.Optional[AsyncAuthClient] = None
         self._files: typing.Optional[AsyncFilesClient] = None
         self._notifications: typing.Optional[AsyncNotificationsClient] = None
+        self._organizations: typing.Optional[AsyncOrganizationsClient] = None
         self._ping: typing.Optional[AsyncPingClient] = None
         self._transactions: typing.Optional[AsyncTransactionsClient] = None
         self._users: typing.Optional[AsyncUsersClient] = None
@@ -424,6 +435,14 @@ class AsyncKardApi:
 
             self._notifications = AsyncNotificationsClient(client_wrapper=self._client_wrapper)
         return self._notifications
+
+    @property
+    def organizations(self):
+        if self._organizations is None:
+            from .organizations.client import AsyncOrganizationsClient  # noqa: E402
+
+            self._organizations = AsyncOrganizationsClient(client_wrapper=self._client_wrapper)
+        return self._organizations
 
     @property
     def ping(self):

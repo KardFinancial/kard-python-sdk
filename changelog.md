@@ -1,3 +1,12 @@
+## 8.4.0 - 2026-04-16
+### Changed
+* **`filter_status` on `get_earned_rewards`** — parameter type narrowed from `Optional[str]` to `Optional[RewardedTransactionStatus]` across all `TransactionsClient` variants; passing `APPROVED` now explicitly returns only approved transactions without a corresponding settled transaction.
+### Added
+* **`OrganizationsClient` / `AsyncOrganizationsClient`** — new top-level clients accessible via `client.organizations` with a `get(organization_id)` method to retrieve organization details for the authenticated issuer.
+* **`ChildrenClient` / `AsyncChildrenClient`** — new sub-clients at `client.organizations.children` for full CRUD management of child organizations, including cursor-based pagination on `list` and supporting request/response types `CreateChildRequestData`, `UpdateChildRequestData`, and `ChildOrganizationListResponse`.
+* **`PlacementsClient` / `AsyncPlacementsClient`** — new sub-clients at `client.organizations.placements` for full CRUD management of organization placements, supporting `placementMainPage` and `placementPushNotification` kinds with scheduling types `Cadence`, `CadenceFrequency`, and `DayOfWeek`.
+* **`ExternalOrganizationAttributes` / `ExternalOrganizationResponse`** — new Pydantic models available from `kard.organizations` describing organization resources including enrolled rewards, card networks, BINs, and optional merchant networks.
+
 ## 8.3.0 - 2026-04-15
 ### Added
 * **`GetEarnedRewardsMeta`** — new type (available from `kard`, `kard.transactions`, and `kard.transactions.types`) containing `lifetime_rewards_in_cents`, the user's total lifetime rewards in cents across all matched transactions.

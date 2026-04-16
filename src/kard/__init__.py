@@ -6,7 +6,7 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from . import auth, commons, files, notifications, ping, transactions, users
+    from . import auth, commons, files, internal_organizations, notifications, organizations, ping, transactions, users
     from ._default_clients import DefaultAioHttpClient, DefaultAsyncHttpxClient
     from .auth import TokenResponse
     from .client import AsyncKardApi, KardApi
@@ -52,6 +52,14 @@ if typing.TYPE_CHECKING:
         GetFilesMetadataResponse,
         PaginationMeta,
     )
+    from .internal_organizations import (
+        DeleteResourceData,
+        DeleteResourceResponse,
+        EnrolledReward,
+        MerchantNetwork,
+        MerchantNetworkName,
+        OrganizationPaginationMetadata,
+    )
     from .notifications import (
         AuditUpdateAttributes,
         AuditUpdateData,
@@ -82,6 +90,7 @@ if typing.TYPE_CHECKING:
         ValidTransactionCommissionEarned,
         ValidTransactionData,
     )
+    from .organizations import ExternalOrganizationAttributes, ExternalOrganizationResponse
     from .ping import NetworkBlockedError, NetworkBlockedErrorBody, PingResponseObject
     from .transactions import (
         AuditAttributes,
@@ -211,6 +220,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateUsersObject": ".users",
     "DefaultAioHttpClient": "._default_clients",
     "DefaultAsyncHttpxClient": "._default_clients",
+    "DeleteResourceData": ".internal_organizations",
+    "DeleteResourceResponse": ".internal_organizations",
     "DeleteUserResponseObject": ".users",
     "DirectionType": ".transactions",
     "DoesNotExistError": ".commons",
@@ -220,10 +231,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EarnedRewardSettledAttributes": ".notifications",
     "EarnedRewardSettledData": ".notifications",
     "EmptyObject": ".commons",
+    "EnrolledReward": ".internal_organizations",
     "EnrolledRewardsType": ".commons",
     "ErrorObject": ".commons",
     "ErrorResponse": ".commons",
     "ErrorSource": ".commons",
+    "ExternalOrganizationAttributes": ".organizations",
+    "ExternalOrganizationResponse": ".organizations",
     "FailedTransactionAttributes": ".notifications",
     "FailedTransactionData": ".notifications",
     "FailedTransactionRelationships": ".notifications",
@@ -256,6 +270,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MatchedTransactionsAttributes": ".transactions",
     "MatchedTransactionsRequest": ".transactions",
     "Merchant": ".transactions",
+    "MerchantNetwork": ".internal_organizations",
+    "MerchantNetworkName": ".internal_organizations",
     "MongoId": ".commons",
     "MultiStatus": ".users",
     "NetworkBlockedError": ".ping",
@@ -272,6 +288,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationPayload": ".notifications",
     "NotificationType": ".commons",
     "OrganizationId": ".commons",
+    "OrganizationPaginationMetadata": ".internal_organizations",
     "PaginationMeta": ".files",
     "PaymentStatus": ".transactions",
     "PaymentType": ".transactions",
@@ -339,7 +356,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "auth": ".auth",
     "commons": ".commons",
     "files": ".files",
+    "internal_organizations": ".internal_organizations",
     "notifications": ".notifications",
+    "organizations": ".organizations",
     "ping": ".ping",
     "transactions": ".transactions",
     "users": ".users",
@@ -404,6 +423,8 @@ __all__ = [
     "CreateUsersObject",
     "DefaultAioHttpClient",
     "DefaultAsyncHttpxClient",
+    "DeleteResourceData",
+    "DeleteResourceResponse",
     "DeleteUserResponseObject",
     "DirectionType",
     "DoesNotExistError",
@@ -413,10 +434,13 @@ __all__ = [
     "EarnedRewardSettledAttributes",
     "EarnedRewardSettledData",
     "EmptyObject",
+    "EnrolledReward",
     "EnrolledRewardsType",
     "ErrorObject",
     "ErrorResponse",
     "ErrorSource",
+    "ExternalOrganizationAttributes",
+    "ExternalOrganizationResponse",
     "FailedTransactionAttributes",
     "FailedTransactionData",
     "FailedTransactionRelationships",
@@ -449,6 +473,8 @@ __all__ = [
     "MatchedTransactionsAttributes",
     "MatchedTransactionsRequest",
     "Merchant",
+    "MerchantNetwork",
+    "MerchantNetworkName",
     "MongoId",
     "MultiStatus",
     "NetworkBlockedError",
@@ -465,6 +491,7 @@ __all__ = [
     "NotificationPayload",
     "NotificationType",
     "OrganizationId",
+    "OrganizationPaginationMetadata",
     "PaginationMeta",
     "PaymentStatus",
     "PaymentType",
@@ -532,7 +559,9 @@ __all__ = [
     "auth",
     "commons",
     "files",
+    "internal_organizations",
     "notifications",
+    "organizations",
     "ping",
     "transactions",
     "users",
