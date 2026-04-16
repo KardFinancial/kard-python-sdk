@@ -1164,6 +1164,22 @@ client.organizations.placements.list(
 <dl>
 <dd>
 
+**filter_type:** `typing.Optional[PlacementTypeFilter]` — Filter by placement type (placementMainPage or placementPushNotification)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_name:** `typing.Optional[str]` — Filter by exact placement name (unique within an organization per type)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **page_after:** `typing.Optional[str]` — Cursor value for the next page of results
     
 </dd>

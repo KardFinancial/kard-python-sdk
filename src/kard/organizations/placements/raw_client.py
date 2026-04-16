@@ -21,6 +21,7 @@ from ...internal_organizations.types.delete_resource_response import DeleteResou
 from .types.create_placement_data_union import CreatePlacementDataUnion
 from .types.placement_format_union import PlacementFormatUnion
 from .types.placement_list_response import PlacementListResponse
+from .types.placement_type_filter import PlacementTypeFilter
 from .types.update_placement_data_union import UpdatePlacementDataUnion
 from pydantic import ValidationError
 
@@ -147,6 +148,8 @@ class RawPlacementsClient:
         self,
         organization_id: str,
         *,
+        filter_type: typing.Optional[PlacementTypeFilter] = None,
+        filter_name: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -158,6 +161,12 @@ class RawPlacementsClient:
         ----------
         organization_id : str
             Unique identifier of the organization
+
+        filter_type : typing.Optional[PlacementTypeFilter]
+            Filter by placement type (placementMainPage or placementPushNotification)
+
+        filter_name : typing.Optional[str]
+            Filter by exact placement name (unique within an organization per type)
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -177,6 +186,8 @@ class RawPlacementsClient:
             f"v2/issuers/{encode_path_param(organization_id)}/placements",
             method="GET",
             params={
+                "filter[type]": filter_type,
+                "filter[name]": filter_name,
                 "page[after]": page_after,
                 "page[size]": page_size,
             },
@@ -205,6 +216,17 @@ class RawPlacementsClient:
                 )
             if _response.status_code == 403:
                 raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,
@@ -659,6 +681,8 @@ class AsyncRawPlacementsClient:
         self,
         organization_id: str,
         *,
+        filter_type: typing.Optional[PlacementTypeFilter] = None,
+        filter_name: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -670,6 +694,12 @@ class AsyncRawPlacementsClient:
         ----------
         organization_id : str
             Unique identifier of the organization
+
+        filter_type : typing.Optional[PlacementTypeFilter]
+            Filter by placement type (placementMainPage or placementPushNotification)
+
+        filter_name : typing.Optional[str]
+            Filter by exact placement name (unique within an organization per type)
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -689,6 +719,8 @@ class AsyncRawPlacementsClient:
             f"v2/issuers/{encode_path_param(organization_id)}/placements",
             method="GET",
             params={
+                "filter[type]": filter_type,
+                "filter[name]": filter_name,
                 "page[after]": page_after,
                 "page[size]": page_size,
             },
@@ -717,6 +749,17 @@ class AsyncRawPlacementsClient:
                 )
             if _response.status_code == 403:
                 raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
                     headers=dict(_response.headers),
                     body=typing.cast(
                         ErrorResponse,

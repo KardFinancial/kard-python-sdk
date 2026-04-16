@@ -27,6 +27,7 @@ if typing.TYPE_CHECKING:
         PlacementFormatUnion_PlacementPushNotification,
     )
     from .placement_list_response import PlacementListResponse
+    from .placement_type_filter import PlacementTypeFilter
     from .push_notification_placement_attributes import PushNotificationPlacementAttributes
     from .push_notification_placement_data import PushNotificationPlacementData
     from .update_main_page_attributes import UpdateMainPageAttributes
@@ -57,6 +58,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PlacementFormatUnion_PlacementMainPage": ".placement_format_union",
     "PlacementFormatUnion_PlacementPushNotification": ".placement_format_union",
     "PlacementListResponse": ".placement_list_response",
+    "PlacementTypeFilter": ".placement_type_filter",
     "PushNotificationPlacementAttributes": ".push_notification_placement_attributes",
     "PushNotificationPlacementData": ".push_notification_placement_data",
     "UpdateMainPageAttributes": ".update_main_page_attributes",
@@ -109,6 +111,7 @@ __all__ = [
     "PlacementFormatUnion_PlacementMainPage",
     "PlacementFormatUnion_PlacementPushNotification",
     "PlacementListResponse",
+    "PlacementTypeFilter",
     "PushNotificationPlacementAttributes",
     "PushNotificationPlacementData",
     "UpdateMainPageAttributes",

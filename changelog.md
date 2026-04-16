@@ -1,3 +1,11 @@
+## 8.6.0 - 2026-04-16
+### Added
+* **`PlacementTypeFilter`** — new type representing the two supported placement kinds (`placementMainPage`, `placementPushNotification`); exported from `kard.organizations`, `kard.organizations.placements`, and `kard.organizations.placements.types`.
+* **`filter_type` and `filter_name` parameters on `PlacementsClient.list` / `AsyncPlacementsClient.list`** — optional parameters to filter the placements list by type or exact name, reducing the need for client-side filtering.
+* **`filter_type` and `filter_name` parameters on `RawPlacementsClient.list` / `AsyncRawPlacementsClient.list`** — same filtering capability exposed on the raw HTTP client variants.
+### Changed
+* **`RawPlacementsClient.list` / `AsyncRawPlacementsClient.list`** — now raises `InvalidRequest` on HTTP 400 responses from the placements list endpoint.
+
 ## 8.5.0 - 2026-04-16
 ### Added
 * **`RewardsClient.placement_offers` / `AsyncRewardsClient.placement_offers`** — new method that retrieves cash-back offers for a placement slot, sorted by highest cash back and limited by the placement's available slots; requires the `rewards:read` scope.

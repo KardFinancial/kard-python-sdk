@@ -9,6 +9,7 @@ from .raw_client import AsyncRawPlacementsClient, RawPlacementsClient
 from .types.create_placement_data_union import CreatePlacementDataUnion
 from .types.placement_format_union import PlacementFormatUnion
 from .types.placement_list_response import PlacementListResponse
+from .types.placement_type_filter import PlacementTypeFilter
 from .types.update_placement_data_union import UpdatePlacementDataUnion
 
 # this is used as the default value for optional parameters
@@ -85,6 +86,8 @@ class PlacementsClient:
         self,
         organization_id: str,
         *,
+        filter_type: typing.Optional[PlacementTypeFilter] = None,
+        filter_name: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -96,6 +99,12 @@ class PlacementsClient:
         ----------
         organization_id : str
             Unique identifier of the organization
+
+        filter_type : typing.Optional[PlacementTypeFilter]
+            Filter by placement type (placementMainPage or placementPushNotification)
+
+        filter_name : typing.Optional[str]
+            Filter by exact placement name (unique within an organization per type)
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -124,7 +133,12 @@ class PlacementsClient:
         )
         """
         _response = self._raw_client.list(
-            organization_id, page_after=page_after, page_size=page_size, request_options=request_options
+            organization_id,
+            filter_type=filter_type,
+            filter_name=filter_name,
+            page_after=page_after,
+            page_size=page_size,
+            request_options=request_options,
         )
         return _response.data
 
@@ -338,6 +352,8 @@ class AsyncPlacementsClient:
         self,
         organization_id: str,
         *,
+        filter_type: typing.Optional[PlacementTypeFilter] = None,
+        filter_name: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -349,6 +365,12 @@ class AsyncPlacementsClient:
         ----------
         organization_id : str
             Unique identifier of the organization
+
+        filter_type : typing.Optional[PlacementTypeFilter]
+            Filter by placement type (placementMainPage or placementPushNotification)
+
+        filter_name : typing.Optional[str]
+            Filter by exact placement name (unique within an organization per type)
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -385,7 +407,12 @@ class AsyncPlacementsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list(
-            organization_id, page_after=page_after, page_size=page_size, request_options=request_options
+            organization_id,
+            filter_type=filter_type,
+            filter_name=filter_name,
+            page_after=page_after,
+            page_size=page_size,
+            request_options=request_options,
         )
         return _response.data
 
