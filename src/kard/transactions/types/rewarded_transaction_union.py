@@ -5,7 +5,9 @@ from __future__ import annotations
 import typing
 
 import pydantic
+import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .approved_transaction_attributes import ApprovedTransactionAttributes
 from .rewarded_transaction_attributes import RewardedTransactionAttributes
 from .rewarded_transaction_relationships import RewardedTransactionRelationships
 
@@ -26,4 +28,23 @@ class RewardedTransactionUnion_RewardedTransaction(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
-RewardedTransactionUnion = RewardedTransactionUnion_RewardedTransaction
+class RewardedTransactionUnion_ApprovedTransaction(UniversalBaseModel):
+    type: typing.Literal["approvedTransaction"] = "approvedTransaction"
+    id: str
+    attributes: ApprovedTransactionAttributes
+    relationships: RewardedTransactionRelationships
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
+RewardedTransactionUnion = typing_extensions.Annotated[
+    typing.Union[RewardedTransactionUnion_RewardedTransaction, RewardedTransactionUnion_ApprovedTransaction],
+    pydantic.Field(discriminator="type"),
+]

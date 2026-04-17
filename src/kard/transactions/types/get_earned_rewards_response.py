@@ -23,12 +23,14 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
         RelationshipSingle,
     )
     from kard.transactions import (
+        ApprovedTransactionAttributes,
         CommissionEarnedDetails,
         GetEarnedRewardsMeta,
         GetEarnedRewardsResponse,
         MerchantAsset,
         RewardedTransactionAttributes,
         RewardedTransactionRelationships,
+        RewardedTransactionUnion_ApprovedTransaction,
         RewardedTransactionUnion_RewardedTransaction,
         TransactionIncludedResource_Merchant,
         TransactionIncludedResource_Offer,
@@ -38,30 +40,13 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
 
     GetEarnedRewardsResponse(
         data=[
-            RewardedTransactionUnion_RewardedTransaction(
+            RewardedTransactionUnion_ApprovedTransaction(
                 id="fcabf024-3870-41f3-9fbd-b43ea85a3d19",
-                attributes=RewardedTransactionAttributes(
-                    status="APPROVED",
+                attributes=ApprovedTransactionAttributes(
                     transaction_id="TXN-20241001-F21-127964",
                     transaction_amount_in_cents=12796,
                     transaction_timestamp=datetime.datetime.fromisoformat(
                         "2024-10-01 01:36:57+00:00",
-                    ),
-                    paid_to_issuer="UNPAID",
-                    payout_timestamp=datetime.datetime.fromisoformat(
-                        "2024-10-01 02:00:00+00:00",
-                    ),
-                    card_bin="123456",
-                    card_last_four="4321",
-                    commission_earned=CommissionEarnedDetails(
-                        issuer=CommissionValue(
-                            type="cents",
-                            value=102,
-                        ),
-                        user=CommissionValue(
-                            type="cents",
-                            value=320,
-                        ),
                     ),
                 ),
                 relationships=RewardedTransactionRelationships(
@@ -88,7 +73,6 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
             RewardedTransactionUnion_RewardedTransaction(
                 id="7bcbdb95-f3a5-4f56-a9be-4c25f313eb0a",
                 attributes=RewardedTransactionAttributes(
-                    status="SETTLED",
                     transaction_id="TXN-20240928-TGT-778813",
                     transaction_amount_in_cents=8800,
                     transaction_timestamp=datetime.datetime.fromisoformat(
@@ -98,13 +82,7 @@ class GetEarnedRewardsResponse(UniversalBaseModel):
                     payout_timestamp=datetime.datetime.fromisoformat(
                         "2024-09-29 10:15:00+00:00",
                     ),
-                    card_bin="123456",
-                    card_last_four="4321",
                     commission_earned=CommissionEarnedDetails(
-                        issuer=CommissionValue(
-                            type="cents",
-                            value=70,
-                        ),
                         user=CommissionValue(
                             type="cents",
                             value=220,

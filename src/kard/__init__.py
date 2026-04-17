@@ -91,6 +91,8 @@ if typing.TYPE_CHECKING:
     from .organizations import ExternalOrganizationAttributes, ExternalOrganizationResponse
     from .ping import NetworkBlockedError, NetworkBlockedErrorBody, PingResponseObject
     from .transactions import (
+        ApprovedTransaction,
+        ApprovedTransactionAttributes,
         AuditAttributes,
         AuditRequestData,
         AuditResponseAttributes,
@@ -139,6 +141,7 @@ if typing.TYPE_CHECKING:
         RewardedTransactionRelationships,
         RewardedTransactionStatus,
         RewardedTransactionUnion,
+        RewardedTransactionUnion_ApprovedTransaction,
         RewardedTransactionUnion_RewardedTransaction,
         States,
         TransactionIncludedResource,
@@ -184,6 +187,8 @@ if typing.TYPE_CHECKING:
     )
     from .version import __version__
 _dynamic_imports: typing.Dict[str, str] = {
+    "ApprovedTransaction": ".transactions",
+    "ApprovedTransactionAttributes": ".transactions",
     "AsyncKardApi": ".client",
     "AuditAttributes": ".transactions",
     "AuditRequestData": ".transactions",
@@ -307,6 +312,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RewardedTransactionRelationships": ".transactions",
     "RewardedTransactionStatus": ".transactions",
     "RewardedTransactionUnion": ".transactions",
+    "RewardedTransactionUnion_ApprovedTransaction": ".transactions",
     "RewardedTransactionUnion_RewardedTransaction": ".transactions",
     "State": ".commons",
     "States": ".transactions",
@@ -387,6 +393,8 @@ def __dir__():
 
 
 __all__ = [
+    "ApprovedTransaction",
+    "ApprovedTransactionAttributes",
     "AsyncKardApi",
     "AuditAttributes",
     "AuditRequestData",
@@ -510,6 +518,7 @@ __all__ = [
     "RewardedTransactionRelationships",
     "RewardedTransactionStatus",
     "RewardedTransactionUnion",
+    "RewardedTransactionUnion_ApprovedTransaction",
     "RewardedTransactionUnion_RewardedTransaction",
     "State",
     "States",

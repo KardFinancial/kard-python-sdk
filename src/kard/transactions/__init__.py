@@ -7,6 +7,8 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
+        ApprovedTransaction,
+        ApprovedTransactionAttributes,
         AuditAttributes,
         AuditRequestData,
         AuditResponseAttributes,
@@ -52,6 +54,7 @@ if typing.TYPE_CHECKING:
         RewardedTransactionRelationships,
         RewardedTransactionStatus,
         RewardedTransactionUnion,
+        RewardedTransactionUnion_ApprovedTransaction,
         RewardedTransactionUnion_RewardedTransaction,
         States,
         TransactionIncludedResource,
@@ -78,6 +81,8 @@ if typing.TYPE_CHECKING:
     )
     from .errors import CreateAuditMultiStatus, CreateIncomingTransactionsMultiStatus, FraudMultiStatus
 _dynamic_imports: typing.Dict[str, str] = {
+    "ApprovedTransaction": ".types",
+    "ApprovedTransactionAttributes": ".types",
     "AuditAttributes": ".types",
     "AuditRequestData": ".types",
     "AuditResponseAttributes": ".types",
@@ -126,6 +131,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RewardedTransactionRelationships": ".types",
     "RewardedTransactionStatus": ".types",
     "RewardedTransactionUnion": ".types",
+    "RewardedTransactionUnion_ApprovedTransaction": ".types",
     "RewardedTransactionUnion_RewardedTransaction": ".types",
     "States": ".types",
     "TransactionIncludedResource": ".types",
@@ -174,6 +180,8 @@ def __dir__():
 
 
 __all__ = [
+    "ApprovedTransaction",
+    "ApprovedTransactionAttributes",
     "AuditAttributes",
     "AuditRequestData",
     "AuditResponseAttributes",
@@ -222,6 +230,7 @@ __all__ = [
     "RewardedTransactionRelationships",
     "RewardedTransactionStatus",
     "RewardedTransactionUnion",
+    "RewardedTransactionUnion_ApprovedTransaction",
     "RewardedTransactionUnion_RewardedTransaction",
     "States",
     "TransactionIncludedResource",

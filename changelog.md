@@ -1,3 +1,14 @@
+## 10.0.0 - 2026-04-17
+### Breaking Changes
+* **`CommissionEarnedDetails`** — the required `issuer: CommissionValue` field is removed; callers that read `.issuer` will receive an `AttributeError`. Remove any access to `.issuer` from your code.
+* **`RewardedTransactionAttributes`** — the optional fields `card_bin` and `card_last_four` are removed; any code that reads these fields must be updated.
+* **`RewardedTransactionAttributes.status`** — the type is narrowed from the open `RewardedTransactionStatus` enum to `Literal["SETTLED"]`; code that sets or compares this field to non-`"SETTLED"` values must migrate to the new `ApprovedTransactionAttributes` model for APPROVED transactions.
+* **`RewardedTransactionUnion`** — changed from a simple alias for `RewardedTransactionUnion_RewardedTransaction` to a discriminated `Union` keyed on a `type` field; code that assumed a single concrete type must handle both variants.
+### Added
+* **`ApprovedTransaction`** — new Pydantic model representing a transaction in the `APPROVED` state, with `id`, `attributes`, and `relationships` fields; exported from `kard`, `kard.transactions`, and `kard.transactions.types`.
+* **`ApprovedTransactionAttributes`** — new Pydantic model carrying `status` (always `"APPROVED"`), `transaction_id`, `transaction_amount_in_cents`, and `transaction_timestamp` for approved transactions.
+* **`RewardedTransactionUnion_ApprovedTransaction`** — new tagged-union variant (discriminator `type="approvedTransaction"`) added alongside the existing `RewardedTransactionUnion_RewardedTransaction`.
+
 ## 9.0.0 - 2026-04-17
 * feat!: remove MerchantNetwork/MerchantNetworkName, add ChildOrganizationResponse, change OrganizationsClient.get signature
 * Significant API surface changes across the organizations and internal_organizations modules.

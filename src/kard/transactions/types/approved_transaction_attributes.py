@@ -7,14 +7,12 @@ import pydantic
 import typing_extensions
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
-from .commission_earned_details import CommissionEarnedDetails
-from .payment_status import PaymentStatus
 
 
-class RewardedTransactionAttributes(UniversalBaseModel):
-    status: typing.Literal["SETTLED"] = pydantic.Field(default="SETTLED")
+class ApprovedTransactionAttributes(UniversalBaseModel):
+    status: typing.Literal["APPROVED"] = pydantic.Field(default="APPROVED")
     """
-    Status of the rewarded transaction
+    Status of the approved transaction
     """
 
     transaction_id: typing_extensions.Annotated[
@@ -32,22 +30,6 @@ class RewardedTransactionAttributes(UniversalBaseModel):
         FieldMetadata(alias="transactionTimestamp"),
         pydantic.Field(alias="transactionTimestamp", description="Timestamp of the transaction in ISO 8601 format"),
     ]
-    paid_to_issuer: typing_extensions.Annotated[
-        PaymentStatus,
-        FieldMetadata(alias="paidToIssuer"),
-        pydantic.Field(alias="paidToIssuer", description="Payment status to issuer"),
-    ]
-    commission_earned: typing_extensions.Annotated[
-        CommissionEarnedDetails, FieldMetadata(alias="commissionEarned"), pydantic.Field(alias="commissionEarned")
-    ]
-    payout_timestamp: typing_extensions.Annotated[
-        typing.Optional[dt.datetime],
-        FieldMetadata(alias="payoutTimestamp"),
-        pydantic.Field(
-            alias="payoutTimestamp",
-            description="Timestamp representing the month when the transaction has been paid out to issuer",
-        ),
-    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

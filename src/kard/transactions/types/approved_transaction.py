@@ -3,12 +3,19 @@
 import typing
 
 import pydantic
-from ...commons.types.commission_value import CommissionValue
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .approved_transaction_attributes import ApprovedTransactionAttributes
+from .rewarded_transaction_relationships import RewardedTransactionRelationships
 
 
-class CommissionEarnedDetails(UniversalBaseModel):
-    user: CommissionValue
+class ApprovedTransaction(UniversalBaseModel):
+    id: str = pydantic.Field()
+    """
+    Unique transaction identifier
+    """
+
+    attributes: ApprovedTransactionAttributes
+    relationships: RewardedTransactionRelationships
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

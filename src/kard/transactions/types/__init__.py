@@ -6,6 +6,8 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .approved_transaction import ApprovedTransaction
+    from .approved_transaction_attributes import ApprovedTransactionAttributes
     from .audit_attributes import AuditAttributes
     from .audit_request_data import AuditRequestData
     from .audit_response_attributes import AuditResponseAttributes
@@ -47,7 +49,11 @@ if typing.TYPE_CHECKING:
     from .rewarded_transaction_attributes import RewardedTransactionAttributes
     from .rewarded_transaction_relationships import RewardedTransactionRelationships
     from .rewarded_transaction_status import RewardedTransactionStatus
-    from .rewarded_transaction_union import RewardedTransactionUnion, RewardedTransactionUnion_RewardedTransaction
+    from .rewarded_transaction_union import (
+        RewardedTransactionUnion,
+        RewardedTransactionUnion_ApprovedTransaction,
+        RewardedTransactionUnion_RewardedTransaction,
+    )
     from .states import States
     from .transaction_included_resource import (
         TransactionIncludedResource,
@@ -75,6 +81,8 @@ if typing.TYPE_CHECKING:
     from .visa_mid import VisaMid
     from .visa_mid_details import VisaMidDetails
 _dynamic_imports: typing.Dict[str, str] = {
+    "ApprovedTransaction": ".approved_transaction",
+    "ApprovedTransactionAttributes": ".approved_transaction_attributes",
     "AuditAttributes": ".audit_attributes",
     "AuditRequestData": ".audit_request_data",
     "AuditResponseAttributes": ".audit_response_attributes",
@@ -120,6 +128,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RewardedTransactionRelationships": ".rewarded_transaction_relationships",
     "RewardedTransactionStatus": ".rewarded_transaction_status",
     "RewardedTransactionUnion": ".rewarded_transaction_union",
+    "RewardedTransactionUnion_ApprovedTransaction": ".rewarded_transaction_union",
     "RewardedTransactionUnion_RewardedTransaction": ".rewarded_transaction_union",
     "States": ".states",
     "TransactionIncludedResource": ".transaction_included_resource",
@@ -168,6 +177,8 @@ def __dir__():
 
 
 __all__ = [
+    "ApprovedTransaction",
+    "ApprovedTransactionAttributes",
     "AuditAttributes",
     "AuditRequestData",
     "AuditResponseAttributes",
@@ -213,6 +224,7 @@ __all__ = [
     "RewardedTransactionRelationships",
     "RewardedTransactionStatus",
     "RewardedTransactionUnion",
+    "RewardedTransactionUnion_ApprovedTransaction",
     "RewardedTransactionUnion_RewardedTransaction",
     "States",
     "TransactionIncludedResource",
