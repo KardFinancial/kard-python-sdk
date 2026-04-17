@@ -11,7 +11,6 @@ from ..commons.types.error_response import ErrorResponse
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
-from ..core.jsonable_encoder import encode_path_param
 from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
@@ -24,16 +23,13 @@ class RawOrganizationsClient:
         self._client_wrapper = client_wrapper
 
     def get(
-        self, organization_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[ExternalOrganizationResponse]:
         """
         Retrieve organization details for the authenticated issuer
 
         Parameters
         ----------
-        organization_id : str
-            Unique identifier of the organization (must match the authenticated issuer)
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -43,7 +39,7 @@ class RawOrganizationsClient:
             Organization resource with limited attributes
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}",
+            "v2/issuer",
             method="GET",
             request_options=request_options,
         )
@@ -116,16 +112,13 @@ class AsyncRawOrganizationsClient:
         self._client_wrapper = client_wrapper
 
     async def get(
-        self, organization_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
         """
         Retrieve organization details for the authenticated issuer
 
         Parameters
         ----------
-        organization_id : str
-            Unique identifier of the organization (must match the authenticated issuer)
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -135,7 +128,7 @@ class AsyncRawOrganizationsClient:
             Organization resource with limited attributes
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"v2/issuers/{encode_path_param(organization_id)}",
+            "v2/issuer",
             method="GET",
             request_options=request_options,
         )

@@ -32,17 +32,12 @@ class OrganizationsClient:
         """
         return self._raw_client
 
-    def get(
-        self, organization_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> ExternalOrganizationResponse:
+    def get(self, *, request_options: typing.Optional[RequestOptions] = None) -> ExternalOrganizationResponse:
         """
         Retrieve organization details for the authenticated issuer
 
         Parameters
         ----------
-        organization_id : str
-            Unique identifier of the organization (must match the authenticated issuer)
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -59,11 +54,9 @@ class OrganizationsClient:
             client_id="YOUR_CLIENT_ID",
             client_secret="YOUR_CLIENT_SECRET",
         )
-        client.organizations.get(
-            organization_id="organizationId",
-        )
+        client.organizations.get()
         """
-        _response = self._raw_client.get(organization_id, request_options=request_options)
+        _response = self._raw_client.get(request_options=request_options)
         return _response.data
 
     @property
@@ -101,17 +94,12 @@ class AsyncOrganizationsClient:
         """
         return self._raw_client
 
-    async def get(
-        self, organization_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> ExternalOrganizationResponse:
+    async def get(self, *, request_options: typing.Optional[RequestOptions] = None) -> ExternalOrganizationResponse:
         """
         Retrieve organization details for the authenticated issuer
 
         Parameters
         ----------
-        organization_id : str
-            Unique identifier of the organization (must match the authenticated issuer)
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -133,14 +121,12 @@ class AsyncOrganizationsClient:
 
 
         async def main() -> None:
-            await client.organizations.get(
-                organization_id="organizationId",
-            )
+            await client.organizations.get()
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get(organization_id, request_options=request_options)
+        _response = await self._raw_client.get(request_options=request_options)
         return _response.data
 
     @property

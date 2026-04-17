@@ -19,8 +19,8 @@ from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
 from ...core.serialization import convert_and_respect_annotation_metadata
 from ...internal_organizations.types.delete_resource_response import DeleteResourceResponse
-from ..types.external_organization_response import ExternalOrganizationResponse
 from .types.child_organization_list_response import ChildOrganizationListResponse
+from .types.child_organization_response import ChildOrganizationResponse
 from .types.create_child_request_data import CreateChildRequestData
 from .types.update_child_request_data import UpdateChildRequestData
 from pydantic import ValidationError
@@ -141,7 +141,7 @@ class RawChildrenClient:
         *,
         data: CreateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[ExternalOrganizationResponse]:
+    ) -> HttpResponse[ChildOrganizationResponse]:
         """
         Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
 
@@ -158,7 +158,7 @@ class RawChildrenClient:
 
         Returns
         -------
-        HttpResponse[ExternalOrganizationResponse]
+        HttpResponse[ChildOrganizationResponse]
             Created child organization resource
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -175,9 +175,9 @@ class RawChildrenClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ExternalOrganizationResponse,
+                    ChildOrganizationResponse,
                     parse_obj_as(
-                        type_=ExternalOrganizationResponse,  # type: ignore
+                        type_=ChildOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -248,7 +248,7 @@ class RawChildrenClient:
 
     def get(
         self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[ExternalOrganizationResponse]:
+    ) -> HttpResponse[ChildOrganizationResponse]:
         """
         Retrieve a specific child organization
 
@@ -265,7 +265,7 @@ class RawChildrenClient:
 
         Returns
         -------
-        HttpResponse[ExternalOrganizationResponse]
+        HttpResponse[ChildOrganizationResponse]
             Child organization resource
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -276,9 +276,9 @@ class RawChildrenClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ExternalOrganizationResponse,
+                    ChildOrganizationResponse,
                     parse_obj_as(
-                        type_=ExternalOrganizationResponse,  # type: ignore
+                        type_=ChildOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -343,7 +343,7 @@ class RawChildrenClient:
         *,
         data: UpdateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[ExternalOrganizationResponse]:
+    ) -> HttpResponse[ChildOrganizationResponse]:
         """
         Update a child organization. Only the name can be changed.
 
@@ -363,7 +363,7 @@ class RawChildrenClient:
 
         Returns
         -------
-        HttpResponse[ExternalOrganizationResponse]
+        HttpResponse[ChildOrganizationResponse]
             Updated child organization resource
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -380,9 +380,9 @@ class RawChildrenClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ExternalOrganizationResponse,
+                    ChildOrganizationResponse,
                     parse_obj_as(
-                        type_=ExternalOrganizationResponse,  # type: ignore
+                        type_=ChildOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -653,7 +653,7 @@ class AsyncRawChildrenClient:
         *,
         data: CreateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
+    ) -> AsyncHttpResponse[ChildOrganizationResponse]:
         """
         Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
 
@@ -670,7 +670,7 @@ class AsyncRawChildrenClient:
 
         Returns
         -------
-        AsyncHttpResponse[ExternalOrganizationResponse]
+        AsyncHttpResponse[ChildOrganizationResponse]
             Created child organization resource
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -687,9 +687,9 @@ class AsyncRawChildrenClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ExternalOrganizationResponse,
+                    ChildOrganizationResponse,
                     parse_obj_as(
-                        type_=ExternalOrganizationResponse,  # type: ignore
+                        type_=ChildOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -760,7 +760,7 @@ class AsyncRawChildrenClient:
 
     async def get(
         self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
+    ) -> AsyncHttpResponse[ChildOrganizationResponse]:
         """
         Retrieve a specific child organization
 
@@ -777,7 +777,7 @@ class AsyncRawChildrenClient:
 
         Returns
         -------
-        AsyncHttpResponse[ExternalOrganizationResponse]
+        AsyncHttpResponse[ChildOrganizationResponse]
             Child organization resource
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -788,9 +788,9 @@ class AsyncRawChildrenClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ExternalOrganizationResponse,
+                    ChildOrganizationResponse,
                     parse_obj_as(
-                        type_=ExternalOrganizationResponse,  # type: ignore
+                        type_=ChildOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -855,7 +855,7 @@ class AsyncRawChildrenClient:
         *,
         data: UpdateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[ExternalOrganizationResponse]:
+    ) -> AsyncHttpResponse[ChildOrganizationResponse]:
         """
         Update a child organization. Only the name can be changed.
 
@@ -875,7 +875,7 @@ class AsyncRawChildrenClient:
 
         Returns
         -------
-        AsyncHttpResponse[ExternalOrganizationResponse]
+        AsyncHttpResponse[ChildOrganizationResponse]
             Updated child organization resource
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -892,9 +892,9 @@ class AsyncRawChildrenClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    ExternalOrganizationResponse,
+                    ChildOrganizationResponse,
                     parse_obj_as(
-                        type_=ExternalOrganizationResponse,  # type: ignore
+                        type_=ChildOrganizationResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

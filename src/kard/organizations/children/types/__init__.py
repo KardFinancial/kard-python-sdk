@@ -6,7 +6,9 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .child_organization_attributes import ChildOrganizationAttributes
     from .child_organization_list_response import ChildOrganizationListResponse
+    from .child_organization_response import ChildOrganizationResponse
     from .create_child_attributes import CreateChildAttributes
     from .create_child_request_body import CreateChildRequestBody
     from .create_child_request_data import CreateChildRequestData
@@ -14,7 +16,9 @@ if typing.TYPE_CHECKING:
     from .update_child_request_body import UpdateChildRequestBody
     from .update_child_request_data import UpdateChildRequestData
 _dynamic_imports: typing.Dict[str, str] = {
+    "ChildOrganizationAttributes": ".child_organization_attributes",
     "ChildOrganizationListResponse": ".child_organization_list_response",
+    "ChildOrganizationResponse": ".child_organization_response",
     "CreateChildAttributes": ".create_child_attributes",
     "CreateChildRequestBody": ".create_child_request_body",
     "CreateChildRequestData": ".create_child_request_data",
@@ -46,7 +50,9 @@ def __dir__():
 
 
 __all__ = [
+    "ChildOrganizationAttributes",
     "ChildOrganizationListResponse",
+    "ChildOrganizationResponse",
     "CreateChildAttributes",
     "CreateChildRequestBody",
     "CreateChildRequestData",

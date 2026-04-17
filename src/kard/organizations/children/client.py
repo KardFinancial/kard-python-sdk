@@ -5,9 +5,9 @@ import typing
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
 from ...internal_organizations.types.delete_resource_response import DeleteResourceResponse
-from ..types.external_organization_response import ExternalOrganizationResponse
 from .raw_client import AsyncRawChildrenClient, RawChildrenClient
 from .types.child_organization_list_response import ChildOrganizationListResponse
+from .types.child_organization_response import ChildOrganizationResponse
 from .types.create_child_request_data import CreateChildRequestData
 from .types.update_child_request_data import UpdateChildRequestData
 
@@ -83,7 +83,7 @@ class ChildrenClient:
         *,
         data: CreateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ExternalOrganizationResponse:
+    ) -> ChildOrganizationResponse:
         """
         Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
 
@@ -100,7 +100,7 @@ class ChildrenClient:
 
         Returns
         -------
-        ExternalOrganizationResponse
+        ChildOrganizationResponse
             Created child organization resource
 
         Examples
@@ -129,7 +129,7 @@ class ChildrenClient:
 
     def get(
         self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> ExternalOrganizationResponse:
+    ) -> ChildOrganizationResponse:
         """
         Retrieve a specific child organization
 
@@ -146,7 +146,7 @@ class ChildrenClient:
 
         Returns
         -------
-        ExternalOrganizationResponse
+        ChildOrganizationResponse
             Child organization resource
 
         Examples
@@ -172,7 +172,7 @@ class ChildrenClient:
         *,
         data: UpdateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ExternalOrganizationResponse:
+    ) -> ChildOrganizationResponse:
         """
         Update a child organization. Only the name can be changed.
 
@@ -192,7 +192,7 @@ class ChildrenClient:
 
         Returns
         -------
-        ExternalOrganizationResponse
+        ChildOrganizationResponse
             Updated child organization resource
 
         Examples
@@ -332,7 +332,7 @@ class AsyncChildrenClient:
         *,
         data: CreateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ExternalOrganizationResponse:
+    ) -> ChildOrganizationResponse:
         """
         Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must be uppercase, and must not contain spaces.
 
@@ -349,7 +349,7 @@ class AsyncChildrenClient:
 
         Returns
         -------
-        ExternalOrganizationResponse
+        ChildOrganizationResponse
             Created child organization resource
 
         Examples
@@ -386,7 +386,7 @@ class AsyncChildrenClient:
 
     async def get(
         self, organization_id: str, child_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> ExternalOrganizationResponse:
+    ) -> ChildOrganizationResponse:
         """
         Retrieve a specific child organization
 
@@ -403,7 +403,7 @@ class AsyncChildrenClient:
 
         Returns
         -------
-        ExternalOrganizationResponse
+        ChildOrganizationResponse
             Child organization resource
 
         Examples
@@ -437,7 +437,7 @@ class AsyncChildrenClient:
         *,
         data: UpdateChildRequestData,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> ExternalOrganizationResponse:
+    ) -> ChildOrganizationResponse:
         """
         Update a child organization. Only the name can be changed.
 
@@ -457,7 +457,7 @@ class AsyncChildrenClient:
 
         Returns
         -------
-        ExternalOrganizationResponse
+        ChildOrganizationResponse
             Updated child organization resource
 
         Examples

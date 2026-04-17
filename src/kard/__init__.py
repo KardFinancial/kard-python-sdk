@@ -56,8 +56,6 @@ if typing.TYPE_CHECKING:
         DeleteResourceData,
         DeleteResourceResponse,
         EnrolledReward,
-        MerchantNetwork,
-        MerchantNetworkName,
         OrganizationPaginationMetadata,
     )
     from .notifications import (
@@ -274,8 +272,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Merchant": ".transactions",
     "MerchantAsset": ".transactions",
     "MerchantAssetType": ".transactions",
-    "MerchantNetwork": ".internal_organizations",
-    "MerchantNetworkName": ".internal_organizations",
     "MongoId": ".commons",
     "MultiStatus": ".users",
     "NetworkBlockedError": ".ping",
@@ -479,8 +475,6 @@ __all__ = [
     "Merchant",
     "MerchantAsset",
     "MerchantAssetType",
-    "MerchantNetwork",
-    "MerchantNetworkName",
     "MongoId",
     "MultiStatus",
     "NetworkBlockedError",

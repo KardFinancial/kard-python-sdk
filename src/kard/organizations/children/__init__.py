@@ -7,7 +7,9 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
+        ChildOrganizationAttributes,
         ChildOrganizationListResponse,
+        ChildOrganizationResponse,
         CreateChildAttributes,
         CreateChildRequestBody,
         CreateChildRequestData,
@@ -16,7 +18,9 @@ if typing.TYPE_CHECKING:
         UpdateChildRequestData,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "ChildOrganizationAttributes": ".types",
     "ChildOrganizationListResponse": ".types",
+    "ChildOrganizationResponse": ".types",
     "CreateChildAttributes": ".types",
     "CreateChildRequestBody": ".types",
     "CreateChildRequestData": ".types",
@@ -48,7 +52,9 @@ def __dir__():
 
 
 __all__ = [
+    "ChildOrganizationAttributes",
     "ChildOrganizationListResponse",
+    "ChildOrganizationResponse",
     "CreateChildAttributes",
     "CreateChildRequestBody",
     "CreateChildRequestData",

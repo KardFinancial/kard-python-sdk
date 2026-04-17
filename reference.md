@@ -496,7 +496,7 @@ client.notifications.subscriptions.update(
 </details>
 
 ## Organizations
-<details><summary><code>client.organizations.<a href="src/kard/organizations/client.py">get</a>(...) -> ExternalOrganizationResponse</code></summary>
+<details><summary><code>client.organizations.<a href="src/kard/organizations/client.py">get</a>() -> ExternalOrganizationResponse</code></summary>
 <dl>
 <dd>
 
@@ -532,9 +532,7 @@ client = KardApi(
     environment=KardApiEnvironment.PRODUCTION,
 )
 
-client.organizations.get(
-    organization_id="organizationId",
-)
+client.organizations.get()
 
 ```
 </dd>
@@ -546,14 +544,6 @@ client.organizations.get(
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**organization_id:** `str` — Unique identifier of the organization (must match the authenticated issuer)
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -661,7 +651,7 @@ client.organizations.children.list(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">create</a>(...) -> ExternalOrganizationResponse</code></summary>
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">create</a>(...) -> ChildOrganizationResponse</code></summary>
 <dl>
 <dd>
 
@@ -750,7 +740,7 @@ client.organizations.children.create(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">get</a>(...) -> ExternalOrganizationResponse</code></summary>
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">get</a>(...) -> ChildOrganizationResponse</code></summary>
 <dl>
 <dd>
 
@@ -833,7 +823,7 @@ client.organizations.children.get(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">update</a>(...) -> ExternalOrganizationResponse</code></summary>
+<details><summary><code>client.organizations.children.<a href="src/kard/organizations/children/client.py">update</a>(...) -> ChildOrganizationResponse</code></summary>
 <dl>
 <dd>
 

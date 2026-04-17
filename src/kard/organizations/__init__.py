@@ -9,7 +9,9 @@ if typing.TYPE_CHECKING:
     from .types import ExternalOrganizationAttributes, ExternalOrganizationResponse
     from . import children, placements
     from .children import (
+        ChildOrganizationAttributes,
         ChildOrganizationListResponse,
+        ChildOrganizationResponse,
         CreateChildAttributes,
         CreateChildRequestBody,
         CreateChildRequestData,
@@ -50,7 +52,9 @@ if typing.TYPE_CHECKING:
 _dynamic_imports: typing.Dict[str, str] = {
     "Cadence": ".placements",
     "CadenceFrequency": ".placements",
+    "ChildOrganizationAttributes": ".children",
     "ChildOrganizationListResponse": ".children",
+    "ChildOrganizationResponse": ".children",
     "CreateChildAttributes": ".children",
     "CreateChildRequestBody": ".children",
     "CreateChildRequestData": ".children",
@@ -114,7 +118,9 @@ def __dir__():
 __all__ = [
     "Cadence",
     "CadenceFrequency",
+    "ChildOrganizationAttributes",
     "ChildOrganizationListResponse",
+    "ChildOrganizationResponse",
     "CreateChildAttributes",
     "CreateChildRequestBody",
     "CreateChildRequestData",

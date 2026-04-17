@@ -1,3 +1,27 @@
+## 9.0.0 - 2026-04-17
+* feat!: remove MerchantNetwork/MerchantNetworkName, add ChildOrganizationResponse, change OrganizationsClient.get signature
+* Significant API surface changes across the organizations and internal_organizations modules.
+* The `MerchantNetwork` and `MerchantNetworkName` types are removed from
+* `kard.internal_organizations` and no longer exported from the top-level
+* `kard` package. `ExternalOrganizationAttributes` loses several fields
+* (`external_id`, `parent_organization_id`, `merchant_networks`,
+* `national_offers`, `local_offers`, `use_attribution`, `created_at`,
+* `updated_at`) and gains new required commission-split fields
+* (`affiliate_commission_split`, `cardlinked_commission_split`,
+* `cardlinked_user_commission_split`).
+* The `organization_id` required parameter is removed from
+* `OrganizationsClient.get` / `AsyncOrganizationsClient.get` and their
+* raw variants; the endpoint now calls `v2/issuer` (no path parameter).
+* Two new types — `ChildOrganizationAttributes` and
+* `ChildOrganizationResponse` — replace `ExternalOrganizationResponse` as
+* the return type for all `ChildrenClient` create/get/update methods.
+* Key changes:
+* Remove `MerchantNetwork`, `MerchantNetworkName` public types from `kard.internal_organizations` and top-level `kard` exports
+* Remove `organization_id` required positional parameter from `OrganizationsClient.get` / `AsyncOrganizationsClient.get` (and raw variants); URL changed from `v2/issuers/{id}` to `v2/issuer`
+* Add `ChildOrganizationAttributes` and `ChildOrganizationResponse` Pydantic models; all `ChildrenClient` methods now return `ChildOrganizationResponse` instead of `ExternalOrganizationResponse`
+* Remove multiple fields from `ExternalOrganizationAttributes` (`external_id`, `parent_organization_id`, `merchant_networks`, `national_offers`, `local_offers`, `use_attribution`, `created_at`, `updated_at`) and add new required commission-split fields
+* 🌿 Generated with Fern
+
 ## 8.7.0 - 2026-04-16
 ### Added
 * **`MerchantAsset`** — new Pydantic model representing an attribution-signed asset image (logo, banner, etc.) for a merchant, with `type`, `url`, and optional `alt` fields; exported from `kard`, `kard.transactions`, and `kard.transactions.types`.

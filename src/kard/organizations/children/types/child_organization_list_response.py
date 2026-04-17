@@ -6,7 +6,7 @@ import pydantic
 from ....commons.types.links import Links
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....internal_organizations.types.organization_pagination_metadata import OrganizationPaginationMetadata
-from ...types.external_organization_response import ExternalOrganizationResponse
+from .child_organization_response import ChildOrganizationResponse
 
 
 class ChildOrganizationListResponse(UniversalBaseModel):
@@ -14,7 +14,7 @@ class ChildOrganizationListResponse(UniversalBaseModel):
     Paginated list of child organizations
     """
 
-    data: typing.List[ExternalOrganizationResponse] = pydantic.Field()
+    data: typing.List[ChildOrganizationResponse] = pydantic.Field()
     """
     Array of child organization resources
     """

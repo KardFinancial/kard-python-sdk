@@ -3,24 +3,22 @@
 import typing
 
 import pydantic
-from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .merchant_network_name import MerchantNetworkName
+from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .child_organization_attributes import ChildOrganizationAttributes
 
 
-class MerchantNetwork(UniversalBaseModel):
+class ChildOrganizationResponse(UniversalBaseModel):
     """
-    Merchant network with priority for an organization
-    """
-
-    name: MerchantNetworkName = pydantic.Field()
-    """
-    Name of the merchant network
+    Child organization resource response
     """
 
-    priority: int = pydantic.Field()
+    type: typing.Literal["organization"] = "organization"
+    id: str = pydantic.Field()
     """
-    Priority of the merchant network (higher = more preferred)
+    Unique identifier of the child organization
     """
+
+    attributes: ChildOrganizationAttributes
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
