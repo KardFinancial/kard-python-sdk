@@ -1,3 +1,8 @@
+## 10.1.0 - 2026-04-23
+### Added
+* **`EarnedRewardAttributes.transaction_timestamp`** — new optional `datetime` field that surfaces the ISO-formatted timestamp of the originating transaction in earned-reward notification payloads.
+* **`EarnedRewardSettledAttributes.transaction_timestamp`** — new optional `datetime` field that surfaces the ISO-formatted timestamp of the originating transaction in settled earned-reward notification payloads.
+
 ## 10.0.0 - 2026-04-17
 ### Breaking Changes
 * **`CommissionEarnedDetails`** — the required `issuer: CommissionValue` field is removed; callers that read `.issuer` will receive an `AttributeError`. Remove any access to `.issuer` from your code.

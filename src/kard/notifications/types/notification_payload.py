@@ -13,6 +13,8 @@ class NotificationPayload(UniversalBaseModel):
     """
     Examples
     --------
+    import datetime
+
     from kard.commons import CommissionValue, RelationshipData, RelationshipSingle
     from kard.notifications import (
         EarnedRewardRelationships,
@@ -34,6 +36,9 @@ class NotificationPayload(UniversalBaseModel):
                 attribution_url="www.attribution.com/token",
                 survey_url="www.survey.com",
                 card_product_id="card_product_123",
+                transaction_timestamp=datetime.datetime.fromisoformat(
+                    "2024-10-01 14:32:10+00:00",
+                ),
             ),
             relationships=EarnedRewardRelationships(
                 user=RelationshipSingle(
