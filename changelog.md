@@ -1,3 +1,15 @@
+## 10.1.1 - 2026-04-28
+* chore: update test fixture asset URLs and alt text in rewards response objects
+* Refresh the example asset data used in `LocationsResponseObject` and
+* `OffersResponseObject` type docstring/test fixtures. The placeholder
+* URLs and alt text strings are replaced with more realistic attribution
+* URLs and empty alt strings that better reflect real API responses.
+* Key changes:
+* Replace `http://assets.getkard.com/logo/img?attribution-tokens` with a realistic attribution URL in both `LocationsResponseObject` and `OffersResponseObject` fixtures
+* Replace `http://assets.getkard.com/banner/img?attribution-tokens` with a realistic banner attribution URL in both fixtures
+* Replace placeholder alt text ("Worlds Greatest Chicken Logo Image" / "Worlds Greatest Chicken Banner Image") with empty strings
+* 🌿 Generated with Fern
+
 ## 10.1.0 - 2026-04-23
 ### Added
 * **`EarnedRewardAttributes.transaction_timestamp`** — new optional `datetime` field that surfaces the ISO-formatted timestamp of the originating transaction in earned-reward notification payloads.
