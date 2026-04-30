@@ -1,3 +1,14 @@
+## 10.1.2 - 2026-04-30
+* chore: update bulk upload docstrings and deprecate legacy upload endpoints
+* Refresh documentation across the transactions and uploads clients to
+* reflect expanded bulk upload support and guide users toward the
+* recommended historical transaction ingestion flow.
+* Key changes:
+* Update `create_bulk_transactions_upload_url` docstring to document support for both `incomingTransactionsFile` and `historicalTransactionsFile` types, replacing the outdated `coreTransaction`-only note
+* Add deprecation notices to all `UploadsClient` and `RawUploadsClient` methods (`create_upload`, `create_upload_part`, `update_upload`) directing users to the bulk transactions upload URL endpoint
+* Apply deprecation notices consistently across sync and async variants in both `client.py` and `raw_client.py`
+* 🌿 Generated with Fern
+
 ## 10.1.1 - 2026-04-28
 * chore: update test fixture asset URLs and alt text in rewards response objects
 * Refresh the example asset data used in `LocationsResponseObject` and
