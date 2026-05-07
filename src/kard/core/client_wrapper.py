@@ -27,12 +27,12 @@ class BaseClientWrapper:
         import platform
 
         headers: typing.Dict[str, str] = {
-            "User-Agent": "kard-financial-sdk/10.1.2",
+            "User-Agent": "kard-financial-sdk/10.1.3",
             "X-Fern-Language": "Python",
             "X-Fern-Runtime": f"python/{platform.python_version()}",
             "X-Fern-Platform": f"{platform.system().lower()}/{platform.release()}",
             "X-Fern-SDK-Name": "kard-financial-sdk",
-            "X-Fern-SDK-Version": "10.1.2",
+            "X-Fern-SDK-Version": "10.1.3",
             **(self.get_custom_headers() or {}),
         }
         token = self._get_token()

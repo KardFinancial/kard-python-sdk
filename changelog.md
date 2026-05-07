@@ -1,3 +1,15 @@
+## 10.1.3 - 2026-05-07
+* chore: correct required scope in bulk upload URL docstrings
+* Update the documented required OAuth scope for the
+* `create_bulk_transactions_upload_url` endpoint from `transaction:write`
+* to `files:write` across all client variants. This is a documentation-only
+* fix — no public API signatures, types, or runtime behavior are changed.
+* Key changes:
+* Replace `transaction:write` with `files:write` in the `create_bulk_transactions_upload_url` docstring in `TransactionsClient`
+* Apply the same correction to `AsyncTransactionsClient`
+* Mirror both fixes in `RawTransactionsClient` and `AsyncRawTransactionsClient`
+* 🌿 Generated with Fern
+
 ## 10.1.2 - 2026-04-30
 * chore: update bulk upload docstrings and deprecate legacy upload endpoints
 * Refresh documentation across the transactions and uploads clients to

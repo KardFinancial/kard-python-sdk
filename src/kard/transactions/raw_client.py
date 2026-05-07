@@ -403,7 +403,7 @@ class RawTransactionsClient:
         binary file content as the body. If a URL expires before the upload completes, you must request a new one.
         Files can be uploaded as plain JSONL or as a gzip-compressed file.
         Supports both `incomingTransactionsFile` for daily transaction ingestion and `historicalTransactionsFile` for historical transaction ingestion. See the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide for details on the historical flow.
-        <b>Required scopes:</b> `transaction:write`
+        <b>Required scopes:</b> `files:write`
 
         Parameters
         ----------
@@ -979,7 +979,7 @@ class AsyncRawTransactionsClient:
         binary file content as the body. If a URL expires before the upload completes, you must request a new one.
         Files can be uploaded as plain JSONL or as a gzip-compressed file.
         Supports both `incomingTransactionsFile` for daily transaction ingestion and `historicalTransactionsFile` for historical transaction ingestion. See the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide for details on the historical flow.
-        <b>Required scopes:</b> `transaction:write`
+        <b>Required scopes:</b> `files:write`
 
         Parameters
         ----------
