@@ -1,3 +1,9 @@
+## 10.2.0 - 2026-05-12
+### Added
+* **`LocationPartnerId`** — new model representing a third-party partner identifier (e.g. Google) associated with a LOCAL location, with `type` and `id` fields.
+* **`LocationPartnerIdType`** — new type alias for the partner identifier kind; currently supports `"google"` with an open union for future values.
+* **`LocationAttributes.partner_ids`** — new optional field (`List[LocationPartnerId] | None`) exposing third-party partner IDs on LOCAL locations; absent on non-LOCAL locations.
+
 ## 10.1.3 - 2026-05-07
 * chore: correct required scope in bulk upload URL docstrings
 * Update the documented required OAuth scope for the

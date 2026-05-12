@@ -8,6 +8,7 @@ from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .coordinates import Coordinates
 from .eligibility_location_address import EligibilityLocationAddress
+from .location_partner_id import LocationPartnerId
 from .operation_hours import OperationHours
 
 
@@ -19,6 +20,14 @@ class LocationAttributes(UniversalBaseModel):
     operation_hours: typing_extensions.Annotated[
         OperationHours, FieldMetadata(alias="operationHours"), pydantic.Field(alias="operationHours")
     ]
+    partner_ids: typing_extensions.Annotated[
+        typing.Optional[typing.List[LocationPartnerId]],
+        FieldMetadata(alias="partnerIds"),
+        pydantic.Field(
+            alias="partnerIds",
+            description="List of ids associated with the location from third party partners. Only included on LOCAL locations.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

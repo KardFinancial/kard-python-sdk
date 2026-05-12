@@ -26,6 +26,7 @@ class LocationsResponseObject(UniversalBaseModel):
         EligibilityLocationAddress,
         LocationAttributes,
         LocationData,
+        LocationPartnerId,
         LocationRelationships,
         LocationsResponseObject,
         OfferDataUnion_StandardOffer,
@@ -115,6 +116,12 @@ class LocationsResponseObject(UniversalBaseModel):
                             "Sunday: Closed",
                         ],
                     ),
+                    partner_ids=[
+                        LocationPartnerId(
+                            type="google",
+                            id="3pafnweri4",
+                        )
+                    ],
                 ),
                 relationships=LocationRelationships(
                     offers=RelationshipMultiple(
