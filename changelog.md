@@ -1,3 +1,7 @@
+## 12.0.0 - 2026-05-14
+### Breaking Changes
+* **`LocationAttributes.partner_ids`** — field is now required (`List[LocationPartnerId]`) instead of optional (`Optional[List[LocationPartnerId]]`, defaulting to `None`); any code constructing `LocationAttributes` without providing `partner_ids` will now raise a Pydantic validation error — pass an explicit list (e.g. `partner_ids=[]`) to migrate.
+
 ## 11.0.0 - 2026-05-14
 ### Breaking Changes
 * **`EarnedRewardAttributes`** — class has been removed from the public API; update any imports to use `RewardNotificationAttributes` instead, which is now the type of `EarnedRewardApprovedData.attributes` and `NotificationDataUnion_EarnedRewardApproved.attributes`.

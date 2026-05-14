@@ -21,13 +21,13 @@ class LocationAttributes(UniversalBaseModel):
         OperationHours, FieldMetadata(alias="operationHours"), pydantic.Field(alias="operationHours")
     ]
     partner_ids: typing_extensions.Annotated[
-        typing.Optional[typing.List[LocationPartnerId]],
+        typing.List[LocationPartnerId],
         FieldMetadata(alias="partnerIds"),
         pydantic.Field(
             alias="partnerIds",
-            description="List of ids associated with the location from third party partners. Only included on LOCAL locations.",
+            description="List of ids associated with the location from third party partners. Only applicable for LOCAL locations.",
         ),
-    ] = None
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
