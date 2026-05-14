@@ -39,6 +39,8 @@ class NotificationPayload(UniversalBaseModel):
                 transaction_timestamp=datetime.datetime.fromisoformat(
                     "2024-10-01 14:32:10+00:00",
                 ),
+                transaction_id="019df940-babd-7cd3-acfc-a96de16643e9",
+                transaction_amount_in_cents=3000,
             ),
             relationships=EarnedRewardRelationships(
                 user=RelationshipSingle(

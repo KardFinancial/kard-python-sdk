@@ -10,11 +10,11 @@ from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...files.types.file_metadata_attribute import FileMetadataAttribute
 from .audit_update_attributes import AuditUpdateAttributes
 from .audit_update_relationships import AuditUpdateRelationships
-from .earned_reward_attributes import EarnedRewardAttributes
 from .earned_reward_relationships import EarnedRewardRelationships
 from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
 from .failed_transaction_attributes import FailedTransactionAttributes
 from .failed_transaction_relationships import FailedTransactionRelationships
+from .reward_notification_attributes import RewardNotificationAttributes
 from .transaction_relationships import TransactionRelationships
 from .valid_transaction_attributes import ValidTransactionAttributes
 
@@ -22,7 +22,7 @@ from .valid_transaction_attributes import ValidTransactionAttributes
 class NotificationDataUnion_EarnedRewardApproved(UniversalBaseModel):
     type: typing.Literal["earnedRewardApproved"] = "earnedRewardApproved"
     id: str
-    attributes: EarnedRewardAttributes
+    attributes: RewardNotificationAttributes
     relationships: EarnedRewardRelationships
 
     if IS_PYDANTIC_V2:

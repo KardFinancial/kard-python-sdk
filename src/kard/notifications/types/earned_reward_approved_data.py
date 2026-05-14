@@ -4,8 +4,8 @@ import typing
 
 import pydantic
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .earned_reward_attributes import EarnedRewardAttributes
 from .earned_reward_relationships import EarnedRewardRelationships
+from .reward_notification_attributes import RewardNotificationAttributes
 
 
 class EarnedRewardApprovedData(UniversalBaseModel):
@@ -14,7 +14,7 @@ class EarnedRewardApprovedData(UniversalBaseModel):
     The internal ID of the notification
     """
 
-    attributes: EarnedRewardAttributes
+    attributes: RewardNotificationAttributes
     relationships: EarnedRewardRelationships
 
     if IS_PYDANTIC_V2:

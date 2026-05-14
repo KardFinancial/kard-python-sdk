@@ -11,7 +11,6 @@ if typing.TYPE_CHECKING:
     from .audit_update_relationships import AuditUpdateRelationships
     from .clawback_data import ClawbackData
     from .earned_reward_approved_data import EarnedRewardApprovedData
-    from .earned_reward_attributes import EarnedRewardAttributes
     from .earned_reward_relationships import EarnedRewardRelationships
     from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
     from .earned_reward_settled_data import EarnedRewardSettledData
@@ -42,7 +41,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuditUpdateRelationships": ".audit_update_relationships",
     "ClawbackData": ".clawback_data",
     "EarnedRewardApprovedData": ".earned_reward_approved_data",
-    "EarnedRewardAttributes": ".earned_reward_attributes",
     "EarnedRewardRelationships": ".earned_reward_relationships",
     "EarnedRewardSettledAttributes": ".earned_reward_settled_attributes",
     "EarnedRewardSettledData": ".earned_reward_settled_data",
@@ -95,7 +93,6 @@ __all__ = [
     "AuditUpdateRelationships",
     "ClawbackData",
     "EarnedRewardApprovedData",
-    "EarnedRewardAttributes",
     "EarnedRewardRelationships",
     "EarnedRewardSettledAttributes",
     "EarnedRewardSettledData",

@@ -1,3 +1,9 @@
+## 11.0.0 - 2026-05-14
+### Breaking Changes
+* **`EarnedRewardAttributes`** — class has been removed from the public API; update any imports to use `RewardNotificationAttributes` instead, which is now the type of `EarnedRewardApprovedData.attributes` and `NotificationDataUnion_EarnedRewardApproved.attributes`.
+* **`RewardNotificationAttributes`** — two new required fields, `transaction_id` (`str`) and `transaction_amount_in_cents` (`int`), have been added; any code constructing this model (or subclasses) must now supply these values.
+* **`EarnedRewardSettledAttributes`** — the `transaction_timestamp` field has been removed from this class; it is now inherited from the base `RewardNotificationAttributes`.
+
 ## 10.2.0 - 2026-05-12
 ### Added
 * **`LocationPartnerId`** — new model representing a third-party partner identifier (e.g. Google) associated with a LOCAL location, with `type` and `id` fields.
