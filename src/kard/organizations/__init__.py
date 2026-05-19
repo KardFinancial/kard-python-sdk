@@ -7,7 +7,7 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import ExternalOrganizationAttributes, ExternalOrganizationResponse
-    from . import children, placements
+    from . import children, content_strategies, placements
     from .children import (
         ChildOrganizationAttributes,
         ChildOrganizationListResponse,
@@ -18,6 +18,18 @@ if typing.TYPE_CHECKING:
         UpdateChildAttributes,
         UpdateChildRequestBody,
         UpdateChildRequestData,
+    )
+    from .content_strategies import (
+        ContentStrategyAttributes,
+        ContentStrategyFilter,
+        ContentStrategyListResponse,
+        ContentStrategyResponse,
+        CreateContentStrategyAttributes,
+        CreateContentStrategyRequestBody,
+        CreateContentStrategyRequestData,
+        UpdateContentStrategyAttributes,
+        UpdateContentStrategyRequestBody,
+        UpdateContentStrategyRequestData,
     )
     from .placements import (
         Cadence,
@@ -55,9 +67,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ChildOrganizationAttributes": ".children",
     "ChildOrganizationListResponse": ".children",
     "ChildOrganizationResponse": ".children",
+    "ContentStrategyAttributes": ".content_strategies",
+    "ContentStrategyFilter": ".content_strategies",
+    "ContentStrategyListResponse": ".content_strategies",
+    "ContentStrategyResponse": ".content_strategies",
     "CreateChildAttributes": ".children",
     "CreateChildRequestBody": ".children",
     "CreateChildRequestData": ".children",
+    "CreateContentStrategyAttributes": ".content_strategies",
+    "CreateContentStrategyRequestBody": ".content_strategies",
+    "CreateContentStrategyRequestData": ".content_strategies",
     "CreateMainPageAttributes": ".placements",
     "CreateMainPagePlacementData": ".placements",
     "CreatePlacementDataUnion": ".placements",
@@ -81,6 +100,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdateChildAttributes": ".children",
     "UpdateChildRequestBody": ".children",
     "UpdateChildRequestData": ".children",
+    "UpdateContentStrategyAttributes": ".content_strategies",
+    "UpdateContentStrategyRequestBody": ".content_strategies",
+    "UpdateContentStrategyRequestData": ".content_strategies",
     "UpdateMainPageAttributes": ".placements",
     "UpdateMainPagePlacementData": ".placements",
     "UpdatePlacementDataUnion": ".placements",
@@ -90,6 +112,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdatePushNotificationAttributes": ".placements",
     "UpdatePushNotificationPlacementData": ".placements",
     "children": ".children",
+    "content_strategies": ".content_strategies",
     "placements": ".placements",
 }
 
@@ -121,9 +144,16 @@ __all__ = [
     "ChildOrganizationAttributes",
     "ChildOrganizationListResponse",
     "ChildOrganizationResponse",
+    "ContentStrategyAttributes",
+    "ContentStrategyFilter",
+    "ContentStrategyListResponse",
+    "ContentStrategyResponse",
     "CreateChildAttributes",
     "CreateChildRequestBody",
     "CreateChildRequestData",
+    "CreateContentStrategyAttributes",
+    "CreateContentStrategyRequestBody",
+    "CreateContentStrategyRequestData",
     "CreateMainPageAttributes",
     "CreateMainPagePlacementData",
     "CreatePlacementDataUnion",
@@ -147,6 +177,9 @@ __all__ = [
     "UpdateChildAttributes",
     "UpdateChildRequestBody",
     "UpdateChildRequestData",
+    "UpdateContentStrategyAttributes",
+    "UpdateContentStrategyRequestBody",
+    "UpdateContentStrategyRequestData",
     "UpdateMainPageAttributes",
     "UpdateMainPagePlacementData",
     "UpdatePlacementDataUnion",
@@ -156,5 +189,6 @@ __all__ = [
     "UpdatePushNotificationAttributes",
     "UpdatePushNotificationPlacementData",
     "children",
+    "content_strategies",
     "placements",
 ]

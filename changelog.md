@@ -1,3 +1,11 @@
+## 12.1.0 - 2026-05-19
+### Added
+* **`ContentStrategiesClient`** and **`AsyncContentStrategiesClient`** — new sub-clients accessible via `client.organizations.content_strategies` supporting `create`, `list`, `get`, `update`, and `delete` operations for content strategies scoped to an organization.
+* **`RawContentStrategiesClient`** and **`AsyncRawContentStrategiesClient`** — new raw clients for the same content strategy operations against the `v2/issuers/{organizationId}/contentStrategies` endpoint.
+* **`ContentStrategyAttributes`** and **`ContentStrategyFilter`** — new models representing content strategy attributes (`name`, `filters`, `categories`, `category_exclusions`, `merchant_exclusions`, `created_at`, `last_modified`) and a filter type alias (`NEWLY_LIVE`, `EXPIRING_SOON`, `HIGHEST_CASHBACK`, `PERSONALIZED`).
+* **`ContentStrategyResponse`** and **`ContentStrategyListResponse`** — new response models for retrieving a single content strategy or a paginated list.
+* **`CreateContentStrategyRequestBody`**, **`UpdateContentStrategyRequestBody`**, and related request data/attribute types — new request models for creating (name must be unique within the organization) and fully replacing (all fields required) a content strategy.
+
 ## 12.0.0 - 2026-05-14
 ### Breaking Changes
 * **`LocationAttributes.partner_ids`** — field is now required (`List[LocationPartnerId]`) instead of optional (`Optional[List[LocationPartnerId]]`, defaulting to `None`); any code constructing `LocationAttributes` without providing `partner_ids` will now raise a Pydantic validation error — pass an explicit list (e.g. `partner_ids=[]`) to migrate.

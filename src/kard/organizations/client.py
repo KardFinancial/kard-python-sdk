@@ -11,6 +11,7 @@ from .types.external_organization_response import ExternalOrganizationResponse
 
 if typing.TYPE_CHECKING:
     from .children.client import AsyncChildrenClient, ChildrenClient
+    from .content_strategies.client import AsyncContentStrategiesClient, ContentStrategiesClient
     from .placements.client import AsyncPlacementsClient, PlacementsClient
 
 
@@ -19,6 +20,7 @@ class OrganizationsClient:
         self._raw_client = RawOrganizationsClient(client_wrapper=client_wrapper)
         self._client_wrapper = client_wrapper
         self._children: typing.Optional[ChildrenClient] = None
+        self._content_strategies: typing.Optional[ContentStrategiesClient] = None
         self._placements: typing.Optional[PlacementsClient] = None
 
     @property
@@ -68,6 +70,14 @@ class OrganizationsClient:
         return self._children
 
     @property
+    def content_strategies(self):
+        if self._content_strategies is None:
+            from .content_strategies.client import ContentStrategiesClient  # noqa: E402
+
+            self._content_strategies = ContentStrategiesClient(client_wrapper=self._client_wrapper)
+        return self._content_strategies
+
+    @property
     def placements(self):
         if self._placements is None:
             from .placements.client import PlacementsClient  # noqa: E402
@@ -81,6 +91,7 @@ class AsyncOrganizationsClient:
         self._raw_client = AsyncRawOrganizationsClient(client_wrapper=client_wrapper)
         self._client_wrapper = client_wrapper
         self._children: typing.Optional[AsyncChildrenClient] = None
+        self._content_strategies: typing.Optional[AsyncContentStrategiesClient] = None
         self._placements: typing.Optional[AsyncPlacementsClient] = None
 
     @property
@@ -136,6 +147,14 @@ class AsyncOrganizationsClient:
 
             self._children = AsyncChildrenClient(client_wrapper=self._client_wrapper)
         return self._children
+
+    @property
+    def content_strategies(self):
+        if self._content_strategies is None:
+            from .content_strategies.client import AsyncContentStrategiesClient  # noqa: E402
+
+            self._content_strategies = AsyncContentStrategiesClient(client_wrapper=self._client_wrapper)
+        return self._content_strategies
 
     @property
     def placements(self):
