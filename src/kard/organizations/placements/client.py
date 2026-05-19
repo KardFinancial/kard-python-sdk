@@ -88,6 +88,7 @@ class PlacementsClient:
         *,
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
+        filter_content_strategy_id: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -105,6 +106,9 @@ class PlacementsClient:
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
+
+        filter_content_strategy_id : typing.Optional[str]
+            Filter by the ID of the content strategy linked to the placement
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -136,6 +140,7 @@ class PlacementsClient:
             organization_id,
             filter_type=filter_type,
             filter_name=filter_name,
+            filter_content_strategy_id=filter_content_strategy_id,
             page_after=page_after,
             page_size=page_size,
             request_options=request_options,
@@ -354,6 +359,7 @@ class AsyncPlacementsClient:
         *,
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
+        filter_content_strategy_id: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -371,6 +377,9 @@ class AsyncPlacementsClient:
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
+
+        filter_content_strategy_id : typing.Optional[str]
+            Filter by the ID of the content strategy linked to the placement
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -410,6 +419,7 @@ class AsyncPlacementsClient:
             organization_id,
             filter_type=filter_type,
             filter_name=filter_name,
+            filter_content_strategy_id=filter_content_strategy_id,
             page_after=page_after,
             page_size=page_size,
             request_options=request_options,

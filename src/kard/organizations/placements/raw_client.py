@@ -150,6 +150,7 @@ class RawPlacementsClient:
         *,
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
+        filter_content_strategy_id: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -167,6 +168,9 @@ class RawPlacementsClient:
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
+
+        filter_content_strategy_id : typing.Optional[str]
+            Filter by the ID of the content strategy linked to the placement
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -188,6 +192,7 @@ class RawPlacementsClient:
             params={
                 "filter[type]": filter_type,
                 "filter[name]": filter_name,
+                "filter[contentStrategyId]": filter_content_strategy_id,
                 "page[after]": page_after,
                 "page[size]": page_size,
             },
@@ -683,6 +688,7 @@ class AsyncRawPlacementsClient:
         *,
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
+        filter_content_strategy_id: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -700,6 +706,9 @@ class AsyncRawPlacementsClient:
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
+
+        filter_content_strategy_id : typing.Optional[str]
+            Filter by the ID of the content strategy linked to the placement
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -721,6 +730,7 @@ class AsyncRawPlacementsClient:
             params={
                 "filter[type]": filter_type,
                 "filter[name]": filter_name,
+                "filter[contentStrategyId]": filter_content_strategy_id,
                 "page[after]": page_after,
                 "page[size]": page_size,
             },

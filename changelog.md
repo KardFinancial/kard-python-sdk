@@ -1,3 +1,9 @@
+## 12.2.0 - 2026-05-19
+### Added
+* **`filter_content_strategy_id`** — new optional parameter on `PlacementsClient.list` and `AsyncPlacementsClient.list` (and their raw counterparts) to filter placements by the ID of a linked content strategy.
+* **`content_strategy_id`** — new optional field on `CreateMainPageAttributes`, `CreatePushNotificationAttributes`, `UpdateMainPageAttributes`, and `UpdatePushNotificationAttributes` to link a placement to a content strategy at creation or update time.
+* **`content_strategy_id`** — new optional field on `MainPagePlacementAttributes` and `PushNotificationPlacementAttributes` response models exposing the ID of the content strategy linked to a placement, if any.
+
 ## 12.1.0 - 2026-05-19
 ### Added
 * **`ContentStrategiesClient`** and **`AsyncContentStrategiesClient`** — new sub-clients accessible via `client.organizations.content_strategies` supporting `create`, `list`, `get`, `update`, and `delete` operations for content strategies scoped to an organization.

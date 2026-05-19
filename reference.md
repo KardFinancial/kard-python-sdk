@@ -1651,6 +1651,14 @@ client.organizations.placements.list(
 <dl>
 <dd>
 
+**filter_content_strategy_id:** `typing.Optional[str]` — Filter by the ID of the content strategy linked to the placement
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **page_after:** `typing.Optional[str]` — Cursor value for the next page of results
     
 </dd>

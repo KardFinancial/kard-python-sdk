@@ -29,6 +29,13 @@ class MainPagePlacementAttributes(UniversalBaseModel):
         FieldMetadata(alias="availableSlots"),
         pydantic.Field(alias="availableSlots", description="Number of available slots"),
     ]
+    content_strategy_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="contentStrategyId"),
+        pydantic.Field(
+            alias="contentStrategyId", description="ID of the content strategy linked to this placement, if any"
+        ),
+    ] = None
     created_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="createdAt"),

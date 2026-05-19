@@ -3,7 +3,9 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ....core.serialization import FieldMetadata
 from .cadence import Cadence
 
 
@@ -36,6 +38,12 @@ class CreatePushNotificationAttributes(UniversalBaseModel):
     """
     Delivery cadence for the notification
     """
+
+    content_strategy_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="contentStrategyId"),
+        pydantic.Field(alias="contentStrategyId", description="ID of the content strategy to link this placement to"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

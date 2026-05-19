@@ -30,6 +30,13 @@ class PushNotificationPlacementAttributes(UniversalBaseModel):
     Delivery cadence for the notification
     """
 
+    content_strategy_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="contentStrategyId"),
+        pydantic.Field(
+            alias="contentStrategyId", description="ID of the content strategy linked to this placement, if any"
+        ),
+    ] = None
     created_at: typing_extensions.Annotated[
         dt.datetime,
         FieldMetadata(alias="createdAt"),
