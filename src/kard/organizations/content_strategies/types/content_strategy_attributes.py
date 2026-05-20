@@ -26,9 +26,9 @@ class ContentStrategyAttributes(UniversalBaseModel):
         FieldMetadata(alias="organizationId"),
         pydantic.Field(alias="organizationId", description="ID of the organization this content strategy belongs to"),
     ]
-    filters: typing.List[ContentStrategyFilter] = pydantic.Field()
+    filter: typing.Optional[ContentStrategyFilter] = pydantic.Field(default=None)
     """
-    Filters applied when selecting offers for the strategy
+    Filter applied when selecting offers for the strategy
     """
 
     categories: typing.List[CategoryOption] = pydantic.Field()

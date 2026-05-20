@@ -1046,10 +1046,7 @@ client.organizations.content_strategies.create(
         type="contentStrategy",
         attributes=CreateContentStrategyAttributes(
             name="Featured Travel",
-            filters=[
-                "HIGHEST_CASHBACK",
-                "NEWLY_LIVE"
-            ],
+            filter="HIGHEST_CASHBACK",
             categories=[
                 "Travel"
             ],
@@ -1330,10 +1327,6 @@ client.organizations.content_strategies.update(
         type="contentStrategy",
         attributes=UpdateContentStrategyAttributes(
             name="name",
-            filters=[
-                "NEWLY_LIVE",
-                "NEWLY_LIVE"
-            ],
             categories=[
                 "Arts & Entertainment",
                 "Arts & Entertainment"

@@ -1,3 +1,7 @@
+## 13.0.0 - 2026-05-20
+### Breaking Changes
+* **`ContentStrategyAttributes.filters`**, **`CreateContentStrategyAttributes.filters`**, and **`UpdateContentStrategyAttributes.filters`** — the required `filters: List[ContentStrategyFilter]` field has been removed and replaced with a single optional `filter: Optional[ContentStrategyFilter]` field (default `None`); migrate by replacing `filters=[...]` with `filter=...` (a single value or `None`) when constructing these models.
+
 ## 12.2.0 - 2026-05-19
 ### Added
 * **`filter_content_strategy_id`** — new optional parameter on `PlacementsClient.list` and `AsyncPlacementsClient.list` (and their raw counterparts) to filter placements by the ID of a linked content strategy.

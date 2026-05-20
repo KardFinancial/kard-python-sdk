@@ -25,7 +25,7 @@ class ContentStrategyResponse(UniversalBaseModel):
         attributes=ContentStrategyAttributes(
             name="Featured Travel",
             organization_id="org-123",
-            filters=["HIGHEST_CASHBACK", "NEWLY_LIVE"],
+            filter="HIGHEST_CASHBACK",
             categories=["Travel"],
             category_exclusions=["Gas"],
             merchant_exclusions=["merchant-abc"],

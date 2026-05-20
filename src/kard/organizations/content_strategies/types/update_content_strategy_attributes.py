@@ -22,7 +22,7 @@ class UpdateContentStrategyAttributes(UniversalBaseModel):
 
     UpdateContentStrategyAttributes(
         name="Updated Travel Strategy",
-        filters=["EXPIRING_SOON", "PERSONALIZED"],
+        filter="EXPIRING_SOON",
         categories=["Travel", "Food & Beverage"],
         category_exclusions=[],
         merchant_exclusions=["merchant-xyz"],
@@ -34,9 +34,9 @@ class UpdateContentStrategyAttributes(UniversalBaseModel):
     Name of the content strategy (unique within an organization)
     """
 
-    filters: typing.List[ContentStrategyFilter] = pydantic.Field()
+    filter: typing.Optional[ContentStrategyFilter] = pydantic.Field(default=None)
     """
-    Filters applied when selecting offers for the strategy
+    Filter applied when selecting offers for the strategy
     """
 
     categories: typing.List[CategoryOption] = pydantic.Field()

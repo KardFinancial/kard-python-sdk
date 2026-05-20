@@ -73,7 +73,7 @@ class ContentStrategiesClient:
             data=CreateContentStrategyRequestData(
                 attributes=CreateContentStrategyAttributes(
                     name="Featured Travel",
-                    filters=["HIGHEST_CASHBACK", "NEWLY_LIVE"],
+                    filter="HIGHEST_CASHBACK",
                     categories=["Travel"],
                     category_exclusions=["Gas"],
                     merchant_exclusions=["merchant-abc"],
@@ -225,7 +225,6 @@ class ContentStrategiesClient:
             data=UpdateContentStrategyRequestData(
                 attributes=UpdateContentStrategyAttributes(
                     name="name",
-                    filters=["NEWLY_LIVE", "NEWLY_LIVE"],
                     categories=["Arts & Entertainment", "Arts & Entertainment"],
                     category_exclusions=[
                         "Arts & Entertainment",
@@ -342,7 +341,7 @@ class AsyncContentStrategiesClient:
                 data=CreateContentStrategyRequestData(
                     attributes=CreateContentStrategyAttributes(
                         name="Featured Travel",
-                        filters=["HIGHEST_CASHBACK", "NEWLY_LIVE"],
+                        filter="HIGHEST_CASHBACK",
                         categories=["Travel"],
                         category_exclusions=["Gas"],
                         merchant_exclusions=["merchant-abc"],
@@ -518,7 +517,6 @@ class AsyncContentStrategiesClient:
                 data=UpdateContentStrategyRequestData(
                     attributes=UpdateContentStrategyAttributes(
                         name="name",
-                        filters=["NEWLY_LIVE", "NEWLY_LIVE"],
                         categories=["Arts & Entertainment", "Arts & Entertainment"],
                         category_exclusions=[
                             "Arts & Entertainment",

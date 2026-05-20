@@ -23,7 +23,7 @@ class CreateContentStrategyRequestBody(UniversalBaseModel):
         data=CreateContentStrategyRequestData(
             attributes=CreateContentStrategyAttributes(
                 name="Featured Travel",
-                filters=["HIGHEST_CASHBACK", "NEWLY_LIVE"],
+                filter="HIGHEST_CASHBACK",
                 categories=["Travel"],
                 category_exclusions=["Gas"],
                 merchant_exclusions=["merchant-abc"],

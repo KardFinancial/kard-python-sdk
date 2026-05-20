@@ -22,7 +22,7 @@ class CreateContentStrategyAttributes(UniversalBaseModel):
 
     CreateContentStrategyAttributes(
         name="Featured Travel",
-        filters=["HIGHEST_CASHBACK", "NEWLY_LIVE"],
+        filter="HIGHEST_CASHBACK",
         categories=["Travel"],
         category_exclusions=["Gas"],
         merchant_exclusions=["merchant-abc"],
@@ -34,9 +34,9 @@ class CreateContentStrategyAttributes(UniversalBaseModel):
     Name of the content strategy (unique within an organization)
     """
 
-    filters: typing.List[ContentStrategyFilter] = pydantic.Field()
+    filter: typing.Optional[ContentStrategyFilter] = pydantic.Field(default=None)
     """
-    Filters applied when selecting offers for the strategy
+    Filter applied when selecting offers for the strategy
     """
 
     categories: typing.List[CategoryOption] = pydantic.Field()
