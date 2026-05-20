@@ -1,3 +1,13 @@
+## 14.0.0 - 2026-05-20
+### Breaking Changes
+* **`PlacementsClient.get`** and **`AsyncPlacementsClient.get`** (and their raw counterparts) now return `PlacementResource` instead of `PlacementFormatUnion`; migrate by accessing `.data` on the returned object to retrieve the placement.
+* **`MainPagePlacementAttributes`** and **`PushNotificationPlacementAttributes`** — the required `created_at` and `last_modified` fields have been removed; remove these fields from any model construction or pattern-matching code.
+* **`ContentStrategyAttributes`** — the required `created_at` and `last_modified` fields have been removed; remove these fields from any model construction or pattern-matching code.
+### Added
+* **`PlacementResource`** — new model wrapping a single placement document with a `data: PlacementFormatUnion` field and an optional `included: List[ContentStrategyResponse]` array for embedded related resources.
+* **`include`** — new optional parameter on `PlacementsClient.list`, `PlacementsClient.get`, `AsyncPlacementsClient.list`, and `AsyncPlacementsClient.get` (and raw counterparts) accepting a CSV string (e.g. `"contentStrategy"`) to embed related resources in the response.
+* **`PlacementListResponse.included`** — new optional field containing embedded `ContentStrategyResponse` objects when `include=contentStrategy` is requested on the list endpoint.
+
 ## 13.0.0 - 2026-05-20
 ### Breaking Changes
 * **`ContentStrategyAttributes.filters`**, **`CreateContentStrategyAttributes.filters`**, and **`UpdateContentStrategyAttributes.filters`** — the required `filters: List[ContentStrategyFilter]` field has been removed and replaced with a single optional `filter: Optional[ContentStrategyFilter]` field (default `None`); migrate by replacing `filters=[...]` with `filter=...` (a single value or `None`) when constructing these models.

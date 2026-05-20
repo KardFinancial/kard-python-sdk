@@ -21,6 +21,7 @@ from ...internal_organizations.types.delete_resource_response import DeleteResou
 from .types.create_placement_data_union import CreatePlacementDataUnion
 from .types.placement_format_union import PlacementFormatUnion
 from .types.placement_list_response import PlacementListResponse
+from .types.placement_resource import PlacementResource
 from .types.placement_type_filter import PlacementTypeFilter
 from .types.update_placement_data_union import UpdatePlacementDataUnion
 from pydantic import ValidationError
@@ -151,6 +152,7 @@ class RawPlacementsClient:
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
         filter_content_strategy_id: typing.Optional[str] = None,
+        include: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -171,6 +173,9 @@ class RawPlacementsClient:
 
         filter_content_strategy_id : typing.Optional[str]
             Filter by the ID of the content strategy linked to the placement
+
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -193,6 +198,7 @@ class RawPlacementsClient:
                 "filter[type]": filter_type,
                 "filter[name]": filter_name,
                 "filter[contentStrategyId]": filter_content_strategy_id,
+                "include": include,
                 "page[after]": page_after,
                 "page[size]": page_size,
             },
@@ -273,8 +279,13 @@ class RawPlacementsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def get(
-        self, organization_id: str, placement_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[PlacementFormatUnion]:
+        self,
+        organization_id: str,
+        placement_id: str,
+        *,
+        include: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[PlacementResource]:
         """
         Retrieve a specific placement
 
@@ -286,25 +297,31 @@ class RawPlacementsClient:
         placement_id : str
             Unique identifier of the placement (UUID v7)
 
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[PlacementFormatUnion]
-            Placement resource
+        HttpResponse[PlacementResource]
+            Placement resource (optionally with embedded related resources)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"v2/issuers/{encode_path_param(organization_id)}/placements/{encode_path_param(placement_id)}",
             method="GET",
+            params={
+                "include": include,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    PlacementFormatUnion,
+                    PlacementResource,
                     parse_obj_as(
-                        type_=PlacementFormatUnion,  # type: ignore
+                        type_=PlacementResource,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -689,6 +706,7 @@ class AsyncRawPlacementsClient:
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
         filter_content_strategy_id: typing.Optional[str] = None,
+        include: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -709,6 +727,9 @@ class AsyncRawPlacementsClient:
 
         filter_content_strategy_id : typing.Optional[str]
             Filter by the ID of the content strategy linked to the placement
+
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -731,6 +752,7 @@ class AsyncRawPlacementsClient:
                 "filter[type]": filter_type,
                 "filter[name]": filter_name,
                 "filter[contentStrategyId]": filter_content_strategy_id,
+                "include": include,
                 "page[after]": page_after,
                 "page[size]": page_size,
             },
@@ -811,8 +833,13 @@ class AsyncRawPlacementsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def get(
-        self, organization_id: str, placement_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[PlacementFormatUnion]:
+        self,
+        organization_id: str,
+        placement_id: str,
+        *,
+        include: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[PlacementResource]:
         """
         Retrieve a specific placement
 
@@ -824,25 +851,31 @@ class AsyncRawPlacementsClient:
         placement_id : str
             Unique identifier of the placement (UUID v7)
 
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[PlacementFormatUnion]
-            Placement resource
+        AsyncHttpResponse[PlacementResource]
+            Placement resource (optionally with embedded related resources)
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"v2/issuers/{encode_path_param(organization_id)}/placements/{encode_path_param(placement_id)}",
             method="GET",
+            params={
+                "include": include,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    PlacementFormatUnion,
+                    PlacementResource,
                     parse_obj_as(
-                        type_=PlacementFormatUnion,  # type: ignore
+                        type_=PlacementResource,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

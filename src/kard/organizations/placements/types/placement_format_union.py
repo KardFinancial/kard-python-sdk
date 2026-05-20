@@ -17,8 +17,6 @@ class PlacementFormatUnion_PlacementMainPage(UniversalBaseModel):
 
     Examples
     --------
-    import datetime
-
     from kard.organizations.placements import (
         MainPagePlacementAttributes,
         PlacementFormatUnion_PlacementMainPage,
@@ -30,12 +28,6 @@ class PlacementFormatUnion_PlacementMainPage(UniversalBaseModel):
             name="Homepage Banner",
             organization_id="org-123",
             available_slots=5,
-            created_at=datetime.datetime.fromisoformat(
-                "2026-04-15 12:00:00+00:00",
-            ),
-            last_modified=datetime.datetime.fromisoformat(
-                "2026-04-15 12:00:00+00:00",
-            ),
         ),
     )
     """
@@ -60,8 +52,6 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
 
     Examples
     --------
-    import datetime
-
     from kard.organizations.placements import (
         MainPagePlacementAttributes,
         PlacementFormatUnion_PlacementMainPage,
@@ -73,12 +63,6 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
             name="Homepage Banner",
             organization_id="org-123",
             available_slots=5,
-            created_at=datetime.datetime.fromisoformat(
-                "2026-04-15 12:00:00+00:00",
-            ),
-            last_modified=datetime.datetime.fromisoformat(
-                "2026-04-15 12:00:00+00:00",
-            ),
         ),
     )
     """
@@ -98,8 +82,6 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
 
 
 """
-import datetime
-
 from kard.organizations.placements import (
     MainPagePlacementAttributes,
     PlacementFormatUnion_PlacementMainPage,
@@ -111,12 +93,6 @@ PlacementFormatUnion_PlacementMainPage(
         name="Homepage Banner",
         organization_id="org-123",
         available_slots=5,
-        created_at=datetime.datetime.fromisoformat(
-            "2026-04-15 12:00:00+00:00",
-        ),
-        last_modified=datetime.datetime.fromisoformat(
-            "2026-04-15 12:00:00+00:00",
-        ),
     ),
 )
 """

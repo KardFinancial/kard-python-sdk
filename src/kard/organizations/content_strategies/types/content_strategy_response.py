@@ -13,8 +13,6 @@ class ContentStrategyResponse(UniversalBaseModel):
 
     Examples
     --------
-    import datetime
-
     from kard.organizations.content_strategies import (
         ContentStrategyAttributes,
         ContentStrategyResponse,
@@ -29,12 +27,6 @@ class ContentStrategyResponse(UniversalBaseModel):
             categories=["Travel"],
             category_exclusions=["Gas"],
             merchant_exclusions=["merchant-abc"],
-            created_at=datetime.datetime.fromisoformat(
-                "2026-04-15 12:00:00+00:00",
-            ),
-            last_modified=datetime.datetime.fromisoformat(
-                "2026-04-15 12:00:00+00:00",
-            ),
         ),
     )
     """

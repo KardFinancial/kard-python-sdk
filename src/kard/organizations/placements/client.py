@@ -9,6 +9,7 @@ from .raw_client import AsyncRawPlacementsClient, RawPlacementsClient
 from .types.create_placement_data_union import CreatePlacementDataUnion
 from .types.placement_format_union import PlacementFormatUnion
 from .types.placement_list_response import PlacementListResponse
+from .types.placement_resource import PlacementResource
 from .types.placement_type_filter import PlacementTypeFilter
 from .types.update_placement_data_union import UpdatePlacementDataUnion
 
@@ -89,6 +90,7 @@ class PlacementsClient:
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
         filter_content_strategy_id: typing.Optional[str] = None,
+        include: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -109,6 +111,9 @@ class PlacementsClient:
 
         filter_content_strategy_id : typing.Optional[str]
             Filter by the ID of the content strategy linked to the placement
+
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -141,6 +146,7 @@ class PlacementsClient:
             filter_type=filter_type,
             filter_name=filter_name,
             filter_content_strategy_id=filter_content_strategy_id,
+            include=include,
             page_after=page_after,
             page_size=page_size,
             request_options=request_options,
@@ -148,8 +154,13 @@ class PlacementsClient:
         return _response.data
 
     def get(
-        self, organization_id: str, placement_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> PlacementFormatUnion:
+        self,
+        organization_id: str,
+        placement_id: str,
+        *,
+        include: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> PlacementResource:
         """
         Retrieve a specific placement
 
@@ -161,13 +172,16 @@ class PlacementsClient:
         placement_id : str
             Unique identifier of the placement (UUID v7)
 
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        PlacementFormatUnion
-            Placement resource
+        PlacementResource
+            Placement resource (optionally with embedded related resources)
 
         Examples
         --------
@@ -182,7 +196,9 @@ class PlacementsClient:
             placement_id="placementId",
         )
         """
-        _response = self._raw_client.get(organization_id, placement_id, request_options=request_options)
+        _response = self._raw_client.get(
+            organization_id, placement_id, include=include, request_options=request_options
+        )
         return _response.data
 
     def update(
@@ -360,6 +376,7 @@ class AsyncPlacementsClient:
         filter_type: typing.Optional[PlacementTypeFilter] = None,
         filter_name: typing.Optional[str] = None,
         filter_content_strategy_id: typing.Optional[str] = None,
+        include: typing.Optional[str] = None,
         page_after: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -380,6 +397,9 @@ class AsyncPlacementsClient:
 
         filter_content_strategy_id : typing.Optional[str]
             Filter by the ID of the content strategy linked to the placement
+
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -420,6 +440,7 @@ class AsyncPlacementsClient:
             filter_type=filter_type,
             filter_name=filter_name,
             filter_content_strategy_id=filter_content_strategy_id,
+            include=include,
             page_after=page_after,
             page_size=page_size,
             request_options=request_options,
@@ -427,8 +448,13 @@ class AsyncPlacementsClient:
         return _response.data
 
     async def get(
-        self, organization_id: str, placement_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> PlacementFormatUnion:
+        self,
+        organization_id: str,
+        placement_id: str,
+        *,
+        include: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> PlacementResource:
         """
         Retrieve a specific placement
 
@@ -440,13 +466,16 @@ class AsyncPlacementsClient:
         placement_id : str
             Unique identifier of the placement (UUID v7)
 
+        include : typing.Optional[str]
+            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        PlacementFormatUnion
-            Placement resource
+        PlacementResource
+            Placement resource (optionally with embedded related resources)
 
         Examples
         --------
@@ -469,7 +498,9 @@ class AsyncPlacementsClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get(organization_id, placement_id, request_options=request_options)
+        _response = await self._raw_client.get(
+            organization_id, placement_id, include=include, request_options=request_options
+        )
         return _response.data
 
     async def update(

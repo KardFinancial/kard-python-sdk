@@ -1652,6 +1652,14 @@ client.organizations.placements.list(
 <dl>
 <dd>
 
+**include:** `typing.Optional[str]` — CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **page_after:** `typing.Optional[str]` — Cursor value for the next page of results
     
 </dd>
@@ -1680,7 +1688,7 @@ client.organizations.placements.list(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">get</a>(...) -> PlacementFormatUnion</code></summary>
+<details><summary><code>client.organizations.placements.<a href="src/kard/organizations/placements/client.py">get</a>(...) -> PlacementResource</code></summary>
 <dl>
 <dd>
 
@@ -1744,6 +1752,14 @@ client.organizations.placements.get(
 <dd>
 
 **placement_id:** `str` — Unique identifier of the placement (UUID v7)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[str]` — CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
     
 </dd>
 </dl>

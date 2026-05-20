@@ -3,32 +3,24 @@
 import typing
 
 import pydantic
-from ....commons.types.links import Links
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ....internal_organizations.types.organization_pagination_metadata import OrganizationPaginationMetadata
 from ...content_strategies.types.content_strategy_response import ContentStrategyResponse
 from .placement_format_union import PlacementFormatUnion
 
 
-class PlacementListResponse(UniversalBaseModel):
+class PlacementResource(UniversalBaseModel):
     """
-    Paginated list of placements
+    Single placement document, optionally with embedded related resources
     """
 
-    data: typing.List[PlacementFormatUnion] = pydantic.Field()
+    data: PlacementFormatUnion = pydantic.Field()
     """
-    Array of placement resources
+    Placement resource
     """
 
     included: typing.Optional[typing.List[ContentStrategyResponse]] = pydantic.Field(default=None)
     """
-    Related resources requested via the `include` query parameter. Only populated when `include=contentStrategy` is supplied and at least one placement in `data` is linked to a content strategy.
-    """
-
-    links: typing.Optional[Links] = None
-    meta: typing.Optional[OrganizationPaginationMetadata] = pydantic.Field(default=None)
-    """
-    Pagination metadata
+    Related resources requested via the `include` query parameter. Only populated when `include=contentStrategy` is supplied and the placement is linked to a content strategy.
     """
 
     if IS_PYDANTIC_V2:
