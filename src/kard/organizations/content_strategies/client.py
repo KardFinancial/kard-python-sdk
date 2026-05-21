@@ -73,7 +73,7 @@ class ContentStrategiesClient:
             data=CreateContentStrategyRequestData(
                 attributes=CreateContentStrategyAttributes(
                     name="Featured Travel",
-                    filter="HIGHEST_CASHBACK",
+                    sort="HIGHEST_CASHBACK",
                     categories=["Travel"],
                     category_exclusions=["Gas"],
                     merchant_exclusions=["merchant-abc"],
@@ -341,7 +341,7 @@ class AsyncContentStrategiesClient:
                 data=CreateContentStrategyRequestData(
                     attributes=CreateContentStrategyAttributes(
                         name="Featured Travel",
-                        filter="HIGHEST_CASHBACK",
+                        sort="HIGHEST_CASHBACK",
                         categories=["Travel"],
                         category_exclusions=["Gas"],
                         merchant_exclusions=["merchant-abc"],

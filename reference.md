@@ -1046,7 +1046,7 @@ client.organizations.content_strategies.create(
         type="contentStrategy",
         attributes=CreateContentStrategyAttributes(
             name="Featured Travel",
-            filter="HIGHEST_CASHBACK",
+            sort="HIGHEST_CASHBACK",
             categories=[
                 "Travel"
             ],

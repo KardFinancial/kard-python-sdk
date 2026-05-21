@@ -8,9 +8,9 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .types import (
         ContentStrategyAttributes,
-        ContentStrategyFilter,
         ContentStrategyListResponse,
         ContentStrategyResponse,
+        ContentStrategySort,
         CreateContentStrategyAttributes,
         CreateContentStrategyRequestBody,
         CreateContentStrategyRequestData,
@@ -20,9 +20,9 @@ if typing.TYPE_CHECKING:
     )
 _dynamic_imports: typing.Dict[str, str] = {
     "ContentStrategyAttributes": ".types",
-    "ContentStrategyFilter": ".types",
     "ContentStrategyListResponse": ".types",
     "ContentStrategyResponse": ".types",
+    "ContentStrategySort": ".types",
     "CreateContentStrategyAttributes": ".types",
     "CreateContentStrategyRequestBody": ".types",
     "CreateContentStrategyRequestData": ".types",
@@ -55,9 +55,9 @@ def __dir__():
 
 __all__ = [
     "ContentStrategyAttributes",
-    "ContentStrategyFilter",
     "ContentStrategyListResponse",
     "ContentStrategyResponse",
+    "ContentStrategySort",
     "CreateContentStrategyAttributes",
     "CreateContentStrategyRequestBody",
     "CreateContentStrategyRequestData",

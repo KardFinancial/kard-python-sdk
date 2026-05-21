@@ -7,9 +7,9 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .content_strategy_attributes import ContentStrategyAttributes
-    from .content_strategy_filter import ContentStrategyFilter
     from .content_strategy_list_response import ContentStrategyListResponse
     from .content_strategy_response import ContentStrategyResponse
+    from .content_strategy_sort import ContentStrategySort
     from .create_content_strategy_attributes import CreateContentStrategyAttributes
     from .create_content_strategy_request_body import CreateContentStrategyRequestBody
     from .create_content_strategy_request_data import CreateContentStrategyRequestData
@@ -18,9 +18,9 @@ if typing.TYPE_CHECKING:
     from .update_content_strategy_request_data import UpdateContentStrategyRequestData
 _dynamic_imports: typing.Dict[str, str] = {
     "ContentStrategyAttributes": ".content_strategy_attributes",
-    "ContentStrategyFilter": ".content_strategy_filter",
     "ContentStrategyListResponse": ".content_strategy_list_response",
     "ContentStrategyResponse": ".content_strategy_response",
+    "ContentStrategySort": ".content_strategy_sort",
     "CreateContentStrategyAttributes": ".create_content_strategy_attributes",
     "CreateContentStrategyRequestBody": ".create_content_strategy_request_body",
     "CreateContentStrategyRequestData": ".create_content_strategy_request_data",
@@ -53,9 +53,9 @@ def __dir__():
 
 __all__ = [
     "ContentStrategyAttributes",
-    "ContentStrategyFilter",
     "ContentStrategyListResponse",
     "ContentStrategyResponse",
+    "ContentStrategySort",
     "CreateContentStrategyAttributes",
     "CreateContentStrategyRequestBody",
     "CreateContentStrategyRequestData",

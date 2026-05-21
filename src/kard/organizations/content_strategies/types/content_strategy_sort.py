@@ -2,6 +2,6 @@
 
 import typing
 
-ContentStrategyFilter = typing.Union[
+ContentStrategySort = typing.Union[
     typing.Literal["NEWLY_LIVE", "EXPIRING_SOON", "HIGHEST_CASHBACK", "PERSONALIZED"], typing.Any
 ]

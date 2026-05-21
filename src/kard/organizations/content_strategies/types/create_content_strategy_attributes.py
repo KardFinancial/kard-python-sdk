@@ -7,7 +7,7 @@ import typing_extensions
 from ....commons.types.category_option import CategoryOption
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
-from .content_strategy_filter import ContentStrategyFilter
+from .content_strategy_sort import ContentStrategySort
 
 
 class CreateContentStrategyAttributes(UniversalBaseModel):
@@ -22,7 +22,7 @@ class CreateContentStrategyAttributes(UniversalBaseModel):
 
     CreateContentStrategyAttributes(
         name="Featured Travel",
-        filter="HIGHEST_CASHBACK",
+        sort="HIGHEST_CASHBACK",
         categories=["Travel"],
         category_exclusions=["Gas"],
         merchant_exclusions=["merchant-abc"],
@@ -34,9 +34,9 @@ class CreateContentStrategyAttributes(UniversalBaseModel):
     Name of the content strategy (unique within an organization)
     """
 
-    filter: typing.Optional[ContentStrategyFilter] = pydantic.Field(default=None)
+    sort: typing.Optional[ContentStrategySort] = pydantic.Field(default=None)
     """
-    Filter applied when selecting offers for the strategy
+    Sort applied when selecting offers for the strategy
     """
 
     categories: typing.List[CategoryOption] = pydantic.Field()

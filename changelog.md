@@ -1,3 +1,8 @@
+## 15.0.0 - 2026-05-21
+### Breaking Changes
+* **`ContentStrategyFilter`** — removed and replaced by **`ContentStrategySort`**; update any imports from `kard.organizations.content_strategies` to use `ContentStrategySort` instead.
+* **`ContentStrategyAttributes.filter`**, **`CreateContentStrategyAttributes.filter`**, and **`UpdateContentStrategyAttributes.filter`** — the optional `filter` field has been renamed to `sort`; migrate by replacing `filter=...` with `sort=...` when constructing or reading these models.
+
 ## 14.0.0 - 2026-05-20
 ### Breaking Changes
 * **`PlacementsClient.get`** and **`AsyncPlacementsClient.get`** (and their raw counterparts) now return `PlacementResource` instead of `PlacementFormatUnion`; migrate by accessing `.data` on the returned object to retrieve the placement.
