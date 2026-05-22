@@ -4,7 +4,10 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .progress_bar_segment_label import ProgressBarSegmentLabel
 from .progress_bar_segment_position import ProgressBarSegmentPosition
+from .progress_bar_segment_selection import ProgressBarSegmentSelection
+from .progress_bar_segment_separator import ProgressBarSegmentSeparator
 
 
 class ProgressBarSegment(UniversalBaseModel):
@@ -20,6 +23,21 @@ class ProgressBarSegment(UniversalBaseModel):
     position: ProgressBarSegmentPosition = pydantic.Field()
     """
     Position of the segment within the layout
+    """
+
+    separator: typing.Optional[ProgressBarSegmentSeparator] = pydantic.Field(default=None)
+    """
+    Separator style to render between segment nodes
+    """
+
+    labels: typing.Optional[typing.List[ProgressBarSegmentLabel]] = pydantic.Field(default=None)
+    """
+    Label configuration for each node in the segment
+    """
+
+    selection: typing.Optional[ProgressBarSegmentSelection] = pydantic.Field(default=None)
+    """
+    Which segment nodes the UI should render as selected based on currentProgress
     """
 
     if IS_PYDANTIC_V2:

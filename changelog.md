@@ -1,3 +1,10 @@
+## 15.1.0 - 2026-05-22
+### Added
+* **`ProgressBarSegmentLabel`** — new model representing label configuration (title and description) for a single node within a progress bar segment.
+* **`ProgressBarSegmentSelection`** — new type alias (`"CURRENT"` or `"CURRENT_AND_BELOW"`) indicating which segment nodes the UI should render as selected based on current progress.
+* **`ProgressBarSegmentSeparator`** — new type alias (`"LINE"`) specifying the separator style rendered between segment nodes.
+* **`ProgressBarSegment.separator`**, **`ProgressBarSegment.labels`**, and **`ProgressBarSegment.selection`** — three new optional fields on `ProgressBarSegment` for configuring separators, per-node labels, and selection state respectively.
+
 ## 15.0.0 - 2026-05-21
 ### Breaking Changes
 * **`ContentStrategyFilter`** — removed and replaced by **`ContentStrategySort`**; update any imports from `kard.organizations.content_strategies` to use `ContentStrategySort` instead.

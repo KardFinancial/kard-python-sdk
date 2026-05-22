@@ -50,7 +50,10 @@ if typing.TYPE_CHECKING:
     from .progress_bar_label_pair import ProgressBarLabelPair
     from .progress_bar_labels import ProgressBarLabels
     from .progress_bar_segment import ProgressBarSegment
+    from .progress_bar_segment_label import ProgressBarSegmentLabel
     from .progress_bar_segment_position import ProgressBarSegmentPosition
+    from .progress_bar_segment_selection import ProgressBarSegmentSelection
+    from .progress_bar_segment_separator import ProgressBarSegmentSeparator
     from .progress_bar_segments import ProgressBarSegments
     from .standard_offer import StandardOffer
     from .standard_offer_core import StandardOfferCore
@@ -101,7 +104,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProgressBarLabelPair": ".progress_bar_label_pair",
     "ProgressBarLabels": ".progress_bar_labels",
     "ProgressBarSegment": ".progress_bar_segment",
+    "ProgressBarSegmentLabel": ".progress_bar_segment_label",
     "ProgressBarSegmentPosition": ".progress_bar_segment_position",
+    "ProgressBarSegmentSelection": ".progress_bar_segment_selection",
+    "ProgressBarSegmentSeparator": ".progress_bar_segment_separator",
     "ProgressBarSegments": ".progress_bar_segments",
     "StandardOffer": ".standard_offer",
     "StandardOfferCore": ".standard_offer_core",
@@ -176,7 +182,10 @@ __all__ = [
     "ProgressBarLabelPair",
     "ProgressBarLabels",
     "ProgressBarSegment",
+    "ProgressBarSegmentLabel",
     "ProgressBarSegmentPosition",
+    "ProgressBarSegmentSelection",
+    "ProgressBarSegmentSeparator",
     "ProgressBarSegments",
     "StandardOffer",
     "StandardOfferCore",
