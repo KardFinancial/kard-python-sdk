@@ -3,7 +3,9 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ....core.serialization import FieldMetadata
 from .attribution_filter import AttributionFilter
 
 
@@ -17,6 +19,19 @@ class AttributionState(UniversalBaseModel):
     """
     The active filters when the user saw the offer
     """
+
+    placement_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="placementId"),
+        pydantic.Field(
+            alias="placementId", description="Unique identifier of the placement the attribution event originated from"
+        ),
+    ] = None
+    slot_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="slotId"),
+        pydantic.Field(alias="slotId", description="Stable identifier for the slot within the placement"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

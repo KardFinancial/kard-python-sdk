@@ -3311,6 +3311,114 @@ client.users.attributions.boost(
 </dl>
 </details>
 
+<details><summary><code>client.users.attributions.<a href="src/kard/users/attributions/client.py">activate_placement_slot</a>(...) -> ActivatePlacementSlotResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record when a user activates a batch-activation placement slot. Writes a slot-level
+`placementSlotAttribution` ACTIVATE event and fans out a per-offer
+`offerAttribution` ACTIVATE event for every offer resolved by the slot's content
+strategy. The slot-level event id and the resolved `offerIds` are returned so the
+partner can render the batch immediately without an extra `getBatchesByPlacement`
+round-trip.
+
+<b>Required scopes:</b> `attributions:write`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.users.attributions.activate_placement_slot(
+    organization_id="organization-123",
+    user_id="user-123",
+    placement_id="018f8d6b-1abc-7def-9012-345678901234",
+    slot_id="slot-a",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `UserId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` — Unique identifier of the placement (UUID v7)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**slot_id:** `str` — Stable identifier for the slot within the placement
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## WebView
 <details><summary><code>client.users.auth.<a href="src/kard/users/auth/client.py">get_web_view_token</a>(...) -> WebViewTokenResponse</code></summary>
 <dl>

@@ -9,6 +9,7 @@ import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .notification_attribution_attributes import NotificationAttributionAttributes
 from .offer_attribution_attributes import OfferAttributionAttributes
+from .placement_slot_attribution_attributes import PlacementSlotAttributionAttributes
 
 
 class CreateAttributionRequestUnion_OfferAttribution(UniversalBaseModel):
@@ -39,7 +40,25 @@ class CreateAttributionRequestUnion_NotificationAttribution(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class CreateAttributionRequestUnion_PlacementSlotAttribution(UniversalBaseModel):
+    type: typing.Literal["placementSlotAttribution"] = "placementSlotAttribution"
+    attributes: PlacementSlotAttributionAttributes
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 CreateAttributionRequestUnion = typing_extensions.Annotated[
-    typing.Union[CreateAttributionRequestUnion_OfferAttribution, CreateAttributionRequestUnion_NotificationAttribution],
+    typing.Union[
+        CreateAttributionRequestUnion_OfferAttribution,
+        CreateAttributionRequestUnion_NotificationAttribution,
+        CreateAttributionRequestUnion_PlacementSlotAttribution,
+    ],
     pydantic.Field(discriminator="type"),
 ]

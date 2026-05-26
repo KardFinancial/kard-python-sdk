@@ -20,6 +20,7 @@ from ...core.serialization import convert_and_respect_annotation_metadata
 from ..rewards.types.component_type import ComponentType
 from .types.activate_offer_include_option import ActivateOfferIncludeOption
 from .types.activate_offer_response import ActivateOfferResponse
+from .types.activate_placement_slot_response import ActivatePlacementSlotResponse
 from .types.boost_offer_include_option import BoostOfferIncludeOption
 from .types.boost_offer_response import BoostOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
@@ -327,6 +328,101 @@ class RawAttributionsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def activate_placement_slot(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        slot_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ActivatePlacementSlotResponse]:
+        """
+        Record when a user activates a batch-activation placement slot. Writes a slot-level
+        `placementSlotAttribution` ACTIVATE event and fans out a per-offer
+        `offerAttribution` ACTIVATE event for every offer resolved by the slot's content
+        strategy. The slot-level event id and the resolved `offerIds` are returned so the
+        partner can render the batch immediately without an extra `getBatchesByPlacement`
+        round-trip.
+
+        <b>Required scopes:</b> `attributions:write`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+            Unique identifier of the placement (UUID v7)
+
+        slot_id : str
+            Stable identifier for the slot within the placement
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ActivatePlacementSlotResponse]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/slot/{encode_path_param(slot_id)}/activate",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ActivatePlacementSlotResponse,
+                    parse_obj_as(
+                        type_=ActivatePlacementSlotResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawAttributionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -579,6 +675,101 @@ class AsyncRawAttributionsClient:
                     BoostOfferResponse,
                     parse_obj_as(
                         type_=BoostOfferResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def activate_placement_slot(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        slot_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ActivatePlacementSlotResponse]:
+        """
+        Record when a user activates a batch-activation placement slot. Writes a slot-level
+        `placementSlotAttribution` ACTIVATE event and fans out a per-offer
+        `offerAttribution` ACTIVATE event for every offer resolved by the slot's content
+        strategy. The slot-level event id and the resolved `offerIds` are returned so the
+        partner can render the batch immediately without an extra `getBatchesByPlacement`
+        round-trip.
+
+        <b>Required scopes:</b> `attributions:write`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+            Unique identifier of the placement (UUID v7)
+
+        slot_id : str
+            Stable identifier for the slot within the placement
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ActivatePlacementSlotResponse]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/slot/{encode_path_param(slot_id)}/activate",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ActivatePlacementSlotResponse,
+                    parse_obj_as(
+                        type_=ActivatePlacementSlotResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

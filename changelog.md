@@ -1,3 +1,11 @@
+## 15.4.0 - 2026-05-26
+### Added
+* **`activate_placement_slot()`** — new method on `AttributionsClient` and `AsyncAttributionsClient` that records a slot-level `placementSlotAttribution` ACTIVATE event and fans out per-offer `offerAttribution` ACTIVATE events for every offer resolved by the slot's content strategy, returning the slot-level event id and resolved `offerIds`.
+* **`ActivatePlacementSlotResponse`**, **`ActivatePlacementSlotResponseAttributes`**, and **`ActivatePlacementSlotResponseData`** — new models representing the acknowledgement payload returned by `activate_placement_slot()`.
+* **`PlacementSlotAttributionAttributes`**, **`PlacementSlotAttributionRequest`**, and **`PlacementSlotMedium`** — new models for constructing slot-level attribution events on batch-activation placements.
+* **`CreateAttributionRequestUnion_PlacementSlotAttribution`** — new discriminated-union variant (discriminator `"placementSlotAttribution"`) added to `CreateAttributionRequestUnion`.
+* **`AttributionState.placement_id`** and **`AttributionState.slot_id`** — two new optional fields carrying placement and slot context for attribution events.
+
 ## 15.3.0 - 2026-05-26
 ### Added
 * **`placement_batches()`** — new method on `RewardsClient` and `AsyncRewardsClient` that retrieves all slots for a batch-activation placement, including per-slot offer sets, aliases, and freshness fields (`isActive`, `lastActivatedAt`, `expiresAt`).

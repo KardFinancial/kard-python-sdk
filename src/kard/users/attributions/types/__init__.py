@@ -11,6 +11,9 @@ if typing.TYPE_CHECKING:
     from .activate_offer_response import ActivateOfferResponse
     from .activate_offer_response_attributes import ActivateOfferResponseAttributes
     from .activate_offer_response_data import ActivateOfferResponseData
+    from .activate_placement_slot_response import ActivatePlacementSlotResponse
+    from .activate_placement_slot_response_attributes import ActivatePlacementSlotResponseAttributes
+    from .activate_placement_slot_response_data import ActivatePlacementSlotResponseData
     from .attribution_filter import AttributionFilter
     from .attribution_state import AttributionState
     from .boost_offer_include_option import BoostOfferIncludeOption
@@ -23,6 +26,7 @@ if typing.TYPE_CHECKING:
         CreateAttributionRequestUnion,
         CreateAttributionRequestUnion_NotificationAttribution,
         CreateAttributionRequestUnion_OfferAttribution,
+        CreateAttributionRequestUnion_PlacementSlotAttribution,
     )
     from .create_attribution_response import CreateAttributionResponse
     from .event_code import EventCode
@@ -32,12 +36,18 @@ if typing.TYPE_CHECKING:
     from .offer_attribution_attributes import OfferAttributionAttributes
     from .offer_attribution_request import OfferAttributionRequest
     from .offer_medium import OfferMedium
+    from .placement_slot_attribution_attributes import PlacementSlotAttributionAttributes
+    from .placement_slot_attribution_request import PlacementSlotAttributionRequest
+    from .placement_slot_medium import PlacementSlotMedium
 _dynamic_imports: typing.Dict[str, str] = {
     "ActivateOfferIncludeOption": ".activate_offer_include_option",
     "ActivateOfferIncluded": ".activate_offer_included",
     "ActivateOfferResponse": ".activate_offer_response",
     "ActivateOfferResponseAttributes": ".activate_offer_response_attributes",
     "ActivateOfferResponseData": ".activate_offer_response_data",
+    "ActivatePlacementSlotResponse": ".activate_placement_slot_response",
+    "ActivatePlacementSlotResponseAttributes": ".activate_placement_slot_response_attributes",
+    "ActivatePlacementSlotResponseData": ".activate_placement_slot_response_data",
     "AttributionFilter": ".attribution_filter",
     "AttributionState": ".attribution_state",
     "BoostOfferIncludeOption": ".boost_offer_include_option",
@@ -49,6 +59,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateAttributionRequestUnion": ".create_attribution_request_union",
     "CreateAttributionRequestUnion_NotificationAttribution": ".create_attribution_request_union",
     "CreateAttributionRequestUnion_OfferAttribution": ".create_attribution_request_union",
+    "CreateAttributionRequestUnion_PlacementSlotAttribution": ".create_attribution_request_union",
     "CreateAttributionResponse": ".create_attribution_response",
     "EventCode": ".event_code",
     "NotificationAttributionAttributes": ".notification_attribution_attributes",
@@ -57,6 +68,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OfferAttributionAttributes": ".offer_attribution_attributes",
     "OfferAttributionRequest": ".offer_attribution_request",
     "OfferMedium": ".offer_medium",
+    "PlacementSlotAttributionAttributes": ".placement_slot_attribution_attributes",
+    "PlacementSlotAttributionRequest": ".placement_slot_attribution_request",
+    "PlacementSlotMedium": ".placement_slot_medium",
 }
 
 
@@ -87,6 +101,9 @@ __all__ = [
     "ActivateOfferResponse",
     "ActivateOfferResponseAttributes",
     "ActivateOfferResponseData",
+    "ActivatePlacementSlotResponse",
+    "ActivatePlacementSlotResponseAttributes",
+    "ActivatePlacementSlotResponseData",
     "AttributionFilter",
     "AttributionState",
     "BoostOfferIncludeOption",
@@ -98,6 +115,7 @@ __all__ = [
     "CreateAttributionRequestUnion",
     "CreateAttributionRequestUnion_NotificationAttribution",
     "CreateAttributionRequestUnion_OfferAttribution",
+    "CreateAttributionRequestUnion_PlacementSlotAttribution",
     "CreateAttributionResponse",
     "EventCode",
     "NotificationAttributionAttributes",
@@ -106,4 +124,7 @@ __all__ = [
     "OfferAttributionAttributes",
     "OfferAttributionRequest",
     "OfferMedium",
+    "PlacementSlotAttributionAttributes",
+    "PlacementSlotAttributionRequest",
+    "PlacementSlotMedium",
 ]

@@ -10,6 +10,7 @@ from ..rewards.types.component_type import ComponentType
 from .raw_client import AsyncRawAttributionsClient, RawAttributionsClient
 from .types.activate_offer_include_option import ActivateOfferIncludeOption
 from .types.activate_offer_response import ActivateOfferResponse
+from .types.activate_placement_slot_response import ActivatePlacementSlotResponse
 from .types.boost_offer_include_option import BoostOfferIncludeOption
 from .types.boost_offer_response import BoostOfferResponse
 from .types.create_attribution_request_union import CreateAttributionRequestUnion
@@ -243,6 +244,64 @@ class AttributionsClient:
             supported_components=supported_components,
             include=include,
             request_options=request_options,
+        )
+        return _response.data
+
+    def activate_placement_slot(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        slot_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ActivatePlacementSlotResponse:
+        """
+        Record when a user activates a batch-activation placement slot. Writes a slot-level
+        `placementSlotAttribution` ACTIVATE event and fans out a per-offer
+        `offerAttribution` ACTIVATE event for every offer resolved by the slot's content
+        strategy. The slot-level event id and the resolved `offerIds` are returned so the
+        partner can render the batch immediately without an extra `getBatchesByPlacement`
+        round-trip.
+
+        <b>Required scopes:</b> `attributions:write`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+            Unique identifier of the placement (UUID v7)
+
+        slot_id : str
+            Stable identifier for the slot within the placement
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ActivatePlacementSlotResponse
+
+        Examples
+        --------
+        from kard import KardApi
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.users.attributions.activate_placement_slot(
+            organization_id="organization-123",
+            user_id="user-123",
+            placement_id="018f8d6b-1abc-7def-9012-345678901234",
+            slot_id="slot-a",
+        )
+        """
+        _response = self._raw_client.activate_placement_slot(
+            organization_id, user_id, placement_id, slot_id, request_options=request_options
         )
         return _response.data
 
@@ -494,5 +553,71 @@ class AsyncAttributionsClient:
             supported_components=supported_components,
             include=include,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def activate_placement_slot(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        slot_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ActivatePlacementSlotResponse:
+        """
+        Record when a user activates a batch-activation placement slot. Writes a slot-level
+        `placementSlotAttribution` ACTIVATE event and fans out a per-offer
+        `offerAttribution` ACTIVATE event for every offer resolved by the slot's content
+        strategy. The slot-level event id and the resolved `offerIds` are returned so the
+        partner can render the batch immediately without an extra `getBatchesByPlacement`
+        round-trip.
+
+        <b>Required scopes:</b> `attributions:write`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+            Unique identifier of the placement (UUID v7)
+
+        slot_id : str
+            Stable identifier for the slot within the placement
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ActivatePlacementSlotResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.users.attributions.activate_placement_slot(
+                organization_id="organization-123",
+                user_id="user-123",
+                placement_id="018f8d6b-1abc-7def-9012-345678901234",
+                slot_id="slot-a",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.activate_placement_slot(
+            organization_id, user_id, placement_id, slot_id, request_options=request_options
         )
         return _response.data
