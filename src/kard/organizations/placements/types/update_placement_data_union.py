@@ -7,6 +7,7 @@ import typing
 import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .update_batch_activation_attributes import UpdateBatchActivationAttributes
 from .update_main_page_attributes import UpdateMainPageAttributes
 from .update_push_notification_attributes import UpdatePushNotificationAttributes
 
@@ -47,7 +48,29 @@ class UpdatePlacementDataUnion_PlacementPushNotification(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class UpdatePlacementDataUnion_PlacementBatchActivation(UniversalBaseModel):
+    """
+    Discriminated union for updating a placement
+    """
+
+    type: typing.Literal["placementBatchActivation"] = "placementBatchActivation"
+    attributes: UpdateBatchActivationAttributes
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 UpdatePlacementDataUnion = typing_extensions.Annotated[
-    typing.Union[UpdatePlacementDataUnion_PlacementMainPage, UpdatePlacementDataUnion_PlacementPushNotification],
+    typing.Union[
+        UpdatePlacementDataUnion_PlacementMainPage,
+        UpdatePlacementDataUnion_PlacementPushNotification,
+        UpdatePlacementDataUnion_PlacementBatchActivation,
+    ],
     pydantic.Field(discriminator="type"),
 ]

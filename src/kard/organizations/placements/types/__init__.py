@@ -6,12 +6,19 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
+    from .batch_activation_placement_data import BatchActivationPlacementData
+    from .batch_activation_slot import BatchActivationSlot
     from .cadence import Cadence
     from .cadence_frequency import CadenceFrequency
+    from .create_batch_activation_attributes import CreateBatchActivationAttributes
+    from .create_batch_activation_placement_data import CreateBatchActivationPlacementData
+    from .create_batch_activation_slot import CreateBatchActivationSlot
     from .create_main_page_attributes import CreateMainPageAttributes
     from .create_main_page_placement_data import CreateMainPagePlacementData
     from .create_placement_data_union import (
         CreatePlacementDataUnion,
+        CreatePlacementDataUnion_PlacementBatchActivation,
         CreatePlacementDataUnion_PlacementMainPage,
         CreatePlacementDataUnion_PlacementPushNotification,
     )
@@ -23,6 +30,7 @@ if typing.TYPE_CHECKING:
     from .main_page_placement_data import MainPagePlacementData
     from .placement_format_union import (
         PlacementFormatUnion,
+        PlacementFormatUnion_PlacementBatchActivation,
         PlacementFormatUnion_PlacementMainPage,
         PlacementFormatUnion_PlacementPushNotification,
     )
@@ -31,10 +39,14 @@ if typing.TYPE_CHECKING:
     from .placement_type_filter import PlacementTypeFilter
     from .push_notification_placement_attributes import PushNotificationPlacementAttributes
     from .push_notification_placement_data import PushNotificationPlacementData
+    from .update_batch_activation_attributes import UpdateBatchActivationAttributes
+    from .update_batch_activation_placement_data import UpdateBatchActivationPlacementData
+    from .update_batch_activation_slot import UpdateBatchActivationSlot
     from .update_main_page_attributes import UpdateMainPageAttributes
     from .update_main_page_placement_data import UpdateMainPagePlacementData
     from .update_placement_data_union import (
         UpdatePlacementDataUnion,
+        UpdatePlacementDataUnion_PlacementBatchActivation,
         UpdatePlacementDataUnion_PlacementMainPage,
         UpdatePlacementDataUnion_PlacementPushNotification,
     )
@@ -42,11 +54,18 @@ if typing.TYPE_CHECKING:
     from .update_push_notification_attributes import UpdatePushNotificationAttributes
     from .update_push_notification_placement_data import UpdatePushNotificationPlacementData
 _dynamic_imports: typing.Dict[str, str] = {
+    "BatchActivationPlacementAttributes": ".batch_activation_placement_attributes",
+    "BatchActivationPlacementData": ".batch_activation_placement_data",
+    "BatchActivationSlot": ".batch_activation_slot",
     "Cadence": ".cadence",
     "CadenceFrequency": ".cadence_frequency",
+    "CreateBatchActivationAttributes": ".create_batch_activation_attributes",
+    "CreateBatchActivationPlacementData": ".create_batch_activation_placement_data",
+    "CreateBatchActivationSlot": ".create_batch_activation_slot",
     "CreateMainPageAttributes": ".create_main_page_attributes",
     "CreateMainPagePlacementData": ".create_main_page_placement_data",
     "CreatePlacementDataUnion": ".create_placement_data_union",
+    "CreatePlacementDataUnion_PlacementBatchActivation": ".create_placement_data_union",
     "CreatePlacementDataUnion_PlacementMainPage": ".create_placement_data_union",
     "CreatePlacementDataUnion_PlacementPushNotification": ".create_placement_data_union",
     "CreatePlacementRequestBody": ".create_placement_request_body",
@@ -56,6 +75,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MainPagePlacementAttributes": ".main_page_placement_attributes",
     "MainPagePlacementData": ".main_page_placement_data",
     "PlacementFormatUnion": ".placement_format_union",
+    "PlacementFormatUnion_PlacementBatchActivation": ".placement_format_union",
     "PlacementFormatUnion_PlacementMainPage": ".placement_format_union",
     "PlacementFormatUnion_PlacementPushNotification": ".placement_format_union",
     "PlacementListResponse": ".placement_list_response",
@@ -63,9 +83,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PlacementTypeFilter": ".placement_type_filter",
     "PushNotificationPlacementAttributes": ".push_notification_placement_attributes",
     "PushNotificationPlacementData": ".push_notification_placement_data",
+    "UpdateBatchActivationAttributes": ".update_batch_activation_attributes",
+    "UpdateBatchActivationPlacementData": ".update_batch_activation_placement_data",
+    "UpdateBatchActivationSlot": ".update_batch_activation_slot",
     "UpdateMainPageAttributes": ".update_main_page_attributes",
     "UpdateMainPagePlacementData": ".update_main_page_placement_data",
     "UpdatePlacementDataUnion": ".update_placement_data_union",
+    "UpdatePlacementDataUnion_PlacementBatchActivation": ".update_placement_data_union",
     "UpdatePlacementDataUnion_PlacementMainPage": ".update_placement_data_union",
     "UpdatePlacementDataUnion_PlacementPushNotification": ".update_placement_data_union",
     "UpdatePlacementRequestBody": ".update_placement_request_body",
@@ -96,11 +120,18 @@ def __dir__():
 
 
 __all__ = [
+    "BatchActivationPlacementAttributes",
+    "BatchActivationPlacementData",
+    "BatchActivationSlot",
     "Cadence",
     "CadenceFrequency",
+    "CreateBatchActivationAttributes",
+    "CreateBatchActivationPlacementData",
+    "CreateBatchActivationSlot",
     "CreateMainPageAttributes",
     "CreateMainPagePlacementData",
     "CreatePlacementDataUnion",
+    "CreatePlacementDataUnion_PlacementBatchActivation",
     "CreatePlacementDataUnion_PlacementMainPage",
     "CreatePlacementDataUnion_PlacementPushNotification",
     "CreatePlacementRequestBody",
@@ -110,6 +141,7 @@ __all__ = [
     "MainPagePlacementAttributes",
     "MainPagePlacementData",
     "PlacementFormatUnion",
+    "PlacementFormatUnion_PlacementBatchActivation",
     "PlacementFormatUnion_PlacementMainPage",
     "PlacementFormatUnion_PlacementPushNotification",
     "PlacementListResponse",
@@ -117,9 +149,13 @@ __all__ = [
     "PlacementTypeFilter",
     "PushNotificationPlacementAttributes",
     "PushNotificationPlacementData",
+    "UpdateBatchActivationAttributes",
+    "UpdateBatchActivationPlacementData",
+    "UpdateBatchActivationSlot",
     "UpdateMainPageAttributes",
     "UpdateMainPagePlacementData",
     "UpdatePlacementDataUnion",
+    "UpdatePlacementDataUnion_PlacementBatchActivation",
     "UpdatePlacementDataUnion_PlacementMainPage",
     "UpdatePlacementDataUnion_PlacementPushNotification",
     "UpdatePlacementRequestBody",

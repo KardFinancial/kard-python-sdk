@@ -1,3 +1,10 @@
+## 15.2.0 - 2026-05-26
+### Added
+* **`BatchActivationPlacementAttributes`**, **`BatchActivationPlacementData`**, and **`BatchActivationSlot`** — new models for reading a batch-activation placement resource and its constituent slots.
+* **`CreateBatchActivationAttributes/PlacementData/Slot`** and **`UpdateBatchActivationAttributes/PlacementData/Slot`** — new models for creating and updating batch-activation placements, including `name`, `refresh_interval` (ISO-8601 duration), `content_strategy_id`, and `alias` fields.
+* **`CreatePlacementDataUnion_PlacementBatchActivation`**, **`UpdatePlacementDataUnion_PlacementBatchActivation`**, and **`PlacementFormatUnion_PlacementBatchActivation`** — new discriminated-union variants (discriminator `"placementBatchActivation"`) added to the existing placement unions.
+* **`PlacementTypeFilter`** — extended with the `"placementBatchActivation"` literal to support filtering by the new placement type.
+
 ## 15.1.0 - 2026-05-22
 ### Added
 * **`ProgressBarSegmentLabel`** — new model representing label configuration (title and description) for a single node within a progress bar segment.

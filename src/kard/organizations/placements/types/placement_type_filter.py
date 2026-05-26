@@ -2,4 +2,6 @@
 
 import typing
 
-PlacementTypeFilter = typing.Union[typing.Literal["placementMainPage", "placementPushNotification"], typing.Any]
+PlacementTypeFilter = typing.Union[
+    typing.Literal["placementMainPage", "placementPushNotification", "placementBatchActivation"], typing.Any
+]

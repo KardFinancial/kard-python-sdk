@@ -7,6 +7,7 @@ import typing
 import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
 from .main_page_placement_attributes import MainPagePlacementAttributes
 from .push_notification_placement_attributes import PushNotificationPlacementAttributes
 
@@ -81,6 +82,41 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
+    """
+    Discriminated union for placement resources keyed on type
+
+    Examples
+    --------
+    from kard.organizations.placements import (
+        MainPagePlacementAttributes,
+        PlacementFormatUnion_PlacementMainPage,
+    )
+
+    PlacementFormatUnion_PlacementMainPage(
+        id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
+        attributes=MainPagePlacementAttributes(
+            name="Homepage Banner",
+            organization_id="org-123",
+            available_slots=5,
+        ),
+    )
+    """
+
+    type: typing.Literal["placementBatchActivation"] = "placementBatchActivation"
+    id: str
+    attributes: BatchActivationPlacementAttributes
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 """
 from kard.organizations.placements import (
     MainPagePlacementAttributes,
@@ -97,6 +133,10 @@ PlacementFormatUnion_PlacementMainPage(
 )
 """
 PlacementFormatUnion = typing_extensions.Annotated[
-    typing.Union[PlacementFormatUnion_PlacementMainPage, PlacementFormatUnion_PlacementPushNotification],
+    typing.Union[
+        PlacementFormatUnion_PlacementMainPage,
+        PlacementFormatUnion_PlacementPushNotification,
+        PlacementFormatUnion_PlacementBatchActivation,
+    ],
     pydantic.Field(discriminator="type"),
 ]
