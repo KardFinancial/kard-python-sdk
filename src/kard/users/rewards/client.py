@@ -10,6 +10,7 @@ from ...commons.types.user_id import UserId
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
 from .raw_client import AsyncRawRewardsClient, RawRewardsClient
+from .types.batches_response_object import BatchesResponseObject
 from .types.component_type import ComponentType
 from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
@@ -197,6 +198,67 @@ class RewardsClient:
             filter_category=filter_category,
             filter_is_targeted=filter_is_targeted,
             include=include,
+            supported_components=supported_components,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def placement_batches(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> BatchesResponseObject:
+        """
+        Retrieve batches for a batch-activation placement. Returns each slot in slot
+        order with its current offer set, alias, and freshness fields (`isActive`,
+        `lastActivatedAt`, `expiresAt`). Applies the same per-user eligibility and
+        per-slot content-strategy filter as Get Offers By Placement, independently
+        per slot. A slot only flips to `isActive: false` when its refresh interval
+        has elapsed AND its post-eligibility `offers[]` is non-empty; otherwise the
+        slot is still returned and stays active so the partner UI does not promote
+        "refresh" with nothing to show.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BatchesResponseObject
+
+        Examples
+        --------
+        from kard import KardApi
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.users.rewards.placement_batches(
+            organization_id="organizationId",
+            user_id="userId",
+            placement_id="placementId",
+        )
+        """
+        _response = self._raw_client.placement_batches(
+            organization_id,
+            user_id,
+            placement_id,
             supported_components=supported_components,
             request_options=request_options,
         )
@@ -511,6 +573,75 @@ class AsyncRewardsClient:
             filter_category=filter_category,
             filter_is_targeted=filter_is_targeted,
             include=include,
+            supported_components=supported_components,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def placement_batches(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> BatchesResponseObject:
+        """
+        Retrieve batches for a batch-activation placement. Returns each slot in slot
+        order with its current offer set, alias, and freshness fields (`isActive`,
+        `lastActivatedAt`, `expiresAt`). Applies the same per-user eligibility and
+        per-slot content-strategy filter as Get Offers By Placement, independently
+        per slot. A slot only flips to `isActive: false` when its refresh interval
+        has elapsed AND its post-eligibility `offers[]` is non-empty; otherwise the
+        slot is still returned and stays active so the partner UI does not promote
+        "refresh" with nothing to show.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BatchesResponseObject
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.users.rewards.placement_batches(
+                organization_id="organizationId",
+                user_id="userId",
+                placement_id="placementId",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.placement_batches(
+            organization_id,
+            user_id,
+            placement_id,
             supported_components=supported_components,
             request_options=request_options,
         )

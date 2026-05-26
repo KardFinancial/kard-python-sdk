@@ -20,6 +20,7 @@ from ...core.jsonable_encoder import encode_path_param
 from ...core.parse_error import ParsingError
 from ...core.pydantic_utilities import parse_obj_as
 from ...core.request_options import RequestOptions
+from .types.batches_response_object import BatchesResponseObject
 from .types.component_type import ComponentType
 from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
@@ -240,6 +241,115 @@ class RawRewardsClient:
                     OffersResponseObject,
                     parse_obj_as(
                         type_=OffersResponseObject,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def placement_batches(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[BatchesResponseObject]:
+        """
+        Retrieve batches for a batch-activation placement. Returns each slot in slot
+        order with its current offer set, alias, and freshness fields (`isActive`,
+        `lastActivatedAt`, `expiresAt`). Applies the same per-user eligibility and
+        per-slot content-strategy filter as Get Offers By Placement, independently
+        per slot. A slot only flips to `isActive: false` when its refresh interval
+        has elapsed AND its post-eligibility `offers[]` is non-empty; otherwise the
+        slot is still returned and stays active so the partner UI does not promote
+        "refresh" with nothing to show.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[BatchesResponseObject]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/batches",
+            method="GET",
+            params={
+                "supportedComponents": supported_components,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    BatchesResponseObject,
+                    parse_obj_as(
+                        type_=BatchesResponseObject,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -667,6 +777,115 @@ class AsyncRawRewardsClient:
                     OffersResponseObject,
                     parse_obj_as(
                         type_=OffersResponseObject,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def placement_batches(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[BatchesResponseObject]:
+        """
+        Retrieve batches for a batch-activation placement. Returns each slot in slot
+        order with its current offer set, alias, and freshness fields (`isActive`,
+        `lastActivatedAt`, `expiresAt`). Applies the same per-user eligibility and
+        per-slot content-strategy filter as Get Offers By Placement, independently
+        per slot. A slot only flips to `isActive: false` when its refresh interval
+        has elapsed AND its post-eligibility `offers[]` is non-empty; otherwise the
+        slot is still returned and stays active so the partner UI does not promote
+        "refresh" with nothing to show.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[BatchesResponseObject]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/batches",
+            method="GET",
+            params={
+                "supportedComponents": supported_components,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    BatchesResponseObject,
+                    parse_obj_as(
+                        type_=BatchesResponseObject,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

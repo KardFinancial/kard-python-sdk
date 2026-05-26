@@ -3709,6 +3709,114 @@ client.users.rewards.placement_offers(
 </dl>
 </details>
 
+<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">placement_batches</a>(...) -> BatchesResponseObject</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve batches for a batch-activation placement. Returns each slot in slot
+order with its current offer set, alias, and freshness fields (`isActive`,
+`lastActivatedAt`, `expiresAt`). Applies the same per-user eligibility and
+per-slot content-strategy filter as Get Offers By Placement, independently
+per slot. A slot only flips to `isActive: false` when its refresh interval
+has elapsed AND its post-eligibility `offers[]` is non-empty; otherwise the
+slot is still returned and stays active so the partner UI does not promote
+"refresh" with nothing to show.<br/>
+<b>Required scopes:</b> `rewards:read`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.users.rewards.placement_batches(
+    organization_id="organizationId",
+    user_id="userId",
+    placement_id="placementId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `UserId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">locations</a>(...) -> LocationsResponseObject</code></summary>
 <dl>
 <dd>

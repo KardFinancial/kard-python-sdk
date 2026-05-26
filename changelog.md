@@ -1,3 +1,9 @@
+## 15.3.0 - 2026-05-26
+### Added
+* **`placement_batches()`** — new method on `RewardsClient` and `AsyncRewardsClient` that retrieves all slots for a batch-activation placement, including per-slot offer sets, aliases, and freshness fields (`isActive`, `lastActivatedAt`, `expiresAt`).
+* **`BatchSlotData`** — new model representing a single slot within a batch-activation placement, carrying `slot_id`, `alias`, `is_active`, `last_activated_at`, `expires_at`, and `offers`.
+* **`BatchesResponseObject`** — new model wrapping an ordered list of `BatchSlotData` entries returned by `placement_batches()`.
+
 ## 15.2.0 - 2026-05-26
 ### Added
 * **`BatchActivationPlacementAttributes`**, **`BatchActivationPlacementData`**, and **`BatchActivationSlot`** — new models for reading a batch-activation placement resource and its constituent slots.
