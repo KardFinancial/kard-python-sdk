@@ -1,3 +1,7 @@
+## 15.5.0 - 2026-05-27
+### Added
+* **`EarnedRewardRelationships.offer`** — new `RelationshipSingle` field that exposes the related offer directly on earned-reward notification payloads.
+
 ## 15.4.1 - 2026-05-27
 * chore: update deprecated uploads endpoint doc links to versioned URLs
 * Update inline docstring links in UploadsClient, AsyncUploadsClient,

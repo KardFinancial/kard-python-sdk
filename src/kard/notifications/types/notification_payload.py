@@ -55,6 +55,12 @@ class NotificationPayload(UniversalBaseModel):
                         id="0987654321",
                     ),
                 ),
+                offer=RelationshipSingle(
+                    data=RelationshipData(
+                        type="offer",
+                        id="12309123879",
+                    ),
+                ),
             ),
         ),
     )

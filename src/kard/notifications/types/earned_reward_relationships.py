@@ -9,6 +9,7 @@ from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 class EarnedRewardRelationships(UniversalBaseModel):
     user: RelationshipSingle
+    offer: RelationshipSingle
     transaction: RelationshipSingle
 
     if IS_PYDANTIC_V2:
