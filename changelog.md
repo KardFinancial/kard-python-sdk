@@ -1,3 +1,14 @@
+## 15.4.1 - 2026-05-27
+* chore: update deprecated uploads endpoint doc links to versioned URLs
+* Update inline docstring links in UploadsClient, AsyncUploadsClient,
+* RawUploadsClient, and AsyncRawUploadsClient to point to the versioned
+* 2024-10-01 API reference paths instead of the old unversioned paths.
+* Key changes:
+* Replace `/api/uploads/create-upload-part` with `/2024-10-01/api/transactions/uploads/create-part`
+* Replace `/api/uploads/create-upload` with `/2024-10-01/api/transactions/uploads/create`
+* Reflow multi-line link text into single lines for readability
+* 🌿 Generated with Fern
+
 ## 15.4.0 - 2026-05-26
 ### Added
 * **`activate_placement_slot()`** — new method on `AttributionsClient` and `AsyncAttributionsClient` that records a slot-level `placementSlotAttribution` ACTIVATE event and fans out per-offer `offerAttribution` ACTIVATE events for every offer resolved by the slot's content strategy, returning the slot-level event id and resolved `offerIds`.
