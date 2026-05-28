@@ -1,3 +1,8 @@
+## 16.1.0 - 2026-05-28
+### Added
+* **`BatchSlotData.components`** — new optional `OfferComponents` field exposing slot-level UI components; carries a `cta` when the slot has no active activation, or a `logoFlare` decoration when it does.
+* **`BatchSlotData.assets`** — new optional `List[Asset]` field exposing slot-level visual assets, currently a single `IMG_VIEW` SVG showing the slot's initials themed via the `--icon-fill` CSS custom property.
+
 ## 16.0.0 - 2026-05-28
 ### Breaking Changes
 * **`get_earned_rewards` (`filter_include_unpaid` parameter)** — the `filter_include_unpaid` parameter has been removed and replaced by `filter_paid_in_full_only` across `TransactionsClient`, `AsyncTransactionsClient`, `RawTransactionsClient`, and `AsyncRawTransactionsClient`. The default behavior is also inverted: all matched transactions are now returned by default; pass `filter_paid_in_full_only=True` to restrict results to transactions paid in full to the issuer. Migrate by replacing `filter_include_unpaid=True` with `filter_paid_in_full_only=False` (or simply omit the argument) and `filter_include_unpaid=False` with `filter_paid_in_full_only=True`.

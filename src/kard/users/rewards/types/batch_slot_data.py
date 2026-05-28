@@ -7,6 +7,8 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
+from .asset import Asset
+from .offer_components import OfferComponents
 from .offer_data_union import OfferDataUnion
 
 
@@ -49,6 +51,16 @@ class BatchSlotData(UniversalBaseModel):
             description="Computed as `lastActivatedAt + placement.refreshInterval`. Absent for cold slots that have never been activated.",
         ),
     ] = None
+    components: typing.Optional[OfferComponents] = pydantic.Field(default=None)
+    """
+    Slot-level UI components. Carries a `cta` (POST to the slot's activate endpoint) when the slot has no active (non-expired) activation, or a `logoFlare` decoration when it does — mutually exclusive on a single slot.
+    """
+
+    assets: typing.Optional[typing.List[Asset]] = pydantic.Field(default=None)
+    """
+    Slot-level visual assets. Currently a single `IMG_VIEW` SVG showing the slot's initials, themed via the `--icon-fill` CSS custom property.
+    """
+
     offers: typing.List[OfferDataUnion] = pydantic.Field()
     """
     The set of offers eligible for the user under this slot's content strategy.
