@@ -321,11 +321,12 @@ class TransactionsClient:
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         filter_status: typing.Optional[RewardedTransactionStatus] = None,
+        filter_include_unpaid: typing.Optional[bool] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). Pass `filter[includeUnpaid]=true` to also return matched transactions that have not yet been paid in full.
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -349,6 +350,9 @@ class TransactionsClient:
 
         filter_status : typing.Optional[RewardedTransactionStatus]
             Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
+
+        filter_include_unpaid : typing.Optional[bool]
+            When `true`, return any matched transaction regardless of payment status. By default (`false`), only transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`) are returned. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -383,6 +387,7 @@ class TransactionsClient:
             page_before=page_before,
             page_size=page_size,
             filter_status=filter_status,
+            filter_include_unpaid=filter_include_unpaid,
             include=include,
             request_options=request_options,
         )
@@ -724,11 +729,12 @@ class AsyncTransactionsClient:
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         filter_status: typing.Optional[RewardedTransactionStatus] = None,
+        filter_include_unpaid: typing.Optional[bool] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months.
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). Pass `filter[includeUnpaid]=true` to also return matched transactions that have not yet been paid in full.
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -752,6 +758,9 @@ class AsyncTransactionsClient:
 
         filter_status : typing.Optional[RewardedTransactionStatus]
             Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
+
+        filter_include_unpaid : typing.Optional[bool]
+            When `true`, return any matched transaction regardless of payment status. By default (`false`), only transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`) are returned. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -794,6 +803,7 @@ class AsyncTransactionsClient:
             page_before=page_before,
             page_size=page_size,
             filter_status=filter_status,
+            filter_include_unpaid=filter_include_unpaid,
             include=include,
             request_options=request_options,
         )

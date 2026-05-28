@@ -1,3 +1,9 @@
+## 15.6.0 - 2026-05-28
+### Added
+* **`filter_include_unpaid`** — new optional boolean parameter on `get_earned_rewards` (all client variants) that maps to `filter[includeUnpaid]`; when `true`, returns matched transactions regardless of payment status and includes them in `lifetimeRewardsInCents`.
+### Changed
+* **`GetEarnedRewardsMeta.lifetimeRewardsInCents`** — docstring updated to clarify that only transactions paid in full to the issuer are counted by default, and that passing `filter[includeUnpaid]=true` includes all matched transactions.
+
 ## 15.5.1 - 2026-05-28
 * chore: update child organization name validation docs
 * Update docstrings and inline examples across child organization types
