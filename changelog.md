@@ -1,3 +1,9 @@
+## 16.0.0 - 2026-05-28
+### Breaking Changes
+* **`get_earned_rewards` (`filter_include_unpaid` parameter)** — the `filter_include_unpaid` parameter has been removed and replaced by `filter_paid_in_full_only` across `TransactionsClient`, `AsyncTransactionsClient`, `RawTransactionsClient`, and `AsyncRawTransactionsClient`. The default behavior is also inverted: all matched transactions are now returned by default; pass `filter_paid_in_full_only=True` to restrict results to transactions paid in full to the issuer. Migrate by replacing `filter_include_unpaid=True` with `filter_paid_in_full_only=False` (or simply omit the argument) and `filter_include_unpaid=False` with `filter_paid_in_full_only=True`.
+### Changed
+* **`GetEarnedRewardsMeta.lifetimeRewardsInCents`** — docstring updated to reflect that all matched transactions are included in the lifetime total by default; pass `filter[paidInFullOnly]=true` to restrict the total to transactions paid in full to the issuer.
+
 ## 15.6.0 - 2026-05-28
 ### Added
 * **`filter_include_unpaid`** — new optional boolean parameter on `get_earned_rewards` (all client variants) that maps to `filter[includeUnpaid]`; when `true`, returns matched transactions regardless of payment status and includes them in `lifetimeRewardsInCents`.

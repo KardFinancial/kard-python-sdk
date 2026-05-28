@@ -502,12 +502,12 @@ class RawTransactionsClient:
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         filter_status: typing.Optional[RewardedTransactionStatus] = None,
-        filter_include_unpaid: typing.Optional[bool] = None,
+        filter_paid_in_full_only: typing.Optional[bool] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[GetEarnedRewardsResponse]:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). Pass `filter[includeUnpaid]=true` to also return matched transactions that have not yet been paid in full.
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -532,8 +532,8 @@ class RawTransactionsClient:
         filter_status : typing.Optional[RewardedTransactionStatus]
             Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
 
-        filter_include_unpaid : typing.Optional[bool]
-            When `true`, return any matched transaction regardless of payment status. By default (`false`), only transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`) are returned. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
+        filter_paid_in_full_only : typing.Optional[bool]
+            When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -553,7 +553,7 @@ class RawTransactionsClient:
                 "page[before]": page_before,
                 "page[size]": page_size,
                 "filter[status]": filter_status,
-                "filter[includeUnpaid]": filter_include_unpaid,
+                "filter[paidInFullOnly]": filter_paid_in_full_only,
                 "include": include,
             },
             request_options=request_options,
@@ -1083,12 +1083,12 @@ class AsyncRawTransactionsClient:
         page_before: typing.Optional[str] = None,
         page_size: typing.Optional[int] = None,
         filter_status: typing.Optional[RewardedTransactionStatus] = None,
-        filter_include_unpaid: typing.Optional[bool] = None,
+        filter_paid_in_full_only: typing.Optional[bool] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[GetEarnedRewardsResponse]:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). Pass `filter[includeUnpaid]=true` to also return matched transactions that have not yet been paid in full.
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -1113,8 +1113,8 @@ class AsyncRawTransactionsClient:
         filter_status : typing.Optional[RewardedTransactionStatus]
             Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
 
-        filter_include_unpaid : typing.Optional[bool]
-            When `true`, return any matched transaction regardless of payment status. By default (`false`), only transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`) are returned. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
+        filter_paid_in_full_only : typing.Optional[bool]
+            When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -1134,7 +1134,7 @@ class AsyncRawTransactionsClient:
                 "page[before]": page_before,
                 "page[size]": page_size,
                 "filter[status]": filter_status,
-                "filter[includeUnpaid]": filter_include_unpaid,
+                "filter[paidInFullOnly]": filter_paid_in_full_only,
                 "include": include,
             },
             request_options=request_options,
