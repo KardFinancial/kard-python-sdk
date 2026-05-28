@@ -17,13 +17,13 @@ class UpdateChildAttributes(UniversalBaseModel):
     from kard.organizations.children import UpdateChildAttributes
 
     UpdateChildAttributes(
-        name="NEWCHILDNAME",
+        name="New Child Name",
     )
     """
 
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
-    New name for the child organization (must be uppercase, no spaces)
+    New name for the child organization (at least one letter; letters and spaces only)
     """
 
     external_id: typing_extensions.Annotated[

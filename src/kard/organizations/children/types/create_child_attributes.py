@@ -17,7 +17,7 @@ class CreateChildAttributes(UniversalBaseModel):
     from kard.organizations.children import CreateChildAttributes
 
     CreateChildAttributes(
-        name="ACMECHILDBANK",
+        name="Acme Child Bank",
         external_id="ext-123",
         bins=["123456", "789012"],
     )
@@ -25,7 +25,7 @@ class CreateChildAttributes(UniversalBaseModel):
 
     name: str = pydantic.Field()
     """
-    Name of the child organization (must be uppercase, no spaces)
+    Name of the child organization (at least one letter; letters and spaces only)
     """
 
     external_id: typing_extensions.Annotated[

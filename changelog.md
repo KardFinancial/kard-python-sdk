@@ -1,3 +1,16 @@
+## 15.5.1 - 2026-05-28
+* chore: update child organization name validation docs
+* Update docstrings and inline examples across child organization types
+* and client methods to reflect the relaxed name validation rule: names
+* now require at least one letter and may contain letters and spaces,
+* replacing the previous uppercase-only, no-spaces constraint.
+* Key changes:
+* Update `ChildOrganizationAttributes.name` field docstring from "uppercase, no spaces" to "at least one letter; letters and spaces only"
+* Update `CreateChildAttributes.name` field docstring and inline example (`"ACMECHILDBANK"` → `"Acme Child Bank"`)
+* Update `UpdateChildAttributes.name` field docstring and inline example (`"NEWCHILDNAME"` → `"New Child Name"`)
+* Update `create` method docstrings in `ChildrenClient`, `AsyncChildrenClient`, `RawChildrenClient`, and `AsyncRawChildrenClient`
+* 🌿 Generated with Fern
+
 ## 15.5.0 - 2026-05-27
 ### Added
 * **`EarnedRewardRelationships.offer`** — new `RelationshipSingle` field that exposes the related offer directly on earned-reward notification payloads.
