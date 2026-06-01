@@ -18,18 +18,29 @@ class UpdateBatchActivationSlot(UniversalBaseModel):
         FieldMetadata(alias="slotId"),
         pydantic.Field(
             alias="slotId",
-            description="Existing slot identifier. Echo the value from a prior GET to keep the slot stable; omit to mint a fresh slot. If the contentStrategyId changes, the slotId is regenerated regardless of what was echoed.",
+            description="Existing slot identifier. Echo the value from a prior GET to keep the slot stable; omit to mint a fresh slot. If the placementId changes, the slotId is regenerated regardless of what was echoed.",
         ),
     ] = None
-    content_strategy_id: typing_extensions.Annotated[
+    placement_id: typing_extensions.Annotated[
         str,
-        FieldMetadata(alias="contentStrategyId"),
-        pydantic.Field(alias="contentStrategyId", description="ID of the content strategy that fills this slot"),
+        FieldMetadata(alias="placementId"),
+        pydantic.Field(
+            alias="placementId",
+            description="ID of another placement that fills this slot. The referenced placement provides both the content strategy and the limit on the number of offers available to the slot.",
+        ),
     ]
     alias: str = pydantic.Field()
     """
     Customer-defined alias for the slot, unique within the placement
     """
+
+    short_description: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="shortDescription"),
+        pydantic.Field(
+            alias="shortDescription", description="Optional short description of the slot, limited to 50 characters"
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

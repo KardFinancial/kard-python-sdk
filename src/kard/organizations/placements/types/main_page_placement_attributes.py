@@ -32,7 +32,8 @@ class MainPagePlacementAttributes(UniversalBaseModel):
         typing.Optional[str],
         FieldMetadata(alias="contentStrategyId"),
         pydantic.Field(
-            alias="contentStrategyId", description="ID of the content strategy linked to this placement, if any"
+            alias="contentStrategyId",
+            description="ID of the content strategy linked to this placement, if any. Retained alongside `relationships.contentStrategy` for backward compatibility.",
         ),
     ] = None
 

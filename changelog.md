@@ -1,3 +1,11 @@
+## 17.0.0 - 2026-06-01
+### Added
+* **`PlacementRelationships`** — new model exposing the optional `contentStrategy` to-one JSON:API relationship on `MainPagePlacementData` and `PushNotificationPlacementData` (and their `PlacementFormatUnion` variants).
+* **`BatchActivationPlacementRelationships`** — new model added as a required `relationships` field on `BatchActivationPlacementData` and `PlacementFormatUnion_PlacementBatchActivation`; exposes a `slots` to-many relationship listing the slot resource identifiers.
+* **`BatchActivationSlotRelationships`** and **`BatchActivationSlotInclusion`** — new models representing a `batchActivationSlot` resource's relationship back to its parent placement and its full shape as it appears in the `included` array.
+* **`IncludedResource`** — new discriminated union (`contentStrategy` | `batchActivationSlot` | `placementMainPage` | `placementPushNotification`) covering every resource type that can appear in the `included` array.
+* **`ResourceIdentifier`**, **`ToOneRelationship`**, and **`ToManyRelationship`** — new primitive JSON:API relationship payload models used throughout the relationship graph.
+
 ## 16.1.0 - 2026-05-28
 ### Added
 * **`BatchSlotData.components`** — new optional `OfferComponents` field exposing slot-level UI components; carries a `cta` when the slot has no active activation, or a `logoFlare` decoration when it does.

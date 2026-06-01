@@ -8,7 +8,9 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
+from .batch_activation_placement_relationships import BatchActivationPlacementRelationships
 from .main_page_placement_attributes import MainPagePlacementAttributes
+from .placement_relationships import PlacementRelationships
 from .push_notification_placement_attributes import PushNotificationPlacementAttributes
 
 
@@ -36,6 +38,7 @@ class PlacementFormatUnion_PlacementMainPage(UniversalBaseModel):
     type: typing.Literal["placementMainPage"] = "placementMainPage"
     id: str
     attributes: MainPagePlacementAttributes
+    relationships: typing.Optional[PlacementRelationships] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -71,6 +74,7 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
     type: typing.Literal["placementPushNotification"] = "placementPushNotification"
     id: str
     attributes: PushNotificationPlacementAttributes
+    relationships: typing.Optional[PlacementRelationships] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -106,6 +110,7 @@ class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
     type: typing.Literal["placementBatchActivation"] = "placementBatchActivation"
     id: str
     attributes: BatchActivationPlacementAttributes
+    relationships: BatchActivationPlacementRelationships
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

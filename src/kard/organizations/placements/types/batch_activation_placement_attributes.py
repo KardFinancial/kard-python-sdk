@@ -6,12 +6,11 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
-from .batch_activation_slot import BatchActivationSlot
 
 
 class BatchActivationPlacementAttributes(UniversalBaseModel):
     """
-    Attributes for a batch-activation placement
+    Attributes for a batch-activation placement. Slot detail is exposed via `relationships.slots` (resource identifiers) and the `batchActivationSlot` entries in `included`; request `?include=slots` (or a deeper path) to get the slot details.
     """
 
     name: str = pydantic.Field()
@@ -32,10 +31,6 @@ class BatchActivationPlacementAttributes(UniversalBaseModel):
             description='ISO-8601 duration that controls how often the activation cohort refreshes (e.g. "P7D" for weekly).',
         ),
     ]
-    slots: typing.List[BatchActivationSlot] = pydantic.Field()
-    """
-    Slots that make up the activation cohort
-    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

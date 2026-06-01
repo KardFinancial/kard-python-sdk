@@ -6,7 +6,7 @@ import pydantic
 from ....commons.types.links import Links
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....internal_organizations.types.organization_pagination_metadata import OrganizationPaginationMetadata
-from ...content_strategies.types.content_strategy_response import ContentStrategyResponse
+from .included_resource import IncludedResource
 from .placement_format_union import PlacementFormatUnion
 
 
@@ -20,9 +20,9 @@ class PlacementListResponse(UniversalBaseModel):
     Array of placement resources
     """
 
-    included: typing.Optional[typing.List[ContentStrategyResponse]] = pydantic.Field(default=None)
+    included: typing.Optional[typing.List[IncludedResource]] = pydantic.Field(default=None)
     """
-    Related resources requested via the `include` query parameter. Only populated when `include=contentStrategy` is supplied and at least one placement in `data` is linked to a content strategy.
+    Related resources requested via the `include` query parameter. Each entry is keyed by its `type` discriminant (`contentStrategy`, `batchActivationSlot`, `placementMainPage`, `placementPushNotification`).
     """
 
     links: typing.Optional[Links] = None

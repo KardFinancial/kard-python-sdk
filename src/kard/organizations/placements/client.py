@@ -113,7 +113,7 @@ class PlacementsClient:
             Filter by the ID of the content strategy linked to the placement
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -173,7 +173,7 @@ class PlacementsClient:
             Unique identifier of the placement (UUID v7)
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -399,7 +399,7 @@ class AsyncPlacementsClient:
             Filter by the ID of the content strategy linked to the placement
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -467,7 +467,7 @@ class AsyncPlacementsClient:
             Unique identifier of the placement (UUID v7)
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array (allowed value is `contentStrategy`).
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

@@ -4,6 +4,7 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .placement_relationships import PlacementRelationships
 from .push_notification_placement_attributes import PushNotificationPlacementAttributes
 
 
@@ -18,6 +19,10 @@ class PushNotificationPlacementData(UniversalBaseModel):
     """
 
     attributes: PushNotificationPlacementAttributes
+    relationships: typing.Optional[PlacementRelationships] = pydantic.Field(default=None)
+    """
+    JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

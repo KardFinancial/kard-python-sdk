@@ -8,25 +8,23 @@ from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 
 
-class BatchActivationSlot(UniversalBaseModel):
+class BatchActivationSlotAttributes(UniversalBaseModel):
     """
-    A slot within a batch-activation placement
+    Attributes block for a `batchActivationSlot` resource.
     """
 
-    slot_id: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="slotId"),
-        pydantic.Field(alias="slotId", description="Stable identifier for the slot within the placement"),
-    ]
-    content_strategy_id: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="contentStrategyId"),
-        pydantic.Field(alias="contentStrategyId", description="ID of the content strategy linked to this slot"),
-    ]
     alias: str = pydantic.Field()
     """
-    Customer-defined alias for the slot, unique within the placement
+    Customer-defined alias for the slot, unique within the placement.
     """
+
+    short_description: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="shortDescription"),
+        pydantic.Field(
+            alias="shortDescription", description="Optional short description of the slot, limited to 50 characters."
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

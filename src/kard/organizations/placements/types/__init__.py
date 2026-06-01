@@ -8,9 +8,13 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
     from .batch_activation_placement_data import BatchActivationPlacementData
-    from .batch_activation_slot import BatchActivationSlot
+    from .batch_activation_placement_relationships import BatchActivationPlacementRelationships
+    from .batch_activation_slot_attributes import BatchActivationSlotAttributes
+    from .batch_activation_slot_inclusion import BatchActivationSlotInclusion
+    from .batch_activation_slot_relationships import BatchActivationSlotRelationships
     from .cadence import Cadence
     from .cadence_frequency import CadenceFrequency
+    from .content_strategy_inclusion import ContentStrategyInclusion
     from .create_batch_activation_attributes import CreateBatchActivationAttributes
     from .create_batch_activation_placement_data import CreateBatchActivationPlacementData
     from .create_batch_activation_slot import CreateBatchActivationSlot
@@ -26,6 +30,13 @@ if typing.TYPE_CHECKING:
     from .create_push_notification_attributes import CreatePushNotificationAttributes
     from .create_push_notification_placement_data import CreatePushNotificationPlacementData
     from .day_of_week import DayOfWeek
+    from .included_resource import (
+        IncludedResource,
+        IncludedResource_BatchActivationSlot,
+        IncludedResource_ContentStrategy,
+        IncludedResource_PlacementMainPage,
+        IncludedResource_PlacementPushNotification,
+    )
     from .main_page_placement_attributes import MainPagePlacementAttributes
     from .main_page_placement_data import MainPagePlacementData
     from .placement_format_union import (
@@ -35,10 +46,14 @@ if typing.TYPE_CHECKING:
         PlacementFormatUnion_PlacementPushNotification,
     )
     from .placement_list_response import PlacementListResponse
+    from .placement_relationships import PlacementRelationships
     from .placement_resource import PlacementResource
     from .placement_type_filter import PlacementTypeFilter
     from .push_notification_placement_attributes import PushNotificationPlacementAttributes
     from .push_notification_placement_data import PushNotificationPlacementData
+    from .resource_identifier import ResourceIdentifier
+    from .to_many_relationship import ToManyRelationship
+    from .to_one_relationship import ToOneRelationship
     from .update_batch_activation_attributes import UpdateBatchActivationAttributes
     from .update_batch_activation_placement_data import UpdateBatchActivationPlacementData
     from .update_batch_activation_slot import UpdateBatchActivationSlot
@@ -56,9 +71,13 @@ if typing.TYPE_CHECKING:
 _dynamic_imports: typing.Dict[str, str] = {
     "BatchActivationPlacementAttributes": ".batch_activation_placement_attributes",
     "BatchActivationPlacementData": ".batch_activation_placement_data",
-    "BatchActivationSlot": ".batch_activation_slot",
+    "BatchActivationPlacementRelationships": ".batch_activation_placement_relationships",
+    "BatchActivationSlotAttributes": ".batch_activation_slot_attributes",
+    "BatchActivationSlotInclusion": ".batch_activation_slot_inclusion",
+    "BatchActivationSlotRelationships": ".batch_activation_slot_relationships",
     "Cadence": ".cadence",
     "CadenceFrequency": ".cadence_frequency",
+    "ContentStrategyInclusion": ".content_strategy_inclusion",
     "CreateBatchActivationAttributes": ".create_batch_activation_attributes",
     "CreateBatchActivationPlacementData": ".create_batch_activation_placement_data",
     "CreateBatchActivationSlot": ".create_batch_activation_slot",
@@ -72,6 +91,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreatePushNotificationAttributes": ".create_push_notification_attributes",
     "CreatePushNotificationPlacementData": ".create_push_notification_placement_data",
     "DayOfWeek": ".day_of_week",
+    "IncludedResource": ".included_resource",
+    "IncludedResource_BatchActivationSlot": ".included_resource",
+    "IncludedResource_ContentStrategy": ".included_resource",
+    "IncludedResource_PlacementMainPage": ".included_resource",
+    "IncludedResource_PlacementPushNotification": ".included_resource",
     "MainPagePlacementAttributes": ".main_page_placement_attributes",
     "MainPagePlacementData": ".main_page_placement_data",
     "PlacementFormatUnion": ".placement_format_union",
@@ -79,10 +103,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PlacementFormatUnion_PlacementMainPage": ".placement_format_union",
     "PlacementFormatUnion_PlacementPushNotification": ".placement_format_union",
     "PlacementListResponse": ".placement_list_response",
+    "PlacementRelationships": ".placement_relationships",
     "PlacementResource": ".placement_resource",
     "PlacementTypeFilter": ".placement_type_filter",
     "PushNotificationPlacementAttributes": ".push_notification_placement_attributes",
     "PushNotificationPlacementData": ".push_notification_placement_data",
+    "ResourceIdentifier": ".resource_identifier",
+    "ToManyRelationship": ".to_many_relationship",
+    "ToOneRelationship": ".to_one_relationship",
     "UpdateBatchActivationAttributes": ".update_batch_activation_attributes",
     "UpdateBatchActivationPlacementData": ".update_batch_activation_placement_data",
     "UpdateBatchActivationSlot": ".update_batch_activation_slot",
@@ -122,9 +150,13 @@ def __dir__():
 __all__ = [
     "BatchActivationPlacementAttributes",
     "BatchActivationPlacementData",
-    "BatchActivationSlot",
+    "BatchActivationPlacementRelationships",
+    "BatchActivationSlotAttributes",
+    "BatchActivationSlotInclusion",
+    "BatchActivationSlotRelationships",
     "Cadence",
     "CadenceFrequency",
+    "ContentStrategyInclusion",
     "CreateBatchActivationAttributes",
     "CreateBatchActivationPlacementData",
     "CreateBatchActivationSlot",
@@ -138,6 +170,11 @@ __all__ = [
     "CreatePushNotificationAttributes",
     "CreatePushNotificationPlacementData",
     "DayOfWeek",
+    "IncludedResource",
+    "IncludedResource_BatchActivationSlot",
+    "IncludedResource_ContentStrategy",
+    "IncludedResource_PlacementMainPage",
+    "IncludedResource_PlacementPushNotification",
     "MainPagePlacementAttributes",
     "MainPagePlacementData",
     "PlacementFormatUnion",
@@ -145,10 +182,14 @@ __all__ = [
     "PlacementFormatUnion_PlacementMainPage",
     "PlacementFormatUnion_PlacementPushNotification",
     "PlacementListResponse",
+    "PlacementRelationships",
     "PlacementResource",
     "PlacementTypeFilter",
     "PushNotificationPlacementAttributes",
     "PushNotificationPlacementData",
+    "ResourceIdentifier",
+    "ToManyRelationship",
+    "ToOneRelationship",
     "UpdateBatchActivationAttributes",
     "UpdateBatchActivationPlacementData",
     "UpdateBatchActivationSlot",

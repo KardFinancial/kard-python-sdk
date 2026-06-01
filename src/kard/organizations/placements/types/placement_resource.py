@@ -4,7 +4,7 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ...content_strategies.types.content_strategy_response import ContentStrategyResponse
+from .included_resource import IncludedResource
 from .placement_format_union import PlacementFormatUnion
 
 
@@ -18,9 +18,9 @@ class PlacementResource(UniversalBaseModel):
     Placement resource
     """
 
-    included: typing.Optional[typing.List[ContentStrategyResponse]] = pydantic.Field(default=None)
+    included: typing.Optional[typing.List[IncludedResource]] = pydantic.Field(default=None)
     """
-    Related resources requested via the `include` query parameter. Only populated when `include=contentStrategy` is supplied and the placement is linked to a content strategy.
+    Related resources requested via the `include` query parameter. Each entry is keyed by its `type` discriminant (`contentStrategy`, `batchActivationSlot`, `placementMainPage`, `placementPushNotification`).
     """
 
     if IS_PYDANTIC_V2:

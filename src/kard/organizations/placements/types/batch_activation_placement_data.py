@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
+from .batch_activation_placement_relationships import BatchActivationPlacementRelationships
 
 
 class BatchActivationPlacementData(UniversalBaseModel):
@@ -18,6 +19,10 @@ class BatchActivationPlacementData(UniversalBaseModel):
     """
 
     attributes: BatchActivationPlacementAttributes
+    relationships: BatchActivationPlacementRelationships = pydantic.Field()
+    """
+    JSON:API relationships for the placement. Always present on a batch-activation placement; the `slots` to-many relationship lists the slot resource identifiers.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
