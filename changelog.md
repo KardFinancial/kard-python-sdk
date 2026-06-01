@@ -1,3 +1,8 @@
+## 18.1.0 - 2026-06-01
+### Added
+* **`PlacementBatchAttributes.short_description`** — new `shortDescription` field providing a short, human-readable summary of how long a slot stays activated after a user taps activate (e.g. `"Activated for 24 hours"`), derived from the parent placement's `refreshInterval`.
+* **`PlacementBatchAttributes.long_description`** — new `longDescription` field providing a longer description of the slot's activation behavior, clarifying which offers are activated and how long they remain active.
+
 ## 18.0.0 - 2026-06-01
 ### Breaking Changes
 * **`BatchSlotData`** — removed from all public exports; replace all references with the new `PlacementBatchData` type. The `slotId` field is now `PlacementBatchData.id`, and `alias` is replaced by `PlacementBatchAttributes.name`.
