@@ -22,22 +22,6 @@ class PlacementBatchAttributes(UniversalBaseModel):
     Display name for the slot. Falls back to the slot's customer-defined alias, or — when the alias is absent — the name of the placement referenced by the slot.
     """
 
-    short_description: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="shortDescription"),
-        pydantic.Field(
-            alias="shortDescription",
-            description='Short, human-readable description of how long the slot stays activated after a user taps activate. Derived from the parent placement\'s `refreshInterval` (e.g. `"Activated for 24 hours"`).',
-        ),
-    ]
-    long_description: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="longDescription"),
-        pydantic.Field(
-            alias="longDescription",
-            description="Longer, human-readable description of the slot's activation behavior: clarifies that the offers displayed under this slot are the ones that will be activated for the user when they tap activate, and for how long they will remain active.",
-        ),
-    ]
     is_active: typing_extensions.Annotated[
         bool,
         FieldMetadata(alias="isActive"),
@@ -64,7 +48,7 @@ class PlacementBatchAttributes(UniversalBaseModel):
     ] = None
     components: typing.Optional[OfferComponents] = pydantic.Field(default=None)
     """
-    Slot-level UI components. Carries a `cta` (POST to the slot's activate endpoint) when the slot has no active (non-expired) activation, or a `logoFlare` decoration when it does — mutually exclusive on a single slot.
+    Slot-level UI components. Carries `shortDescription` and `longDescription` (activation copy derived from the parent placement's `refreshInterval`), plus either a `cta` (POST to the slot's activate endpoint) when the slot has no active (non-expired) activation, or a `logoFlare` decoration when it does — `cta` and `logoFlare` are mutually exclusive on a single slot.
     """
 
     assets: typing.Optional[typing.List[Asset]] = pydantic.Field(default=None)

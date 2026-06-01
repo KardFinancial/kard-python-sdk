@@ -1,3 +1,8 @@
+## 19.0.0 - 2026-06-01
+### Breaking Changes
+* **`PlacementBatchAttributes.short_description`** — field removed; access activation copy via `PlacementBatchAttributes.components` instead (the `OfferComponents` model now carries `shortDescription` and `longDescription`).
+* **`PlacementBatchAttributes.long_description`** — field removed; access activation copy via `PlacementBatchAttributes.components` instead.
+
 ## 18.1.0 - 2026-06-01
 ### Added
 * **`PlacementBatchAttributes.short_description`** — new `shortDescription` field providing a short, human-readable summary of how long a slot stays activated after a user taps activate (e.g. `"Activated for 24 hours"`), derived from the parent placement's `refreshInterval`.
