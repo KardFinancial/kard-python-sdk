@@ -1,3 +1,11 @@
+## 18.0.0 - 2026-06-01
+### Breaking Changes
+* **`BatchSlotData`** — removed from all public exports; replace all references with the new `PlacementBatchData` type. The `slotId` field is now `PlacementBatchData.id`, and `alias` is replaced by `PlacementBatchAttributes.name`.
+* **`BatchesResponseObject.data`** — field type changed from `List[BatchSlotData]` to `List[PlacementBatchData]`; update any code that unpacks or type-checks elements of this list.
+### Added
+* **`PlacementBatchData`** — new JSON:API resource model representing one slot in a batch-activation placement, carrying `id`, `type`, and an `attributes` payload.
+* **`PlacementBatchAttributes`** — new model holding per-slot attributes (including the new `name` display field, `is_active`, `offers`, and related fields) previously spread across `BatchSlotData`.
+
 ## 17.0.0 - 2026-06-01
 ### Added
 * **`PlacementRelationships`** — new model exposing the optional `contentStrategy` to-one JSON:API relationship on `MainPagePlacementData` and `PushNotificationPlacementData` (and their `PlacementFormatUnion` variants).

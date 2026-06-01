@@ -4,15 +4,21 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .placement_batch_data import PlacementBatchData
+from .placement_batch_attributes import PlacementBatchAttributes
 
 
-class BatchesResponseObject(UniversalBaseModel):
+class PlacementBatchData(UniversalBaseModel):
     """
-    Ordered list of slots for a batch-activation placement, with freshness fields and per-slot offer sets.
+    One slot in a batch-activation placement, with freshness fields and the offers that resolve under the slot's content strategy.
     """
 
-    data: typing.List[PlacementBatchData]
+    id: str = pydantic.Field()
+    """
+    Stable identifier for the slot within the placement
+    """
+
+    type: typing.Literal["placementBatch"] = "placementBatch"
+    attributes: PlacementBatchAttributes
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

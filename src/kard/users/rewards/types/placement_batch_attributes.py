@@ -12,19 +12,14 @@ from .offer_components import OfferComponents
 from .offer_data_union import OfferDataUnion
 
 
-class BatchSlotData(UniversalBaseModel):
+class PlacementBatchAttributes(UniversalBaseModel):
     """
-    One slot in a batch-activation placement, with freshness fields and the offers that resolve under the slot's content strategy.
+    Attributes of a placement batch slot.
     """
 
-    slot_id: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="slotId"),
-        pydantic.Field(alias="slotId", description="Stable identifier for the slot within the placement"),
-    ]
-    alias: str = pydantic.Field()
+    name: str = pydantic.Field()
     """
-    Customer-defined alias for the slot, unique within the placement
+    Display name for the slot. Falls back to the slot's customer-defined alias, or — when the alias is absent — the name of the placement referenced by the slot.
     """
 
     is_active: typing_extensions.Annotated[

@@ -9,7 +9,6 @@ if typing.TYPE_CHECKING:
     from .amount import Amount
     from .amount_type import AmountType
     from .asset import Asset
-    from .batch_slot_data import BatchSlotData
     from .batches_response_object import BatchesResponseObject
     from .button_style import ButtonStyle
     from .category_data import CategoryData
@@ -48,6 +47,8 @@ if typing.TYPE_CHECKING:
     from .operation_hours import OperationHours
     from .operation_period import OperationPeriod
     from .operation_time import OperationTime
+    from .placement_batch_attributes import PlacementBatchAttributes
+    from .placement_batch_data import PlacementBatchData
     from .progress_bar import ProgressBar
     from .progress_bar_label_pair import ProgressBarLabelPair
     from .progress_bar_labels import ProgressBarLabels
@@ -64,7 +65,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Amount": ".amount",
     "AmountType": ".amount_type",
     "Asset": ".asset",
-    "BatchSlotData": ".batch_slot_data",
     "BatchesResponseObject": ".batches_response_object",
     "ButtonStyle": ".button_style",
     "CategoryData": ".category_data",
@@ -104,6 +104,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OperationHours": ".operation_hours",
     "OperationPeriod": ".operation_period",
     "OperationTime": ".operation_time",
+    "PlacementBatchAttributes": ".placement_batch_attributes",
+    "PlacementBatchData": ".placement_batch_data",
     "ProgressBar": ".progress_bar",
     "ProgressBarLabelPair": ".progress_bar_label_pair",
     "ProgressBarLabels": ".progress_bar_labels",
@@ -144,7 +146,6 @@ __all__ = [
     "Amount",
     "AmountType",
     "Asset",
-    "BatchSlotData",
     "BatchesResponseObject",
     "ButtonStyle",
     "CategoryData",
@@ -184,6 +185,8 @@ __all__ = [
     "OperationHours",
     "OperationPeriod",
     "OperationTime",
+    "PlacementBatchAttributes",
+    "PlacementBatchData",
     "ProgressBar",
     "ProgressBarLabelPair",
     "ProgressBarLabels",
