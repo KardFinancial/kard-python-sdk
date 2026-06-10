@@ -14,6 +14,9 @@ if typing.TYPE_CHECKING:
     from .earned_reward_relationships import EarnedRewardRelationships
     from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
     from .earned_reward_settled_data import EarnedRewardSettledData
+    from .email_notification_placement_file_attributes import EmailNotificationPlacementFileAttributes
+    from .email_notification_placement_file_data import EmailNotificationPlacementFileData
+    from .email_notification_placement_file_relationships import EmailNotificationPlacementFileRelationships
     from .failed_transaction_attributes import FailedTransactionAttributes
     from .failed_transaction_data import FailedTransactionData
     from .failed_transaction_relationships import FailedTransactionRelationships
@@ -24,12 +27,17 @@ if typing.TYPE_CHECKING:
         NotificationDataUnion_Clawback,
         NotificationDataUnion_EarnedRewardApproved,
         NotificationDataUnion_EarnedRewardSettled,
+        NotificationDataUnion_EmailNotificationPlacementFile,
         NotificationDataUnion_FailedTransaction,
         NotificationDataUnion_FileProcessingResult,
+        NotificationDataUnion_PushNotificationPlacementFile,
         NotificationDataUnion_ValidTransaction,
     )
     from .notification_metadata import NotificationMetadata
     from .notification_payload import NotificationPayload
+    from .push_notification_placement_file_attributes import PushNotificationPlacementFileAttributes
+    from .push_notification_placement_file_data import PushNotificationPlacementFileData
+    from .push_notification_placement_file_relationships import PushNotificationPlacementFileRelationships
     from .reward_notification_attributes import RewardNotificationAttributes
     from .transaction_relationships import TransactionRelationships
     from .valid_transaction_attributes import ValidTransactionAttributes
@@ -44,6 +52,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EarnedRewardRelationships": ".earned_reward_relationships",
     "EarnedRewardSettledAttributes": ".earned_reward_settled_attributes",
     "EarnedRewardSettledData": ".earned_reward_settled_data",
+    "EmailNotificationPlacementFileAttributes": ".email_notification_placement_file_attributes",
+    "EmailNotificationPlacementFileData": ".email_notification_placement_file_data",
+    "EmailNotificationPlacementFileRelationships": ".email_notification_placement_file_relationships",
     "FailedTransactionAttributes": ".failed_transaction_attributes",
     "FailedTransactionData": ".failed_transaction_data",
     "FailedTransactionRelationships": ".failed_transaction_relationships",
@@ -53,11 +64,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationDataUnion_Clawback": ".notification_data_union",
     "NotificationDataUnion_EarnedRewardApproved": ".notification_data_union",
     "NotificationDataUnion_EarnedRewardSettled": ".notification_data_union",
+    "NotificationDataUnion_EmailNotificationPlacementFile": ".notification_data_union",
     "NotificationDataUnion_FailedTransaction": ".notification_data_union",
     "NotificationDataUnion_FileProcessingResult": ".notification_data_union",
+    "NotificationDataUnion_PushNotificationPlacementFile": ".notification_data_union",
     "NotificationDataUnion_ValidTransaction": ".notification_data_union",
     "NotificationMetadata": ".notification_metadata",
     "NotificationPayload": ".notification_payload",
+    "PushNotificationPlacementFileAttributes": ".push_notification_placement_file_attributes",
+    "PushNotificationPlacementFileData": ".push_notification_placement_file_data",
+    "PushNotificationPlacementFileRelationships": ".push_notification_placement_file_relationships",
     "RewardNotificationAttributes": ".reward_notification_attributes",
     "TransactionRelationships": ".transaction_relationships",
     "ValidTransactionAttributes": ".valid_transaction_attributes",
@@ -96,6 +112,9 @@ __all__ = [
     "EarnedRewardRelationships",
     "EarnedRewardSettledAttributes",
     "EarnedRewardSettledData",
+    "EmailNotificationPlacementFileAttributes",
+    "EmailNotificationPlacementFileData",
+    "EmailNotificationPlacementFileRelationships",
     "FailedTransactionAttributes",
     "FailedTransactionData",
     "FailedTransactionRelationships",
@@ -105,11 +124,16 @@ __all__ = [
     "NotificationDataUnion_Clawback",
     "NotificationDataUnion_EarnedRewardApproved",
     "NotificationDataUnion_EarnedRewardSettled",
+    "NotificationDataUnion_EmailNotificationPlacementFile",
     "NotificationDataUnion_FailedTransaction",
     "NotificationDataUnion_FileProcessingResult",
+    "NotificationDataUnion_PushNotificationPlacementFile",
     "NotificationDataUnion_ValidTransaction",
     "NotificationMetadata",
     "NotificationPayload",
+    "PushNotificationPlacementFileAttributes",
+    "PushNotificationPlacementFileData",
+    "PushNotificationPlacementFileRelationships",
     "RewardNotificationAttributes",
     "TransactionRelationships",
     "ValidTransactionAttributes",

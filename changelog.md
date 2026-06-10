@@ -1,3 +1,10 @@
+## 19.2.0 - 2026-06-10
+### Added
+* **`PushNotificationPlacementFileAttributes`**, **`PushNotificationPlacementFileData`**, and **`PushNotificationPlacementFileRelationships`** — new models representing a push-notification placement file notification, carrying placement name, available slot count, delivery cadence, and a presigned download URL.
+* **`EmailNotificationPlacementFileAttributes`**, **`EmailNotificationPlacementFileData`**, and **`EmailNotificationPlacementFileRelationships`** — new models representing an email-notification placement file notification with the same core fields as the push variant.
+* **`NotificationDataUnion_PushNotificationPlacementFile`** and **`NotificationDataUnion_EmailNotificationPlacementFile`** — two new discriminated-union variants added to `NotificationDataUnion`, enabling typed handling of `pushNotificationPlacementFile` and `emailNotificationPlacementFile` webhook payloads.
+* **`NotificationType`** — extended with `"pushNotificationPlacementFile"` and `"emailNotificationPlacementFile"` literal values.
+
 ## 19.1.0 - 2026-06-10
 ### Added
 * **`UpdateUserRequestAttributes.historical_transactions_sent`** — new optional boolean field that confirms historical transactions have been sent for a user; once set to `true` it cannot be reverted to `false`.

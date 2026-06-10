@@ -12,8 +12,12 @@ from .audit_update_attributes import AuditUpdateAttributes
 from .audit_update_relationships import AuditUpdateRelationships
 from .earned_reward_relationships import EarnedRewardRelationships
 from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
+from .email_notification_placement_file_attributes import EmailNotificationPlacementFileAttributes
+from .email_notification_placement_file_relationships import EmailNotificationPlacementFileRelationships
 from .failed_transaction_attributes import FailedTransactionAttributes
 from .failed_transaction_relationships import FailedTransactionRelationships
+from .push_notification_placement_file_attributes import PushNotificationPlacementFileAttributes
+from .push_notification_placement_file_relationships import PushNotificationPlacementFileRelationships
 from .reward_notification_attributes import RewardNotificationAttributes
 from .transaction_relationships import TransactionRelationships
 from .valid_transaction_attributes import ValidTransactionAttributes
@@ -130,6 +134,38 @@ class NotificationDataUnion_FileProcessingResult(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class NotificationDataUnion_PushNotificationPlacementFile(UniversalBaseModel):
+    type: typing.Literal["pushNotificationPlacementFile"] = "pushNotificationPlacementFile"
+    id: str
+    attributes: PushNotificationPlacementFileAttributes
+    relationships: PushNotificationPlacementFileRelationships
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
+class NotificationDataUnion_EmailNotificationPlacementFile(UniversalBaseModel):
+    type: typing.Literal["emailNotificationPlacementFile"] = "emailNotificationPlacementFile"
+    id: str
+    attributes: EmailNotificationPlacementFileAttributes
+    relationships: EmailNotificationPlacementFileRelationships
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 NotificationDataUnion = typing_extensions.Annotated[
     typing.Union[
         NotificationDataUnion_EarnedRewardApproved,
@@ -139,6 +175,8 @@ NotificationDataUnion = typing_extensions.Annotated[
         NotificationDataUnion_Clawback,
         NotificationDataUnion_AuditUpdate,
         NotificationDataUnion_FileProcessingResult,
+        NotificationDataUnion_PushNotificationPlacementFile,
+        NotificationDataUnion_EmailNotificationPlacementFile,
     ],
     pydantic.Field(discriminator="type"),
 ]

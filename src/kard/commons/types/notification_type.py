@@ -11,6 +11,8 @@ NotificationType = typing.Union[
         "clawback",
         "auditUpdate",
         "fileProcessingResult",
+        "pushNotificationPlacementFile",
+        "emailNotificationPlacementFile",
     ],
     typing.Any,
 ]
