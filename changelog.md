@@ -1,3 +1,7 @@
+## 19.1.0 - 2026-06-10
+### Added
+* **`UpdateUserRequestAttributes.historical_transactions_sent`** — new optional boolean field that confirms historical transactions have been sent for a user; once set to `true` it cannot be reverted to `false`.
+
 ## 19.0.0 - 2026-06-01
 ### Breaking Changes
 * **`PlacementBatchAttributes.short_description`** — field removed; access activation copy via `PlacementBatchAttributes.components` instead (the `OfferComponents` model now carries `shortDescription` and `longDescription`).

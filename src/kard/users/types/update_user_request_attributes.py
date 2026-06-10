@@ -43,6 +43,14 @@ class UpdateUserRequestAttributes(UniversalBaseModel):
         FieldMetadata(alias="birthYear"),
         pydantic.Field(alias="birthYear", description="Birth year of user"),
     ] = None
+    historical_transactions_sent: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="historicalTransactionsSent"),
+        pydantic.Field(
+            alias="historicalTransactionsSent",
+            description="Set to `true` to confirm that historical transactions have been sent for this user. This is a one-way flag: once `true` it cannot be set back to `false`, and a request attempting to do so is rejected.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
