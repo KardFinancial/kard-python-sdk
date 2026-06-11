@@ -40,7 +40,7 @@ class PlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PlacementFormatUnion:
         """
-        Create a placement for the organization. Use type "placementMainPage" for main-page placements (requires name and availableSlots) or "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1).
+        Create a placement for the organization. Use type "placement" for standard placements (requires name and availableSlots), "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1), "placementEmail" for email placements (requires name, cadence, and availableSlots), "placementBatchActivation" for batch-activation placements (requires name, refreshInterval, and slots), or "placementGroup" for group placements (requires name and slots).
 
         Parameters
         ----------
@@ -62,8 +62,8 @@ class PlacementsClient:
         --------
         from kard import KardApi
         from kard.organizations.placements import (
-            CreateMainPageAttributes,
-            CreatePlacementDataUnion_PlacementMainPage,
+            CreatePlacementDataUnion_Placement,
+            CreateStandardAttributes,
         )
 
         client = KardApi(
@@ -72,8 +72,8 @@ class PlacementsClient:
         )
         client.organizations.placements.create(
             organization_id="org-123",
-            data=CreatePlacementDataUnion_PlacementMainPage(
-                attributes=CreateMainPageAttributes(
+            data=CreatePlacementDataUnion_Placement(
+                attributes=CreateStandardAttributes(
                     name="Homepage Banner",
                     available_slots=5,
                 ),
@@ -104,7 +104,7 @@ class PlacementsClient:
             Unique identifier of the organization
 
         filter_type : typing.Optional[PlacementTypeFilter]
-            Filter by placement type (placementMainPage or placementPushNotification)
+            Filter by placement type (placement, placementPushNotification, placementEmail, placementBatchActivation, or placementGroup)
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
@@ -113,7 +113,7 @@ class PlacementsClient:
             Filter by the ID of the content strategy linked to the placement
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -173,7 +173,7 @@ class PlacementsClient:
             Unique identifier of the placement (UUID v7)
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -210,7 +210,7 @@ class PlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PlacementFormatUnion:
         """
-        Replace a placement. All fields must be provided. Use type "placementMainPage" or "placementPushNotification" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
+        Replace a placement. All fields must be provided. Use type "placement", "placementPushNotification", "placementEmail", "placementBatchActivation", or "placementGroup" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
 
         Parameters
         ----------
@@ -235,8 +235,8 @@ class PlacementsClient:
         --------
         from kard import KardApi
         from kard.organizations.placements import (
-            UpdateMainPageAttributes,
-            UpdatePlacementDataUnion_PlacementMainPage,
+            UpdatePlacementDataUnion_Placement,
+            UpdateStandardAttributes,
         )
 
         client = KardApi(
@@ -246,8 +246,8 @@ class PlacementsClient:
         client.organizations.placements.update(
             organization_id="organizationId",
             placement_id="placementId",
-            data=UpdatePlacementDataUnion_PlacementMainPage(
-                attributes=UpdateMainPageAttributes(
+            data=UpdatePlacementDataUnion_Placement(
+                attributes=UpdateStandardAttributes(
                     name="name",
                     available_slots=1,
                 ),
@@ -318,7 +318,7 @@ class AsyncPlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PlacementFormatUnion:
         """
-        Create a placement for the organization. Use type "placementMainPage" for main-page placements (requires name and availableSlots) or "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1).
+        Create a placement for the organization. Use type "placement" for standard placements (requires name and availableSlots), "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1), "placementEmail" for email placements (requires name, cadence, and availableSlots), "placementBatchActivation" for batch-activation placements (requires name, refreshInterval, and slots), or "placementGroup" for group placements (requires name and slots).
 
         Parameters
         ----------
@@ -342,8 +342,8 @@ class AsyncPlacementsClient:
 
         from kard import AsyncKardApi
         from kard.organizations.placements import (
-            CreateMainPageAttributes,
-            CreatePlacementDataUnion_PlacementMainPage,
+            CreatePlacementDataUnion_Placement,
+            CreateStandardAttributes,
         )
 
         client = AsyncKardApi(
@@ -355,8 +355,8 @@ class AsyncPlacementsClient:
         async def main() -> None:
             await client.organizations.placements.create(
                 organization_id="org-123",
-                data=CreatePlacementDataUnion_PlacementMainPage(
-                    attributes=CreateMainPageAttributes(
+                data=CreatePlacementDataUnion_Placement(
+                    attributes=CreateStandardAttributes(
                         name="Homepage Banner",
                         available_slots=5,
                     ),
@@ -390,7 +390,7 @@ class AsyncPlacementsClient:
             Unique identifier of the organization
 
         filter_type : typing.Optional[PlacementTypeFilter]
-            Filter by placement type (placementMainPage or placementPushNotification)
+            Filter by placement type (placement, placementPushNotification, placementEmail, placementBatchActivation, or placementGroup)
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
@@ -399,7 +399,7 @@ class AsyncPlacementsClient:
             Filter by the ID of the content strategy linked to the placement
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -467,7 +467,7 @@ class AsyncPlacementsClient:
             Unique identifier of the placement (UUID v7)
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -512,7 +512,7 @@ class AsyncPlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PlacementFormatUnion:
         """
-        Replace a placement. All fields must be provided. Use type "placementMainPage" or "placementPushNotification" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
+        Replace a placement. All fields must be provided. Use type "placement", "placementPushNotification", "placementEmail", "placementBatchActivation", or "placementGroup" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
 
         Parameters
         ----------
@@ -539,8 +539,8 @@ class AsyncPlacementsClient:
 
         from kard import AsyncKardApi
         from kard.organizations.placements import (
-            UpdateMainPageAttributes,
-            UpdatePlacementDataUnion_PlacementMainPage,
+            UpdatePlacementDataUnion_Placement,
+            UpdateStandardAttributes,
         )
 
         client = AsyncKardApi(
@@ -553,8 +553,8 @@ class AsyncPlacementsClient:
             await client.organizations.placements.update(
                 organization_id="organizationId",
                 placement_id="placementId",
-                data=UpdatePlacementDataUnion_PlacementMainPage(
-                    attributes=UpdateMainPageAttributes(
+                data=UpdatePlacementDataUnion_Placement(
+                    attributes=UpdateStandardAttributes(
                         name="name",
                         available_slots=1,
                     ),

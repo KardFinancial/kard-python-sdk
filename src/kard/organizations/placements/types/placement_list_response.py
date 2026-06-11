@@ -22,7 +22,7 @@ class PlacementListResponse(UniversalBaseModel):
 
     included: typing.Optional[typing.List[IncludedResource]] = pydantic.Field(default=None)
     """
-    Related resources requested via the `include` query parameter. Each entry is keyed by its `type` discriminant (`contentStrategy`, `batchActivationSlot`, `placementMainPage`, `placementPushNotification`).
+    Related resources requested via the `include` query parameter. Each entry is keyed by its `type` discriminant (`contentStrategy`, `batchActivationSlot`, `placement`, `placementPushNotification`, `placementEmail`).
     """
 
     links: typing.Optional[Links] = None

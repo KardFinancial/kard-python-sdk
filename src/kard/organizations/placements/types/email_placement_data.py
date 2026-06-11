@@ -4,13 +4,13 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .main_page_placement_attributes import MainPagePlacementAttributes
+from .email_placement_attributes import EmailPlacementAttributes
 from .placement_relationships import PlacementRelationships
 
 
-class MainPagePlacementData(UniversalBaseModel):
+class EmailPlacementData(UniversalBaseModel):
     """
-    Main-page placement resource data
+    Email placement resource data
     """
 
     id: str = pydantic.Field()
@@ -18,7 +18,7 @@ class MainPagePlacementData(UniversalBaseModel):
     Unique identifier of the placement (UUID v7)
     """
 
-    attributes: MainPagePlacementAttributes
+    attributes: EmailPlacementAttributes
     relationships: typing.Optional[PlacementRelationships] = pydantic.Field(default=None)
     """
     JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.

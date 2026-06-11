@@ -8,7 +8,6 @@ from importlib import import_module
 if typing.TYPE_CHECKING:
     from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
     from .batch_activation_placement_data import BatchActivationPlacementData
-    from .batch_activation_placement_relationships import BatchActivationPlacementRelationships
     from .batch_activation_slot_attributes import BatchActivationSlotAttributes
     from .batch_activation_slot_inclusion import BatchActivationSlotInclusion
     from .batch_activation_slot_relationships import BatchActivationSlotRelationships
@@ -18,31 +17,44 @@ if typing.TYPE_CHECKING:
     from .create_batch_activation_attributes import CreateBatchActivationAttributes
     from .create_batch_activation_placement_data import CreateBatchActivationPlacementData
     from .create_batch_activation_slot import CreateBatchActivationSlot
-    from .create_main_page_attributes import CreateMainPageAttributes
-    from .create_main_page_placement_data import CreateMainPagePlacementData
+    from .create_email_attributes import CreateEmailAttributes
+    from .create_email_placement_data import CreateEmailPlacementData
+    from .create_group_attributes import CreateGroupAttributes
+    from .create_group_placement_data import CreateGroupPlacementData
     from .create_placement_data_union import (
         CreatePlacementDataUnion,
+        CreatePlacementDataUnion_Placement,
         CreatePlacementDataUnion_PlacementBatchActivation,
-        CreatePlacementDataUnion_PlacementMainPage,
+        CreatePlacementDataUnion_PlacementEmail,
+        CreatePlacementDataUnion_PlacementGroup,
         CreatePlacementDataUnion_PlacementPushNotification,
     )
     from .create_placement_request_body import CreatePlacementRequestBody
     from .create_push_notification_attributes import CreatePushNotificationAttributes
     from .create_push_notification_placement_data import CreatePushNotificationPlacementData
+    from .create_standard_attributes import CreateStandardAttributes
+    from .create_standard_placement_data import CreateStandardPlacementData
     from .day_of_week import DayOfWeek
+    from .email_placement_attributes import EmailPlacementAttributes
+    from .email_placement_data import EmailPlacementData
+    from .group_placement_attributes import GroupPlacementAttributes
+    from .group_placement_data import GroupPlacementData
     from .included_resource import (
         IncludedResource,
         IncludedResource_BatchActivationSlot,
         IncludedResource_ContentStrategy,
-        IncludedResource_PlacementMainPage,
+        IncludedResource_Placement,
+        IncludedResource_PlacementEmail,
         IncludedResource_PlacementPushNotification,
     )
-    from .main_page_placement_attributes import MainPagePlacementAttributes
-    from .main_page_placement_data import MainPagePlacementData
+    from .placement_attributes import PlacementAttributes
+    from .placement_data import PlacementData
     from .placement_format_union import (
         PlacementFormatUnion,
+        PlacementFormatUnion_Placement,
         PlacementFormatUnion_PlacementBatchActivation,
-        PlacementFormatUnion_PlacementMainPage,
+        PlacementFormatUnion_PlacementEmail,
+        PlacementFormatUnion_PlacementGroup,
         PlacementFormatUnion_PlacementPushNotification,
     )
     from .placement_list_response import PlacementListResponse
@@ -52,26 +64,32 @@ if typing.TYPE_CHECKING:
     from .push_notification_placement_attributes import PushNotificationPlacementAttributes
     from .push_notification_placement_data import PushNotificationPlacementData
     from .resource_identifier import ResourceIdentifier
+    from .slotted_placement_relationships import SlottedPlacementRelationships
     from .to_many_relationship import ToManyRelationship
     from .to_one_relationship import ToOneRelationship
     from .update_batch_activation_attributes import UpdateBatchActivationAttributes
     from .update_batch_activation_placement_data import UpdateBatchActivationPlacementData
     from .update_batch_activation_slot import UpdateBatchActivationSlot
-    from .update_main_page_attributes import UpdateMainPageAttributes
-    from .update_main_page_placement_data import UpdateMainPagePlacementData
+    from .update_email_attributes import UpdateEmailAttributes
+    from .update_email_placement_data import UpdateEmailPlacementData
+    from .update_group_attributes import UpdateGroupAttributes
+    from .update_group_placement_data import UpdateGroupPlacementData
     from .update_placement_data_union import (
         UpdatePlacementDataUnion,
+        UpdatePlacementDataUnion_Placement,
         UpdatePlacementDataUnion_PlacementBatchActivation,
-        UpdatePlacementDataUnion_PlacementMainPage,
+        UpdatePlacementDataUnion_PlacementEmail,
+        UpdatePlacementDataUnion_PlacementGroup,
         UpdatePlacementDataUnion_PlacementPushNotification,
     )
     from .update_placement_request_body import UpdatePlacementRequestBody
     from .update_push_notification_attributes import UpdatePushNotificationAttributes
     from .update_push_notification_placement_data import UpdatePushNotificationPlacementData
+    from .update_standard_attributes import UpdateStandardAttributes
+    from .update_standard_placement_data import UpdateStandardPlacementData
 _dynamic_imports: typing.Dict[str, str] = {
     "BatchActivationPlacementAttributes": ".batch_activation_placement_attributes",
     "BatchActivationPlacementData": ".batch_activation_placement_data",
-    "BatchActivationPlacementRelationships": ".batch_activation_placement_relationships",
     "BatchActivationSlotAttributes": ".batch_activation_slot_attributes",
     "BatchActivationSlotInclusion": ".batch_activation_slot_inclusion",
     "BatchActivationSlotRelationships": ".batch_activation_slot_relationships",
@@ -81,26 +99,39 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateBatchActivationAttributes": ".create_batch_activation_attributes",
     "CreateBatchActivationPlacementData": ".create_batch_activation_placement_data",
     "CreateBatchActivationSlot": ".create_batch_activation_slot",
-    "CreateMainPageAttributes": ".create_main_page_attributes",
-    "CreateMainPagePlacementData": ".create_main_page_placement_data",
+    "CreateEmailAttributes": ".create_email_attributes",
+    "CreateEmailPlacementData": ".create_email_placement_data",
+    "CreateGroupAttributes": ".create_group_attributes",
+    "CreateGroupPlacementData": ".create_group_placement_data",
     "CreatePlacementDataUnion": ".create_placement_data_union",
+    "CreatePlacementDataUnion_Placement": ".create_placement_data_union",
     "CreatePlacementDataUnion_PlacementBatchActivation": ".create_placement_data_union",
-    "CreatePlacementDataUnion_PlacementMainPage": ".create_placement_data_union",
+    "CreatePlacementDataUnion_PlacementEmail": ".create_placement_data_union",
+    "CreatePlacementDataUnion_PlacementGroup": ".create_placement_data_union",
     "CreatePlacementDataUnion_PlacementPushNotification": ".create_placement_data_union",
     "CreatePlacementRequestBody": ".create_placement_request_body",
     "CreatePushNotificationAttributes": ".create_push_notification_attributes",
     "CreatePushNotificationPlacementData": ".create_push_notification_placement_data",
+    "CreateStandardAttributes": ".create_standard_attributes",
+    "CreateStandardPlacementData": ".create_standard_placement_data",
     "DayOfWeek": ".day_of_week",
+    "EmailPlacementAttributes": ".email_placement_attributes",
+    "EmailPlacementData": ".email_placement_data",
+    "GroupPlacementAttributes": ".group_placement_attributes",
+    "GroupPlacementData": ".group_placement_data",
     "IncludedResource": ".included_resource",
     "IncludedResource_BatchActivationSlot": ".included_resource",
     "IncludedResource_ContentStrategy": ".included_resource",
-    "IncludedResource_PlacementMainPage": ".included_resource",
+    "IncludedResource_Placement": ".included_resource",
+    "IncludedResource_PlacementEmail": ".included_resource",
     "IncludedResource_PlacementPushNotification": ".included_resource",
-    "MainPagePlacementAttributes": ".main_page_placement_attributes",
-    "MainPagePlacementData": ".main_page_placement_data",
+    "PlacementAttributes": ".placement_attributes",
+    "PlacementData": ".placement_data",
     "PlacementFormatUnion": ".placement_format_union",
+    "PlacementFormatUnion_Placement": ".placement_format_union",
     "PlacementFormatUnion_PlacementBatchActivation": ".placement_format_union",
-    "PlacementFormatUnion_PlacementMainPage": ".placement_format_union",
+    "PlacementFormatUnion_PlacementEmail": ".placement_format_union",
+    "PlacementFormatUnion_PlacementGroup": ".placement_format_union",
     "PlacementFormatUnion_PlacementPushNotification": ".placement_format_union",
     "PlacementListResponse": ".placement_list_response",
     "PlacementRelationships": ".placement_relationships",
@@ -109,20 +140,27 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PushNotificationPlacementAttributes": ".push_notification_placement_attributes",
     "PushNotificationPlacementData": ".push_notification_placement_data",
     "ResourceIdentifier": ".resource_identifier",
+    "SlottedPlacementRelationships": ".slotted_placement_relationships",
     "ToManyRelationship": ".to_many_relationship",
     "ToOneRelationship": ".to_one_relationship",
     "UpdateBatchActivationAttributes": ".update_batch_activation_attributes",
     "UpdateBatchActivationPlacementData": ".update_batch_activation_placement_data",
     "UpdateBatchActivationSlot": ".update_batch_activation_slot",
-    "UpdateMainPageAttributes": ".update_main_page_attributes",
-    "UpdateMainPagePlacementData": ".update_main_page_placement_data",
+    "UpdateEmailAttributes": ".update_email_attributes",
+    "UpdateEmailPlacementData": ".update_email_placement_data",
+    "UpdateGroupAttributes": ".update_group_attributes",
+    "UpdateGroupPlacementData": ".update_group_placement_data",
     "UpdatePlacementDataUnion": ".update_placement_data_union",
+    "UpdatePlacementDataUnion_Placement": ".update_placement_data_union",
     "UpdatePlacementDataUnion_PlacementBatchActivation": ".update_placement_data_union",
-    "UpdatePlacementDataUnion_PlacementMainPage": ".update_placement_data_union",
+    "UpdatePlacementDataUnion_PlacementEmail": ".update_placement_data_union",
+    "UpdatePlacementDataUnion_PlacementGroup": ".update_placement_data_union",
     "UpdatePlacementDataUnion_PlacementPushNotification": ".update_placement_data_union",
     "UpdatePlacementRequestBody": ".update_placement_request_body",
     "UpdatePushNotificationAttributes": ".update_push_notification_attributes",
     "UpdatePushNotificationPlacementData": ".update_push_notification_placement_data",
+    "UpdateStandardAttributes": ".update_standard_attributes",
+    "UpdateStandardPlacementData": ".update_standard_placement_data",
 }
 
 
@@ -150,7 +188,6 @@ def __dir__():
 __all__ = [
     "BatchActivationPlacementAttributes",
     "BatchActivationPlacementData",
-    "BatchActivationPlacementRelationships",
     "BatchActivationSlotAttributes",
     "BatchActivationSlotInclusion",
     "BatchActivationSlotRelationships",
@@ -160,26 +197,39 @@ __all__ = [
     "CreateBatchActivationAttributes",
     "CreateBatchActivationPlacementData",
     "CreateBatchActivationSlot",
-    "CreateMainPageAttributes",
-    "CreateMainPagePlacementData",
+    "CreateEmailAttributes",
+    "CreateEmailPlacementData",
+    "CreateGroupAttributes",
+    "CreateGroupPlacementData",
     "CreatePlacementDataUnion",
+    "CreatePlacementDataUnion_Placement",
     "CreatePlacementDataUnion_PlacementBatchActivation",
-    "CreatePlacementDataUnion_PlacementMainPage",
+    "CreatePlacementDataUnion_PlacementEmail",
+    "CreatePlacementDataUnion_PlacementGroup",
     "CreatePlacementDataUnion_PlacementPushNotification",
     "CreatePlacementRequestBody",
     "CreatePushNotificationAttributes",
     "CreatePushNotificationPlacementData",
+    "CreateStandardAttributes",
+    "CreateStandardPlacementData",
     "DayOfWeek",
+    "EmailPlacementAttributes",
+    "EmailPlacementData",
+    "GroupPlacementAttributes",
+    "GroupPlacementData",
     "IncludedResource",
     "IncludedResource_BatchActivationSlot",
     "IncludedResource_ContentStrategy",
-    "IncludedResource_PlacementMainPage",
+    "IncludedResource_Placement",
+    "IncludedResource_PlacementEmail",
     "IncludedResource_PlacementPushNotification",
-    "MainPagePlacementAttributes",
-    "MainPagePlacementData",
+    "PlacementAttributes",
+    "PlacementData",
     "PlacementFormatUnion",
+    "PlacementFormatUnion_Placement",
     "PlacementFormatUnion_PlacementBatchActivation",
-    "PlacementFormatUnion_PlacementMainPage",
+    "PlacementFormatUnion_PlacementEmail",
+    "PlacementFormatUnion_PlacementGroup",
     "PlacementFormatUnion_PlacementPushNotification",
     "PlacementListResponse",
     "PlacementRelationships",
@@ -188,18 +238,25 @@ __all__ = [
     "PushNotificationPlacementAttributes",
     "PushNotificationPlacementData",
     "ResourceIdentifier",
+    "SlottedPlacementRelationships",
     "ToManyRelationship",
     "ToOneRelationship",
     "UpdateBatchActivationAttributes",
     "UpdateBatchActivationPlacementData",
     "UpdateBatchActivationSlot",
-    "UpdateMainPageAttributes",
-    "UpdateMainPagePlacementData",
+    "UpdateEmailAttributes",
+    "UpdateEmailPlacementData",
+    "UpdateGroupAttributes",
+    "UpdateGroupPlacementData",
     "UpdatePlacementDataUnion",
+    "UpdatePlacementDataUnion_Placement",
     "UpdatePlacementDataUnion_PlacementBatchActivation",
-    "UpdatePlacementDataUnion_PlacementMainPage",
+    "UpdatePlacementDataUnion_PlacementEmail",
+    "UpdatePlacementDataUnion_PlacementGroup",
     "UpdatePlacementDataUnion_PlacementPushNotification",
     "UpdatePlacementRequestBody",
     "UpdatePushNotificationAttributes",
     "UpdatePushNotificationPlacementData",
+    "UpdateStandardAttributes",
+    "UpdateStandardPlacementData",
 ]

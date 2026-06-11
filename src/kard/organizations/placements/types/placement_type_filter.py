@@ -3,5 +3,8 @@
 import typing
 
 PlacementTypeFilter = typing.Union[
-    typing.Literal["placementMainPage", "placementPushNotification", "placementBatchActivation"], typing.Any
+    typing.Literal[
+        "placement", "placementPushNotification", "placementEmail", "placementBatchActivation", "placementGroup"
+    ],
+    typing.Any,
 ]

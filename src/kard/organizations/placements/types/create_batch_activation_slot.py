@@ -10,7 +10,7 @@ from ....core.serialization import FieldMetadata
 
 class CreateBatchActivationSlot(UniversalBaseModel):
     """
-    A slot in a batch-activation placement at creation time
+    A slot in a batch-activation or group placement at creation time
     """
 
     placement_id: typing_extensions.Annotated[

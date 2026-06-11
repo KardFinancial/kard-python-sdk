@@ -4,21 +4,18 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .placement_batch_attributes import PlacementBatchAttributes
+from .create_group_attributes import CreateGroupAttributes
 
 
-class PlacementBatchData(UniversalBaseModel):
+class CreateGroupPlacementData(UniversalBaseModel):
     """
-    One slot in a batch-activation or group placement, with freshness fields and the offers that resolve under the slot's content strategy.
-    """
-
-    id: str = pydantic.Field()
-    """
-    Stable identifier for the slot within the placement
+    Data for creating a group placement
     """
 
-    type: typing.Literal["placementBatch"] = "placementBatch"
-    attributes: PlacementBatchAttributes
+    attributes: CreateGroupAttributes = pydantic.Field()
+    """
+    Group placement attributes for creation
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

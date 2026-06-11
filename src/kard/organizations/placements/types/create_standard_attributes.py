@@ -8,9 +8,18 @@ from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 
 
-class MainPagePlacementAttributes(UniversalBaseModel):
+class CreateStandardAttributes(UniversalBaseModel):
     """
-    Attributes for a main-page placement
+    Attributes for creating a standard placement
+
+    Examples
+    --------
+    from kard.organizations.placements import CreateStandardAttributes
+
+    CreateStandardAttributes(
+        name="Homepage Banner",
+        available_slots=5,
+    )
     """
 
     name: str = pydantic.Field()
@@ -18,23 +27,15 @@ class MainPagePlacementAttributes(UniversalBaseModel):
     Name of the placement
     """
 
-    organization_id: typing_extensions.Annotated[
-        str,
-        FieldMetadata(alias="organizationId"),
-        pydantic.Field(alias="organizationId", description="ID of the organization this placement belongs to"),
-    ]
     available_slots: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="availableSlots"),
-        pydantic.Field(alias="availableSlots", description="Number of available slots"),
+        pydantic.Field(alias="availableSlots", description="Number of available slots (minimum 1)"),
     ]
     content_strategy_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="contentStrategyId"),
-        pydantic.Field(
-            alias="contentStrategyId",
-            description="ID of the content strategy linked to this placement, if any. Retained alongside `relationships.contentStrategy` for backward compatibility.",
-        ),
+        pydantic.Field(alias="contentStrategyId", description="ID of the content strategy to link this placement to"),
     ] = None
 
     if IS_PYDANTIC_V2:

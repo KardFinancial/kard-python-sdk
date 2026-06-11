@@ -4,13 +4,13 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
+from .group_placement_attributes import GroupPlacementAttributes
 from .slotted_placement_relationships import SlottedPlacementRelationships
 
 
-class BatchActivationPlacementData(UniversalBaseModel):
+class GroupPlacementData(UniversalBaseModel):
     """
-    Batch-activation placement resource data
+    Group placement resource data
     """
 
     id: str = pydantic.Field()
@@ -18,10 +18,10 @@ class BatchActivationPlacementData(UniversalBaseModel):
     Unique identifier of the placement (UUID v7)
     """
 
-    attributes: BatchActivationPlacementAttributes
+    attributes: GroupPlacementAttributes
     relationships: SlottedPlacementRelationships = pydantic.Field()
     """
-    JSON:API relationships for the placement. Always present on a batch-activation placement; the `slots` to-many relationship lists the slot resource identifiers.
+    JSON:API relationships for the placement. Always present on a group placement; the `slots` to-many relationship lists the slot resource identifiers.
     """
 
     if IS_PYDANTIC_V2:

@@ -4,17 +4,17 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .create_main_page_attributes import CreateMainPageAttributes
+from .update_email_attributes import UpdateEmailAttributes
 
 
-class CreateMainPagePlacementData(UniversalBaseModel):
+class UpdateEmailPlacementData(UniversalBaseModel):
     """
-    Data for creating a main-page placement
+    Data for updating an email placement
     """
 
-    attributes: CreateMainPageAttributes = pydantic.Field()
+    attributes: UpdateEmailAttributes = pydantic.Field()
     """
-    Main-page placement attributes for creation
+    Email placement attributes for update
     """
 
     if IS_PYDANTIC_V2:

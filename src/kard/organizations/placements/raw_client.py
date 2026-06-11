@@ -42,7 +42,7 @@ class RawPlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[PlacementFormatUnion]:
         """
-        Create a placement for the organization. Use type "placementMainPage" for main-page placements (requires name and availableSlots) or "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1).
+        Create a placement for the organization. Use type "placement" for standard placements (requires name and availableSlots), "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1), "placementEmail" for email placements (requires name, cadence, and availableSlots), "placementBatchActivation" for batch-activation placements (requires name, refreshInterval, and slots), or "placementGroup" for group placements (requires name and slots).
 
         Parameters
         ----------
@@ -166,7 +166,7 @@ class RawPlacementsClient:
             Unique identifier of the organization
 
         filter_type : typing.Optional[PlacementTypeFilter]
-            Filter by placement type (placementMainPage or placementPushNotification)
+            Filter by placement type (placement, placementPushNotification, placementEmail, placementBatchActivation, or placementGroup)
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
@@ -175,7 +175,7 @@ class RawPlacementsClient:
             Filter by the ID of the content strategy linked to the placement
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -298,7 +298,7 @@ class RawPlacementsClient:
             Unique identifier of the placement (UUID v7)
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -388,7 +388,7 @@ class RawPlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[PlacementFormatUnion]:
         """
-        Replace a placement. All fields must be provided. Use type "placementMainPage" or "placementPushNotification" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
+        Replace a placement. All fields must be provided. Use type "placement", "placementPushNotification", "placementEmail", "placementBatchActivation", or "placementGroup" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
 
         Parameters
         ----------
@@ -596,7 +596,7 @@ class AsyncRawPlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[PlacementFormatUnion]:
         """
-        Create a placement for the organization. Use type "placementMainPage" for main-page placements (requires name and availableSlots) or "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1).
+        Create a placement for the organization. Use type "placement" for standard placements (requires name and availableSlots), "placementPushNotification" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1), "placementEmail" for email placements (requires name, cadence, and availableSlots), "placementBatchActivation" for batch-activation placements (requires name, refreshInterval, and slots), or "placementGroup" for group placements (requires name and slots).
 
         Parameters
         ----------
@@ -720,7 +720,7 @@ class AsyncRawPlacementsClient:
             Unique identifier of the organization
 
         filter_type : typing.Optional[PlacementTypeFilter]
-            Filter by placement type (placementMainPage or placementPushNotification)
+            Filter by placement type (placement, placementPushNotification, placementEmail, placementBatchActivation, or placementGroup)
 
         filter_name : typing.Optional[str]
             Filter by exact placement name (unique within an organization per type)
@@ -729,7 +729,7 @@ class AsyncRawPlacementsClient:
             Filter by the ID of the content strategy linked to the placement
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         page_after : typing.Optional[str]
             Cursor value for the next page of results
@@ -852,7 +852,7 @@ class AsyncRawPlacementsClient:
             Unique identifier of the placement (UUID v7)
 
         include : typing.Optional[str]
-            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
+            CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -942,7 +942,7 @@ class AsyncRawPlacementsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[PlacementFormatUnion]:
         """
-        Replace a placement. All fields must be provided. Use type "placementMainPage" or "placementPushNotification" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
+        Replace a placement. All fields must be provided. Use type "placement", "placementPushNotification", "placementEmail", "placementBatchActivation", or "placementGroup" to set the placement kind. If the type is "placementPushNotification", availableSlots is automatically set to 1.
 
         Parameters
         ----------

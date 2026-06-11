@@ -8,17 +8,19 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .update_batch_activation_attributes import UpdateBatchActivationAttributes
-from .update_main_page_attributes import UpdateMainPageAttributes
+from .update_email_attributes import UpdateEmailAttributes
+from .update_group_attributes import UpdateGroupAttributes
 from .update_push_notification_attributes import UpdatePushNotificationAttributes
+from .update_standard_attributes import UpdateStandardAttributes
 
 
-class UpdatePlacementDataUnion_PlacementMainPage(UniversalBaseModel):
+class UpdatePlacementDataUnion_Placement(UniversalBaseModel):
     """
     Discriminated union for updating a placement
     """
 
-    type: typing.Literal["placementMainPage"] = "placementMainPage"
-    attributes: UpdateMainPageAttributes
+    type: typing.Literal["placement"] = "placement"
+    attributes: UpdateStandardAttributes
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -48,6 +50,24 @@ class UpdatePlacementDataUnion_PlacementPushNotification(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class UpdatePlacementDataUnion_PlacementEmail(UniversalBaseModel):
+    """
+    Discriminated union for updating a placement
+    """
+
+    type: typing.Literal["placementEmail"] = "placementEmail"
+    attributes: UpdateEmailAttributes
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 class UpdatePlacementDataUnion_PlacementBatchActivation(UniversalBaseModel):
     """
     Discriminated union for updating a placement
@@ -66,11 +86,31 @@ class UpdatePlacementDataUnion_PlacementBatchActivation(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class UpdatePlacementDataUnion_PlacementGroup(UniversalBaseModel):
+    """
+    Discriminated union for updating a placement
+    """
+
+    type: typing.Literal["placementGroup"] = "placementGroup"
+    attributes: UpdateGroupAttributes
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 UpdatePlacementDataUnion = typing_extensions.Annotated[
     typing.Union[
-        UpdatePlacementDataUnion_PlacementMainPage,
+        UpdatePlacementDataUnion_Placement,
         UpdatePlacementDataUnion_PlacementPushNotification,
+        UpdatePlacementDataUnion_PlacementEmail,
         UpdatePlacementDataUnion_PlacementBatchActivation,
+        UpdatePlacementDataUnion_PlacementGroup,
     ],
     pydantic.Field(discriminator="type"),
 ]

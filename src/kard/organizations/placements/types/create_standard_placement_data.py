@@ -4,17 +4,17 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .to_many_relationship import ToManyRelationship
+from .create_standard_attributes import CreateStandardAttributes
 
 
-class BatchActivationPlacementRelationships(UniversalBaseModel):
+class CreateStandardPlacementData(UniversalBaseModel):
     """
-    Relationship block for a batch-activation placement.
+    Data for creating a standard placement
     """
 
-    slots: ToManyRelationship = pydantic.Field()
+    attributes: CreateStandardAttributes = pydantic.Field()
     """
-    Resource identifiers for the slots that make up the activation cohort. Each entry corresponds to a `batchActivationSlot` resource that appears in `included` when the request asks for `slots` (or any deeper path that implies it).
+    Standard placement attributes for creation
     """
 
     if IS_PYDANTIC_V2:

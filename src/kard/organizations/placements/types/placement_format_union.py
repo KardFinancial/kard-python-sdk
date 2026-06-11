@@ -8,26 +8,28 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .batch_activation_placement_attributes import BatchActivationPlacementAttributes
-from .batch_activation_placement_relationships import BatchActivationPlacementRelationships
-from .main_page_placement_attributes import MainPagePlacementAttributes
+from .email_placement_attributes import EmailPlacementAttributes
+from .group_placement_attributes import GroupPlacementAttributes
+from .placement_attributes import PlacementAttributes
 from .placement_relationships import PlacementRelationships
 from .push_notification_placement_attributes import PushNotificationPlacementAttributes
+from .slotted_placement_relationships import SlottedPlacementRelationships
 
 
-class PlacementFormatUnion_PlacementMainPage(UniversalBaseModel):
+class PlacementFormatUnion_Placement(UniversalBaseModel):
     """
     Discriminated union for placement resources keyed on type
 
     Examples
     --------
     from kard.organizations.placements import (
-        MainPagePlacementAttributes,
-        PlacementFormatUnion_PlacementMainPage,
+        PlacementAttributes,
+        PlacementFormatUnion_Placement,
     )
 
-    PlacementFormatUnion_PlacementMainPage(
+    PlacementFormatUnion_Placement(
         id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
-        attributes=MainPagePlacementAttributes(
+        attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
             available_slots=5,
@@ -35,9 +37,9 @@ class PlacementFormatUnion_PlacementMainPage(UniversalBaseModel):
     )
     """
 
-    type: typing.Literal["placementMainPage"] = "placementMainPage"
+    type: typing.Literal["placement"] = "placement"
     id: str
-    attributes: MainPagePlacementAttributes
+    attributes: PlacementAttributes
     relationships: typing.Optional[PlacementRelationships] = None
 
     if IS_PYDANTIC_V2:
@@ -57,13 +59,13 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
     Examples
     --------
     from kard.organizations.placements import (
-        MainPagePlacementAttributes,
-        PlacementFormatUnion_PlacementMainPage,
+        PlacementAttributes,
+        PlacementFormatUnion_Placement,
     )
 
-    PlacementFormatUnion_PlacementMainPage(
+    PlacementFormatUnion_Placement(
         id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
-        attributes=MainPagePlacementAttributes(
+        attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
             available_slots=5,
@@ -86,6 +88,42 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class PlacementFormatUnion_PlacementEmail(UniversalBaseModel):
+    """
+    Discriminated union for placement resources keyed on type
+
+    Examples
+    --------
+    from kard.organizations.placements import (
+        PlacementAttributes,
+        PlacementFormatUnion_Placement,
+    )
+
+    PlacementFormatUnion_Placement(
+        id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
+        attributes=PlacementAttributes(
+            name="Homepage Banner",
+            organization_id="org-123",
+            available_slots=5,
+        ),
+    )
+    """
+
+    type: typing.Literal["placementEmail"] = "placementEmail"
+    id: str
+    attributes: EmailPlacementAttributes
+    relationships: typing.Optional[PlacementRelationships] = None
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
     """
     Discriminated union for placement resources keyed on type
@@ -93,13 +131,13 @@ class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
     Examples
     --------
     from kard.organizations.placements import (
-        MainPagePlacementAttributes,
-        PlacementFormatUnion_PlacementMainPage,
+        PlacementAttributes,
+        PlacementFormatUnion_Placement,
     )
 
-    PlacementFormatUnion_PlacementMainPage(
+    PlacementFormatUnion_Placement(
         id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
-        attributes=MainPagePlacementAttributes(
+        attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
             available_slots=5,
@@ -110,7 +148,43 @@ class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
     type: typing.Literal["placementBatchActivation"] = "placementBatchActivation"
     id: str
     attributes: BatchActivationPlacementAttributes
-    relationships: BatchActivationPlacementRelationships
+    relationships: SlottedPlacementRelationships
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
+class PlacementFormatUnion_PlacementGroup(UniversalBaseModel):
+    """
+    Discriminated union for placement resources keyed on type
+
+    Examples
+    --------
+    from kard.organizations.placements import (
+        PlacementAttributes,
+        PlacementFormatUnion_Placement,
+    )
+
+    PlacementFormatUnion_Placement(
+        id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
+        attributes=PlacementAttributes(
+            name="Homepage Banner",
+            organization_id="org-123",
+            available_slots=5,
+        ),
+    )
+    """
+
+    type: typing.Literal["placementGroup"] = "placementGroup"
+    id: str
+    attributes: GroupPlacementAttributes
+    relationships: SlottedPlacementRelationships
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -124,13 +198,13 @@ class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
 
 """
 from kard.organizations.placements import (
-    MainPagePlacementAttributes,
-    PlacementFormatUnion_PlacementMainPage,
+    PlacementAttributes,
+    PlacementFormatUnion_Placement,
 )
 
-PlacementFormatUnion_PlacementMainPage(
+PlacementFormatUnion_Placement(
     id="01961e5a-b74c-7d42-8456-d3a1f2c90e71",
-    attributes=MainPagePlacementAttributes(
+    attributes=PlacementAttributes(
         name="Homepage Banner",
         organization_id="org-123",
         available_slots=5,
@@ -139,9 +213,11 @@ PlacementFormatUnion_PlacementMainPage(
 """
 PlacementFormatUnion = typing_extensions.Annotated[
     typing.Union[
-        PlacementFormatUnion_PlacementMainPage,
+        PlacementFormatUnion_Placement,
         PlacementFormatUnion_PlacementPushNotification,
+        PlacementFormatUnion_PlacementEmail,
         PlacementFormatUnion_PlacementBatchActivation,
+        PlacementFormatUnion_PlacementGroup,
     ],
     pydantic.Field(discriminator="type"),
 ]

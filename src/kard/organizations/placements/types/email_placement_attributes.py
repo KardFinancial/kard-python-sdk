@@ -6,20 +6,12 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
+from .cadence import Cadence
 
 
-class UpdateMainPageAttributes(UniversalBaseModel):
+class EmailPlacementAttributes(UniversalBaseModel):
     """
-    Attributes for updating a main-page placement. All fields are required.
-
-    Examples
-    --------
-    from kard.organizations.placements import UpdateMainPageAttributes
-
-    UpdateMainPageAttributes(
-        name="Updated Banner",
-        available_slots=10,
-    )
+    Attributes for an email placement
     """
 
     name: str = pydantic.Field()
@@ -27,17 +19,27 @@ class UpdateMainPageAttributes(UniversalBaseModel):
     Name of the placement
     """
 
+    organization_id: typing_extensions.Annotated[
+        str,
+        FieldMetadata(alias="organizationId"),
+        pydantic.Field(alias="organizationId", description="ID of the organization this placement belongs to"),
+    ]
     available_slots: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="availableSlots"),
-        pydantic.Field(alias="availableSlots", description="Number of available slots (minimum 1)"),
+        pydantic.Field(alias="availableSlots", description="Number of available slots"),
     ]
+    cadence: Cadence = pydantic.Field()
+    """
+    Delivery cadence for the email
+    """
+
     content_strategy_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="contentStrategyId"),
         pydantic.Field(
             alias="contentStrategyId",
-            description="ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).",
+            description="ID of the content strategy linked to this placement, if any. Retained alongside `relationships.contentStrategy` for backward compatibility.",
         ),
     ] = None
 

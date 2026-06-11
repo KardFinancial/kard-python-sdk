@@ -12,7 +12,7 @@ from .day_of_week import DayOfWeek
 
 class Cadence(UniversalBaseModel):
     """
-    Cadence schedule for push notification placements
+    Cadence schedule for push notification and email placements
     """
 
     frequency: CadenceFrequency = pydantic.Field()

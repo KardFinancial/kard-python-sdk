@@ -14,14 +14,14 @@ class CreatePlacementRequestBody(UniversalBaseModel):
     Examples
     --------
     from kard.organizations.placements import (
-        CreateMainPageAttributes,
-        CreatePlacementDataUnion_PlacementMainPage,
+        CreatePlacementDataUnion_Placement,
         CreatePlacementRequestBody,
+        CreateStandardAttributes,
     )
 
     CreatePlacementRequestBody(
-        data=CreatePlacementDataUnion_PlacementMainPage(
-            attributes=CreateMainPageAttributes(
+        data=CreatePlacementDataUnion_Placement(
+            attributes=CreateStandardAttributes(
                 name="Homepage Banner",
                 available_slots=5,
             ),

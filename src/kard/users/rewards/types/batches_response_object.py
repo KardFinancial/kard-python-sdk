@@ -9,7 +9,7 @@ from .placement_batch_data import PlacementBatchData
 
 class BatchesResponseObject(UniversalBaseModel):
     """
-    Ordered list of slots for a batch-activation placement, with freshness fields and per-slot offer sets.
+    Ordered list of slots for a batch-activation or group placement, with freshness fields and per-slot offer sets.
     """
 
     data: typing.List[PlacementBatchData]

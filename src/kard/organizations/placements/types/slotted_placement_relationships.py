@@ -4,17 +4,17 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .update_main_page_attributes import UpdateMainPageAttributes
+from .to_many_relationship import ToManyRelationship
 
 
-class UpdateMainPagePlacementData(UniversalBaseModel):
+class SlottedPlacementRelationships(UniversalBaseModel):
     """
-    Data for updating a main-page placement
+    Relationship block for a batch-activation or group placement.
     """
 
-    attributes: UpdateMainPageAttributes = pydantic.Field()
+    slots: ToManyRelationship = pydantic.Field()
     """
-    Main-page placement attributes for update
+    Resource identifiers for the slots that make up the placement. Each entry corresponds to a `batchActivationSlot` resource that appears in `included` when the request asks for `slots` (or any deeper path that implies it).
     """
 
     if IS_PYDANTIC_V2:

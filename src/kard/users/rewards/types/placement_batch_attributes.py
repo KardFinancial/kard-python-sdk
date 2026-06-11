@@ -27,7 +27,7 @@ class PlacementBatchAttributes(UniversalBaseModel):
         FieldMetadata(alias="isActive"),
         pydantic.Field(
             alias="isActive",
-            description='Whether the slot is still considered "fresh" for the user. Set to false only when the slot\'s `expiresAt` is in the past AND the slot resolves to a non-empty offer set; an empty offer set keeps the slot active so partner UIs do not promote "tap to refresh" with nothing to show.',
+            description='Whether the slot is still considered "fresh" for the user. Set to false only when the slot\'s `expiresAt` is in the past AND the slot resolves to a non-empty offer set; an empty offer set keeps the slot active so partner UIs do not promote "tap to refresh" with nothing to show. Always true for slots of a group placement, which has no activation cycle.',
         ),
     ]
     last_activated_at: typing_extensions.Annotated[
@@ -48,7 +48,7 @@ class PlacementBatchAttributes(UniversalBaseModel):
     ] = None
     components: typing.Optional[OfferComponents] = pydantic.Field(default=None)
     """
-    Slot-level UI components. Carries `shortDescription` and `longDescription` (activation copy derived from the parent placement's `refreshInterval`), plus either a `cta` (POST to the slot's activate endpoint) when the slot has no active (non-expired) activation, or a `logoFlare` decoration when it does — `cta` and `logoFlare` are mutually exclusive on a single slot.
+    Slot-level UI components. Carries `shortDescription` and `longDescription` (activation copy derived from the parent placement's `refreshInterval`), plus either a `cta` (POST to the slot's activate endpoint) when the slot has no active (non-expired) activation, or a `logoFlare` decoration when it does — `cta` and `logoFlare` are mutually exclusive on a single slot. Omitted for slots of a group placement, which has no activation cycle.
     """
 
     assets: typing.Optional[typing.List[Asset]] = pydantic.Field(default=None)

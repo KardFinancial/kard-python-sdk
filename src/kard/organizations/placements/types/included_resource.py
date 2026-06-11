@@ -10,7 +10,8 @@ from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...content_strategies.types.content_strategy_attributes import ContentStrategyAttributes
 from .batch_activation_slot_attributes import BatchActivationSlotAttributes
 from .batch_activation_slot_relationships import BatchActivationSlotRelationships
-from .main_page_placement_attributes import MainPagePlacementAttributes
+from .email_placement_attributes import EmailPlacementAttributes
+from .placement_attributes import PlacementAttributes
 from .placement_relationships import PlacementRelationships
 from .push_notification_placement_attributes import PushNotificationPlacementAttributes
 
@@ -54,14 +55,14 @@ class IncludedResource_BatchActivationSlot(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
-class IncludedResource_PlacementMainPage(UniversalBaseModel):
+class IncludedResource_Placement(UniversalBaseModel):
     """
     Discriminated union of every resource type that can appear in the `included` array. The shape of each branch matches the corresponding primary-data resource (same attributes and relationships), keyed on the JSON:API `type` discriminant.
     """
 
-    type: typing.Literal["placementMainPage"] = "placementMainPage"
+    type: typing.Literal["placement"] = "placement"
     id: str
-    attributes: MainPagePlacementAttributes
+    attributes: PlacementAttributes
     relationships: typing.Optional[PlacementRelationships] = None
 
     if IS_PYDANTIC_V2:
@@ -94,12 +95,33 @@ class IncludedResource_PlacementPushNotification(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class IncludedResource_PlacementEmail(UniversalBaseModel):
+    """
+    Discriminated union of every resource type that can appear in the `included` array. The shape of each branch matches the corresponding primary-data resource (same attributes and relationships), keyed on the JSON:API `type` discriminant.
+    """
+
+    type: typing.Literal["placementEmail"] = "placementEmail"
+    id: str
+    attributes: EmailPlacementAttributes
+    relationships: typing.Optional[PlacementRelationships] = None
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 IncludedResource = typing_extensions.Annotated[
     typing.Union[
         IncludedResource_ContentStrategy,
         IncludedResource_BatchActivationSlot,
-        IncludedResource_PlacementMainPage,
+        IncludedResource_Placement,
         IncludedResource_PlacementPushNotification,
+        IncludedResource_PlacementEmail,
     ],
     pydantic.Field(discriminator="type"),
 ]

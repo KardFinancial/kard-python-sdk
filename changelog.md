@@ -1,3 +1,15 @@
+## 20.0.0 - 2026-06-11
+### Breaking Changes
+* **`CreateMainPageAttributes`**, **`CreateMainPagePlacementData`**, **`UpdateMainPageAttributes`**, **`UpdateMainPagePlacementData`**, **`MainPagePlacementAttributes`**, and **`MainPagePlacementData`** — removed; migrate to the new `CreateStandardAttributes` / `CreateStandardPlacementData`, `UpdateStandardAttributes` / `UpdateStandardPlacementData`, and `PlacementAttributes` / `PlacementData` equivalents.
+* **`BatchActivationPlacementRelationships`** — removed and replaced by `SlottedPlacementRelationships`; update any direct imports or type annotations.
+* **`CreatePlacementDataUnion_PlacementMainPage`**, **`UpdatePlacementDataUnion_PlacementMainPage`**, **`PlacementFormatUnion_PlacementMainPage`**, and **`IncludedResource_PlacementMainPage`** — removed; use the new `_Placement`, `_PlacementEmail`, or `_PlacementGroup` union variants instead.
+### Added
+* **`CreateStandardAttributes`**, **`CreateStandardPlacementData`**, **`UpdateStandardAttributes`**, and **`UpdateStandardPlacementData`** — new models replacing the removed `MainPage` equivalents for standard placement create and update operations.
+* **`CreateEmailAttributes`**, **`CreateEmailPlacementData`**, **`UpdateEmailAttributes`**, and **`UpdateEmailPlacementData`** — new models for creating and updating email placements with cadence scheduling and slot configuration.
+* **`CreateGroupAttributes`**, **`CreateGroupPlacementData`**, **`GroupPlacementAttributes`**, **`GroupPlacementData`**, **`UpdateGroupAttributes`**, and **`UpdateGroupPlacementData`** — new models for group placements, which expose slot details via `relationships.slots` and accept slot lists on update.
+* **`SlottedPlacementRelationships`** — new relationships model replacing `BatchActivationPlacementRelationships`, used by group placements.
+* **`PlacementTypeFilter`**, **`PlacementFormatUnion`**, **`CreatePlacementDataUnion`**, and **`UpdatePlacementDataUnion`** — extended with `placement`, `placementEmail`, and `placementGroup` variants to support all three placement types.
+
 ## 19.2.0 - 2026-06-10
 ### Added
 * **`PushNotificationPlacementFileAttributes`**, **`PushNotificationPlacementFileData`**, and **`PushNotificationPlacementFileRelationships`** — new models representing a push-notification placement file notification, carrying placement name, available slot count, delivery cadence, and a presigned download URL.
