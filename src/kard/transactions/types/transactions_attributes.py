@@ -173,6 +173,11 @@ class TransactionsAttributes(UniversalBaseModel):
             alias="processorMids", description="Network specific merchant IDs (MIDs) associated with the transaction"
         ),
     ] = None
+    account_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="accountId"),
+        pydantic.Field(alias="accountId", description="An account identifier associated to transaction"),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

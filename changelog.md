@@ -1,3 +1,7 @@
+## 20.1.0 - 2026-06-17
+### Added
+* **`TransactionsAttributes.account_id`** — new optional string field (`accountId`) that carries an account identifier associated with a transaction.
+
 ## 20.0.0 - 2026-06-11
 ### Breaking Changes
 * **`CreateMainPageAttributes`**, **`CreateMainPagePlacementData`**, **`UpdateMainPageAttributes`**, **`UpdateMainPagePlacementData`**, **`MainPagePlacementAttributes`**, and **`MainPagePlacementData`** — removed; migrate to the new `CreateStandardAttributes` / `CreateStandardPlacementData`, `UpdateStandardAttributes` / `UpdateStandardPlacementData`, and `PlacementAttributes` / `PlacementData` equivalents.
