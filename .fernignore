@@ -2,4 +2,4 @@
 .github/workflows/changelog-dispatch.yml
 changelog.md
 src/kard/hem.py
-LICENSE.md
+LICENSE
