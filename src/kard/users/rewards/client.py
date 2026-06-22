@@ -16,6 +16,7 @@ from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
 from .types.offer_sort_options import OfferSortOptions
 from .types.offers_response_object import OffersResponseObject
+from .types.placement_content_response import PlacementContentResponse
 
 
 class RewardsClient:
@@ -263,6 +264,75 @@ class RewardsClient:
             organization_id,
             user_id,
             placement_id,
+            supported_components=supported_components,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def placement_content(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> PlacementContentResponse:
+        """
+        Retrieve the content for a placement. The placement type is resolved
+        server-side so callers no longer pick an endpoint by placement type.
+        Returns a JSON:API document whose `data` resources are self-describing
+        by `type`: a standard placement returns `standardOffer` resources (the
+        same payload as Get Offers By Placement — with `links`, optional
+        `included` categories, and `meta`); a batch-activation or group
+        placement returns `placementBatch` slot resources (the same payload as
+        Get Batches By Placement). Distinguish the two by each resource's
+        `type`. Email and push-notification placements are not servable through
+        this endpoint and respond with a `400`.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`. Only applies to standard placements (those returning `standardOffer` resources).
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        PlacementContentResponse
+
+        Examples
+        --------
+        from kard import KardApi
+
+        client = KardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+        client.users.rewards.placement_content(
+            organization_id="organization-123",
+            user_id="user-123",
+            placement_id="placement-homepage-banner",
+            include="categories",
+        )
+        """
+        _response = self._raw_client.placement_content(
+            organization_id,
+            user_id,
+            placement_id,
+            include=include,
             supported_components=supported_components,
             request_options=request_options,
         )
@@ -650,6 +720,83 @@ class AsyncRewardsClient:
             organization_id,
             user_id,
             placement_id,
+            supported_components=supported_components,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def placement_content(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> PlacementContentResponse:
+        """
+        Retrieve the content for a placement. The placement type is resolved
+        server-side so callers no longer pick an endpoint by placement type.
+        Returns a JSON:API document whose `data` resources are self-describing
+        by `type`: a standard placement returns `standardOffer` resources (the
+        same payload as Get Offers By Placement — with `links`, optional
+        `included` categories, and `meta`); a batch-activation or group
+        placement returns `placementBatch` slot resources (the same payload as
+        Get Batches By Placement). Distinguish the two by each resource's
+        `type`. Email and push-notification placements are not servable through
+        this endpoint and respond with a `400`.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`. Only applies to standard placements (those returning `standardOffer` resources).
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        PlacementContentResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from kard import AsyncKardApi
+
+        client = AsyncKardApi(
+            client_id="YOUR_CLIENT_ID",
+            client_secret="YOUR_CLIENT_SECRET",
+        )
+
+
+        async def main() -> None:
+            await client.users.rewards.placement_content(
+                organization_id="organization-123",
+                user_id="user-123",
+                placement_id="placement-homepage-banner",
+                include="categories",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.placement_content(
+            organization_id,
+            user_id,
+            placement_id,
+            include=include,
             supported_components=supported_components,
             request_options=request_options,
         )

@@ -26,6 +26,7 @@ from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
 from .types.offer_sort_options import OfferSortOptions
 from .types.offers_response_object import OffersResponseObject
+from .types.placement_content_response import PlacementContentResponse
 from pydantic import ValidationError
 
 
@@ -354,6 +355,122 @@ class RawRewardsClient:
                     BatchesResponseObject,
                     parse_obj_as(
                         type_=BatchesResponseObject,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def placement_content(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[PlacementContentResponse]:
+        """
+        Retrieve the content for a placement. The placement type is resolved
+        server-side so callers no longer pick an endpoint by placement type.
+        Returns a JSON:API document whose `data` resources are self-describing
+        by `type`: a standard placement returns `standardOffer` resources (the
+        same payload as Get Offers By Placement — with `links`, optional
+        `included` categories, and `meta`); a batch-activation or group
+        placement returns `placementBatch` slot resources (the same payload as
+        Get Batches By Placement). Distinguish the two by each resource's
+        `type`. Email and push-notification placements are not servable through
+        this endpoint and respond with a `400`.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`. Only applies to standard placements (those returning `standardOffer` resources).
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[PlacementContentResponse]
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/content",
+            method="GET",
+            params={
+                "include": include,
+                "supportedComponents": supported_components,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    PlacementContentResponse,
+                    parse_obj_as(
+                        type_=PlacementContentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -894,6 +1011,122 @@ class AsyncRawRewardsClient:
                     BatchesResponseObject,
                     parse_obj_as(
                         type_=BatchesResponseObject,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 400:
+                raise InvalidRequest(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise DoesNotExistError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def placement_content(
+        self,
+        organization_id: OrganizationId,
+        user_id: UserId,
+        placement_id: str,
+        *,
+        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[PlacementContentResponse]:
+        """
+        Retrieve the content for a placement. The placement type is resolved
+        server-side so callers no longer pick an endpoint by placement type.
+        Returns a JSON:API document whose `data` resources are self-describing
+        by `type`: a standard placement returns `standardOffer` resources (the
+        same payload as Get Offers By Placement — with `links`, optional
+        `included` categories, and `meta`); a batch-activation or group
+        placement returns `placementBatch` slot resources (the same payload as
+        Get Batches By Placement). Distinguish the two by each resource's
+        `type`. Email and push-notification placements are not servable through
+        this endpoint and respond with a `400`.<br/>
+        <b>Required scopes:</b> `rewards:read`
+
+        Parameters
+        ----------
+        organization_id : OrganizationId
+
+        user_id : UserId
+
+        placement_id : str
+
+        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`. Only applies to standard placements (those returning `standardOffer` resources).
+
+        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
+            UI component types to include in the response.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[PlacementContentResponse]
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v2/issuers/{encode_path_param(organization_id)}/users/{encode_path_param(user_id)}/placements/{encode_path_param(placement_id)}/content",
+            method="GET",
+            params={
+                "include": include,
+                "supportedComponents": supported_components,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    PlacementContentResponse,
+                    parse_obj_as(
+                        type_=PlacementContentResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

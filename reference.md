@@ -3937,6 +3937,127 @@ client.users.rewards.placement_batches(
 </dl>
 </details>
 
+<details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">placement_content</a>(...) -> PlacementContentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the content for a placement. The placement type is resolved
+server-side so callers no longer pick an endpoint by placement type.
+Returns a JSON:API document whose `data` resources are self-describing
+by `type`: a standard placement returns `standardOffer` resources (the
+same payload as Get Offers By Placement — with `links`, optional
+`included` categories, and `meta`); a batch-activation or group
+placement returns `placementBatch` slot resources (the same payload as
+Get Batches By Placement). Distinguish the two by each resource's
+`type`. Email and push-notification placements are not servable through
+this endpoint and respond with a `400`.<br/>
+<b>Required scopes:</b> `rewards:read`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from kard import KardApi
+from kard.environment import KardApiEnvironment
+
+client = KardApi(
+    client_id="<clientId>",
+    client_secret="<clientSecret>",
+    environment=KardApiEnvironment.PRODUCTION,
+)
+
+client.users.rewards.placement_content(
+    organization_id="organization-123",
+    user_id="user-123",
+    placement_id="placement-homepage-banner",
+    include=[
+        "categories"
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `OrganizationId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `UserId` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**placement_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`. Only applies to standard placements (those returning `standardOffer` resources).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supported_components:** `typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]` — UI component types to include in the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.users.rewards.<a href="src/kard/users/rewards/client.py">locations</a>(...) -> LocationsResponseObject</code></summary>
 <dl>
 <dd>

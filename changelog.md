@@ -1,3 +1,9 @@
+## 20.2.0 - 2026-06-22
+### Added
+* **`RewardsClient.placement_content()`** and **`AsyncRewardsClient.placement_content()`** — new method that retrieves content for any placement type via a single unified endpoint (`GET v2/issuers/{org}/users/{user}/placements/{id}/content`), with the server resolving whether to return `standardOffer` or `placementBatch` resources.
+* **`PlacementContentResponse`** — new Pydantic model representing the JSON:API response document, carrying a `data` list, optional `links`, optional `included` categories, and optional `meta`.
+* **`PlacementContentData`** — new type alias (`Union[OfferDataUnion, PlacementBatchData]`) describing the polymorphic per-resource payload returned by the placement content endpoint.
+
 ## 20.1.0 - 2026-06-17
 ### Added
 * **`TransactionsAttributes.account_id`** — new optional string field (`accountId`) that carries an account identifier associated with a transaction.
