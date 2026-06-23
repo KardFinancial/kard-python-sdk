@@ -10,7 +10,6 @@ from ...commons.types.user_id import UserId
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
 from .raw_client import AsyncRawRewardsClient, RawRewardsClient
-from .types.batches_response_object import BatchesResponseObject
 from .types.component_type import ComponentType
 from .types.location_sort_options import LocationSortOptions
 from .types.locations_response_object import LocationsResponseObject
@@ -127,148 +126,6 @@ class RewardsClient:
         )
         return _response.data
 
-    def placement_offers(
-        self,
-        organization_id: OrganizationId,
-        user_id: UserId,
-        placement_id: str,
-        *,
-        filter_search: typing.Optional[str] = None,
-        filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
-        filter_category: typing.Optional[CategoryOption] = None,
-        filter_is_targeted: typing.Optional[bool] = None,
-        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> OffersResponseObject:
-        """
-        Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
-        limited by the placement's available slots.<br/>
-        <b>Required scopes:</b> `rewards:read`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        user_id : UserId
-
-        placement_id : str
-
-        filter_search : typing.Optional[str]
-            Case-insensitive search string to filter offers by merchant name
-
-        filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
-
-        filter_category : typing.Optional[CategoryOption]
-
-        filter_is_targeted : typing.Optional[bool]
-
-        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
-            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
-
-        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
-            UI component types to include in the response.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        OffersResponseObject
-
-        Examples
-        --------
-        from kard import KardApi
-
-        client = KardApi(
-            client_id="YOUR_CLIENT_ID",
-            client_secret="YOUR_CLIENT_SECRET",
-        )
-        client.users.rewards.placement_offers(
-            organization_id="organizationId",
-            user_id="userId",
-            placement_id="placementId",
-        )
-        """
-        _response = self._raw_client.placement_offers(
-            organization_id,
-            user_id,
-            placement_id,
-            filter_search=filter_search,
-            filter_purchase_channel=filter_purchase_channel,
-            filter_category=filter_category,
-            filter_is_targeted=filter_is_targeted,
-            include=include,
-            supported_components=supported_components,
-            request_options=request_options,
-        )
-        return _response.data
-
-    def placement_batches(
-        self,
-        organization_id: OrganizationId,
-        user_id: UserId,
-        placement_id: str,
-        *,
-        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> BatchesResponseObject:
-        """
-        Retrieve batches for a batch-activation or group placement. Returns each
-        slot in slot order with its current offer set, alias, and freshness fields
-        (`isActive`, `lastActivatedAt`, `expiresAt`). Applies the same per-user
-        eligibility and per-slot content-strategy filter as Get Offers By
-        Placement, independently per slot. For a batch-activation placement, a
-        slot only flips to `isActive: false` when its refresh interval has elapsed
-        AND its post-eligibility `offers[]` is non-empty; otherwise the slot is
-        still returned and stays active so the partner UI does not promote
-        "refresh" with nothing to show. For a group placement, slots are always
-        active and each slot returns its offers regardless of activation state,
-        hiding only offers that require activation (`requiredInBatch`) and have
-        no activation record.<br/>
-        <b>Required scopes:</b> `rewards:read`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        user_id : UserId
-
-        placement_id : str
-
-        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
-            UI component types to include in the response.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        BatchesResponseObject
-
-        Examples
-        --------
-        from kard import KardApi
-
-        client = KardApi(
-            client_id="YOUR_CLIENT_ID",
-            client_secret="YOUR_CLIENT_SECRET",
-        )
-        client.users.rewards.placement_batches(
-            organization_id="organizationId",
-            user_id="userId",
-            placement_id="placementId",
-        )
-        """
-        _response = self._raw_client.placement_batches(
-            organization_id,
-            user_id,
-            placement_id,
-            supported_components=supported_components,
-            request_options=request_options,
-        )
-        return _response.data
-
     def placement_content(
         self,
         organization_id: OrganizationId,
@@ -283,13 +140,12 @@ class RewardsClient:
         Retrieve the content for a placement. The placement type is resolved
         server-side so callers no longer pick an endpoint by placement type.
         Returns a JSON:API document whose `data` resources are self-describing
-        by `type`: a standard placement returns `standardOffer` resources (the
-        same payload as Get Offers By Placement — with `links`, optional
-        `included` categories, and `meta`); a batch-activation or group
-        placement returns `placementBatch` slot resources (the same payload as
-        Get Batches By Placement). Distinguish the two by each resource's
-        `type`. Email and push-notification placements are not servable through
-        this endpoint and respond with a `400`.<br/>
+        by `type`: a standard placement returns `standardOffer` resources (with
+        `links`, optional `included` categories, and `meta`); a batch-activation
+        or group placement returns `placementBatch` slot resources. Distinguish
+        the two by each resource's `type`. Email and push-notification
+        placements are not servable through this endpoint and respond with a
+        `400`.<br/>
         <b>Required scopes:</b> `rewards:read`
 
         Parameters
@@ -567,164 +423,6 @@ class AsyncRewardsClient:
         )
         return _response.data
 
-    async def placement_offers(
-        self,
-        organization_id: OrganizationId,
-        user_id: UserId,
-        placement_id: str,
-        *,
-        filter_search: typing.Optional[str] = None,
-        filter_purchase_channel: typing.Optional[typing.Sequence[PurchaseChannel]] = None,
-        filter_category: typing.Optional[CategoryOption] = None,
-        filter_is_targeted: typing.Optional[bool] = None,
-        include: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
-        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> OffersResponseObject:
-        """
-        Retrieve offers for a placement slot. Returns offers sorted by highest cash back,
-        limited by the placement's available slots.<br/>
-        <b>Required scopes:</b> `rewards:read`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        user_id : UserId
-
-        placement_id : str
-
-        filter_search : typing.Optional[str]
-            Case-insensitive search string to filter offers by merchant name
-
-        filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
-
-        filter_category : typing.Optional[CategoryOption]
-
-        filter_is_targeted : typing.Optional[bool]
-
-        include : typing.Optional[typing.Union[str, typing.Sequence[str]]]
-            CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
-
-        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
-            UI component types to include in the response.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        OffersResponseObject
-
-        Examples
-        --------
-        import asyncio
-
-        from kard import AsyncKardApi
-
-        client = AsyncKardApi(
-            client_id="YOUR_CLIENT_ID",
-            client_secret="YOUR_CLIENT_SECRET",
-        )
-
-
-        async def main() -> None:
-            await client.users.rewards.placement_offers(
-                organization_id="organizationId",
-                user_id="userId",
-                placement_id="placementId",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.placement_offers(
-            organization_id,
-            user_id,
-            placement_id,
-            filter_search=filter_search,
-            filter_purchase_channel=filter_purchase_channel,
-            filter_category=filter_category,
-            filter_is_targeted=filter_is_targeted,
-            include=include,
-            supported_components=supported_components,
-            request_options=request_options,
-        )
-        return _response.data
-
-    async def placement_batches(
-        self,
-        organization_id: OrganizationId,
-        user_id: UserId,
-        placement_id: str,
-        *,
-        supported_components: typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> BatchesResponseObject:
-        """
-        Retrieve batches for a batch-activation or group placement. Returns each
-        slot in slot order with its current offer set, alias, and freshness fields
-        (`isActive`, `lastActivatedAt`, `expiresAt`). Applies the same per-user
-        eligibility and per-slot content-strategy filter as Get Offers By
-        Placement, independently per slot. For a batch-activation placement, a
-        slot only flips to `isActive: false` when its refresh interval has elapsed
-        AND its post-eligibility `offers[]` is non-empty; otherwise the slot is
-        still returned and stays active so the partner UI does not promote
-        "refresh" with nothing to show. For a group placement, slots are always
-        active and each slot returns its offers regardless of activation state,
-        hiding only offers that require activation (`requiredInBatch`) and have
-        no activation record.<br/>
-        <b>Required scopes:</b> `rewards:read`
-
-        Parameters
-        ----------
-        organization_id : OrganizationId
-
-        user_id : UserId
-
-        placement_id : str
-
-        supported_components : typing.Optional[typing.Union[ComponentType, typing.Sequence[ComponentType]]]
-            UI component types to include in the response.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        BatchesResponseObject
-
-        Examples
-        --------
-        import asyncio
-
-        from kard import AsyncKardApi
-
-        client = AsyncKardApi(
-            client_id="YOUR_CLIENT_ID",
-            client_secret="YOUR_CLIENT_SECRET",
-        )
-
-
-        async def main() -> None:
-            await client.users.rewards.placement_batches(
-                organization_id="organizationId",
-                user_id="userId",
-                placement_id="placementId",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.placement_batches(
-            organization_id,
-            user_id,
-            placement_id,
-            supported_components=supported_components,
-            request_options=request_options,
-        )
-        return _response.data
-
     async def placement_content(
         self,
         organization_id: OrganizationId,
@@ -739,13 +437,12 @@ class AsyncRewardsClient:
         Retrieve the content for a placement. The placement type is resolved
         server-side so callers no longer pick an endpoint by placement type.
         Returns a JSON:API document whose `data` resources are self-describing
-        by `type`: a standard placement returns `standardOffer` resources (the
-        same payload as Get Offers By Placement — with `links`, optional
-        `included` categories, and `meta`); a batch-activation or group
-        placement returns `placementBatch` slot resources (the same payload as
-        Get Batches By Placement). Distinguish the two by each resource's
-        `type`. Email and push-notification placements are not servable through
-        this endpoint and respond with a `400`.<br/>
+        by `type`: a standard placement returns `standardOffer` resources (with
+        `links`, optional `included` categories, and `meta`); a batch-activation
+        or group placement returns `placementBatch` slot resources. Distinguish
+        the two by each resource's `type`. Email and push-notification
+        placements are not servable through this endpoint and respond with a
+        `400`.<br/>
         <b>Required scopes:</b> `rewards:read`
 
         Parameters

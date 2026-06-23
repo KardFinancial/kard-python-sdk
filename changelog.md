@@ -1,3 +1,7 @@
+## 20.2.1 - 2026-06-23
+* SDK regeneration
+* Unable to analyze changes with AI, incrementing PATCH version.
+
 ## 20.2.0 - 2026-06-22
 ### Added
 * **`RewardsClient.placement_content()`** and **`AsyncRewardsClient.placement_content()`** — new method that retrieves content for any placement type via a single unified endpoint (`GET v2/issuers/{org}/users/{user}/placements/{id}/content`), with the server resolving whether to return `standardOffer` or `placementBatch` resources.

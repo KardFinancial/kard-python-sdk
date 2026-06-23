@@ -2,29 +2,7 @@
 
 import typing
 
-import pydantic
-from ....commons.types.links import Links
-from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .eligibility_offer_included import EligibilityOfferIncluded
-from .offers_meta import OffersMeta
-from .placement_content_data import PlacementContentData
+from .batches_response_object import BatchesResponseObject
+from .offers_response_object import OffersResponseObject
 
-
-class PlacementContentResponse(UniversalBaseModel):
-    """
-    Combined placement-content response, shaped as a JSON:API document. The placement is resolved server-side: a standard placement yields `standardOffer` resources (with `links`, optional `included` categories, and `meta`), while a batch-activation or group placement yields `placementBatch` slot resources. Callers distinguish the two by each resource's `type` rather than a separate discriminator, and the payload mirrors Get Offers By Placement / Get Batches By Placement exactly.
-    """
-
-    data: typing.List[PlacementContentData]
-    links: typing.Optional[Links] = None
-    included: typing.Optional[typing.List[EligibilityOfferIncluded]] = None
-    meta: typing.Optional[OffersMeta] = None
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
+PlacementContentResponse = typing.Union[OffersResponseObject, BatchesResponseObject]

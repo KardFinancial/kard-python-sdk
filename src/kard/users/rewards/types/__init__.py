@@ -49,7 +49,6 @@ if typing.TYPE_CHECKING:
     from .operation_time import OperationTime
     from .placement_batch_attributes import PlacementBatchAttributes
     from .placement_batch_data import PlacementBatchData
-    from .placement_content_data import PlacementContentData
     from .placement_content_response import PlacementContentResponse
     from .progress_bar import ProgressBar
     from .progress_bar_label_pair import ProgressBarLabelPair
@@ -108,7 +107,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OperationTime": ".operation_time",
     "PlacementBatchAttributes": ".placement_batch_attributes",
     "PlacementBatchData": ".placement_batch_data",
-    "PlacementContentData": ".placement_content_data",
     "PlacementContentResponse": ".placement_content_response",
     "ProgressBar": ".progress_bar",
     "ProgressBarLabelPair": ".progress_bar_label_pair",
@@ -191,7 +189,6 @@ __all__ = [
     "OperationTime",
     "PlacementBatchAttributes",
     "PlacementBatchData",
-    "PlacementContentData",
     "PlacementContentResponse",
     "ProgressBar",
     "ProgressBarLabelPair",
