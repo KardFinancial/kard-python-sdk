@@ -1,3 +1,9 @@
+## 20.3.0 - 2026-06-23
+### Added
+* **`BatchesMeta`** — new Pydantic model representing metadata about a placement, with an optional `placement_name` field containing the display name resolved server-side.
+* **`BatchesResponseObject.meta`** — new optional field of type `BatchesMeta` carrying placement metadata.
+* **`OffersMeta.placement_name`** — new optional string field populated only on the Get Placement Content endpoint.
+
 ## 20.2.1 - 2026-06-23
 * SDK regeneration
 * Unable to analyze changes with AI, incrementing PATCH version.

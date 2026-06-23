@@ -3,18 +3,23 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .batches_meta import BatchesMeta
-from .placement_batch_data import PlacementBatchData
+from ....core.serialization import FieldMetadata
 
 
-class BatchesResponseObject(UniversalBaseModel):
+class BatchesMeta(UniversalBaseModel):
     """
-    Ordered list of slots for a batch-activation or group placement, with freshness fields and per-slot offer sets.
+    Metadata about the placement.
     """
 
-    data: typing.List[PlacementBatchData]
-    meta: typing.Optional[BatchesMeta] = None
+    placement_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="placementName"),
+        pydantic.Field(
+            alias="placementName", description="Display name of the placement, resolved server-side from its id."
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

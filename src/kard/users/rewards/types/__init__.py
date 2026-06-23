@@ -9,6 +9,7 @@ if typing.TYPE_CHECKING:
     from .amount import Amount
     from .amount_type import AmountType
     from .asset import Asset
+    from .batches_meta import BatchesMeta
     from .batches_response_object import BatchesResponseObject
     from .button_style import ButtonStyle
     from .category_data import CategoryData
@@ -66,6 +67,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Amount": ".amount",
     "AmountType": ".amount_type",
     "Asset": ".asset",
+    "BatchesMeta": ".batches_meta",
     "BatchesResponseObject": ".batches_response_object",
     "ButtonStyle": ".button_style",
     "CategoryData": ".category_data",
@@ -148,6 +150,7 @@ __all__ = [
     "Amount",
     "AmountType",
     "Asset",
+    "BatchesMeta",
     "BatchesResponseObject",
     "ButtonStyle",
     "CategoryData",

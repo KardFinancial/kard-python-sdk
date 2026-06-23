@@ -22,6 +22,14 @@ class OffersMeta(UniversalBaseModel):
             description="All distinct categories available across the entire filtered result set, not just the current page",
         ),
     ] = None
+    placement_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="placementName"),
+        pydantic.Field(
+            alias="placementName",
+            description="Display name of the placement, resolved server-side from its id. Populated only on the Get Placement Content endpoint; absent on the Get Offers By User endpoint.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
