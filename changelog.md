@@ -1,3 +1,7 @@
+## 20.4.0 - 2026-06-29
+### Added
+* **`OfferMedium`** — new `"PUSH"` literal value added to the union, representing a push-notification offer delivery channel.
+
 ## 20.3.0 - 2026-06-23
 ### Added
 * **`BatchesMeta`** — new Pydantic model representing metadata about a placement, with an optional `placement_name` field containing the display name resolved server-side.

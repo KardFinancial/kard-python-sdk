@@ -2,4 +2,4 @@
 
 import typing
 
-OfferMedium = typing.Union[typing.Literal["BROWSE", "EMAIL", "MAP", "SEARCH", "CTA"], typing.Any]
+OfferMedium = typing.Union[typing.Literal["BROWSE", "EMAIL", "MAP", "SEARCH", "CTA", "PUSH"], typing.Any]
