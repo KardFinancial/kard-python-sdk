@@ -57,6 +57,7 @@ if typing.TYPE_CHECKING:
     from .progress_bar_segment import ProgressBarSegment
     from .progress_bar_segment_label import ProgressBarSegmentLabel
     from .progress_bar_segment_position import ProgressBarSegmentPosition
+    from .progress_bar_segment_progress import ProgressBarSegmentProgress
     from .progress_bar_segment_selection import ProgressBarSegmentSelection
     from .progress_bar_segment_separator import ProgressBarSegmentSeparator
     from .progress_bar_segments import ProgressBarSegments
@@ -116,6 +117,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProgressBarSegment": ".progress_bar_segment",
     "ProgressBarSegmentLabel": ".progress_bar_segment_label",
     "ProgressBarSegmentPosition": ".progress_bar_segment_position",
+    "ProgressBarSegmentProgress": ".progress_bar_segment_progress",
     "ProgressBarSegmentSelection": ".progress_bar_segment_selection",
     "ProgressBarSegmentSeparator": ".progress_bar_segment_separator",
     "ProgressBarSegments": ".progress_bar_segments",
@@ -199,6 +201,7 @@ __all__ = [
     "ProgressBarSegment",
     "ProgressBarSegmentLabel",
     "ProgressBarSegmentPosition",
+    "ProgressBarSegmentProgress",
     "ProgressBarSegmentSelection",
     "ProgressBarSegmentSeparator",
     "ProgressBarSegments",

@@ -1,3 +1,8 @@
+## 20.5.0 - 2026-07-02
+### Added
+* **`ProgressBarSegmentProgress`** — new Pydantic model representing the fill state of a single progress bar segment node, with `completed` and `total` integer fields indicating units completed within and required for the current segment.
+* **`ProgressBarSegments.progress`** — new field of type `List[ProgressBarSegmentProgress]` providing per-segment fill state, index-aligned with segment nodes; reached nodes report 1 of 1, unreached nodes 0 of 1, and in-progress punch-card nodes report qualifying-purchase progress toward the next reward.
+
 ## 20.4.1 - 2026-07-02
 * chore: update filter_search docstring and version placeholder
 * Clarify the behavior of the `filter_search` parameter across rewards

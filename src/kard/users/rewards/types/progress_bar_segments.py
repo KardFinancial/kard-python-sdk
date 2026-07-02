@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .progress_bar_segment import ProgressBarSegment
+from .progress_bar_segment_progress import ProgressBarSegmentProgress
 
 
 class ProgressBarSegments(UniversalBaseModel):
@@ -20,6 +21,11 @@ class ProgressBarSegments(UniversalBaseModel):
     default: ProgressBarSegment = pydantic.Field()
     """
     Segment configuration for the default view
+    """
+
+    progress: typing.List[ProgressBarSegmentProgress] = pydantic.Field()
+    """
+    Per-segment fill state: one entry per segment node, index-aligned with the nodes (length equals the progress bar total). Reached nodes report 1 of 1 and not-yet-reached nodes 0 of 1; for a punch-card offer the in-progress node reports qualifying-purchase progress toward the next reward (Q mod N of N).
     """
 
     if IS_PYDANTIC_V2:
