@@ -1,3 +1,14 @@
+## 20.4.1 - 2026-07-02
+* chore: update filter_search docstring and version placeholder
+* Clarify the behavior of the `filter_search` parameter across rewards
+* clients and update the User-Agent version string to the Fern placeholder.
+* Key changes:
+* Updated `filter_search` docstring from "filter offers by merchant name"
+* to "Case-insensitive substring search. Returns offers whose offer name
+* or category name contains the search string." in all rewards clients
+* Updated User-Agent header version string to the Fern SDK placeholder
+* 🌿 Generated with Fern
+
 ## 20.4.0 - 2026-06-29
 ### Added
 * **`OfferMedium`** — new `"PUSH"` literal value added to the union, representing a push-notification offer delivery channel.

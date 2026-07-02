@@ -69,7 +69,7 @@ class RewardsClient:
         page_before : typing.Optional[str]
 
         filter_search : typing.Optional[str]
-            Case-insensitive search string to filter offers by merchant name
+            Case-insensitive substring search. Returns offers whose offer name or category name contains the search string.
 
         filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
 
@@ -358,7 +358,7 @@ class AsyncRewardsClient:
         page_before : typing.Optional[str]
 
         filter_search : typing.Optional[str]
-            Case-insensitive search string to filter offers by merchant name
+            Case-insensitive substring search. Returns offers whose offer name or category name contains the search string.
 
         filter_purchase_channel : typing.Optional[typing.Sequence[PurchaseChannel]]
 
