@@ -1,3 +1,7 @@
+## 20.6.0 - 2026-07-10
+### Added
+* **`ContentStrategySort`** — new `"OFFERS_NEAR_YOU"` literal value added to the union, representing a sort order that surfaces offers near the user's location.
+
 ## 20.5.0 - 2026-07-02
 ### Added
 * **`ProgressBarSegmentProgress`** — new Pydantic model representing the fill state of a single progress bar segment node, with `completed` and `total` integer fields indicating units completed within and required for the current segment.

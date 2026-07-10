@@ -3,5 +3,5 @@
 import typing
 
 ContentStrategySort = typing.Union[
-    typing.Literal["NEWLY_LIVE", "EXPIRING_SOON", "HIGHEST_CASHBACK", "PERSONALIZED"], typing.Any
+    typing.Literal["NEWLY_LIVE", "EXPIRING_SOON", "HIGHEST_CASHBACK", "PERSONALIZED", "OFFERS_NEAR_YOU"], typing.Any
 ]
