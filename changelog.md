@@ -1,3 +1,12 @@
+## 20.8.0 - 2026-07-15
+### Added
+* **`EarnedRewardNotificationAttributes`** — new Pydantic model extending `RewardNotificationAttributes` with optional `category_name` (offer category string), `user_reward` (`UserReward`), `assets` (list of `MerchantAsset`), and `purchase_channel` (list of `PurchaseChannel`) fields, providing richer detail on earned-reward notifications.
+* **`UserReward`** — new Pydantic model representing the commission type (`type: CommissionType`) and numeric value (`value: float`) of a user's reward, used within `EarnedRewardNotificationAttributes`.
+### Changed
+* **`EarnedRewardApprovedData.attributes`** — type widened from `RewardNotificationAttributes` to `EarnedRewardNotificationAttributes`, exposing the new offer-detail fields on approved-reward payloads.
+* **`NotificationDataUnion_EarnedRewardApproved.attributes`** — type widened from `RewardNotificationAttributes` to `EarnedRewardNotificationAttributes` for consistency with `EarnedRewardApprovedData`.
+* **`EarnedRewardSettledAttributes`** — base class changed from `RewardNotificationAttributes` to `EarnedRewardNotificationAttributes`, inheriting the new offer-detail fields.
+
 ## 20.7.0 - 2026-07-15
 ### Added
 * **`EarnedRewardRejectedAttributes`** — new Pydantic model representing the attributes of an `earnedRewardRejected` notification, including `reason`, `message`, `transaction_id`, `transaction_amount_in_cents`, and optional `transaction_timestamp` fields.

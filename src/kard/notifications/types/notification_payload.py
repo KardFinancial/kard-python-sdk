@@ -21,7 +21,9 @@ class NotificationPayload(UniversalBaseModel):
         EarnedRewardSettledAttributes,
         NotificationDataUnion_EarnedRewardSettled,
         NotificationPayload,
+        UserReward,
     )
+    from kard.transactions import MerchantAsset
 
     NotificationPayload(
         data=NotificationDataUnion_EarnedRewardSettled(
@@ -41,6 +43,18 @@ class NotificationPayload(UniversalBaseModel):
                 ),
                 transaction_id="019df940-babd-7cd3-acfc-a96de16643e9",
                 transaction_amount_in_cents=3000,
+                category_name="Food & Dining",
+                user_reward=UserReward(
+                    type="PERCENT",
+                    value=5.7,
+                ),
+                assets=[
+                    MerchantAsset(
+                        type="IMG_VIEW",
+                        url="https://cdn.getkard.com/merchants/mcdonalds.png",
+                    )
+                ],
+                purchase_channel=["ONLINE", "INSTORE"],
             ),
             relationships=EarnedRewardRelationships(
                 user=RelationshipSingle(

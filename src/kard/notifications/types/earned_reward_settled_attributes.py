@@ -7,10 +7,10 @@ import typing_extensions
 from ...commons.types.commission_value import CommissionValue
 from ...core.pydantic_utilities import IS_PYDANTIC_V2
 from ...core.serialization import FieldMetadata
-from .reward_notification_attributes import RewardNotificationAttributes
+from .earned_reward_notification_attributes import EarnedRewardNotificationAttributes
 
 
-class EarnedRewardSettledAttributes(RewardNotificationAttributes):
+class EarnedRewardSettledAttributes(EarnedRewardNotificationAttributes):
     commission_earned: typing_extensions.Annotated[
         CommissionValue, FieldMetadata(alias="commissionEarned"), pydantic.Field(alias="commissionEarned")
     ]

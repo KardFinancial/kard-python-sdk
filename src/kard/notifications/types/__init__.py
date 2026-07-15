@@ -11,6 +11,7 @@ if typing.TYPE_CHECKING:
     from .audit_update_relationships import AuditUpdateRelationships
     from .clawback_data import ClawbackData
     from .earned_reward_approved_data import EarnedRewardApprovedData
+    from .earned_reward_notification_attributes import EarnedRewardNotificationAttributes
     from .earned_reward_rejected_attributes import EarnedRewardRejectedAttributes
     from .earned_reward_rejected_data import EarnedRewardRejectedData
     from .earned_reward_relationships import EarnedRewardRelationships
@@ -44,6 +45,7 @@ if typing.TYPE_CHECKING:
     from .rejected_transaction_relationships import RejectedTransactionRelationships
     from .reward_notification_attributes import RewardNotificationAttributes
     from .transaction_relationships import TransactionRelationships
+    from .user_reward import UserReward
     from .valid_transaction_attributes import ValidTransactionAttributes
     from .valid_transaction_commission_earned import ValidTransactionCommissionEarned
     from .valid_transaction_data import ValidTransactionData
@@ -53,6 +55,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AuditUpdateRelationships": ".audit_update_relationships",
     "ClawbackData": ".clawback_data",
     "EarnedRewardApprovedData": ".earned_reward_approved_data",
+    "EarnedRewardNotificationAttributes": ".earned_reward_notification_attributes",
     "EarnedRewardRejectedAttributes": ".earned_reward_rejected_attributes",
     "EarnedRewardRejectedData": ".earned_reward_rejected_data",
     "EarnedRewardRelationships": ".earned_reward_relationships",
@@ -84,6 +87,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RejectedTransactionRelationships": ".rejected_transaction_relationships",
     "RewardNotificationAttributes": ".reward_notification_attributes",
     "TransactionRelationships": ".transaction_relationships",
+    "UserReward": ".user_reward",
     "ValidTransactionAttributes": ".valid_transaction_attributes",
     "ValidTransactionCommissionEarned": ".valid_transaction_commission_earned",
     "ValidTransactionData": ".valid_transaction_data",
@@ -117,6 +121,7 @@ __all__ = [
     "AuditUpdateRelationships",
     "ClawbackData",
     "EarnedRewardApprovedData",
+    "EarnedRewardNotificationAttributes",
     "EarnedRewardRejectedAttributes",
     "EarnedRewardRejectedData",
     "EarnedRewardRelationships",
@@ -148,6 +153,7 @@ __all__ = [
     "RejectedTransactionRelationships",
     "RewardNotificationAttributes",
     "TransactionRelationships",
+    "UserReward",
     "ValidTransactionAttributes",
     "ValidTransactionCommissionEarned",
     "ValidTransactionData",
