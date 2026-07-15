@@ -10,6 +10,7 @@ from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...files.types.file_metadata_attribute import FileMetadataAttribute
 from .audit_update_attributes import AuditUpdateAttributes
 from .audit_update_relationships import AuditUpdateRelationships
+from .earned_reward_rejected_attributes import EarnedRewardRejectedAttributes
 from .earned_reward_relationships import EarnedRewardRelationships
 from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
 from .email_notification_placement_file_attributes import EmailNotificationPlacementFileAttributes
@@ -18,6 +19,7 @@ from .failed_transaction_attributes import FailedTransactionAttributes
 from .failed_transaction_relationships import FailedTransactionRelationships
 from .push_notification_placement_file_attributes import PushNotificationPlacementFileAttributes
 from .push_notification_placement_file_relationships import PushNotificationPlacementFileRelationships
+from .rejected_transaction_relationships import RejectedTransactionRelationships
 from .reward_notification_attributes import RewardNotificationAttributes
 from .transaction_relationships import TransactionRelationships
 from .valid_transaction_attributes import ValidTransactionAttributes
@@ -44,6 +46,22 @@ class NotificationDataUnion_EarnedRewardSettled(UniversalBaseModel):
     id: str
     attributes: EarnedRewardSettledAttributes
     relationships: EarnedRewardRelationships
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
+class NotificationDataUnion_EarnedRewardRejected(UniversalBaseModel):
+    type: typing.Literal["earnedRewardRejected"] = "earnedRewardRejected"
+    id: str
+    attributes: EarnedRewardRejectedAttributes
+    relationships: RejectedTransactionRelationships
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -170,6 +188,7 @@ NotificationDataUnion = typing_extensions.Annotated[
     typing.Union[
         NotificationDataUnion_EarnedRewardApproved,
         NotificationDataUnion_EarnedRewardSettled,
+        NotificationDataUnion_EarnedRewardRejected,
         NotificationDataUnion_ValidTransaction,
         NotificationDataUnion_FailedTransaction,
         NotificationDataUnion_Clawback,

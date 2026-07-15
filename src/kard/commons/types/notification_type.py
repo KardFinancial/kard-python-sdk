@@ -6,6 +6,7 @@ NotificationType = typing.Union[
     typing.Literal[
         "earnedRewardApproved",
         "earnedRewardSettled",
+        "earnedRewardRejected",
         "validTransaction",
         "failedTransaction",
         "clawback",

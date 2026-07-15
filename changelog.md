@@ -1,3 +1,11 @@
+## 20.7.0 - 2026-07-15
+### Added
+* **`EarnedRewardRejectedAttributes`** — new Pydantic model representing the attributes of an `earnedRewardRejected` notification, including `reason`, `message`, `transaction_id`, `transaction_amount_in_cents`, and optional `transaction_timestamp` fields.
+* **`EarnedRewardRejectedData`** — new Pydantic model wrapping the full data payload for an `earnedRewardRejected` notification, combining `EarnedRewardRejectedAttributes` with `RejectedTransactionRelationships`.
+* **`RejectedTransactionRelationships`** — new Pydantic model holding `user` and `transaction` relationship references for a rejected transaction notification.
+* **`NotificationDataUnion_EarnedRewardRejected`** — new variant added to the `NotificationDataUnion` discriminated union, enabling deserialization of `earnedRewardRejected` notification payloads.
+* **`NotificationType`** — new `"earnedRewardRejected"` literal value added to the union, representing the notification event fired when a transaction does not result in a reward.
+
 ## 20.6.0 - 2026-07-10
 ### Added
 * **`ContentStrategySort`** — new `"OFFERS_NEAR_YOU"` literal value added to the union, representing a sort order that surfaces offers near the user's location.
