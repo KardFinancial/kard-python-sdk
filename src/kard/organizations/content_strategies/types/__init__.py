@@ -7,23 +7,27 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .content_strategy_attributes import ContentStrategyAttributes
+    from .content_strategy_filters import ContentStrategyFilters
     from .content_strategy_list_response import ContentStrategyListResponse
     from .content_strategy_response import ContentStrategyResponse
     from .content_strategy_sort import ContentStrategySort
     from .create_content_strategy_attributes import CreateContentStrategyAttributes
     from .create_content_strategy_request_body import CreateContentStrategyRequestBody
     from .create_content_strategy_request_data import CreateContentStrategyRequestData
+    from .offer_features import OfferFeatures
     from .update_content_strategy_attributes import UpdateContentStrategyAttributes
     from .update_content_strategy_request_body import UpdateContentStrategyRequestBody
     from .update_content_strategy_request_data import UpdateContentStrategyRequestData
 _dynamic_imports: typing.Dict[str, str] = {
     "ContentStrategyAttributes": ".content_strategy_attributes",
+    "ContentStrategyFilters": ".content_strategy_filters",
     "ContentStrategyListResponse": ".content_strategy_list_response",
     "ContentStrategyResponse": ".content_strategy_response",
     "ContentStrategySort": ".content_strategy_sort",
     "CreateContentStrategyAttributes": ".create_content_strategy_attributes",
     "CreateContentStrategyRequestBody": ".create_content_strategy_request_body",
     "CreateContentStrategyRequestData": ".create_content_strategy_request_data",
+    "OfferFeatures": ".offer_features",
     "UpdateContentStrategyAttributes": ".update_content_strategy_attributes",
     "UpdateContentStrategyRequestBody": ".update_content_strategy_request_body",
     "UpdateContentStrategyRequestData": ".update_content_strategy_request_data",
@@ -53,12 +57,14 @@ def __dir__():
 
 __all__ = [
     "ContentStrategyAttributes",
+    "ContentStrategyFilters",
     "ContentStrategyListResponse",
     "ContentStrategyResponse",
     "ContentStrategySort",
     "CreateContentStrategyAttributes",
     "CreateContentStrategyRequestBody",
     "CreateContentStrategyRequestData",
+    "OfferFeatures",
     "UpdateContentStrategyAttributes",
     "UpdateContentStrategyRequestBody",
     "UpdateContentStrategyRequestData",

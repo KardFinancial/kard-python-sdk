@@ -7,6 +7,7 @@ import typing_extensions
 from ....commons.types.category_option import CategoryOption
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
+from .content_strategy_filters import ContentStrategyFilters
 from .content_strategy_sort import ContentStrategySort
 
 
@@ -28,6 +29,11 @@ class ContentStrategyAttributes(UniversalBaseModel):
     sort: typing.Optional[ContentStrategySort] = pydantic.Field(default=None)
     """
     Sort applied when selecting offers for the strategy
+    """
+
+    filters: ContentStrategyFilters = pydantic.Field()
+    """
+    Filters applied when selecting offers for the strategy
     """
 
     categories: typing.List[CategoryOption] = pydantic.Field()

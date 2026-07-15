@@ -60,6 +60,7 @@ class ContentStrategiesClient:
         --------
         from kard import KardApi
         from kard.organizations.content_strategies import (
+            ContentStrategyFilters,
             CreateContentStrategyAttributes,
             CreateContentStrategyRequestData,
         )
@@ -74,6 +75,9 @@ class ContentStrategiesClient:
                 attributes=CreateContentStrategyAttributes(
                     name="Featured Travel",
                     sort="HIGHEST_CASHBACK",
+                    filters=ContentStrategyFilters(
+                        offer_features=["INTERACTIVE"],
+                    ),
                     categories=["Travel"],
                     category_exclusions=["Gas"],
                     merchant_exclusions=["merchant-abc"],
@@ -211,6 +215,7 @@ class ContentStrategiesClient:
         --------
         from kard import KardApi
         from kard.organizations.content_strategies import (
+            ContentStrategyFilters,
             UpdateContentStrategyAttributes,
             UpdateContentStrategyRequestData,
         )
@@ -225,6 +230,7 @@ class ContentStrategiesClient:
             data=UpdateContentStrategyRequestData(
                 attributes=UpdateContentStrategyAttributes(
                     name="name",
+                    filters=ContentStrategyFilters(),
                     categories=["Arts & Entertainment", "Arts & Entertainment"],
                     category_exclusions=[
                         "Arts & Entertainment",
@@ -325,6 +331,7 @@ class AsyncContentStrategiesClient:
 
         from kard import AsyncKardApi
         from kard.organizations.content_strategies import (
+            ContentStrategyFilters,
             CreateContentStrategyAttributes,
             CreateContentStrategyRequestData,
         )
@@ -342,6 +349,9 @@ class AsyncContentStrategiesClient:
                     attributes=CreateContentStrategyAttributes(
                         name="Featured Travel",
                         sort="HIGHEST_CASHBACK",
+                        filters=ContentStrategyFilters(
+                            offer_features=["INTERACTIVE"],
+                        ),
                         categories=["Travel"],
                         category_exclusions=["Gas"],
                         merchant_exclusions=["merchant-abc"],
@@ -500,6 +510,7 @@ class AsyncContentStrategiesClient:
 
         from kard import AsyncKardApi
         from kard.organizations.content_strategies import (
+            ContentStrategyFilters,
             UpdateContentStrategyAttributes,
             UpdateContentStrategyRequestData,
         )
@@ -517,6 +528,7 @@ class AsyncContentStrategiesClient:
                 data=UpdateContentStrategyRequestData(
                     attributes=UpdateContentStrategyAttributes(
                         name="name",
+                        filters=ContentStrategyFilters(),
                         categories=["Arts & Entertainment", "Arts & Entertainment"],
                         category_exclusions=[
                             "Arts & Entertainment",

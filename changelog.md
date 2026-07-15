@@ -1,3 +1,12 @@
+## 21.0.0 - 2026-07-15
+### Breaking Changes
+* **`ContentStrategyAttributes`** — new required field `filters` (`ContentStrategyFilters`) added; existing code that constructs this model without providing `filters` will raise a `ValidationError`. Pass `filters=ContentStrategyFilters()` to migrate.
+* **`CreateContentStrategyAttributes`** — new required field `filters` (`ContentStrategyFilters`) added; update all construction sites to include `filters=ContentStrategyFilters(...)`.
+* **`UpdateContentStrategyAttributes`** — new required field `filters` (`ContentStrategyFilters`) added; update all construction sites to include `filters=ContentStrategyFilters(...)`.
+### Added
+* **`ContentStrategyFilters`** — new Pydantic model representing filters applied when selecting offers for a content strategy, with optional `categories`, `category_exclusions`, `merchant_exclusions`, and `offer_features` fields.
+* **`OfferFeatures`** — new type alias (`Literal["INTERACTIVE"] | Any`) representing offer feature flags that can be used to filter offers within a `ContentStrategyFilters`.
+
 ## 20.8.0 - 2026-07-15
 ### Added
 * **`EarnedRewardNotificationAttributes`** — new Pydantic model extending `RewardNotificationAttributes` with optional `category_name` (offer category string), `user_reward` (`UserReward`), `assets` (list of `MerchantAsset`), and `purchase_channel` (list of `PurchaseChannel`) fields, providing richer detail on earned-reward notifications.

@@ -1032,7 +1032,7 @@ Create a content strategy for the organization. The strategy name must be unique
 ```python
 from kard import KardApi
 from kard.environment import KardApiEnvironment
-from kard.organizations.content_strategies import CreateContentStrategyRequestData, CreateContentStrategyAttributes
+from kard.organizations.content_strategies import CreateContentStrategyRequestData, CreateContentStrategyAttributes, ContentStrategyFilters
 
 client = KardApi(
     client_id="<clientId>",
@@ -1047,6 +1047,11 @@ client.organizations.content_strategies.create(
         attributes=CreateContentStrategyAttributes(
             name="Featured Travel",
             sort="HIGHEST_CASHBACK",
+            filters=ContentStrategyFilters(
+                offer_features=[
+                    "INTERACTIVE"
+                ],
+            ),
             categories=[
                 "Travel"
             ],
@@ -1312,7 +1317,7 @@ Replace a content strategy. All fields must be provided; any omitted attribute i
 ```python
 from kard import KardApi
 from kard.environment import KardApiEnvironment
-from kard.organizations.content_strategies import UpdateContentStrategyRequestData, UpdateContentStrategyAttributes
+from kard.organizations.content_strategies import UpdateContentStrategyRequestData, UpdateContentStrategyAttributes, ContentStrategyFilters
 
 client = KardApi(
     client_id="<clientId>",
@@ -1327,6 +1332,7 @@ client.organizations.content_strategies.update(
         type="contentStrategy",
         attributes=UpdateContentStrategyAttributes(
             name="name",
+            filters=ContentStrategyFilters(),
             categories=[
                 "Arts & Entertainment",
                 "Arts & Entertainment"

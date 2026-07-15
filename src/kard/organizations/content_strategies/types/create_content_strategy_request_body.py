@@ -14,6 +14,7 @@ class CreateContentStrategyRequestBody(UniversalBaseModel):
     Examples
     --------
     from kard.organizations.content_strategies import (
+        ContentStrategyFilters,
         CreateContentStrategyAttributes,
         CreateContentStrategyRequestBody,
         CreateContentStrategyRequestData,
@@ -24,6 +25,9 @@ class CreateContentStrategyRequestBody(UniversalBaseModel):
             attributes=CreateContentStrategyAttributes(
                 name="Featured Travel",
                 sort="HIGHEST_CASHBACK",
+                filters=ContentStrategyFilters(
+                    offer_features=["INTERACTIVE"],
+                ),
                 categories=["Travel"],
                 category_exclusions=["Gas"],
                 merchant_exclusions=["merchant-abc"],

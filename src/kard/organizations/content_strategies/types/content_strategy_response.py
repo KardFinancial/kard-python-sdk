@@ -15,6 +15,7 @@ class ContentStrategyResponse(UniversalBaseModel):
     --------
     from kard.organizations.content_strategies import (
         ContentStrategyAttributes,
+        ContentStrategyFilters,
         ContentStrategyResponse,
     )
 
@@ -24,6 +25,9 @@ class ContentStrategyResponse(UniversalBaseModel):
             name="Featured Travel",
             organization_id="org-123",
             sort="HIGHEST_CASHBACK",
+            filters=ContentStrategyFilters(
+                offer_features=["INTERACTIVE"],
+            ),
             categories=["Travel"],
             category_exclusions=["Gas"],
             merchant_exclusions=["merchant-abc"],
