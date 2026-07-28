@@ -10,6 +10,7 @@ from .types.create_audit_request_data_union import CreateAuditRequestDataUnion
 from .types.create_audit_response_body import CreateAuditResponseBody
 from .types.create_file_upload_data import CreateFileUploadData
 from .types.create_file_upload_url_response import CreateFileUploadUrlResponse
+from .types.earned_rewards_range import EarnedRewardsRange
 from .types.fraudulent_transaction_data import FraudulentTransactionData
 from .types.fraudulent_transaction_object import FraudulentTransactionObject
 from .types.get_earned_rewards_response import GetEarnedRewardsResponse
@@ -322,11 +323,12 @@ class TransactionsClient:
         page_size: typing.Optional[int] = None,
         filter_status: typing.Optional[RewardedTransactionStatus] = None,
         filter_paid_in_full_only: typing.Optional[bool] = None,
+        filter_range: typing.Optional[EarnedRewardsRange] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[range]` to narrow the window to the last 6 months (`6M`), last 3 months (`3M`), or year to date (`YTD`). Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -353,6 +355,9 @@ class TransactionsClient:
 
         filter_paid_in_full_only : typing.Optional[bool]
             When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
+
+        filter_range : typing.Optional[EarnedRewardsRange]
+            Time window for the returned transactions, ending now. Supported values are `12M`, `6M`, `3M`, and `YTD` (since January 1 of the current year). Defaults to `12M` when omitted. Also scopes `lifetimeRewardsInCents`, so the meta total always matches the returned rows.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -388,6 +393,7 @@ class TransactionsClient:
             page_size=page_size,
             filter_status=filter_status,
             filter_paid_in_full_only=filter_paid_in_full_only,
+            filter_range=filter_range,
             include=include,
             request_options=request_options,
         )
@@ -730,11 +736,12 @@ class AsyncTransactionsClient:
         page_size: typing.Optional[int] = None,
         filter_status: typing.Optional[RewardedTransactionStatus] = None,
         filter_paid_in_full_only: typing.Optional[bool] = None,
+        filter_range: typing.Optional[EarnedRewardsRange] = None,
         include: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GetEarnedRewardsResponse:
         """
-        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
+        Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[range]` to narrow the window to the last 6 months (`6M`), last 3 months (`3M`), or year to date (`YTD`). Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
         <br/>
         <b>Required scopes:</b> `transaction:read`
         <br/>
@@ -761,6 +768,9 @@ class AsyncTransactionsClient:
 
         filter_paid_in_full_only : typing.Optional[bool]
             When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
+
+        filter_range : typing.Optional[EarnedRewardsRange]
+            Time window for the returned transactions, ending now. Supported values are `12M`, `6M`, `3M`, and `YTD` (since January 1 of the current year). Defaults to `12M` when omitted. Also scopes `lifetimeRewardsInCents`, so the meta total always matches the returned rows.
 
         include : typing.Optional[str]
             Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
@@ -804,6 +814,7 @@ class AsyncTransactionsClient:
             page_size=page_size,
             filter_status=filter_status,
             filter_paid_in_full_only=filter_paid_in_full_only,
+            filter_range=filter_range,
             include=include,
             request_options=request_options,
         )

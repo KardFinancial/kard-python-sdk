@@ -1,3 +1,10 @@
+## 21.1.0 - 2026-07-28
+### Added
+* **`EarnedRewardsRange`** — new type alias (`Literal["12M", "6M", "3M", "YTD"] | Any`) representing the supported time-window values for filtering earned rewards.
+* **`filter_range`** — new optional parameter on `TransactionsClient.get_earned_rewards` (and its async/raw variants) that narrows the returned transaction window to the last 6 months (`6M`), last 3 months (`3M`), year-to-date (`YTD`), or the default last 12 months (`12M`).
+### Changed
+* **`GetEarnedRewardsMeta.lifetimeRewardsInCents`** — now scoped to the window selected by `filter[range]` (default last 12 months), so the aggregate total always matches the rows returned in the response.
+
 ## 21.0.0 - 2026-07-15
 ### Breaking Changes
 * **`ContentStrategyAttributes`** — new required field `filters` (`ContentStrategyFilters`) added; existing code that constructs this model without providing `filters` will raise a `ValidationError`. Pass `filters=ContentStrategyFilters()` to migrate.

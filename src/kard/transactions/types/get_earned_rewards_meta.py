@@ -14,7 +14,7 @@ class GetEarnedRewardsMeta(UniversalBaseModel):
         FieldMetadata(alias="lifetimeRewardsInCents"),
         pydantic.Field(
             alias="lifetimeRewardsInCents",
-            description="Lifetime rewards earned by the user across matched transactions in cents. By default all matched transactions are included regardless of payment status; pass `filter[paidInFullOnly]=true` to restrict the total to transactions paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).",
+            description="Lifetime rewards earned by the user across matched transactions in cents, within the window selected by `filter[range]` (default last 12 months). By default all matched transactions are included regardless of payment status; pass `filter[paidInFullOnly]=true` to restrict the total to transactions paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).",
         ),
     ]
 

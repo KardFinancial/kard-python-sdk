@@ -2479,7 +2479,7 @@ client.transactions.create_bulk_transactions_upload_url(
 <dl>
 <dd>
 
-Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
+Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[range]` to narrow the window to the last 6 months (`6M`), last 3 months (`3M`), or year to date (`YTD`). Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
 <br/>
 <b>Required scopes:</b> `transaction:read`
 <br/>
@@ -2578,6 +2578,14 @@ client.transactions.get_earned_rewards(
 <dd>
 
 **filter_paid_in_full_only:** `typing.Optional[bool]` — When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter_range:** `typing.Optional[EarnedRewardsRange]` — Time window for the returned transactions, ending now. Supported values are `12M`, `6M`, `3M`, and `YTD` (since January 1 of the current year). Defaults to `12M` when omitted. Also scopes `lifetimeRewardsInCents`, so the meta total always matches the returned rows.
     
 </dd>
 </dl>
