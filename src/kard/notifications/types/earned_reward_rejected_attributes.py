@@ -5,12 +5,13 @@ import typing
 
 import pydantic
 import typing_extensions
+from ...commons.types.rejected_reason import RejectedReason
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
 
 
 class EarnedRewardRejectedAttributes(UniversalBaseModel):
-    reason: str = pydantic.Field()
+    reason: RejectedReason = pydantic.Field()
     """
     The reason code for why the transaction did not result in a reward
     """

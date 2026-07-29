@@ -24,6 +24,7 @@ if typing.TYPE_CHECKING:
     from .notification_type import NotificationType
     from .organization_id import OrganizationId
     from .purchase_channel import PurchaseChannel
+    from .rejected_reason import RejectedReason
     from .relationship_data import RelationshipData
     from .relationship_multiple import RelationshipMultiple
     from .relationship_single import RelationshipSingle
@@ -50,6 +51,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationType": ".notification_type",
     "OrganizationId": ".organization_id",
     "PurchaseChannel": ".purchase_channel",
+    "RejectedReason": ".rejected_reason",
     "RelationshipData": ".relationship_data",
     "RelationshipMultiple": ".relationship_multiple",
     "RelationshipSingle": ".relationship_single",
@@ -100,6 +102,7 @@ __all__ = [
     "NotificationType",
     "OrganizationId",
     "PurchaseChannel",
+    "RejectedReason",
     "RelationshipData",
     "RelationshipMultiple",
     "RelationshipSingle",

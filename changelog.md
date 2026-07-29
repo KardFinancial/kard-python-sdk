@@ -1,3 +1,9 @@
+## 21.2.0 - 2026-07-29
+### Added
+* **`RejectedReason`** — new type alias (`Literal["AGGREGATOR_CARD_OVERLAP", "SETTLEMENT_REJECTED", "USER_NOT_ENROLLED", "USER_NOT_IN_AUDIENCE_SEGMENT"] | Any`) exported from `kard.commons`, representing the structured set of known rejection reason codes.
+### Changed
+* **`EarnedRewardRejectedAttributes.reason`** — type widened from `str` to `RejectedReason`, providing self-documenting literal values for known rejection codes while remaining compatible with unknown values via the `Any` fallback.
+
 ## 21.1.0 - 2026-07-28
 ### Added
 * **`EarnedRewardsRange`** — new type alias (`Literal["12M", "6M", "3M", "YTD"] | Any`) representing the supported time-window values for filtering earned rewards.
