@@ -1,3 +1,7 @@
+## 21.3.0 - 2026-08-03
+### Changed
+* **`NotificationMedium`** — type alias widened to include `"EMAIL"` as a known literal value alongside `"PUSH"`, providing a self-documenting constant for email-based notification channels.
+
 ## 21.2.0 - 2026-07-29
 ### Added
 * **`RejectedReason`** — new type alias (`Literal["AGGREGATOR_CARD_OVERLAP", "SETTLEMENT_REJECTED", "USER_NOT_ENROLLED", "USER_NOT_IN_AUDIENCE_SEGMENT"] | Any`) exported from `kard.commons`, representing the structured set of known rejection reason codes.

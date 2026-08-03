@@ -2,4 +2,4 @@
 
 import typing
 
-NotificationMedium = typing.Union[typing.Literal["PUSH"], typing.Any]
+NotificationMedium = typing.Union[typing.Literal["PUSH", "EMAIL"], typing.Any]
