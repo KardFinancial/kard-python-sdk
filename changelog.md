@@ -1,3 +1,8 @@
+## 22.0.0 - 2026-08-03
+### Breaking Changes
+* **`NotificationType`** — the literal values `"validTransaction"`, `"failedTransaction"`, and `"clawback"` have been removed from the type union; update any code that passes or checks these values to use the remaining supported notification types.
+* **`TransactionsRequestBody`** — the `matchedTransaction` discriminated-union variant is no longer recognized; callers submitting pre-matched transactions must migrate to the `transaction` or `coreTransaction` variants.
+
 ## 21.3.0 - 2026-08-03
 ### Changed
 * **`NotificationMedium`** — type alias widened to include `"EMAIL"` as a known literal value alongside `"PUSH"`, providing a self-documenting constant for email-based notification channels.

@@ -48,7 +48,6 @@ class TransactionsClient:
         Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>
         Please use the correct type when calling the endpoint:
         - `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.
-        - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
         - `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>
 
         <b>Required scopes:</b> `transaction:write`<br/>
@@ -62,7 +61,6 @@ class TransactionsClient:
             Discriminated union representing the request body for submitting a transaction.
             Use `type` to distinguish between the two:
             - `transaction`: For transactions requiring processing and matching by the Kard system.
-            - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
             - `coreTransaction`: For transactions from core banking systems with limited card-level data.
 
         request_options : typing.Optional[RequestOptions]
@@ -426,7 +424,6 @@ class AsyncTransactionsClient:
         Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>
         Please use the correct type when calling the endpoint:
         - `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.
-        - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
         - `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>
 
         <b>Required scopes:</b> `transaction:write`<br/>
@@ -440,7 +437,6 @@ class AsyncTransactionsClient:
             Discriminated union representing the request body for submitting a transaction.
             Use `type` to distinguish between the two:
             - `transaction`: For transactions requiring processing and matching by the Kard system.
-            - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
             - `coreTransaction`: For transactions from core banking systems with limited card-level data.
 
         request_options : typing.Optional[RequestOptions]
