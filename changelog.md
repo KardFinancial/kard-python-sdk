@@ -1,3 +1,10 @@
+## 24.0.0 - 2026-08-04
+### Breaking Changes
+* **`ClawbackData`** — class removed from `kard.notifications`; any code importing or instantiating this model will raise `ImportError`. Remove all usages.
+* **`FailedTransactionAttributes`**, **`FailedTransactionData`**, and **`FailedTransactionRelationships`** — classes removed from `kard.notifications`; callers must remove all imports and references to these types.
+* **`ValidTransactionAttributes`**, **`ValidTransactionCommissionEarned`**, **`ValidTransactionData`**, and **`TransactionRelationships`** — classes removed from `kard.notifications`; remove all imports and references.
+* **`NotificationDataUnion_ValidTransaction`**, **`NotificationDataUnion_FailedTransaction`**, and **`NotificationDataUnion_Clawback`** — variants removed from the `NotificationDataUnion` discriminated union; update any pattern-matching or type-narrowing code that handles `"validTransaction"`, `"failedTransaction"`, or `"clawback"` discriminator values.
+
 ## 23.0.0 - 2026-08-04
 ### Breaking Changes
 * **`MatchedTransactionsAttributes`** — class removed from `kard.transactions`; any code importing or instantiating this model will raise `ImportError`. Remove usages or migrate to `TransactionsAttributes` / `CoreTransactionAttributes`.

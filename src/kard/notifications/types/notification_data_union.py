@@ -16,13 +16,9 @@ from .earned_reward_relationships import EarnedRewardRelationships
 from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
 from .email_notification_placement_file_attributes import EmailNotificationPlacementFileAttributes
 from .email_notification_placement_file_relationships import EmailNotificationPlacementFileRelationships
-from .failed_transaction_attributes import FailedTransactionAttributes
-from .failed_transaction_relationships import FailedTransactionRelationships
 from .push_notification_placement_file_attributes import PushNotificationPlacementFileAttributes
 from .push_notification_placement_file_relationships import PushNotificationPlacementFileRelationships
 from .rejected_transaction_relationships import RejectedTransactionRelationships
-from .transaction_relationships import TransactionRelationships
-from .valid_transaction_attributes import ValidTransactionAttributes
 
 
 class NotificationDataUnion_EarnedRewardApproved(UniversalBaseModel):
@@ -62,54 +58,6 @@ class NotificationDataUnion_EarnedRewardRejected(UniversalBaseModel):
     id: str
     attributes: EarnedRewardRejectedAttributes
     relationships: RejectedTransactionRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
-class NotificationDataUnion_ValidTransaction(UniversalBaseModel):
-    type: typing.Literal["validTransaction"] = "validTransaction"
-    id: str
-    attributes: ValidTransactionAttributes
-    relationships: TransactionRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
-class NotificationDataUnion_FailedTransaction(UniversalBaseModel):
-    type: typing.Literal["failedTransaction"] = "failedTransaction"
-    id: str
-    attributes: FailedTransactionAttributes
-    relationships: FailedTransactionRelationships
-
-    if IS_PYDANTIC_V2:
-        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
-    else:
-
-        class Config:
-            frozen = True
-            smart_union = True
-            extra = pydantic.Extra.allow
-
-
-class NotificationDataUnion_Clawback(UniversalBaseModel):
-    type: typing.Literal["clawback"] = "clawback"
-    id: str
-    attributes: FailedTransactionAttributes
-    relationships: FailedTransactionRelationships
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
@@ -189,9 +137,6 @@ NotificationDataUnion = typing_extensions.Annotated[
         NotificationDataUnion_EarnedRewardApproved,
         NotificationDataUnion_EarnedRewardSettled,
         NotificationDataUnion_EarnedRewardRejected,
-        NotificationDataUnion_ValidTransaction,
-        NotificationDataUnion_FailedTransaction,
-        NotificationDataUnion_Clawback,
         NotificationDataUnion_AuditUpdate,
         NotificationDataUnion_FileProcessingResult,
         NotificationDataUnion_PushNotificationPlacementFile,
