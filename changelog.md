@@ -1,3 +1,11 @@
+## 23.0.0 - 2026-08-04
+### Breaking Changes
+* **`MatchedTransactionsAttributes`** — class removed from `kard.transactions`; any code importing or instantiating this model will raise `ImportError`. Remove usages or migrate to `TransactionsAttributes` / `CoreTransactionAttributes`.
+* **`MatchedTransactionsRequest`** — class removed from `kard.transactions`; callers constructing matched-transaction payloads must migrate to the `transaction` or `coreTransaction` request variants.
+* **`Transactions_MatchedTransaction`** — removed from the `Transactions` discriminated union; the `"matchedTransaction"` discriminator value is no longer recognized. Update any pattern-matching or type-narrowing code to handle only `Transactions_Transaction` and `Transactions_CoreTransaction`.
+* **`PaymentType`** — type alias removed from `kard.transactions`; replace references with inline literals or the equivalent field type on `TransactionsAttributes`.
+* **`ReceiptMediumType`** — type alias removed from `kard.transactions`; replace references with inline literals.
+
 ## 22.0.0 - 2026-08-03
 ### Breaking Changes
 * **`NotificationType`** — the literal values `"validTransaction"`, `"failedTransaction"`, and `"clawback"` have been removed from the type union; update any code that passes or checks these values to use the remaining supported notification types.

@@ -37,15 +37,11 @@ if typing.TYPE_CHECKING:
     from .fraudulent_transaction_response import FraudulentTransactionResponse
     from .get_earned_rewards_meta import GetEarnedRewardsMeta
     from .get_earned_rewards_response import GetEarnedRewardsResponse
-    from .matched_transactions_attributes import MatchedTransactionsAttributes
-    from .matched_transactions_request import MatchedTransactionsRequest
     from .merchant import Merchant
     from .merchant_asset import MerchantAsset
     from .merchant_asset_type import MerchantAssetType
     from .payment_status import PaymentStatus
-    from .payment_type import PaymentType
     from .processor_mid import ProcessorMid, ProcessorMid_Visa
-    from .receipt_medium_type import ReceiptMediumType
     from .rewarded_transaction import RewardedTransaction
     from .rewarded_transaction_attributes import RewardedTransactionAttributes
     from .rewarded_transaction_relationships import RewardedTransactionRelationships
@@ -67,12 +63,7 @@ if typing.TYPE_CHECKING:
     from .transaction_offer_resource import TransactionOfferResource
     from .transaction_payment_type import TransactionPaymentType
     from .transaction_status import TransactionStatus
-    from .transactions import (
-        Transactions,
-        Transactions_CoreTransaction,
-        Transactions_MatchedTransaction,
-        Transactions_Transaction,
-    )
+    from .transactions import Transactions, Transactions_CoreTransaction, Transactions_Transaction
     from .transactions_attributes import TransactionsAttributes
     from .transactions_multi_response import TransactionsMultiResponse
     from .transactions_request import TransactionsRequest
@@ -115,16 +106,12 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FraudulentTransactionResponse": ".fraudulent_transaction_response",
     "GetEarnedRewardsMeta": ".get_earned_rewards_meta",
     "GetEarnedRewardsResponse": ".get_earned_rewards_response",
-    "MatchedTransactionsAttributes": ".matched_transactions_attributes",
-    "MatchedTransactionsRequest": ".matched_transactions_request",
     "Merchant": ".merchant",
     "MerchantAsset": ".merchant_asset",
     "MerchantAssetType": ".merchant_asset_type",
     "PaymentStatus": ".payment_status",
-    "PaymentType": ".payment_type",
     "ProcessorMid": ".processor_mid",
     "ProcessorMid_Visa": ".processor_mid",
-    "ReceiptMediumType": ".receipt_medium_type",
     "RewardedTransaction": ".rewarded_transaction",
     "RewardedTransactionAttributes": ".rewarded_transaction_attributes",
     "RewardedTransactionRelationships": ".rewarded_transaction_relationships",
@@ -150,7 +137,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TransactionsResponse": ".transactions_response",
     "TransactionsResponseData": ".transactions_response_data",
     "Transactions_CoreTransaction": ".transactions",
-    "Transactions_MatchedTransaction": ".transactions",
     "Transactions_Transaction": ".transactions",
     "VisaMid": ".visa_mid",
     "VisaMidDetails": ".visa_mid_details",
@@ -212,16 +198,12 @@ __all__ = [
     "FraudulentTransactionResponse",
     "GetEarnedRewardsMeta",
     "GetEarnedRewardsResponse",
-    "MatchedTransactionsAttributes",
-    "MatchedTransactionsRequest",
     "Merchant",
     "MerchantAsset",
     "MerchantAssetType",
     "PaymentStatus",
-    "PaymentType",
     "ProcessorMid",
     "ProcessorMid_Visa",
-    "ReceiptMediumType",
     "RewardedTransaction",
     "RewardedTransactionAttributes",
     "RewardedTransactionRelationships",
@@ -247,7 +229,6 @@ __all__ = [
     "TransactionsResponse",
     "TransactionsResponseData",
     "Transactions_CoreTransaction",
-    "Transactions_MatchedTransaction",
     "Transactions_Transaction",
     "VisaMid",
     "VisaMidDetails",
