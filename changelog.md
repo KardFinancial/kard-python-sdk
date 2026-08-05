@@ -1,3 +1,9 @@
+## 25.1.0 - 2026-08-05
+### Added
+* **`OrganizationCardNetwork`** — new type alias (`"VISA" | "MASTERCARD" | "AMERICAN_EXPRESS" | "DISCOVER"`) exported from `kard.internal_organizations.types`, `kard.internal_organizations`, and the top-level `kard` namespace.
+### Changed
+* **`ExternalOrganizationAttributes.card_networks`** — field type changed from `CardNetwork` (imported from `kard.commons`) to `OrganizationCardNetwork` (from `kard.internal_organizations`); update any imports or `isinstance` checks that reference `CardNetwork` for this field.
+
 ## 25.0.0 - 2026-08-05
 ### Breaking Changes
 * **`ButtonStyle`, `CtaAction`, `CtaComponent`, `LogoFlare` family, `OfferComponents`, and all `ProgressBar*` types** — removed from `kard.users.rewards` and `kard.users.rewards.types`; update all imports to `kard.commons` or the top-level `kard` namespace.

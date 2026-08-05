@@ -4,10 +4,10 @@ import typing
 
 import pydantic
 import typing_extensions
-from ...commons.types.card_network import CardNetwork
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
 from ...internal_organizations.types.enrolled_reward import EnrolledReward
+from ...internal_organizations.types.organization_card_network import OrganizationCardNetwork
 
 
 class ExternalOrganizationAttributes(UniversalBaseModel):
@@ -26,7 +26,7 @@ class ExternalOrganizationAttributes(UniversalBaseModel):
         pydantic.Field(alias="enrolledRewards", description="Rewards programs the organization is enrolled in"),
     ]
     card_networks: typing_extensions.Annotated[
-        typing.List[CardNetwork],
+        typing.List[OrganizationCardNetwork],
         FieldMetadata(alias="cardNetworks"),
         pydantic.Field(alias="cardNetworks", description="Card networks supported by the organization"),
     ]

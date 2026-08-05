@@ -75,6 +75,7 @@ if typing.TYPE_CHECKING:
         DeleteResourceData,
         DeleteResourceResponse,
         EnrolledReward,
+        OrganizationCardNetwork,
         OrganizationPaginationMetadata,
     )
     from .notifications import (
@@ -317,6 +318,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "NotificationPayload": ".notifications",
     "NotificationType": ".commons",
     "OfferComponents": ".commons",
+    "OrganizationCardNetwork": ".internal_organizations",
     "OrganizationId": ".commons",
     "OrganizationPaginationMetadata": ".internal_organizations",
     "PaginationMeta": ".files",
@@ -540,6 +542,7 @@ __all__ = [
     "NotificationPayload",
     "NotificationType",
     "OfferComponents",
+    "OrganizationCardNetwork",
     "OrganizationId",
     "OrganizationPaginationMetadata",
     "PaginationMeta",

@@ -6,11 +6,18 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .types import DeleteResourceData, DeleteResourceResponse, EnrolledReward, OrganizationPaginationMetadata
+    from .types import (
+        DeleteResourceData,
+        DeleteResourceResponse,
+        EnrolledReward,
+        OrganizationCardNetwork,
+        OrganizationPaginationMetadata,
+    )
 _dynamic_imports: typing.Dict[str, str] = {
     "DeleteResourceData": ".types",
     "DeleteResourceResponse": ".types",
     "EnrolledReward": ".types",
+    "OrganizationCardNetwork": ".types",
     "OrganizationPaginationMetadata": ".types",
 }
 
@@ -36,4 +43,10 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["DeleteResourceData", "DeleteResourceResponse", "EnrolledReward", "OrganizationPaginationMetadata"]
+__all__ = [
+    "DeleteResourceData",
+    "DeleteResourceResponse",
+    "EnrolledReward",
+    "OrganizationCardNetwork",
+    "OrganizationPaginationMetadata",
+]

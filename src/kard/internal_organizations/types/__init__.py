@@ -9,11 +9,13 @@ if typing.TYPE_CHECKING:
     from .delete_resource_data import DeleteResourceData
     from .delete_resource_response import DeleteResourceResponse
     from .enrolled_reward import EnrolledReward
+    from .organization_card_network import OrganizationCardNetwork
     from .organization_pagination_metadata import OrganizationPaginationMetadata
 _dynamic_imports: typing.Dict[str, str] = {
     "DeleteResourceData": ".delete_resource_data",
     "DeleteResourceResponse": ".delete_resource_response",
     "EnrolledReward": ".enrolled_reward",
+    "OrganizationCardNetwork": ".organization_card_network",
     "OrganizationPaginationMetadata": ".organization_pagination_metadata",
 }
 
@@ -39,4 +41,10 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["DeleteResourceData", "DeleteResourceResponse", "EnrolledReward", "OrganizationPaginationMetadata"]
+__all__ = [
+    "DeleteResourceData",
+    "DeleteResourceResponse",
+    "EnrolledReward",
+    "OrganizationCardNetwork",
+    "OrganizationPaginationMetadata",
+]
