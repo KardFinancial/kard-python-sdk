@@ -5,13 +5,13 @@ import typing
 
 import pydantic
 import typing_extensions
+from ....commons.types.offer_components import OfferComponents
 from ....commons.types.purchase_channel import PurchaseChannel
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .amount import Amount
 from .asset import Asset
 from .commission import Commission
-from .offer_components import OfferComponents
 
 
 class OfferCommonFields(UniversalBaseModel):

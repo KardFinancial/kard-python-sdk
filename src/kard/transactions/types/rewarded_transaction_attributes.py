@@ -5,6 +5,7 @@ import typing
 
 import pydantic
 import typing_extensions
+from ...commons.types.offer_components import OfferComponents
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
 from .commission_earned_details import CommissionEarnedDetails
@@ -48,6 +49,10 @@ class RewardedTransactionAttributes(UniversalBaseModel):
             description="Timestamp representing the month when the transaction has been paid out to issuer",
         ),
     ] = None
+    components: typing.Optional[OfferComponents] = pydantic.Field(default=None)
+    """
+    UI component data for the reward, built from the offer state persisted on the matched transaction (e.g. a progress bar for progressive and punch-card offers). Omitted when the reward carries no persisted state.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

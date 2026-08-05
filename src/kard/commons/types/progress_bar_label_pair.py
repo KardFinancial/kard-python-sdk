@@ -3,23 +3,22 @@
 import typing
 
 import pydantic
-from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .logo_flare_badge_position import LogoFlareBadgePosition
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class LogoFlareBadge(UniversalBaseModel):
+class ProgressBarLabelPair(UniversalBaseModel):
     """
-    Badge configuration for logo flare
-    """
-
-    icon: str = pydantic.Field()
-    """
-    Icon identifier for the badge
+    Left and right label configuration for a specific layout
     """
 
-    position: LogoFlareBadgePosition = pydantic.Field()
+    left: typing.Optional[str] = pydantic.Field(default=None)
     """
-    Position of the badge on the logo
+    Text content for the left label
+    """
+
+    right: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Text content for the right label
     """
 
     if IS_PYDANTIC_V2:

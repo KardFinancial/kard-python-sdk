@@ -4,8 +4,8 @@ import typing
 
 import pydantic
 import typing_extensions
-from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ....core.serialization import FieldMetadata
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.serialization import FieldMetadata
 from .logo_flare_badge import LogoFlareBadge
 from .logo_flare_border_color import LogoFlareBorderColor
 

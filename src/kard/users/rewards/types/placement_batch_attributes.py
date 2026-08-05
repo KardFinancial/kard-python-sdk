@@ -5,10 +5,10 @@ import typing
 
 import pydantic
 import typing_extensions
+from ....commons.types.offer_components import OfferComponents
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .asset import Asset
-from .offer_components import OfferComponents
 from .offer_data_union import OfferDataUnion
 
 

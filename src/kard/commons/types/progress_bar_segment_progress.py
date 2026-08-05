@@ -3,22 +3,22 @@
 import typing
 
 import pydantic
-from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class ProgressBarLabelPair(UniversalBaseModel):
+class ProgressBarSegmentProgress(UniversalBaseModel):
     """
-    Left and right label configuration for a specific layout
-    """
-
-    left: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Text content for the left label
+    Fill state of a single segment node, expressed as completed of total.
     """
 
-    right: typing.Optional[str] = pydantic.Field(default=None)
+    completed: int = pydantic.Field()
     """
-    Text content for the right label
+    Units completed within the current segment.
+    """
+
+    total: int = pydantic.Field()
+    """
+    Total units required to complete the current segment.
     """
 
     if IS_PYDANTIC_V2:

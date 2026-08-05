@@ -3,22 +3,23 @@
 import typing
 
 import pydantic
-from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .logo_flare_badge_position import LogoFlareBadgePosition
 
 
-class ProgressBarSegmentLabel(UniversalBaseModel):
+class LogoFlareBadge(UniversalBaseModel):
     """
-    Label configuration for a single node within a segment
-    """
-
-    title: str = pydantic.Field()
-    """
-    Title text for the segment node
+    Badge configuration for logo flare
     """
 
-    description: str = pydantic.Field()
+    icon: str = pydantic.Field()
     """
-    Description text for the segment node
+    Icon identifier for the badge
+    """
+
+    position: LogoFlareBadgePosition = pydantic.Field()
+    """
+    Position of the badge on the logo
     """
 
     if IS_PYDANTIC_V2:

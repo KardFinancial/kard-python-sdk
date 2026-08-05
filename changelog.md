@@ -1,3 +1,10 @@
+## 25.0.0 - 2026-08-05
+### Breaking Changes
+* **`ButtonStyle`, `CtaAction`, `CtaComponent`, `LogoFlare` family, `OfferComponents`, and all `ProgressBar*` types** — removed from `kard.users.rewards` and `kard.users.rewards.types`; update all imports to `kard.commons` or the top-level `kard` namespace.
+### Added
+* **UI component types (`ButtonStyle`, `CtaAction`, `CtaComponent`, `LogoFlare` family, `OfferComponents`, `ProgressBar*`)** — relocated to and now exported from `kard.commons.types`, `kard.commons`, and the top-level `kard` namespace.
+* **`RewardedTransactionAttributes.components`** — new optional `OfferComponents` field carrying UI component data derived from persisted offer state on a matched transaction; omitted when no persisted state exists.
+
 ## 24.0.0 - 2026-08-04
 ### Breaking Changes
 * **`ClawbackData`** — class removed from `kard.notifications`; any code importing or instantiating this model will raise `ImportError`. Remove all usages.
