@@ -3829,9 +3829,7 @@ client.users.rewards.placement_content(
 <dd>
 
 Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build
-out your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note
-that Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search
-pattern.<br/>
+out your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view).<br/>
 <br/>
 <b>Required scopes:</b> `rewards:read`
 </dd>
@@ -3931,7 +3929,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**filter_city:** `typing.Optional[str]` 
+**filter_city:** `typing.Optional[str]` — Case-insensitive substring match on the location's city. Never defines the search area; applied as an additional constraint alongside a radius search when `filter[latitude]`/`filter[longitude]`/`filter[radius]` are also provided.
     
 </dd>
 </dl>
@@ -3939,7 +3937,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**filter_zip_code:** `typing.Optional[str]` 
+**filter_zip_code:** `typing.Optional[str]` — Exact-match filter on the location's zip code. Never defines the search area; applied as an additional constraint alongside a radius search when `filter[latitude]`/`filter[longitude]`/`filter[radius]` are also provided.
     
 </dd>
 </dl>
@@ -3947,7 +3945,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**filter_state:** `typing.Optional[State]` 
+**filter_state:** `typing.Optional[State]` — Exact-match filter on the location's state. Never defines the search area; applied as an additional constraint alongside a radius search when `filter[latitude]`/`filter[longitude]`/`filter[radius]` are also provided.
     
 </dd>
 </dl>
@@ -3963,7 +3961,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**filter_longitude:** `typing.Optional[float]` 
+**filter_longitude:** `typing.Optional[float]` — Longitude of the point to search around. Must be provided together with `filter[latitude]`; combine with `filter[radius]` to run a radius search.
     
 </dd>
 </dl>
@@ -3971,7 +3969,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**filter_latitude:** `typing.Optional[float]` 
+**filter_latitude:** `typing.Optional[float]` — Latitude of the point to search around. Must be provided together with `filter[longitude]`; combine with `filter[radius]` to run a radius search.
     
 </dd>
 </dl>
@@ -3979,7 +3977,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**filter_radius:** `typing.Optional[int]` 
+**filter_radius:** `typing.Optional[int]` — Radius in miles to search around the point given by `filter[latitude]`/`filter[longitude]` (default 10, minimum 1). Has no effect unless both latitude and longitude are also provided — it is ignored when only `filter[zipCode]`, `filter[city]`, or `filter[state]` is used, without lat/long.
     
 </dd>
 </dl>

@@ -1,3 +1,16 @@
+## 25.1.1 - 2026-08-07
+* chore: improve docstrings for location filter parameters
+* Clarify the behavior of geographic filter parameters in the
+* `get_locations` methods across `RewardsClient`, `AsyncRewardsClient`,
+* `RawRewardsClient`, and `AsyncRawRewardsClient`. The changes update
+* inline documentation only — no signatures, types, or runtime behavior
+* are affected.
+* Key changes:
+* Add per-parameter docstring descriptions for `filter_city`, `filter_zip_code`, `filter_state`, `filter_longitude`, `filter_latitude`, and `filter_radius` explaining their exact-match / substring-match semantics and how they interact with radius searches
+* Remove the outdated note that "Longitude and Latitude fields are prioritized over State, City and Zipcode" from the method-level docstring
+* Apply identical docstring updates to both sync and async variants in both the high-level and raw clients
+* 🌿 Generated with Fern
+
 ## 25.1.0 - 2026-08-05
 ### Added
 * **`OrganizationCardNetwork`** — new type alias (`"VISA" | "MASTERCARD" | "AMERICAN_EXPRESS" | "DISCOVER"`) exported from `kard.internal_organizations.types`, `kard.internal_organizations`, and the top-level `kard` namespace.
