@@ -6,21 +6,19 @@ import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class Asset(UniversalBaseModel):
-    type: str = pydantic.Field()
+class LocationRating(UniversalBaseModel):
     """
-    What the asset shows. `IMG_VIEW` is the merchant logo, `BANNER_VIEW` a promotional
-    banner, and `LOCATION_IMG_VIEW` a photo of the location. New values may be added over time.
+    Customer rating for a location.
     """
 
-    url: str = pydantic.Field()
+    value: float = pydantic.Field()
     """
-    URL of the asset containing an attribution token
+    Rating on a scale of 1 to 5.
     """
 
-    alt: str = pydantic.Field()
+    count: typing.Optional[int] = pydantic.Field(default=None)
     """
-    Alt text of the asset
+    Number of ratings the score is based on. Null when a count is not available.
     """
 
     if IS_PYDANTIC_V2:

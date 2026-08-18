@@ -28,6 +28,7 @@ if typing.TYPE_CHECKING:
     from .location_data import LocationData
     from .location_partner_id import LocationPartnerId
     from .location_partner_id_type import LocationPartnerIdType
+    from .location_rating import LocationRating
     from .location_relationships import LocationRelationships
     from .location_sort_options import LocationSortOptions
     from .locations_response_object import LocationsResponseObject
@@ -69,6 +70,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LocationData": ".location_data",
     "LocationPartnerId": ".location_partner_id",
     "LocationPartnerIdType": ".location_partner_id_type",
+    "LocationRating": ".location_rating",
     "LocationRelationships": ".location_relationships",
     "LocationSortOptions": ".location_sort_options",
     "LocationsResponseObject": ".locations_response_object",
@@ -135,6 +137,7 @@ __all__ = [
     "LocationData",
     "LocationPartnerId",
     "LocationPartnerIdType",
+    "LocationRating",
     "LocationRelationships",
     "LocationSortOptions",
     "LocationsResponseObject",

@@ -27,6 +27,7 @@ class LocationsResponseObject(UniversalBaseModel):
         LocationAttributes,
         LocationData,
         LocationPartnerId,
+        LocationRating,
         LocationRelationships,
         LocationsResponseObject,
         OfferDataUnion_StandardOffer,
@@ -122,6 +123,12 @@ class LocationsResponseObject(UniversalBaseModel):
                             id="3pafnweri4",
                         )
                     ],
+                    cuisine="Pizza Restaurant",
+                    rating=LocationRating(
+                        value=4.6,
+                        count=812,
+                    ),
+                    price_level=2,
                 ),
                 relationships=LocationRelationships(
                     offers=RelationshipMultiple(

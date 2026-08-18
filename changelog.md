@@ -1,3 +1,11 @@
+## 25.2.0 - 2026-08-18
+### Added
+* **`CuisineOption`** — new type alias representing a cuisine or venue category (e.g. `"Pizza Restaurant"`, `"Sushi Restaurant"`), exported from `kard.commons.types`, `kard.commons`, and the top-level `kard` namespace.
+* **`LocationRating`** — new Pydantic model with `value` (float, 1–5 scale) and optional `count` (int) fields, exported from `kard.users.rewards.types`, `kard.users.rewards`, `kard.users`, and `kard`.
+* **`LocationAttributes.cuisine`** — new optional `CuisineOption` field indicating the kind of food or venue a location offers.
+* **`LocationAttributes.rating`** — new optional `LocationRating` field carrying the customer rating for a location.
+* **`LocationAttributes.price_level`** — new optional `int` field (1–4) indicating the typical price range for a location.
+
 ## 25.1.1 - 2026-08-07
 * chore: improve docstrings for location filter parameters
 * Clarify the behavior of geographic filter parameters in the

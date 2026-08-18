@@ -4,11 +4,13 @@ import typing
 
 import pydantic
 import typing_extensions
+from ....commons.types.cuisine_option import CuisineOption
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .coordinates import Coordinates
 from .eligibility_location_address import EligibilityLocationAddress
 from .location_partner_id import LocationPartnerId
+from .location_rating import LocationRating
 from .operation_hours import OperationHours
 
 
@@ -28,6 +30,24 @@ class LocationAttributes(UniversalBaseModel):
             description="List of ids associated with the location from third party partners. Only applicable for LOCAL locations.",
         ),
     ]
+    cuisine: typing.Optional[CuisineOption] = pydantic.Field(default=None)
+    """
+    The kind of food or venue this location offers, for example "Pizza Restaurant".
+    """
+
+    rating: typing.Optional[LocationRating] = pydantic.Field(default=None)
+    """
+    Customer rating for this location.
+    """
+
+    price_level: typing_extensions.Annotated[
+        typing.Optional[int],
+        FieldMetadata(alias="priceLevel"),
+        pydantic.Field(
+            alias="priceLevel",
+            description="Typical price range for this location, from 1 (least expensive) to 4 (most expensive).",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

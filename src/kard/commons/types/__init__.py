@@ -14,6 +14,7 @@ if typing.TYPE_CHECKING:
     from .commission_value_type import CommissionValueType
     from .cta_action import CtaAction
     from .cta_component import CtaComponent
+    from .cuisine_option import CuisineOption
     from .empty_object import EmptyObject
     from .enrolled_rewards_type import EnrolledRewardsType
     from .error_object import ErrorObject
@@ -59,6 +60,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CommissionValueType": ".commission_value_type",
     "CtaAction": ".cta_action",
     "CtaComponent": ".cta_component",
+    "CuisineOption": ".cuisine_option",
     "EmptyObject": ".empty_object",
     "EnrolledRewardsType": ".enrolled_rewards_type",
     "ErrorObject": ".error_object",
@@ -128,6 +130,7 @@ __all__ = [
     "CommissionValueType",
     "CtaAction",
     "CtaComponent",
+    "CuisineOption",
     "EmptyObject",
     "EnrolledRewardsType",
     "ErrorObject",
