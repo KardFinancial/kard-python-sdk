@@ -1,3 +1,9 @@
+## 25.3.0 - 2026-08-24
+### Added
+* **`PlacementStatus`** — new type alias (`"ACTIVE"` or `"INACTIVE"`) exported from `kard.organizations.placements.types`, `kard.organizations.placements`, and `kard.organizations`, representing whether a placement serves content and fires scheduled deliveries.
+* **`status` field on response placement attribute models** — `PlacementAttributes`, `EmailPlacementAttributes`, `PushNotificationPlacementAttributes`, `GroupPlacementAttributes`, and `BatchActivationPlacementAttributes` now include a required `status: PlacementStatus` field indicating the placement's active/inactive state.
+* **`status` field on create/update placement attribute models** — `CreateStandardAttributes`, `CreateEmailAttributes`, `CreatePushNotificationAttributes`, `CreateBatchActivationAttributes`, `CreateGroupAttributes`, and their `Update*` counterparts now accept an optional `status: Optional[PlacementStatus]` field; defaults to `ACTIVE` on create and preserves the current value when omitted on update.
+
 ## 25.2.0 - 2026-08-18
 ### Added
 * **`CuisineOption`** — new type alias representing a cuisine or venue category (e.g. `"Pizza Restaurant"`, `"Sushi Restaurant"`), exported from `kard.commons.types`, `kard.commons`, and the top-level `kard` namespace.

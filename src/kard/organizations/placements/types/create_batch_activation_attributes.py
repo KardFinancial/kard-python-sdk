@@ -7,6 +7,7 @@ import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .create_batch_activation_slot import CreateBatchActivationSlot
+from .placement_status import PlacementStatus
 
 
 class CreateBatchActivationAttributes(UniversalBaseModel):
@@ -36,6 +37,11 @@ class CreateBatchActivationAttributes(UniversalBaseModel):
     name: str = pydantic.Field()
     """
     Name of the placement
+    """
+
+    status: typing.Optional[PlacementStatus] = pydantic.Field(default=None)
+    """
+    Placement status. Defaults to ACTIVE on create; when omitted on update, the current status is preserved.
     """
 
     refresh_interval: typing_extensions.Annotated[

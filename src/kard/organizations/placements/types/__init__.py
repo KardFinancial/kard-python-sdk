@@ -60,6 +60,7 @@ if typing.TYPE_CHECKING:
     from .placement_list_response import PlacementListResponse
     from .placement_relationships import PlacementRelationships
     from .placement_resource import PlacementResource
+    from .placement_status import PlacementStatus
     from .placement_type_filter import PlacementTypeFilter
     from .push_notification_placement_attributes import PushNotificationPlacementAttributes
     from .push_notification_placement_data import PushNotificationPlacementData
@@ -136,6 +137,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PlacementListResponse": ".placement_list_response",
     "PlacementRelationships": ".placement_relationships",
     "PlacementResource": ".placement_resource",
+    "PlacementStatus": ".placement_status",
     "PlacementTypeFilter": ".placement_type_filter",
     "PushNotificationPlacementAttributes": ".push_notification_placement_attributes",
     "PushNotificationPlacementData": ".push_notification_placement_data",
@@ -234,6 +236,7 @@ __all__ = [
     "PlacementListResponse",
     "PlacementRelationships",
     "PlacementResource",
+    "PlacementStatus",
     "PlacementTypeFilter",
     "PushNotificationPlacementAttributes",
     "PushNotificationPlacementData",

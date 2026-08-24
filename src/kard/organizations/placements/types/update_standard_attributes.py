@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
+from .placement_status import PlacementStatus
 
 
 class UpdateStandardAttributes(UniversalBaseModel):
@@ -25,6 +26,11 @@ class UpdateStandardAttributes(UniversalBaseModel):
     name: str = pydantic.Field()
     """
     Name of the placement
+    """
+
+    status: typing.Optional[PlacementStatus] = pydantic.Field(default=None)
+    """
+    Placement status. Defaults to ACTIVE on create; when omitted on update, the current status is preserved.
     """
 
     available_slots: typing_extensions.Annotated[

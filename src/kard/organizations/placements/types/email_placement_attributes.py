@@ -7,6 +7,7 @@ import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .cadence import Cadence
+from .placement_status import PlacementStatus
 
 
 class EmailPlacementAttributes(UniversalBaseModel):
@@ -17,6 +18,11 @@ class EmailPlacementAttributes(UniversalBaseModel):
     name: str = pydantic.Field()
     """
     Name of the placement
+    """
+
+    status: PlacementStatus = pydantic.Field()
+    """
+    Whether the placement serves content and fires scheduled deliveries. An INACTIVE placement keeps its configuration but serves empty content and skips scheduled deliveries.
     """
 
     organization_id: typing_extensions.Annotated[

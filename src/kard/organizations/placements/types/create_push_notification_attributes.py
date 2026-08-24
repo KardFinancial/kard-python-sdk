@@ -7,6 +7,7 @@ import typing_extensions
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .cadence import Cadence
+from .placement_status import PlacementStatus
 
 
 class CreatePushNotificationAttributes(UniversalBaseModel):
@@ -32,6 +33,11 @@ class CreatePushNotificationAttributes(UniversalBaseModel):
     name: str = pydantic.Field()
     """
     Name of the placement
+    """
+
+    status: typing.Optional[PlacementStatus] = pydantic.Field(default=None)
+    """
+    Placement status. Defaults to ACTIVE on create; when omitted on update, the current status is preserved.
     """
 
     cadence: Cadence = pydantic.Field()
