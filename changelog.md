@@ -1,3 +1,11 @@
+## 26.0.0 - 2026-08-25
+### Breaking Changes
+* **`PlacementAttributes`** — the required `status` field has been removed; callers that access `.status` on this model will get an `AttributeError`. Remove any references to `placement_attributes.status`.
+* **`GroupPlacementAttributes`** and **`BatchActivationPlacementAttributes`** — the required `status` field has been removed from both response models; update any code that reads `.status` from these types.
+* **`CreateStandardAttributes`**, **`UpdateStandardAttributes`**, **`CreateGroupAttributes`**, **`UpdateGroupAttributes`**, **`CreateBatchActivationAttributes`**, and **`UpdateBatchActivationAttributes`** — the optional `status` field has been removed; passing `status=` to these models will raise a `ValidationError`. Remove `status` from any construction calls.
+### Changed
+* **`EmailPlacementAttributes.status`** and **`PushNotificationPlacementAttributes.status`** — the field description has been updated to clarify that `status` only pauses scheduled deliveries and has no effect on content serving.
+
 ## 25.3.0 - 2026-08-24
 ### Added
 * **`PlacementStatus`** — new type alias (`"ACTIVE"` or `"INACTIVE"`) exported from `kard.organizations.placements.types`, `kard.organizations.placements`, and `kard.organizations`, representing whether a placement serves content and fires scheduled deliveries.

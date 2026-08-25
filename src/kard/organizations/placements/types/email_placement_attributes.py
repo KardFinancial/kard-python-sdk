@@ -22,7 +22,7 @@ class EmailPlacementAttributes(UniversalBaseModel):
 
     status: PlacementStatus = pydantic.Field()
     """
-    Whether the placement serves content and fires scheduled deliveries. An INACTIVE placement keeps its configuration but serves empty content and skips scheduled deliveries.
+    Whether the placement's scheduled deliveries are paused. Has no effect on content serving.
     """
 
     organization_id: typing_extensions.Annotated[

@@ -4,7 +4,6 @@ import typing
 
 import pydantic
 from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .placement_status import PlacementStatus
 from .update_batch_activation_slot import UpdateBatchActivationSlot
 
 
@@ -35,11 +34,6 @@ class UpdateGroupAttributes(UniversalBaseModel):
     name: str = pydantic.Field()
     """
     Name of the placement
-    """
-
-    status: typing.Optional[PlacementStatus] = pydantic.Field(default=None)
-    """
-    Placement status. Defaults to ACTIVE on create; when omitted on update, the current status is preserved.
     """
 
     slots: typing.List[UpdateBatchActivationSlot] = pydantic.Field()

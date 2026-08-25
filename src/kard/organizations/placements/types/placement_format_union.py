@@ -32,7 +32,6 @@ class PlacementFormatUnion_Placement(UniversalBaseModel):
         attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
-            status="ACTIVE",
             available_slots=5,
         ),
     )
@@ -69,7 +68,6 @@ class PlacementFormatUnion_PlacementPushNotification(UniversalBaseModel):
         attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
-            status="ACTIVE",
             available_slots=5,
         ),
     )
@@ -106,7 +104,6 @@ class PlacementFormatUnion_PlacementEmail(UniversalBaseModel):
         attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
-            status="ACTIVE",
             available_slots=5,
         ),
     )
@@ -143,7 +140,6 @@ class PlacementFormatUnion_PlacementBatchActivation(UniversalBaseModel):
         attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
-            status="ACTIVE",
             available_slots=5,
         ),
     )
@@ -180,7 +176,6 @@ class PlacementFormatUnion_PlacementGroup(UniversalBaseModel):
         attributes=PlacementAttributes(
             name="Homepage Banner",
             organization_id="org-123",
-            status="ACTIVE",
             available_slots=5,
         ),
     )
@@ -212,7 +207,6 @@ PlacementFormatUnion_Placement(
     attributes=PlacementAttributes(
         name="Homepage Banner",
         organization_id="org-123",
-        status="ACTIVE",
         available_slots=5,
     ),
 )
