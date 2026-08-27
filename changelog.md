@@ -1,3 +1,7 @@
+## 27.0.0 - 2026-08-27
+### Breaking Changes
+* **`FileType`** — the literal value `"validatedTransactionDailyReconciliationFile"` has been removed from the union; any code that passes or matches against this string will no longer be treated as a valid `FileType`. Remove or replace references to `"validatedTransactionDailyReconciliationFile"` in your codebase.
+
 ## 26.0.0 - 2026-08-25
 ### Breaking Changes
 * **`PlacementAttributes`** — the required `status` field has been removed; callers that access `.status` on this model will get an `AttributeError`. Remove any references to `placement_attributes.status`.

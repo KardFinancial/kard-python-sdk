@@ -6,7 +6,6 @@ FileType = typing.Union[
     typing.Literal[
         "earnedRewardApprovedDailyReconciliationFile",
         "earnedRewardSettledDailyReconciliationFile",
-        "validatedTransactionDailyReconciliationFile",
         "monthlyReconciliationFile",
     ],
     typing.Any,
