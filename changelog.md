@@ -1,3 +1,11 @@
+## 28.0.0 - 2026-08-31
+### Breaking Changes
+* **`kard.users.uploads`** — the entire `uploads` subpackage has been deleted; all `from kard.users.uploads import ...` statements will raise `ImportError`. Remove all references to this subpackage.
+* **`UsersClient.uploads`** and **`AsyncUsersClient.uploads`** — the `uploads` property has been removed from both sync and async users clients; accessing `client.users.uploads` will raise `AttributeError`. Migrate to the [Create Bulk Transactions Upload URL](https://docs.kard.com/2024-10-01/api/transactions/create-bulk-transactions-upload-url) endpoint instead.
+* **`UploadsClient`**, **`AsyncUploadsClient`**, **`RawUploadsClient`**, and **`AsyncRawUploadsClient`** — all four upload client classes have been removed; migrate to the bulk transactions upload flow via the Create Bulk Transactions Upload URL endpoint.
+* **`CreateUploadRequestObject`**, **`CreateUploadPartRequestObject`**, **`UpdateUploadRequestObject`**, and all related request/response model and union types — every public type from `kard.users.uploads.types` has been deleted; remove all imports and type annotations referencing these classes.
+* **`UploadPartMultiStatus`** — the error class and its containing module `kard.users.uploads.errors` have been removed; any `except UploadPartMultiStatus` block will fail to import. Remove all references to this error type.
+
 ## 27.0.0 - 2026-08-27
 ### Breaking Changes
 * **`FileType`** — the literal value `"validatedTransactionDailyReconciliationFile"` has been removed from the union; any code that passes or matches against this string will no longer be treated as a valid `FileType`. Remove or replace references to `"validatedTransactionDailyReconciliationFile"` in your codebase.

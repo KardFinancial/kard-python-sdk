@@ -19,7 +19,6 @@ if typing.TYPE_CHECKING:
     from .attributions.client import AsyncAttributionsClient, AttributionsClient
     from .auth.client import AsyncAuthClient, AuthClient
     from .rewards.client import AsyncRewardsClient, RewardsClient
-    from .uploads.client import AsyncUploadsClient, UploadsClient
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
@@ -31,7 +30,6 @@ class UsersClient:
         self._attributions: typing.Optional[AttributionsClient] = None
         self._auth: typing.Optional[AuthClient] = None
         self._rewards: typing.Optional[RewardsClient] = None
-        self._uploads: typing.Optional[UploadsClient] = None
 
     @property
     def with_raw_response(self) -> RawUsersClient:
@@ -265,14 +263,6 @@ class UsersClient:
             self._rewards = RewardsClient(client_wrapper=self._client_wrapper)
         return self._rewards
 
-    @property
-    def uploads(self):
-        if self._uploads is None:
-            from .uploads.client import UploadsClient  # noqa: E402
-
-            self._uploads = UploadsClient(client_wrapper=self._client_wrapper)
-        return self._uploads
-
 
 class AsyncUsersClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -281,7 +271,6 @@ class AsyncUsersClient:
         self._attributions: typing.Optional[AsyncAttributionsClient] = None
         self._auth: typing.Optional[AsyncAuthClient] = None
         self._rewards: typing.Optional[AsyncRewardsClient] = None
-        self._uploads: typing.Optional[AsyncUploadsClient] = None
 
     @property
     def with_raw_response(self) -> AsyncRawUsersClient:
@@ -546,11 +535,3 @@ class AsyncUsersClient:
 
             self._rewards = AsyncRewardsClient(client_wrapper=self._client_wrapper)
         return self._rewards
-
-    @property
-    def uploads(self):
-        if self._uploads is None:
-            from .uploads.client import AsyncUploadsClient  # noqa: E402
-
-            self._uploads = AsyncUploadsClient(client_wrapper=self._client_wrapper)
-        return self._uploads
