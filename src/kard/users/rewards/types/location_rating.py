@@ -13,7 +13,7 @@ class LocationRating(UniversalBaseModel):
 
     value: float = pydantic.Field()
     """
-    Rating on a scale of 1 to 5.
+    Restaurant star rating. Rating is out of 5.
     """
 
     count: typing.Optional[int] = pydantic.Field(default=None)

@@ -1,3 +1,7 @@
+## 29.0.0 - 2026-08-31
+### Breaking Changes
+* **`LocationAttributes.price_level`** — the field type has changed from `Optional[int]` to `Optional[str]`; it now returns dollar-sign strings (e.g. `"$"` to `"$$$$"`) instead of integers 1–4. Update any code that performs numeric operations or integer comparisons on this field to handle string values instead.
+
 ## 28.0.0 - 2026-08-31
 ### Breaking Changes
 * **`kard.users.uploads`** — the entire `uploads` subpackage has been deleted; all `from kard.users.uploads import ...` statements will raise `ImportError`. Remove all references to this subpackage.

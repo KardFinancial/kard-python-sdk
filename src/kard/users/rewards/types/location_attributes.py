@@ -41,11 +41,11 @@ class LocationAttributes(UniversalBaseModel):
     """
 
     price_level: typing_extensions.Annotated[
-        typing.Optional[int],
+        typing.Optional[str],
         FieldMetadata(alias="priceLevel"),
         pydantic.Field(
             alias="priceLevel",
-            description="Typical price range for this location, from 1 (least expensive) to 4 (most expensive).",
+            description='Typical price range for this location, rendered as dollar signs from "$" (least expensive) to "$$$$" (most expensive).',
         ),
     ] = None
 
