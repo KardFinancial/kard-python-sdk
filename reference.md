@@ -3985,7 +3985,7 @@ client.users.rewards.locations(
 <dl>
 <dd>
 
-**sort:** `typing.Optional[typing.Union[LocationSortOptions, typing.Sequence[LocationSortOptions]]]` — If provided, response will be sorted by the specified fields
+**sort:** `typing.Optional[typing.Union[LocationSortOptions, typing.Sequence[LocationSortOptions]]]` — If provided, response will be sorted by the specified fields. Defaults to newest first, equivalent to descending `createdDate`; when `filter[latitude]`/`filter[longitude]` are provided, locations are ordered by ascending distance from that point first, then newest first.
     
 </dd>
 </dl>

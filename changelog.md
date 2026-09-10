@@ -1,3 +1,17 @@
+## 29.0.1 - 2026-09-10
+* chore: clarify sort parameter docstring for location search
+* Update the `sort` parameter documentation in `RewardsClient`,
+* `AsyncRewardsClient`, `RawRewardsClient`, and `AsyncRawRewardsClient`
+* to describe the default sort behavior more precisely. The docstring now
+* explains that results default to newest first (descending `createdDate`)
+* and that when lat/long filters are provided, locations are ordered by
+* ascending distance first, then newest first.
+* Key changes:
+* Expanded `sort` parameter docstring in `RewardsClient.get_locations` and `AsyncRewardsClient.get_locations`
+* Expanded `sort` parameter docstring in `RawRewardsClient.get_locations` and `AsyncRawRewardsClient.get_locations`
+* No functional or API surface changes — documentation only
+* 🌿 Generated with Fern
+
 ## 29.0.0 - 2026-08-31
 ### Breaking Changes
 * **`LocationAttributes.price_level`** — the field type has changed from `Optional[int]` to `Optional[str]`; it now returns dollar-sign strings (e.g. `"$"` to `"$$$$"`) instead of integers 1–4. Update any code that performs numeric operations or integer comparisons on this field to handle string values instead.
