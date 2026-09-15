@@ -1,3 +1,7 @@
+## 29.1.0 - 2026-09-15
+### Added
+* **`display_name`** — new optional field on `CreateStandardAttributes`, `UpdateStandardAttributes`, and `PlacementAttributes` that holds the cardholder-facing title for a placement section; omit it to let clients use their own default label.
+
 ## 29.0.1 - 2026-09-10
 * chore: clarify sort parameter docstring for location search
 * Update the `sort` parameter documentation in `RewardsClient`,

@@ -27,6 +27,14 @@ class UpdateStandardAttributes(UniversalBaseModel):
     Name of the placement
     """
 
+    display_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="displayName"),
+        pydantic.Field(
+            alias="displayName",
+            description="Cardholder-facing title for the section (minimum 1 character). Omit to clear it (PUT requires the full attribute set).",
+        ),
+    ] = None
     available_slots: typing_extensions.Annotated[
         int,
         FieldMetadata(alias="availableSlots"),

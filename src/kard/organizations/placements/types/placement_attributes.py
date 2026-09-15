@@ -18,6 +18,14 @@ class PlacementAttributes(UniversalBaseModel):
     Name of the placement
     """
 
+    display_name: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="displayName"),
+        pydantic.Field(
+            alias="displayName",
+            description="Cardholder-facing title for the section, if one was set. When absent, clients fall back to their own default label.",
+        ),
+    ] = None
     organization_id: typing_extensions.Annotated[
         str,
         FieldMetadata(alias="organizationId"),
