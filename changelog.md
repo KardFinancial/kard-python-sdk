@@ -1,3 +1,8 @@
+## 30.0.0 - 2026-09-21
+### Breaking Changes
+* **`RewardNotificationAttributes`** — the class has been removed from the public API (`kard`, `kard.notifications`, and `kard.notifications.types`). Any code importing or subclassing `RewardNotificationAttributes` will break; migrate by using `EarnedRewardNotificationAttributes` directly, which now contains all the same fields inline.
+* **`EarnedRewardNotificationAttributes.user_reward`** — the field is now required (`UserReward`) instead of optional (`Optional[UserReward]`). Remove any `None`-fallback handling and ensure `user_reward` is always provided when constructing this model.
+
 ## 29.1.0 - 2026-09-15
 ### Added
 * **`display_name`** — new optional field on `CreateStandardAttributes`, `UpdateStandardAttributes`, and `PlacementAttributes` that holds the cardholder-facing title for a placement section; omit it to let clients use their own default label.

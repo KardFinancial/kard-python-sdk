@@ -36,7 +36,6 @@ if typing.TYPE_CHECKING:
     from .push_notification_placement_file_data import PushNotificationPlacementFileData
     from .push_notification_placement_file_relationships import PushNotificationPlacementFileRelationships
     from .rejected_transaction_relationships import RejectedTransactionRelationships
-    from .reward_notification_attributes import RewardNotificationAttributes
     from .user_reward import UserReward
 _dynamic_imports: typing.Dict[str, str] = {
     "AuditUpdateAttributes": ".audit_update_attributes",
@@ -67,7 +66,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PushNotificationPlacementFileData": ".push_notification_placement_file_data",
     "PushNotificationPlacementFileRelationships": ".push_notification_placement_file_relationships",
     "RejectedTransactionRelationships": ".rejected_transaction_relationships",
-    "RewardNotificationAttributes": ".reward_notification_attributes",
     "UserReward": ".user_reward",
 }
 
@@ -122,6 +120,5 @@ __all__ = [
     "PushNotificationPlacementFileData",
     "PushNotificationPlacementFileRelationships",
     "RejectedTransactionRelationships",
-    "RewardNotificationAttributes",
     "UserReward",
 ]

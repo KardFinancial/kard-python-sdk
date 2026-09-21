@@ -108,7 +108,6 @@ if typing.TYPE_CHECKING:
         PushNotificationPlacementFileData,
         PushNotificationPlacementFileRelationships,
         RejectedTransactionRelationships,
-        RewardNotificationAttributes,
         UserReward,
     )
     from .organizations import ExternalOrganizationAttributes, ExternalOrganizationResponse
@@ -348,7 +347,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RelationshipMultiple": ".commons",
     "RelationshipSingle": ".commons",
     "ResourceType": ".commons",
-    "RewardNotificationAttributes": ".notifications",
     "RewardedTransaction": ".transactions",
     "RewardedTransactionAttributes": ".transactions",
     "RewardedTransactionRelationships": ".transactions",
@@ -573,7 +571,6 @@ __all__ = [
     "RelationshipMultiple",
     "RelationshipSingle",
     "ResourceType",
-    "RewardNotificationAttributes",
     "RewardedTransaction",
     "RewardedTransactionAttributes",
     "RewardedTransactionRelationships",

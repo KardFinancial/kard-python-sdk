@@ -35,7 +35,6 @@ if typing.TYPE_CHECKING:
         PushNotificationPlacementFileData,
         PushNotificationPlacementFileRelationships,
         RejectedTransactionRelationships,
-        RewardNotificationAttributes,
         UserReward,
     )
     from . import subscriptions
@@ -94,7 +93,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PushNotificationPlacementFileData": ".types",
     "PushNotificationPlacementFileRelationships": ".types",
     "RejectedTransactionRelationships": ".types",
-    "RewardNotificationAttributes": ".types",
     "Subscription": ".subscriptions",
     "SubscriptionAttributes": ".subscriptions",
     "SubscriptionRequest": ".subscriptions",
@@ -170,7 +168,6 @@ __all__ = [
     "PushNotificationPlacementFileData",
     "PushNotificationPlacementFileRelationships",
     "RejectedTransactionRelationships",
-    "RewardNotificationAttributes",
     "Subscription",
     "SubscriptionAttributes",
     "SubscriptionRequest",
