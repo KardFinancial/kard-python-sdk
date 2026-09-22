@@ -2,4 +2,6 @@
 .github/workflows/changelog-dispatch.yml
 changelog.md
 src/kard/hem.py
+tests/custom/test_hem.py
+tests/custom/test_vectors.json
 LICENSE

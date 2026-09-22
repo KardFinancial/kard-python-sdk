@@ -16,7 +16,8 @@ def normalize_email(raw: str) -> str:
     Raises:
         TypeError: If *raw* is not a string.
         ValueError: If the address is empty, missing '@', has multiple '@',
-            or has an empty local-part or domain.
+            or has an empty local-part or domain -- including when Gmail
+            normalization strips the local-part down to nothing.
     """
     if not isinstance(raw, str):
         raise TypeError(f"Expected a string, got {type(raw).__name__}")
@@ -41,6 +42,10 @@ def normalize_email(raw: str) -> str:
     if domain in _GMAIL_DOMAINS:
         local = local.split("+")[0].replace(".", "")
         domain = "gmail.com"
+        if not local:
+            raise ValueError(
+                "Local part (before '@') must not be empty after Gmail normalization"
+            )
 
     return f"{local}@{domain}"
 
