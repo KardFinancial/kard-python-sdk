@@ -1,3 +1,7 @@
+## 30.1.0 - 2026-09-25
+### Added
+* **`RejectedReason`** — new `"MAX_REDEMPTION_LIMIT_REACHED"` literal value added to the union, allowing consumers to explicitly handle rejections caused by a transaction exceeding its maximum redemption limit.
+
 ## 30.0.0 - 2026-09-21
 ### Breaking Changes
 * **`RewardNotificationAttributes`** — the class has been removed from the public API (`kard`, `kard.notifications`, and `kard.notifications.types`). Any code importing or subclassing `RewardNotificationAttributes` will break; migrate by using `EarnedRewardNotificationAttributes` directly, which now contains all the same fields inline.

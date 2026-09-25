@@ -4,7 +4,11 @@ import typing
 
 RejectedReason = typing.Union[
     typing.Literal[
-        "AGGREGATOR_CARD_OVERLAP", "SETTLEMENT_REJECTED", "USER_NOT_ENROLLED", "USER_NOT_IN_AUDIENCE_SEGMENT"
+        "AGGREGATOR_CARD_OVERLAP",
+        "MAX_REDEMPTION_LIMIT_REACHED",
+        "SETTLEMENT_REJECTED",
+        "USER_NOT_ENROLLED",
+        "USER_NOT_IN_AUDIENCE_SEGMENT",
     ],
     typing.Any,
 ]
