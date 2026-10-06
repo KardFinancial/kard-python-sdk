@@ -1,3 +1,16 @@
+## 30.1.1 - 2026-10-06
+* chore: update child organization name validation docs
+* Update docstrings across child organization types and client methods to
+* reflect the revised name validation rules: names now require at least
+* two letters or numbers (previously one letter) and may contain letters,
+* numbers, and spaces (previously letters and spaces only).
+* Key changes:
+* Updated `ChildOrganizationAttributes.name` field docstring with new validation rules
+* Updated `CreateChildAttributes.name` field docstring with new validation rules
+* Updated `UpdateChildAttributes.name` field docstring with new validation rules
+* Updated `create` method docstrings in `ChildrenClient`, `AsyncChildrenClient`, `RawChildrenClient`, and `AsyncRawChildrenClient`
+* 🌿 Generated with Fern
+
 ## 30.1.0 - 2026-09-25
 ### Added
 * **`RejectedReason`** — new `"MAX_REDEMPTION_LIMIT_REACHED"` literal value added to the union, allowing consumers to explicitly handle rejections caused by a transaction exceeding its maximum redemption limit.

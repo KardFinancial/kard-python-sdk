@@ -23,7 +23,7 @@ class UpdateChildAttributes(UniversalBaseModel):
 
     name: typing.Optional[str] = pydantic.Field(default=None)
     """
-    New name for the child organization (at least one letter; letters and spaces only)
+    New name for the child organization (at least two letters or numbers; letters, numbers, and spaces only)
     """
 
     external_id: typing_extensions.Annotated[

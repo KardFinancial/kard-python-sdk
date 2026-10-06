@@ -143,7 +143,7 @@ class RawChildrenClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ChildOrganizationResponse]:
         """
-        Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must contain at least one letter, and may contain only letters and spaces.
+        Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must contain at least two letters or numbers, and may contain only letters, numbers, and spaces.
 
         Parameters
         ----------
@@ -655,7 +655,7 @@ class AsyncRawChildrenClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ChildOrganizationResponse]:
         """
-        Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must contain at least one letter, and may contain only letters and spaces.
+        Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must contain at least two letters or numbers, and may contain only letters, numbers, and spaces.
 
         Parameters
         ----------

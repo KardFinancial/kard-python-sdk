@@ -15,7 +15,7 @@ class ChildOrganizationAttributes(UniversalBaseModel):
 
     name: str = pydantic.Field()
     """
-    Name of the child organization (at least one letter; letters and spaces only)
+    Name of the child organization (at least two letters or numbers; letters, numbers, and spaces only)
     """
 
     external_id: typing_extensions.Annotated[
