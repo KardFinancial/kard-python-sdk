@@ -1,3 +1,11 @@
+## 30.2.0 - 2026-10-07
+### Added
+* **`PhoneNumber`** — new model representing a user phone number in E.164 format with an optional `PhoneNumberType` classification (`"MOBILE"`, `"HOME"`, `"WORK"`, `"OTHER"`).
+* **`PostalCode`** — new model representing a 5-digit postal code with an optional `PostalCodeType` classification (`"PHYSICAL"`, `"BILLING"`, `"OTHER"`).
+* **`UserRequestAttributes.phone_numbers`** and **`UserRequestAttributes.postal_codes`** — new optional list fields (up to 10 entries each) for supplying structured phone numbers and postal codes when creating a user; sending the list replaces all values on file.
+* **`UpdateUserRequestAttributes.phone_numbers`** and **`UpdateUserRequestAttributes.postal_codes`** — same optional list fields available when updating an existing user.
+* All four new types (`PhoneNumber`, `PhoneNumberType`, `PostalCode`, `PostalCodeType`) are exported from `kard`, `kard.users`, and `kard.users.types`.
+
 ## 30.1.1 - 2026-10-06
 * chore: update child organization name validation docs
 * Update docstrings across child organization types and client methods to

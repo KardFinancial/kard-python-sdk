@@ -9,6 +9,10 @@ if typing.TYPE_CHECKING:
     from .create_users_multi_status_response import CreateUsersMultiStatusResponse
     from .create_users_object import CreateUsersObject
     from .delete_user_response_object import DeleteUserResponseObject
+    from .phone_number import PhoneNumber
+    from .phone_number_type import PhoneNumberType
+    from .postal_code import PostalCode
+    from .postal_code_type import PostalCodeType
     from .update_user_object import UpdateUserObject
     from .update_user_request_attributes import UpdateUserRequestAttributes
     from .update_user_request_data import UpdateUserRequestData
@@ -23,6 +27,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateUsersMultiStatusResponse": ".create_users_multi_status_response",
     "CreateUsersObject": ".create_users_object",
     "DeleteUserResponseObject": ".delete_user_response_object",
+    "PhoneNumber": ".phone_number",
+    "PhoneNumberType": ".phone_number_type",
+    "PostalCode": ".postal_code",
+    "PostalCodeType": ".postal_code_type",
     "UpdateUserObject": ".update_user_object",
     "UpdateUserRequestAttributes": ".update_user_request_attributes",
     "UpdateUserRequestData": ".update_user_request_data",
@@ -64,6 +72,10 @@ __all__ = [
     "CreateUsersMultiStatusResponse",
     "CreateUsersObject",
     "DeleteUserResponseObject",
+    "PhoneNumber",
+    "PhoneNumberType",
+    "PostalCode",
+    "PostalCodeType",
     "UpdateUserObject",
     "UpdateUserRequestAttributes",
     "UpdateUserRequestData",

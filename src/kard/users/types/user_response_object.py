@@ -12,6 +12,8 @@ class UserResponseObject(UniversalBaseModel):
     Examples
     --------
     from kard.users import (
+        PhoneNumber,
+        PostalCode,
         UserRequestAttributes,
         UserRequestDataUnion_User,
         UserResponseObject,
@@ -28,6 +30,26 @@ class UserResponseObject(UniversalBaseModel):
                 phone_number="+14155552671",
                 birth_year="1990",
                 historical_transactions_sent=True,
+                phone_numbers=[
+                    PhoneNumber(
+                        number="+14155552671",
+                        type="MOBILE",
+                    ),
+                    PhoneNumber(
+                        number="+12125550188",
+                        type="HOME",
+                    ),
+                ],
+                postal_codes=[
+                    PostalCode(
+                        code="11238",
+                        type="PHYSICAL",
+                    ),
+                    PostalCode(
+                        code="10028",
+                        type="BILLING",
+                    ),
+                ],
             ),
         ),
     )

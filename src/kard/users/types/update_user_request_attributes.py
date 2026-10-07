@@ -7,6 +7,8 @@ import typing_extensions
 from ...commons.types.enrolled_rewards_type import EnrolledRewardsType
 from ...core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ...core.serialization import FieldMetadata
+from .phone_number import PhoneNumber
+from .postal_code import PostalCode
 
 
 class UpdateUserRequestAttributes(UniversalBaseModel):
@@ -49,6 +51,22 @@ class UpdateUserRequestAttributes(UniversalBaseModel):
         pydantic.Field(
             alias="historicalTransactionsSent",
             description="Set to `true` to confirm that historical transactions have been sent for this user. This is a one-way flag: once `true` it cannot be set back to `false`, and a request attempting to do so is rejected.",
+        ),
+    ] = None
+    phone_numbers: typing_extensions.Annotated[
+        typing.Optional[typing.List[PhoneNumber]],
+        FieldMetadata(alias="phoneNumbers"),
+        pydantic.Field(
+            alias="phoneNumbers",
+            description="Phone numbers of user, up to 10. Sending the list replaces every number on file.",
+        ),
+    ] = None
+    postal_codes: typing_extensions.Annotated[
+        typing.Optional[typing.List[PostalCode]],
+        FieldMetadata(alias="postalCodes"),
+        pydantic.Field(
+            alias="postalCodes",
+            description="Postal codes of user, up to 10. Sending the list replaces every postal code on file.",
         ),
     ] = None
 
