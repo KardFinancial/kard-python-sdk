@@ -34,6 +34,22 @@ class FileMetadataAttribute(UniversalBaseModel):
             description="Temporary URL that provides direct access to download the file for 30 minutes.",
         ),
     ]
+    period_start: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="periodStart"),
+        pydantic.Field(
+            alias="periodStart",
+            description="Start of the reporting period, inclusive (RFC 3339, UTC). Present only when a period was informed at upload.",
+        ),
+    ] = None
+    period_end: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="periodEnd"),
+        pydantic.Field(
+            alias="periodEnd",
+            description="End of the reporting period, inclusive (RFC 3339, UTC). Present only when a period was informed at upload.",
+        ),
+    ] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
