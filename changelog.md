@@ -1,3 +1,15 @@
+## 30.4.1 - 2026-10-15
+* chore: update docstrings for email and push placement behavior
+* Correct the inline documentation for the `get_placements` method in
+* both the sync and async rewards clients (standard and raw) to reflect
+* that email and push-notification placements now return `standardOffer`
+* resources as a preview rather than responding with a `400` error.
+* Key changes:
+* Updated docstring in `RewardsClient` (sync) to describe email/push placement preview behavior
+* Updated docstring in `AsyncRewardsClient` (async) to match
+* Updated docstrings in `RawRewardsClient` and `AsyncRawRewardsClient` consistently
+* 🌿 Generated with Fern
+
 ## 30.4.0 - 2026-10-15
 ### Added
 * **`NotificationDataUnion_PayoutReconciliationFile`** — new discriminated-union variant (type `"payoutReconciliationFile"`) for handling payout reconciliation file notifications.

@@ -191,8 +191,8 @@ class RawRewardsClient:
         `links`, optional `included` categories, and `meta`); a batch-activation
         or group placement returns `placementBatch` slot resources. Distinguish
         the two by each resource's `type`. Email and push-notification
-        placements are not servable through this endpoint and respond with a
-        `400`.<br/>
+        placements also return `standardOffer` resources, as a preview of a
+        send: up to `availableSlots` offers for email and up to one offer for push.<br/>
         <b>Required scopes:</b> `rewards:read`
 
         Parameters
@@ -612,8 +612,8 @@ class AsyncRawRewardsClient:
         `links`, optional `included` categories, and `meta`); a batch-activation
         or group placement returns `placementBatch` slot resources. Distinguish
         the two by each resource's `type`. Email and push-notification
-        placements are not servable through this endpoint and respond with a
-        `400`.<br/>
+        placements also return `standardOffer` resources, as a preview of a
+        send: up to `availableSlots` offers for email and up to one offer for push.<br/>
         <b>Required scopes:</b> `rewards:read`
 
         Parameters
