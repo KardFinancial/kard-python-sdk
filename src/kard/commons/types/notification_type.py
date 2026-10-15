@@ -11,6 +11,7 @@ NotificationType = typing.Union[
         "fileProcessingResult",
         "pushNotificationPlacementFile",
         "emailNotificationPlacementFile",
+        "payoutReconciliationFile",
     ],
     typing.Any,
 ]

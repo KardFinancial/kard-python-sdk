@@ -16,6 +16,8 @@ from .earned_reward_relationships import EarnedRewardRelationships
 from .earned_reward_settled_attributes import EarnedRewardSettledAttributes
 from .email_notification_placement_file_attributes import EmailNotificationPlacementFileAttributes
 from .email_notification_placement_file_relationships import EmailNotificationPlacementFileRelationships
+from .payout_reconciliation_file_attributes import PayoutReconciliationFileAttributes
+from .payout_reconciliation_file_relationships import PayoutReconciliationFileRelationships
 from .push_notification_placement_file_attributes import PushNotificationPlacementFileAttributes
 from .push_notification_placement_file_relationships import PushNotificationPlacementFileRelationships
 from .rejected_transaction_relationships import RejectedTransactionRelationships
@@ -132,6 +134,22 @@ class NotificationDataUnion_EmailNotificationPlacementFile(UniversalBaseModel):
             extra = pydantic.Extra.allow
 
 
+class NotificationDataUnion_PayoutReconciliationFile(UniversalBaseModel):
+    type: typing.Literal["payoutReconciliationFile"] = "payoutReconciliationFile"
+    id: str
+    attributes: PayoutReconciliationFileAttributes
+    relationships: PayoutReconciliationFileRelationships
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
+
+
 NotificationDataUnion = typing_extensions.Annotated[
     typing.Union[
         NotificationDataUnion_EarnedRewardApproved,
@@ -141,6 +159,7 @@ NotificationDataUnion = typing_extensions.Annotated[
         NotificationDataUnion_FileProcessingResult,
         NotificationDataUnion_PushNotificationPlacementFile,
         NotificationDataUnion_EmailNotificationPlacementFile,
+        NotificationDataUnion_PayoutReconciliationFile,
     ],
     pydantic.Field(discriminator="type"),
 ]

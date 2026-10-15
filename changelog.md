@@ -1,3 +1,10 @@
+## 30.4.0 - 2026-10-15
+### Added
+* **`NotificationDataUnion_PayoutReconciliationFile`** — new discriminated-union variant (type `"payoutReconciliationFile"`) for handling payout reconciliation file notifications.
+* **`PayoutReconciliationFileAttributes`** — new model exposing `file_name`, `period_start`, `period_end`, `download_url`, and `expires_in` fields for a payout reconciliation file notification.
+* **`PayoutReconciliationFileData`** and **`PayoutReconciliationFileRelationships`** — new supporting models for the payout reconciliation file notification payload.
+* All four new types are exported from `kard`, `kard.notifications`, and `kard.notifications.types`.
+
 ## 30.3.0 - 2026-10-14
 ### Added
 * **`FileMetadataAttribute.period_start`** and **`FileMetadataAttribute.period_end`** — new optional string fields (RFC 3339, UTC) exposing the inclusive start and end of the reporting period associated with an uploaded file; present only when a period was provided at upload time.
