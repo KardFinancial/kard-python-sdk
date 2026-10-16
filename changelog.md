@@ -1,3 +1,9 @@
+## 30.5.0 - 2026-10-16
+### Added
+* **`WeekOfMonth`** — new string literal type (`"FIRST"` or `"LAST"`) exported from `kard.organizations.placements.types`, `kard.organizations.placements`, and `kard.organizations` for specifying which week of the month a monthly placement should deliver.
+* **`Cadence.week_of_month`** — new optional field accepting a `WeekOfMonth` value; use with `frequency=MONTHLY` and `day_of_week` to target the first or last occurrence of a weekday in the month (cannot be combined with `day_of_month`).
+* **`EmailPlacementAttributes.created_at`** and **`PushNotificationPlacementAttributes.created_at`** — new `datetime` field indicating when the placement was created.
+
 ## 30.4.1 - 2026-10-15
 * chore: update docstrings for email and push placement behavior
 * Correct the inline documentation for the `get_placements` method in

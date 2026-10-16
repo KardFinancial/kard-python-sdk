@@ -88,6 +88,7 @@ if typing.TYPE_CHECKING:
     from .update_push_notification_placement_data import UpdatePushNotificationPlacementData
     from .update_standard_attributes import UpdateStandardAttributes
     from .update_standard_placement_data import UpdateStandardPlacementData
+    from .week_of_month import WeekOfMonth
 _dynamic_imports: typing.Dict[str, str] = {
     "BatchActivationPlacementAttributes": ".batch_activation_placement_attributes",
     "BatchActivationPlacementData": ".batch_activation_placement_data",
@@ -163,6 +164,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UpdatePushNotificationPlacementData": ".update_push_notification_placement_data",
     "UpdateStandardAttributes": ".update_standard_attributes",
     "UpdateStandardPlacementData": ".update_standard_placement_data",
+    "WeekOfMonth": ".week_of_month",
 }
 
 
@@ -262,4 +264,5 @@ __all__ = [
     "UpdatePushNotificationPlacementData",
     "UpdateStandardAttributes",
     "UpdateStandardPlacementData",
+    "WeekOfMonth",
 ]

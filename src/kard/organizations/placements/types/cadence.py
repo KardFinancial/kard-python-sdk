@@ -8,6 +8,7 @@ from ....core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ....core.serialization import FieldMetadata
 from .cadence_frequency import CadenceFrequency
 from .day_of_week import DayOfWeek
+from .week_of_month import WeekOfMonth
 
 
 class Cadence(UniversalBaseModel):
@@ -38,6 +39,14 @@ class Cadence(UniversalBaseModel):
         pydantic.Field(
             alias="dayOfMonth",
             description="Day of the month to deliver, 1-31 (used when frequency is MONTHLY, defaults to 1)",
+        ),
+    ] = None
+    week_of_month: typing_extensions.Annotated[
+        typing.Optional[WeekOfMonth],
+        FieldMetadata(alias="weekOfMonth"),
+        pydantic.Field(
+            alias="weekOfMonth",
+            description="Deliver on the first or last dayOfWeek of the month. Requires frequency MONTHLY and dayOfWeek, and cannot be combined with dayOfMonth.",
         ),
     ] = None
 
