@@ -38,7 +38,7 @@ class Cadence(UniversalBaseModel):
         FieldMetadata(alias="dayOfMonth"),
         pydantic.Field(
             alias="dayOfMonth",
-            description="Day of the month to deliver, 1-31 (used when frequency is MONTHLY, defaults to 1)",
+            description="Day of the month to deliver, 1-31 (used when frequency is MONTHLY, defaults to 1). For 29-31, months without that day deliver on their last day.",
         ),
     ] = None
     week_of_month: typing_extensions.Annotated[

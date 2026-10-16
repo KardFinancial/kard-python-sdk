@@ -1,3 +1,12 @@
+## 30.5.1 - 2026-10-16
+* chore: clarify day_of_month behavior for short months
+* Update the `day_of_month` field description in `Cadence` to document
+* that when the specified day (29–31) does not exist in a given month,
+* delivery falls back to the last day of that month.
+* Key changes:
+* Extended `Cadence.day_of_month` docstring to note that days 29–31 fall back to the last day of months that don't have that day
+* 🌿 Generated with Fern
+
 ## 30.5.0 - 2026-10-16
 ### Added
 * **`WeekOfMonth`** — new string literal type (`"FIRST"` or `"LAST"`) exported from `kard.organizations.placements.types`, `kard.organizations.placements`, and `kard.organizations` for specifying which week of the month a monthly placement should deliver.
