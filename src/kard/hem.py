@@ -33,14 +33,15 @@ def normalize_email(raw: str) -> str:
         )
 
     local, domain = parts
-    if not local:
-        raise ValueError("Local part (before '@') must not be empty")
     if not domain:
         raise ValueError("Domain part (after '@') must not be empty")
 
     if domain in _GMAIL_DOMAINS:
         local = local.split("+")[0].replace(".", "")
         domain = "gmail.com"
+
+    if not local:
+        raise ValueError("Local part (before '@') must not be empty")
 
     return f"{local}@{domain}"
 
